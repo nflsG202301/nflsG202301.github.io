@@ -1,0 +1,4640 @@
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Panel</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --baseFont:22px; --bgImgOpacity:0.0; }
+body {
+    background: linear-gradient(90deg, #b8e8ff, #f2c8f8);
+    padding: 14px 22px 30px; min-height: 100vh;
+    font-family: "KaiTi", "楷体", SimSun, serif;
+    position: relative;
+    color: #2a0840;
+}
+button {
+    cursor: pointer; font-family: inherit; font-size: 15px;
+    padding: 8px 18px; border-radius: 10px;
+    border: 1px solid rgba(160, 96, 200, 0.35);
+    background: linear-gradient(180deg, #faf6fe 0%, #f0e6f8 100%);
+    color: #5a1e7c;
+    box-shadow: 0 1px 3px rgba(112, 32, 144, 0.08);
+    transition: all 0.18s ease; font-weight: 500;
+    letter-spacing: 0.5px; outline: none; white-space: nowrap;
+}
+button:hover {
+    background: linear-gradient(180deg, #f3eaff 0%, #e6d5f5 100%);
+    border-color: rgba(160, 96, 200, 0.6);
+    box-shadow: 0 4px 12px rgba(112, 32, 144, 0.16);
+    transform: translateY(-1px);
+}
+button:active {
+    transform: translateY(0);
+    background: linear-gradient(180deg, #ebddf8 0%, #ddc8f0 100%);
+    box-shadow: 0 1px 2px rgba(112, 32, 144, 0.12);
+}
+button[onclick^="close"], button[onclick^="cancel"], button[onclick^="backToAppList"] {
+    background: linear-gradient(180deg, #f8f8fb 0%, #eeeef4 100%) !important;
+    color: #555 !important;
+    border: 1px solid rgba(140, 140, 160, 0.32) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+}
+button[onclick^="close"]:hover, button[onclick^="cancel"]:hover, button[onclick^="backToAppList"]:hover {
+    background: linear-gradient(180deg, #f0f0f6 0%, #e4e4ec 100%) !important;
+    color: #333 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10) !important;
+}
+#lockBtn {
+    position: static; font-size: 14px; padding: 7px 10px; border-radius: 9px;
+    background: linear-gradient(180deg, #faf6fe 0%, #f0e6f8 100%);
+    border: 1px solid rgba(160, 96, 200, 0.35);
+    color: #4a1268;
+    box-shadow: 0 2px 10px rgba(112, 32, 144, 0.15);
+    font-family: inherit; cursor: pointer; transition: all 0.18s ease; font-weight: 500;
+    letter-spacing: 0.5px; flex: 0 0 auto;
+}
+#lockBtn:hover {
+    background: linear-gradient(180deg, #f3eaff 0%, #e6d5f5 100%);
+    border-color: rgba(160, 96, 200, 0.6); transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(112, 32, 144, 0.22);
+}
+#lockBtn.locked {
+    background: linear-gradient(180deg, #ffeaea 0%, #ffd3d3 100%) !important;
+    border-color: #dd6666 !important;
+    color: #cc0000 !important; font-weight: 700;
+}
+#lockBtn.locked:hover { background: linear-gradient(180deg, #ffdada 0%, #ffc0c0 100%) !important; }
+#lockToast {
+    position: fixed; top: 70px; left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: rgba(48, 16, 80, 0.94);
+    color: #fff; padding: 10px 24px; border-radius: 12px; font-size: 15px;
+    z-index: 2000; opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    font-family: inherit; letter-spacing: 0.5px;
+}
+#lockToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+body.locked-mode .item-text,
+body.locked-mode .course-table-item { cursor: default; }
+body.locked-mode .del-circle-btn { opacity: 0; pointer-events: none; }
+#importModal > button, #exportModal > button, #appModal > button,
+#randomStudentModal > button, #latexGuideModal > button,
+#funcPlotModal > button, #eqSolverModal > button, #dictModal > button { display: block; margin: 18px auto 0; }
+.del-circle-btn {
+    position: absolute !important; right: 4px !important; top: 4px !important;
+    width: 18px !important; height: 18px !important;
+    border-radius: 50% !important; background: #dd3333 !important;
+    color: #fff !important; border: none !important; font-size: 12px !important;
+    line-height: 18px !important; text-align: center !important;
+    cursor: pointer !important; padding: 0 !important;
+    box-shadow: none !important; transition: opacity 0.2s ease !important;
+    transform: none !important; font-weight: normal !important;
+    letter-spacing: 0 !important;
+}
+.del-circle-btn:hover { background: #ff4545 !important; }
+.course-table-item .del-circle-btn { top: -6px !important; right: -6px !important; }
+.timer-btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.timer-btn-group button {
+    border-radius: 11px; padding: 11px 26px; font-size: 16px;
+    font-weight: 600; border: none; color: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12); letter-spacing: 1px;
+}
+.timer-btn-group button:nth-child(1) { background: linear-gradient(180deg, #42c95b 0%, #28a745 100%); }
+.timer-btn-group button:nth-child(1):hover { background: linear-gradient(180deg, #55d76e 0%, #34b851 100%); filter: none; transform: translateY(-1px); }
+.timer-btn-group button:nth-child(2) { background: linear-gradient(180deg, #ffcf3a 0%, #f0b400 100%); color: #4a3000; }
+.timer-btn-group button:nth-child(2):hover { background: linear-gradient(180deg, #ffd95a 0%, #ffc010 100%); filter: none; transform: translateY(-1px); }
+.timer-btn-group button:nth-child(3) { background: linear-gradient(180deg, #f25362 0%, #dc3545 100%); }
+.timer-btn-group button:nth-child(3):hover { background: linear-gradient(180deg, #ff6675 0%, #e64353 100%); filter: none; transform: translateY(-1px); }
+.calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.calc-grid button {
+    background: linear-gradient(180deg, #fbf7fe 0%, #f1e8f8 100%);
+    color: #4a1268; border: 1px solid rgba(160, 96, 200, 0.18);
+    border-radius: 12px; padding: 16px 0; font-size: 22px;
+    font-weight: 600; box-shadow: 0 1px 3px rgba(112, 32, 144, 0.08); letter-spacing: 0;
+}
+.calc-grid button:hover {
+    background: linear-gradient(180deg, #f5ebfd 0%, #e9dbf5 100%);
+    border-color: rgba(160, 96, 200, 0.45); transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(112, 32, 144, 0.14);
+}
+.calc-grid button:nth-child(4n) {
+    background: linear-gradient(180deg, #8aa3ff 0%, #7696ff 100%);
+    color: #fff; border-color: #5d83f5;
+}
+.calc-grid button:nth-child(4n):hover { background: linear-gradient(180deg, #7189f5 0%, #5d83f5 100%); }
+.calc-grid .equal-btn {
+    background: linear-gradient(180deg, #ffa947 0%, #ff9833 100%) !important;
+    color: #fff !important; border-color: #ff851b !important;
+    grid-column: span 4; font-size: 20px; letter-spacing: 3px;
+}
+.calc-grid .equal-btn:hover { background: linear-gradient(180deg, #ff9c33 0%, #ff851b 100%) !important; }
+.toggle-switch {
+    position: relative; display: inline-block; width: 52px; height: 28px;
+    vertical-align: middle; flex: 0 0 auto;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-switch .slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #c8c8d0; border-radius: 28px; transition: .3s;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.toggle-switch .slider:before {
+    position: absolute; content: ""; height: 22px; width: 22px;
+    left: 3px; bottom: 3px; background-color: #fff;
+    border-radius: 50%; transition: .3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+.toggle-switch input:checked + .slider { background: linear-gradient(180deg, #b878e0 0%, #a060c8 100%); }
+.toggle-switch input:checked + .slider:before { transform: translateX(24px); }
+#bgImageLayer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: -1; overflow: hidden;
+}
+#bgImage {
+    position: absolute; width: 100%; height: 100%; object-fit: cover;
+    transform-origin: center center;
+    opacity: calc(1 - var(--bgImgOpacity));
+}
+.container { max-width: 1750px; margin: 0 auto; position: relative; z-index: 1; }
+.header-wrap {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    padding: 4px 0 10px;
+}
+.header-title {
+    font-size: 30px; color: #702090; text-align: center;
+    font-weight: 700; letter-spacing: 3px;
+    text-shadow: 0 2px 6px rgba(112, 32, 144, 0.12);
+    cursor: pointer; padding: 4px 14px; border-radius: 12px;
+    transition: all 0.18s ease; transform: translateX(30px);
+}
+.header-title:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(245,235,255,0.62));
+    box-shadow: 0 3px 12px rgba(112, 32, 144, 0.12); color: #6b1a94;
+}
+.header-right {
+    position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%); display: flex; align-items: stretch; gap: 10px;
+}
+.header-brand {
+    display: flex; flex-direction: column; align-items: center;
+    line-height: 1.15; user-select: none;
+    padding: 6px 18px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.78), rgba(245,235,255,0.68));
+    border: 1px solid rgba(160, 96, 200, 0.28);
+    box-shadow: 0 3px 12px rgba(112, 32, 144, 0.10);
+}
+.header-brand .brand-title {
+    font-size: 20px; color: #6b1a94; font-weight: 700; letter-spacing: 1.5px;
+    font-family: "KaiTi", "楷体", SimSun, serif;
+}
+.header-brand .brand-sub {
+    font-size: 14px; color: #9030b0; opacity: 0.85;
+    font-family: "Brush Script MT", "Segoe Script", "Snell Roundhand", "Apple Chancery", cursive;
+    font-style: italic; letter-spacing: 0.5px;
+}
+.top-left-bar {
+    position: fixed; left: 8px; top: 22px; z-index: 50;
+    display: flex; align-items: center; gap: 6px;
+}
+.operate-bar { display: flex; gap: 6px; flex-wrap: nowrap; margin: 0; }
+.operate-bar button { font-size: 14px; padding: 7px 11px; border-radius: 9px; }
+.main-wrap {
+    display: grid; grid-template-columns: 1fr 1fr 300px; gap: 22px;
+    align-items: start; margin-top: 20px;
+}
+.col-left, .col-mid {
+    background: rgba(255, 255, 255, 0.52); border-radius: 18px;
+    padding: 18px 24px;
+    box-shadow: 0 8px 28px rgba(112, 32, 144, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    position: relative; min-width: 0;
+}
+.col-right {
+    background: rgba(255, 255, 255, 0.52); border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 0 8px 28px rgba(112, 32, 144, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative; min-width: 0;
+}
+.main-wrap .col-left  { grid-column: 1 / 2; }
+.main-wrap .col-mid   { grid-column: 2 / 3; }
+.main-wrap .col-right { grid-column: 3 / 4; }
+.main-wrap.right-collapsed:not(.mid-collapsed) .col-mid { grid-column: 2 / 4; }
+.main-wrap.mid-collapsed:not(.right-collapsed) .col-left { grid-column: 1 / 3; }
+.main-wrap.mid-collapsed.right-collapsed .col-left { grid-column: 1 / 4; }
+.timetable-block, .duty-block {
+    background: rgba(255, 255, 255, 0.45); border-radius: 14px;
+    padding: 12px 16px;
+    box-shadow: inset 0 0 0 1px rgba(160, 96, 200, 0.10);
+}
+h2 {
+    text-align: center; font-size: var(--baseFont); margin: 8px 0 12px;
+    font-weight: 700; color: #6b1a94; letter-spacing: 2px;
+}
+.subject-name {
+    font-size: var(--baseFont); font-weight: 700; color: #702090;
+    letter-spacing: 1.5px; display: block; width: fit-content;
+    margin: 0.12em auto 0.34em;
+    border-bottom: 2px solid rgba(160, 96, 200, 0.35);
+    padding-bottom: 0.06em;
+}
+.subject-block { margin-bottom: 0.9em; }
+.subject-block:last-child { margin-bottom: 0; }
+.item-row {
+    display: flex; align-items: flex-start; gap: 0.42em;
+    margin: 0.24em 0; font-size: var(--baseFont); line-height: 1.6;
+    position: relative; padding-right: 1.4em; padding-left: 0.35em;
+}
+.item-index { min-width: 1.4em; font-weight: 500; opacity: 0.85; }
+.item-text { flex: 1; cursor: pointer; word-break: break-word; }
+.item-text br { line-height: 1.6; }
+.copyright-item .item-text { font-weight: 800; color: #e60000; }
+.course-table-item {
+    position: relative; text-align: center; font-size: var(--baseFont);
+    line-height: 1.3; margin: 6px 0; padding: 6px 16px;
+    background: linear-gradient(180deg, #fdfaff 0%, #f6eefa 100%);
+    border: 1px solid rgba(160, 96, 200, 0.28);
+    border-radius: 12px; cursor: pointer; color: #4a1268;
+    box-shadow: 0 1px 3px rgba(112, 32, 144, 0.06);
+    transition: all 0.18s ease;
+}
+.course-table-item:hover {
+    background: linear-gradient(180deg, #f4e9fd 0%, #e9d8f7 100%);
+    border-color: rgba(160, 96, 200, 0.55);
+    box-shadow: 0 4px 12px rgba(112, 32, 144, 0.12);
+}
+textarea, input, select { font-size: 15px; padding: 9px 13px; font-family: inherit; }
+input, textarea {
+    border: 1px solid rgba(160, 96, 200, 0.3);
+    border-radius: 9px; background: #fdfbff; color: #4a1268;
+    transition: all 0.18s ease; outline: none;
+}
+input:focus, textarea:focus {
+    border-color: rgba(160, 96, 200, 0.75);
+    box-shadow: 0 0 0 3px rgba(160, 96, 200, 0.15);
+    background: #fff;
+}
+select {
+    border: 1px solid rgba(160, 96, 200, 0.3);
+    border-radius: 9px; background-color: #fdfbff; color: #4a1268;
+    cursor: pointer; transition: all 0.18s ease; max-width: 320px;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238038b0' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    padding-right: 34px; appearance: none; -webkit-appearance: none;
+}
+select:hover { border-color: rgba(160, 96, 200, 0.6); }
+select:focus { outline: none; border-color: rgba(160, 96, 200, 0.75); box-shadow: 0 0 0 3px rgba(160, 96, 200, 0.15); }
+.divider-hr {
+    border: none; height: 1px; margin: 16px 0;
+    background: linear-gradient(90deg, rgba(160,96,200,0) 0%, rgba(160,96,200,0.35) 50%, rgba(160,96,200,0) 100%);
+}
+.quote-wrap { min-height: 0; padding: 6px 8px 10px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+.quote-text { font-size: var(--baseFont); text-align: center; line-height: 1.7; margin: 4px 0 6px; color: #4a1268; }
+.section-head { position: relative; display: flex; align-items: center; justify-content: center; margin: 8px 0 12px; }
+.section-head h2 { margin: 0; }
+.section-head .mini-add-btn {
+    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    font-size: 14px; padding: 4px 12px; line-height: 1.5; border-radius: 9px;
+    border: 1px solid rgba(160, 96, 200, 0.35);
+    background: linear-gradient(180deg, #faf6fe 0%, #f0e6f8 100%);
+    color: #5a1e7c; font-weight: 600;
+}
+.section-head .mini-add-btn:hover {
+    background: linear-gradient(180deg, #f3eaff 0%, #e6d5f5 100%);
+    border-color: rgba(160, 96, 200, 0.6);
+    box-shadow: 0 4px 12px rgba(112, 32, 144, 0.14);
+}
+.countdown-empty { text-align: center; color: #999; font-size: 15px; padding: 8px 0; }
+.countdown-row .item-text { cursor: pointer; }
+.cd-name { color: #702090; font-weight: 700; }
+.cd-days { color: #e0502a; font-weight: 800; font-size: 1.08em; }
+.cd-invalid { color: #999; font-size: 0.85em; }
+.item-tag {
+    flex: 0 0 auto; align-self: flex-start; margin-top: 0.34em;
+    font-size: 0.66em; line-height: 1.55; padding: 0 0.5em;
+    border-radius: 0.6em; background: rgba(255, 226, 233, 0.9);
+    border: 1px solid #f2a8bd; color: #c02a52; white-space: nowrap;
+    font-weight: 700; letter-spacing: 0.5px;
+}
+.latex-formula { font-family: "Cambria Math", "Latin Modern Math", "Times New Roman", "KaiTi", serif; display: inline; padding: 0 1px; }
+.latex-atom { display: inline-block; vertical-align: baseline; }
+.latex-sup { font-size: 0.7em; vertical-align: super; line-height: 0; position: relative; top: -0.35em; padding-left: 1px; }
+.latex-sub { font-size: 0.7em; vertical-align: sub; line-height: 0; position: relative; bottom: -0.15em; padding-left: 1px; }
+.latex-frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 4px; line-height: 1.15; font-size: 0.92em; position: relative; top: -0.15em; }
+.latex-frac .latex-num { border-bottom: 1.2px solid currentColor; padding: 0 4px 1px; }
+.latex-frac .latex-den { padding: 1px 4px 0; }
+.latex-sqrt { display: inline-block; vertical-align: middle; position: relative; }
+.latex-sqrt-inner { border-top: 1.2px solid currentColor; padding: 1px 3px 0; margin-left: 1px; }
+.latex-sqrt-index { position: absolute; top: -0.2em; left: -0.15em; font-size: 0.55em; line-height: 1; }
+.latex-sym { font-family: "Cambria Math", "Times New Roman", serif; }
+.latex-space-1 { display: inline-block; width: 1em; }
+.latex-space-2 { display: inline-block; width: 2em; }
+.latex-space-thin { display: inline-block; width: 0.17em; }
+.latex-space-med { display: inline-block; width: 0.22em; }
+.latex-space-neg { display: inline-block; width: -0.16em; margin-right: -0.16em; }
+.latex-accent { display: inline-block; position: relative; text-align: center; padding: 0 1px; }
+.latex-accent .latex-accent-mark { position: absolute; top: -0.65em; left: 0; right: 0; text-align: center; font-size: 0.8em; line-height: 1; pointer-events: none; font-family: "Cambria Math", serif; }
+.latex-accent.latex-bar, .latex-accent.latex-overline, .latex-accent.latex-underline { border-top: 1.2px solid currentColor; padding-top: 1px; }
+.latex-accent.latex-underline { border-top: none; border-bottom: 1.2px solid currentColor; padding-bottom: 1px; padding-top: 0; }
+.latex-accent.latex-bar .latex-accent-mark, .latex-accent.latex-overline .latex-accent-mark, .latex-accent.latex-underline .latex-accent-mark { display: none; }
+.latex-vec-over { display: inline-block; position: relative; padding-top: 0.35em; padding-left: 1px; padding-right: 1px; }
+.latex-vec-over::before { content: '→'; position: absolute; top: -0.55em; left: 0; right: 0; text-align: center; font-size: 0.72em; line-height: 1; font-family: "Cambria Math", serif; }
+.latex-vec-over-left::before { content: '←'; }
+.latex-overbrace { display: inline-block; position: relative; padding-top: 0.7em; }
+.latex-overbrace::before { content: ''; position: absolute; top: 0.15em; left: 0.15em; right: 0.15em; height: 0.45em; border-top: 1.2px solid currentColor; border-left: 1.2px solid currentColor; border-right: 1.2px solid currentColor; border-radius: 0.5em 0.5em 0 0; }
+.latex-underbrace { display: inline-block; position: relative; padding-bottom: 0.7em; }
+.latex-underbrace::after { content: ''; position: absolute; bottom: 0.15em; left: 0.15em; right: 0.15em; height: 0.45em; border-bottom: 1.2px solid currentColor; border-left: 1.2px solid currentColor; border-right: 1.2px solid currentColor; border-radius: 0 0 0.5em 0.5em; }
+.latex-mathbb { font-family: "Cambria Math", "Segoe UI Symbol", serif; }
+.latex-mathcal { font-family: "Cambria Math", "Segoe UI Symbol", serif; font-style: italic; }
+.latex-mathrm { font-style: normal; }
+.latex-mathbf { font-weight: 700; }
+.latex-mathit { font-style: italic; }
+.latex-text { font-family: inherit; white-space: pre-wrap; }
+.latex-binom { display: inline-flex; align-items: center; vertical-align: middle; }
+.latex-binom-paren { font-size: 1.9em; line-height: 0.8; font-family: "Cambria Math", serif; transform: scaleY(1.05); }
+.latex-binom-stack { display: inline-flex; flex-direction: column; text-align: center; font-size: 0.9em; line-height: 1.15; margin: 0 1px; }
+.latex-boxed { border: 1.2px solid currentColor; padding: 2px 5px; border-radius: 3px; display: inline-block; }
+.latex-xarrow { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 3px; line-height: 1; }
+.latex-xarrow .latex-xarrow-label { font-size: 0.72em; padding-bottom: 1px; white-space: nowrap; }
+.latex-xarrow .latex-xarrow-arrow { font-size: 1em; line-height: 0.9; }
+.latex-over, .latex-under { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1.05; margin: 0 2px; }
+.latex-over-top, .latex-under-bottom { font-size: 0.7em; }
+.latex-matrix-wrap { display: inline-flex; align-items: center; vertical-align: middle; margin: 0 3px; }
+.latex-matrix-delim { font-size: 1.9em; line-height: 0.85; font-family: "Cambria Math", serif; color: currentColor; }
+.latex-matrix { border-collapse: collapse; margin: 0 3px; vertical-align: middle; display: inline-table; }
+.latex-matrix td { padding: 2px 8px; text-align: center; vertical-align: middle; }
+.latex-cases-wrap { display: inline-flex; align-items: center; vertical-align: middle; margin: 0 3px; }
+.latex-cases-delim { font-size: 2.6em; line-height: 0.5; font-family: "Cambria Math", serif; margin-right: 5px; transform: scaleY(1.15); }
+.latex-cases { border-collapse: collapse; display: inline-table; vertical-align: middle; }
+.latex-cases td { padding: 2px 6px; text-align: left; vertical-align: middle; white-space: nowrap; }
+.latex-cases td:last-child { padding-left: 14px; }
+#editModal, #importModal, #exportModal, #globalSettingModal, #appModal,
+#randomStudentModal, #stopwatchModal, #countdownModal, #calcModal, #dayCountdownModal,
+#funcPlotModal, #eqSolverModal, #dictModal {
+    display: none; position: fixed; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); background: #fff; border-radius: 20px;
+    box-shadow:
+        0 24px 70px rgba(80, 30, 110, 0.28),
+        0 4px 14px rgba(80, 30, 110, 0.12),
+        0 0 0 1px rgba(160, 96, 200, 0.12);
+    font-family: inherit; z-index: 1000; padding: 24px 26px;
+    min-width: 420px; max-width: 92vw; max-height: 88vh;
+    overflow-y: auto; animation: modalIn 0.2s ease;
+}
+@keyframes modalIn {
+    from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+#editModal > h3, #importModal > h3, #exportModal > h3, #globalSettingModal > h3,
+#appModal > h3, #randomStudentModal > h3, #stopwatchModal > h3,
+#countdownModal > h3, #calcModal > h3, #dayCountdownModal > h3,
+#funcPlotModal > h3, #eqSolverModal > h3, #dictModal > h3,
+#latexGuideModal > h3 {
+    text-align: center; font-size: 19px; font-weight: 700; letter-spacing: 1.5px;
+    color: #6b1a94; background: linear-gradient(135deg, #f5ecfc 0%, #e6d0f4 100%);
+    border-bottom: 1px solid rgba(160, 96, 200, 0.15);
+    border-radius: 20px 20px 0 0; margin: -24px -26px 18px; padding: 18px 32px;
+}
+#editModal { min-width: 560px; }
+#importModal { min-width: 500px; }
+#exportModal { min-width: 460px; }
+#globalSettingModal { min-width: 600px; }
+#appModal { min-width: 480px; }
+#randomStudentModal { min-width: 500px; }
+#stopwatchModal { min-width: 440px; }
+#countdownModal { min-width: 440px; }
+#calcModal { min-width: 440px; }
+#dayCountdownModal { min-width: 560px; }
+#funcPlotModal { min-width: 860px; }
+#eqSolverModal { min-width: 760px; }
+#latexGuideModal {
+    display: none; position: fixed; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); background: #fff; border-radius: 20px;
+    box-shadow:
+        0 24px 70px rgba(80, 30, 110, 0.28),
+        0 4px 14px rgba(80, 30, 110, 0.12),
+        0 0 0 1px rgba(160, 96, 200, 0.12);
+    font-family: inherit; z-index: 1008; padding: 24px 26px;
+    width: 780px; max-width: 92vw; max-height: 88vh;
+    flex-direction: column; animation: modalIn 0.2s ease;
+}
+#latexGuideModal.show { display: flex; }
+.latex-guide-scroll { overflow-y: auto; max-height: 66vh; margin: 12px 0; padding-right: 10px; flex: 1; }
+.latex-guide-scroll::-webkit-scrollbar { width: 10px; }
+.latex-guide-scroll::-webkit-scrollbar-track { background: #f5f0fa; border-radius: 5px; }
+.latex-guide-scroll::-webkit-scrollbar-thumb { background: #c0a0d8; border-radius: 5px; }
+.latex-guide-scroll::-webkit-scrollbar-thumb:hover { background: #a060c8; }
+.latex-guide-section { margin-bottom: 20px; }
+.latex-guide-section h4 {
+    margin: 0 0 10px 0; color: #702090; font-size: 16px;
+    border-bottom: 2px solid #e0d0f0; padding-bottom: 6px;
+    font-weight: 700; letter-spacing: 1px;
+}
+.latex-guide-table { display: grid; grid-template-columns: 1.6fr 1.1fr 1.5fr; gap: 5px 10px; font-size: 13px; }
+.latex-guide-table > div { padding: 6px 9px; background: #faf5ff; border-radius: 6px; display: flex; align-items: center; }
+.latex-guide-table .head { font-weight: 700; background: #e9dff5; color: #702090; justify-content: center; letter-spacing: 1px; }
+.latex-guide-table .cmd-cell { font-family: Consolas, "Courier New", monospace; color: #4a1268; word-break: break-all; }
+.latex-guide-table .meaning-cell { color: #444; }
+.latex-guide-table .preview-cell { font-family: "Cambria Math", "Times New Roman", "KaiTi", serif; color: #000; font-size: 15px; justify-content: center; }
+.style-row { margin: 14px 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.style-row label { color: #5a1e7c; font-weight: 600; font-size: 15px; }
+.rgb-input { width: 72px !important; padding: 7px 10px !important; }
+.color-preview {
+    display: inline-block; width: 30px; height: 30px;
+    border: 2px solid #c8a8e0; border-radius: 8px; background: #000;
+    vertical-align: middle; flex: 0 0 auto;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(112, 32, 144, 0.1);
+}
+.app-item {
+    padding: 14px 18px; border: 1px solid rgba(160, 96, 200, 0.22);
+    border-radius: 12px; margin-bottom: 10px; cursor: pointer;
+    display: flex; align-items: center; gap: 12px;
+    background: linear-gradient(180deg, #fdfaff 0%, #f6eefa 100%);
+    font-size: 15px; color: #4a1268; transition: all 0.18s ease; font-weight: 500;
+}
+.app-item:last-child { margin-bottom: 0; }
+.app-item:hover {
+    background: linear-gradient(180deg, #f4e9fd 0%, #e9d8f7 100%);
+    border-color: rgba(160, 96, 200, 0.55);
+    transform: translateX(3px);
+    box-shadow: 0 4px 14px rgba(112, 32, 144, 0.14);
+}
+.app-item .app-icon {
+    display: inline-block; width: 26px; text-align: center;
+    font-size: 17px; flex-shrink: 0;
+}
+.app-item .app-arrow {
+    margin-left: auto; color: #a060c8; font-weight: 700; font-size: 15px;
+}
+.app-sub-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(160, 96, 200, 0.25);
+}
+.app-sub-back {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 5px 12px; border-radius: 8px;
+    background: linear-gradient(180deg, #faf6fe 0%, #f0e6f8 100%);
+    border: 1px solid rgba(160, 96, 200, 0.3);
+    color: #5a1e7c; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.18s ease; user-select: none;
+}
+.app-sub-back:hover {
+    background: linear-gradient(180deg, #f3eaff 0%, #e6d5f5 100%);
+    border-color: rgba(160, 96, 200, 0.6);
+    transform: translateX(-2px);
+}
+.app-sub-title {
+    font-size: 16px; font-weight: 700; color: #6b1a94;
+    letter-spacing: 1.5px;
+}
+.time-display {
+    font-size: 48px; text-align: center; margin: 20px 0;
+    font-weight: 700; color: #702090; font-variant-numeric: tabular-nums;
+    letter-spacing: 3px; font-family: Consolas, "Courier New", monospace;
+    text-shadow: 0 2px 8px rgba(112, 32, 144, 0.15);
+    background: linear-gradient(180deg, #faf5ff 0%, #f0e5fa 100%);
+    padding: 18px 10px; border-radius: 14px;
+    border: 1px solid rgba(160, 96, 200, 0.18);
+}
+.calc-input {
+    width: 100%; font-size: 28px; text-align: right;
+    padding: 18px 16px; margin-bottom: 16px;
+    border: 1.5px solid rgba(160, 96, 200, 0.3);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fdfaff 0%, #f6eefa 100%);
+    color: #4a1268; font-family: Consolas, "Courier New", monospace;
+    font-weight: 700; letter-spacing: 2px; outline: none;
+}
+.clock-display {
+    position: static; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 2px;
+    padding: 6px 18px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.78), rgba(245,235,255,0.68));
+    border: 1px solid rgba(160, 96, 200, 0.28);
+    box-shadow: 0 3px 12px rgba(112, 32, 144, 0.10);
+    font-variant-numeric: tabular-nums; user-select: none; pointer-events: none;
+}
+.clock-display .clock-date {
+    font-size: 22px; line-height: 1.15; color: #6b1a94;
+    font-weight: 700; letter-spacing: 1px;
+    font-family: "KaiTi", "楷体", SimSun, serif; white-space: nowrap;
+}
+.clock-display .clock-week {
+    font-size: 21px; line-height: 1.15; color: #6b1a94;
+    font-weight: 700; letter-spacing: 3px;
+    font-family: "KaiTi", "楷体", SimSun, serif; white-space: nowrap;
+}
+.bottom-tag {
+    position: fixed; left: 14px; bottom: 8px;
+    display: flex; align-items: center; gap: 12px;
+    z-index: 10; pointer-events: none; user-select: none;
+    white-space: nowrap;
+    font-family: "KaiTi", "楷体", SimSun, serif;
+}
+.bottom-tag .version-text {
+    font-size: var(--baseFont); color: rgba(80, 30, 110, 0.72);
+    letter-spacing: 0.5px; font-weight: 600;
+}
+.bottom-tag .copyright-text {
+    font-size: var(--baseFont); color: #e60000;
+    font-weight: 800; letter-spacing: 0.3px;
+}
+.course-divider { display: flex; align-items: center; gap: 10px; margin: 16px 0; }
+.course-divider::before, .course-divider::after {
+    content: ''; flex: 1; height: 2px; border-radius: 1px;
+}
+.course-divider::before { background: linear-gradient(90deg, rgba(160,96,200,0.12), rgba(160,96,200,0.62)); }
+.course-divider::after { background: linear-gradient(90deg, rgba(160,96,200,0.62), rgba(160,96,200,0.12)); }
+.course-divider span {
+    flex: 0 0 auto; font-size: calc(var(--baseFont) * 0.8);
+    color: #702090; font-weight: 700; letter-spacing: 2px;
+    font-family: "KaiTi", "楷体", SimSun, serif;
+}
+.collapse-btn {
+    position: absolute; right: 0; top: 50%;
+    transform: translateY(-50%); width: 26px; height: 54px; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700; line-height: 1; letter-spacing: 0;
+    border: 1px solid rgba(160, 96, 200, 0.35); border-right: none;
+    border-radius: 9px 0 0 9px;
+    background: linear-gradient(90deg, rgba(252,249,255,0.55) 0%, rgba(240,230,248,0.95) 100%);
+    color: #5a1e7c; box-shadow: -2px 0 8px rgba(112, 32, 144, 0.10);
+    opacity: 0.55; transition: all 0.18s ease; z-index: 5;
+}
+.collapse-btn:hover {
+    opacity: 1; width: 30px;
+    background: linear-gradient(90deg, rgba(243,234,255,0.9) 0%, rgba(226,207,243,1) 100%);
+    color: #6b1a94; box-shadow: -3px 0 14px rgba(112, 32, 144, 0.24);
+    transform: translateY(-50%);
+}
+.expand-bar {
+    position: fixed; right: 6px; top: 50%;
+    transform: translateY(-50%); display: flex;
+    flex-direction: row; align-items: center; gap: 6px; z-index: 60;
+}
+.expand-btn {
+    width: 28px; height: 56px; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; line-height: 1; letter-spacing: 0;
+    border: 1px solid #7a30a8; border-radius: 10px;
+    background: linear-gradient(180deg, #a860d0 0%, #8038b0 100%);
+    color: #fff; box-shadow: 0 3px 12px rgba(112, 32, 144, 0.30);
+    transition: all 0.18s ease;
+}
+.expand-btn:hover {
+    background: linear-gradient(180deg, #b878e0 0%, #9048c0 100%);
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 6px 18px rgba(112, 32, 144, 0.40);
+}
+#bgImageSettings > .style-row:first-child { margin-top: 0; }
+.disabled-section { opacity: 0.45; pointer-events: none; user-select: none; }
+#napBtn {
+    font-size: 14px; padding: 7px 10px; border-radius: 9px;
+    background: linear-gradient(180deg, #faf6fe 0%, #f0e6f8 100%);
+    border: 1px solid rgba(160, 96, 200, 0.35);
+    color: #4a1268;
+    box-shadow: 0 2px 10px rgba(112, 32, 144, 0.15);
+    font-weight: 500; letter-spacing: 0.5px; flex: 0 0 auto;
+}
+#napBtn:hover {
+    background: linear-gradient(180deg, #f3eaff 0%, #e6d5f5 100%);
+    border-color: rgba(160, 96, 200, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(112, 32, 144, 0.22);
+}
+#napModeOverlay {
+    display: none; position: fixed; inset: 0; background: #000;
+    z-index: 9999; cursor: pointer; user-select: none;
+    align-items: center; justify-content: center;
+    flex-direction: column; overflow: hidden;
+}
+#napModeOverlay.show { display: flex; }
+#napModeOverlay > * { pointer-events: none; }
+#napClock {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: min(16vw, 28vh); font-weight: 300;
+    line-height: 1; color: #8f8f8f; letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 50px rgba(160, 160, 160, 0.22);
+    animation: napFadeIn 0.6s ease;
+}
+@keyframes napFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+.nap-hint {
+    position: absolute; bottom: 7vh;
+    font-family: "KaiTi", "楷体", SimSun, serif;
+    font-size: 16px; color: rgba(150, 150, 150, 0.42);
+    letter-spacing: 3px; animation: napFadeIn 0.6s ease;
+}
+.plot-input-row { margin: 12px 0; }
+.plot-input-row label {
+    display: block; color: #5a1e7c;
+    font-weight: 600; font-size: 15px; margin-bottom: 6px;
+}
+#funcExprInput {
+    width: 100%; font-family: Consolas, "Courier New", monospace;
+    font-size: 15px; line-height: 1.55; resize: vertical;
+    min-height: 66px; letter-spacing: 0.3px;
+}
+.plot-range-row {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 8px 10px; margin: 12px 0;
+}
+.plot-range-row label {
+    color: #5a1e7c; font-weight: 600; font-size: 14px; white-space: nowrap;
+}
+.plot-range-row input {
+    width: 84px; padding: 7px 10px;
+    font-family: Consolas, "Courier New", monospace; text-align: center;
+}
+.plot-range-row .sep { color: #a060c8; font-weight: 700; }
+.plot-range-row .hint-mini { font-size: 12px; color: #999; margin-left: 4px; }
+.plot-canvas-wrap {
+    position: relative; width: 100%; border-radius: 12px; overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(160, 96, 200, 0.22), 0 2px 10px rgba(112, 32, 144, 0.08);
+    background: #fff;
+}
+#funcPlotCanvas {
+    display: block; width: 100%; height: 440px;
+    cursor: crosshair; touch-action: none;
+}
+.plot-cursor-info {
+    position: absolute; right: 10px; top: 10px;
+    padding: 5px 11px; background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(160, 96, 200, 0.3);
+    border-radius: 8px; font-family: Consolas, "Courier New", monospace;
+    font-size: 13px; line-height: 1.5; color: #4a1268;
+    pointer-events: none; white-space: pre;
+    box-shadow: 0 2px 8px rgba(112, 32, 144, 0.10);
+    max-width: 60%; overflow: hidden; text-overflow: ellipsis;
+}
+.plot-legend {
+    display: flex; flex-wrap: wrap; gap: 6px 18px;
+    margin-top: 12px; font-size: 14px; color: #4a1268;
+    justify-content: center; min-height: 20px;
+}
+.plot-legend .legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: Consolas, "Courier New", monospace;
+    max-width: 100%;
+}
+.plot-legend .legend-swatch {
+    display: inline-block; width: 22px; height: 3px;
+    border-radius: 2px; flex: 0 0 auto;
+}
+.plot-legend .legend-error { color: #cc0000; font-size: 12.5px; font-family: inherit; }
+.plot-hint {
+    text-align: center; font-size: 12.5px; color: #999;
+    margin-top: 8px; letter-spacing: 0.5px; line-height: 1.6;
+}
+.plot-hint code {
+    font-family: Consolas, "Courier New", monospace;
+    background: #f5eefc; color: #702090;
+    padding: 1px 5px; border-radius: 4px; font-size: 12px;
+}
+.eq-input-row { margin: 12px 0; }
+.eq-input-row > label {
+    display: block; color: #5a1e7c;
+    font-weight: 600; font-size: 15px; margin-bottom: 6px;
+}
+#eqEquationInput {
+    width: 100%; font-family: Consolas, "Courier New", monospace;
+    font-size: 15px; line-height: 1.6; letter-spacing: 0.3px;
+    resize: vertical; min-height: 92px;
+}
+.eq-options-row {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 8px 10px; margin: 12px 0;
+}
+.eq-options-row > label {
+    color: #5a1e7c; font-weight: 600; font-size: 14px; white-space: nowrap;
+}
+.eq-options-row input[type="number"] {
+    width: 100px; padding: 7px 10px;
+    font-family: Consolas, "Courier New", monospace; text-align: center;
+}
+.eq-options-row select {
+    max-width: 80px; padding: 7px 26px 7px 12px;
+    font-family: Consolas, "Courier New", monospace; text-align: center;
+}
+.eq-options-row .sep { color: #a060c8; font-weight: 700; }
+.eq-options-row .hint-mini { font-size: 12px; color: #999; margin-left: 4px; }
+.eq-range-toggle-row {
+    display: flex; align-items: center; gap: 10px;
+    margin: 8px 0 12px; flex-wrap: wrap;
+}
+.eq-range-toggle-row > label.main-label {
+    color: #5a1e7c; font-weight: 600; font-size: 15px;
+}
+.eq-range-settings {
+    display: flex; align-items: center; gap: 8px 10px;
+    flex-wrap: wrap;
+    padding: 8px 14px; margin: 4px 0 12px;
+    background: linear-gradient(180deg, #fdfaff 0%, #f6eefa 100%);
+    border-radius: 10px;
+    border: 1px solid rgba(160, 96, 200, 0.18);
+}
+.eq-range-settings > label {
+    color: #5a1e7c; font-weight: 600; font-size: 14px; white-space: nowrap;
+}
+.eq-range-settings input[type="number"] {
+    width: 100px; padding: 7px 10px;
+    font-family: Consolas, "Courier New", monospace; text-align: center;
+}
+.eq-results {
+    margin-top: 14px;
+    background: linear-gradient(180deg, #fdfaff 0%, #f6eefa 100%);
+    border: 1px solid rgba(160, 96, 200, 0.2);
+    border-radius: 12px; padding: 6px 18px;
+    min-height: 96px; max-height: 340px; overflow-y: auto;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 15px; line-height: 1.8; color: #4a1268;
+}
+.eq-results::-webkit-scrollbar { width: 8px; }
+.eq-results::-webkit-scrollbar-track { background: #f5f0fa; border-radius: 4px; }
+.eq-results::-webkit-scrollbar-thumb { background: #c0a0d8; border-radius: 4px; }
+.eq-results::-webkit-scrollbar-thumb:hover { background: #a060c8; }
+.eq-block { padding: 10px 0; border-bottom: 1px dashed rgba(160, 96, 200, 0.18); }
+.eq-block:last-child { border-bottom: none; }
+.eq-source { color: #702090; font-weight: 700; margin-bottom: 4px; word-break: break-all; }
+.eq-roots { color: #1ea54c; }
+.eq-root-value { color: #e0502a; font-weight: 700; padding: 0 2px; }
+.eq-root-approx { color: #999; font-size: 0.85em; font-weight: 400; padding-left: 6px; }
+.eq-no-solution { color: #999; font-style: italic; }
+.eq-error { color: #cc0000; word-break: break-all; }
+.eq-info {
+    color: #888; font-size: 12.5px;
+    font-family: "KaiTi", "楷体", SimSun, serif;
+    margin-top: 4px; letter-spacing: 0.3px;
+}
+.eq-hint {
+    text-align: center; font-size: 12.5px; color: #999;
+    margin-top: 10px; letter-spacing: 0.5px; line-height: 1.75;
+}
+.eq-hint code {
+    font-family: Consolas, "Courier New", monospace;
+    background: #f5eefc; color: #702090;
+    padding: 1px 5px; border-radius: 4px; font-size: 12px;
+}
+
+/* ===================== 英语词典 ===================== */
+/* 固定尺寸：进入后窗口大小不会改变 */
+#dictModal {
+    width: 760px;
+    min-width: 0;
+    height: 640px;
+    max-width: 92vw;
+    max-height: 88vh;
+    overflow: hidden;
+    flex-direction: column;
+}
+#dictModal > h3 { flex: 0 0 auto; }
+#dictModal > button {
+    flex: 0 0 auto;
+    align-self: center;
+}
+
+/* 空状态（居中提示 + 导入按钮） */
+#dictEmptyState {
+    display: none;
+    flex: 1;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    text-align: center;
+}
+#dictEmptyState.on { display: flex; }
+
+.dict-empty-state {
+    color: #888;
+    font-size: 15px;
+    line-height: 2;
+}
+.dict-empty-title {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 6px;
+}
+.dict-empty-sub {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 14px;
+}
+.dict-empty-code {
+    display: inline-block;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 15px;
+    background: #f5eefc;
+    color: #702090;
+    padding: 8px 16px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(160, 96, 200, 0.18);
+}
+.dict-empty-actions { margin-top: 26px; }
+
+/* 主状态（搜索 + 候选 + 释义 + 计数） */
+#dictMainState {
+    display: none;
+    flex: 1;
+    min-height: 0;
+    flex-direction: column;
+    gap: 12px;
+}
+#dictMainState.on { display: flex; }
+
+/* 搜索行：position relative，方便下方绝对定位的候选框 */
+.dict-search-wrap {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex: 0 0 auto;
+}
+#dictSearchInput {
+    flex: 1;
+    font-size: 16px;
+    padding: 10px 14px;
+    font-family: Consolas, "Courier New", monospace;
+    letter-spacing: 0.3px;
+    min-width: 0;
+}
+.dict-action-btn {
+    padding: 8px 14px !important;
+    font-size: 14px !important;
+    flex: 0 0 auto;
+}
+
+/* 候选下拉框：绝对定位，不占用布局空间 */
+.dict-suggestions {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 30;
+    background: #fff;
+    border: 1px solid rgba(160, 96, 200, 0.25);
+    border-radius: 10px;
+    max-height: 220px;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(112, 32, 144, 0.16);
+}
+.dict-suggestions::-webkit-scrollbar { width: 8px; }
+.dict-suggestions::-webkit-scrollbar-track { background: #f5f0fa; border-radius: 4px; }
+.dict-suggestions::-webkit-scrollbar-thumb { background: #c0a0d8; border-radius: 4px; }
+.dict-suggestion-item {
+    padding: 9px 14px;
+    cursor: pointer;
+    color: #4a1268;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(160, 96, 200, 0.08);
+    transition: background 0.12s ease;
+}
+.dict-suggestion-item:last-child { border-bottom: none; }
+.dict-suggestion-item:hover {
+    background: linear-gradient(90deg, #f5ecfc 0%, #ece0f8 100%);
+    color: #702090;
+}
+
+/* 结果区：撑满剩余空间，内部滚动 */
+.dict-result {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 16px 20px;
+    background: linear-gradient(180deg, #fdfaff 0%, #f6eefa 100%);
+    border: 1px solid rgba(160, 96, 200, 0.2);
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #4a1268;
+}
+.dict-result::-webkit-scrollbar { width: 8px; }
+.dict-result::-webkit-scrollbar-track { background: #f5f0fa; border-radius: 4px; }
+.dict-result::-webkit-scrollbar-thumb { background: #c0a0d8; border-radius: 4px; }
+.dict-result-word {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: #702090;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    word-break: break-word;
+}
+.dict-result-meaning {
+    font-size: 15px;
+    color: #4a1268;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+.dict-result-empty { color: #999; font-style: italic; }
+
+/* 计数信息：固定在结果区下方 */
+.dict-info {
+    flex: 0 0 auto;
+    text-align: center;
+    font-size: 12.5px;
+    color: #999;
+    letter-spacing: 0.3px;
+}
+</style>
+</head>
+<body>
+<div class="top-left-bar">
+    <button id="lockBtn" onclick="toggleLock()" title="锁定 / 解锁编辑">🔒 锁定</button>
+    <button id="napBtn" onclick="enterNapMode()" title="午休模式：全屏黑底显示时间">🌙 午休</button>
+    <div class="operate-bar">
+        <button onclick="openImportModal()">导入信息</button>
+        <button onclick="openExportModal()">导出信息</button>
+        <button onclick="openEditModal()">新增条目</button>
+        <button onclick="openAppModal()">应用程序</button>
+        <button onclick="openGlobalSettingModal()">系统设置</button>
+    </div>
+</div>
+<div id="lockToast"></div>
+
+<div id="bgImageLayer" style="display:none;"><img id="bgImage" style="display:none;"></div>
+
+<div class="container">
+    <div class="header-wrap">
+        <div class="header-title" id="pageTitle" onclick="editPageTitle()" title="点击修改标题">高一(1)班 作业</div>
+        <div class="header-right">
+            <div class="header-brand">
+                <div class="brand-title">Class Panel</div>
+                <div class="brand-sub">Clever Haoxi Xia</div>
+                <div class="brand-sub">Yunsheng Tang</div>
+            </div>
+            <div class="clock-display" id="clockDisplay">
+                <span class="clock-date" id="clockDate">----年--月--日</span>
+                <span class="clock-week" id="clockWeek">星期-</span>
+            </div>
+        </div>
+    </div>
+    <input id="fileInput" type="file" accept=".classpanel" style="display:none" onchange="loadHomeworkFile(event)">
+    <input id="quoteFileInput" type="file" accept=".txt" style="display:none" onchange="loadQuoteFromFile(event)">
+    <input id="timetableFileInput" type="file" accept=".txt" style="display:none" onchange="loadTimetableTxt(event)">
+    <input id="bgFileInput" type="file" accept="image/*" style="display:none;" onchange="loadBgImage(event)">
+
+    <div class="main-wrap">
+        <div class="col-left" id="leftCol"></div>
+        <div class="col-mid" id="midCol">
+            <button class="collapse-btn" type="button" onclick="collapseColumn('mid')" title="向右折叠中间栏">&gt;</button>
+            <div class="section-head">
+                <h2>日期倒计时</h2>
+                <button class="mini-add-btn" onclick="openDayCountdownModal(-1)" title="添加倒计时">＋</button>
+            </div>
+            <div id="countdownWrap"></div>
+            <hr class="divider-hr">
+            <h2>通知</h2>
+            <div id="noticeWrap"></div>
+            <hr class="divider-hr">
+            <h2>名言</h2>
+            <div class="quote-wrap">
+                <div class="quote-text" id="quoteDisplay">可在设置里调整名言轮播</div>
+            </div>
+            <hr class="divider-hr">
+            <h2>每日一题</h2>
+            <div id="thinkWrap"></div>
+        </div>
+        <div class="col-right">
+            <button class="collapse-btn" type="button" onclick="collapseColumn('right')" title="向右折叠右侧栏">&gt;</button>
+            <div class="timetable-block">
+                <h2>课程表</h2>
+                <div id="timetableWrap"></div>
+            </div>
+            <div class="duty-block">
+                <h2>值日生表</h2>
+                <div id="dutyWrap"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="expand-bar" id="expandBar" style="display:none;">
+    <button class="expand-btn" id="expandMidBtn" type="button" onclick="expandColumn('mid')" title="展开中间栏">&lt;</button>
+    <button class="expand-btn" id="expandRightBtn" type="button" onclick="expandColumn('right')" title="展开右侧栏">&lt;</button>
+</div>
+
+<div class="bottom-tag" id="bottomTag">
+    <span class="version-text" id="versionText"></span>
+    <span class="copyright-text" id="copyrightText"></span>
+</div>
+
+<div id="napModeOverlay" onclick="exitNapMode()">
+    <div id="napClock">--:--:--</div>
+    <div class="nap-hint">点击空白处退出午休模式</div>
+</div>
+
+<div id="importModal">
+    <h3>导入信息</h3>
+    <div style="margin:18px 0;display:flex;flex-direction:column;gap:10px;">
+        <button onclick="importHomeworkData()">导入大屏数据(classpanel)</button>
+        <button onclick="importQuoteFile()">导入名言(txt)</button>
+        <button onclick="importTimetableFile()">导入当日课程(txt)</button>
+    </div>
+    <button onclick="closeImportModal()">关闭</button>
+</div>
+
+<div id="exportModal">
+    <h3>导出信息</h3>
+    <div style="margin:18px 0;">
+        <button onclick="exportToHomework()">导出大屏数据(classpanel)</button>
+    </div>
+    <div style="margin:18px 0;">
+        <button onclick="exportAsImage()">📷 导出为图片 (.png)</button>
+    </div>
+    <button onclick="closeExportModal()">关闭</button>
+</div>
+
+<div id="globalSettingModal">
+    <h3>系统设置</h3>
+    <div class="style-row">
+        <label>选择字体：</label>
+        <select id="fontSelect">
+            <option value='"KaiTi","楷体",SimSun,serif' style="font-family:'KaiTi','楷体',SimSun,serif">楷体</option>
+            <option value='"KaiTi_GB2312","楷体_GB2312",KaiTi,楷体,serif' style="font-family:'KaiTi_GB2312','楷体_GB2312',KaiTi,楷体,serif">楷体_GB2312</option>
+            <option value='"STKaiti",华文楷体,serif' style="font-family:'STKaiti',华文楷体,serif">华文楷体</option>
+            <option value='"FZKai-Z03","方正楷体",serif' style="font-family:'FZKai-Z03','方正楷体',serif">方正楷体</option>
+            <option value='"HYKaiTi","汉仪楷体",serif' style="font-family:'HYKaiTi','汉仪楷体',serif">汉仪楷体</option>
+            <option value='"Adobe Kaiti Std","Adobe 楷体",serif' style="font-family:'Adobe Kaiti Std','Adobe 楷体',serif">Adobe 楷体</option>
+            <option value='"SimHei",黑体,sans-serif' style="font-family:'SimHei',黑体,sans-serif">黑体</option>
+            <option value='"Microsoft YaHei",微软雅黑,sans-serif' style="font-family:'Microsoft YaHei',微软雅黑,sans-serif">微软雅黑</option>
+            <option value='"Microsoft YaHei Light","微软雅黑 Light",sans-serif' style="font-family:'Microsoft YaHei Light','微软雅黑 Light',sans-serif">微软雅黑 Light</option>
+            <option value='"STHeiti",华文黑体,sans-serif' style="font-family:'STHeiti',华文黑体,sans-serif">华文黑体</option>
+            <option value='"STXihei",华文细黑,sans-serif' style="font-family:'STXihei',华文细黑,sans-serif">华文细黑</option>
+            <option value='"FZHei-B01","方正黑体",sans-serif' style="font-family:'FZHei-B01','方正黑体',sans-serif">方正黑体</option>
+            <option value='"FZLanTingHei","方正兰亭黑",sans-serif' style="font-family:'FZLanTingHei','方正兰亭黑',sans-serif">方正兰亭黑</option>
+            <option value='"HYQiHei","汉仪旗黑",sans-serif' style="font-family:'HYQiHei','汉仪旗黑',sans-serif">汉仪旗黑</option>
+            <option value='"PingFang SC","苹方",sans-serif' style="font-family:'PingFang SC','苹方',sans-serif">苹方</option>
+            <option value='"Hiragino Sans GB","冬青黑体",sans-serif' style="font-family:'Hiragino Sans GB','冬青黑体',sans-serif">冬青黑体</option>
+            <option value='"SimSun",宋体,serif' style="font-family:'SimSun',宋体,serif">宋体</option>
+            <option value='"STSong",华文宋体,serif' style="font-family:'STSong',华文宋体,serif">华文宋体</option>
+            <option value='"STZhongsong",华文中宋,serif' style="font-family:'STZhongsong',华文中宋,serif">华文中宋</option>
+            <option value='"FZShuSong-Z01","方正书宋",serif' style="font-family:'FZShuSong-Z01','方正书宋',serif">方正书宋</option>
+            <option value='"Adobe Song Std","Adobe 宋体",serif' style="font-family:'Adobe Song Std','Adobe 宋体',serif">Adobe 宋体</option>
+            <option value='"HYShuSong","汉仪书宋",serif' style="font-family:'HYShuSong','汉仪书宋',serif">汉仪书宋</option>
+            <option value='"FangSong",仿宋,serif' style="font-family:'FangSong',仿宋,serif">仿宋</option>
+            <option value='"FangSong_GB2312","仿宋_GB2312",FangSong,仿宋,serif' style="font-family:'FangSong_GB2312','仿宋_GB2312',FangSong,仿宋,serif">仿宋_GB2312</option>
+            <option value='"STFangsong",华文仿宋,serif' style="font-family:'STFangsong',华文仿宋,serif">华文仿宋</option>
+            <option value='"LiSu",隶书,serif' style="font-family:'LiSu',隶书,serif">隶书</option>
+            <option value='"STLiti",华文隶书,serif' style="font-family:'STLiti',华文隶书,serif">华文隶书</option>
+            <option value='"YouYuan",幼圆,sans-serif' style="font-family:'YouYuan',幼圆,sans-serif">幼圆</option>
+            <option value='"DengXian","等线",sans-serif' style="font-family:'DengXian','等线',sans-serif">等线</option>
+            <option value='"STXingkai",华文行楷,serif' style="font-family:'STXingkai',华文行楷,serif">华文行楷</option>
+            <option value='"STXinwei",华文新魏,sans-serif' style="font-family:'STXinwei',华文新魏,sans-serif">华文新魏</option>
+            <option value='"STHupo",华文琥珀,sans-serif' style="font-family:'STHupo',华文琥珀,sans-serif">华文琥珀</option>
+            <option value='"STCaiyun",华文彩云,sans-serif' style="font-family:'STCaiyun',华文彩云,sans-serif">华文彩云</option>
+            <option value='"FZShuTi",方正舒体,sans-serif' style="font-family:'FZShuTi',方正舒体,sans-serif">方正舒体</option>
+            <option value='"FZYaoti",方正姚体,sans-serif' style="font-family:'FZYaoti',方正姚体,sans-serif">方正姚体</option>
+            <option value='"LXGW WenKai","霞鹜文楷",serif' style="font-family:'LXGW WenKai','霞鹜文楷',serif">霞鹜文楷</option>
+            <option value='"Source Han Sans SC","Noto Sans CJK SC","思源黑体",sans-serif' style="font-family:'Source Han Sans SC','Noto Sans CJK SC','思源黑体',sans-serif">思源黑体</option>
+            <option value='"Source Han Serif SC","Noto Serif CJK SC","思源宋体",serif' style="font-family:'Source Han Serif SC','Noto Serif CJK SC','思源宋体',serif">思源宋体</option>
+            <option value='"Sarasa Gothic SC","更纱黑体",sans-serif' style="font-family:'Sarasa Gothic SC','更纱黑体',sans-serif">更纱黑体</option>
+            <option value='"Sarasa Mono SC","更纱等宽",monospace' style="font-family:'Sarasa Mono SC','更纱等宽',monospace">更纱等宽</option>
+            <option value='"WenQuanYi Micro Hei","文泉驿微米黑",sans-serif' style="font-family:'WenQuanYi Micro Hei','文泉驿微米黑',sans-serif">文泉驿微米黑</option>
+            <option value='"WenQuanYi Zen Hei","文泉驿正黑",sans-serif' style="font-family:'WenQuanYi Zen Hei','文泉驿正黑',sans-serif">文泉驿正黑</option>
+            <option value='"Times New Roman",serif' style="font-family:'Times New Roman',serif">Times New Roman</option>
+            <option value='"Georgia",serif' style="font-family:Georgia,serif">Georgia</option>
+            <option value='"Cambria",serif' style="font-family:Cambria,serif">Cambria</option>
+            <option value='"Garamond",serif' style="font-family:Garamond,serif">Garamond</option>
+            <option value='"Palatino Linotype","Palatino",serif' style="font-family:'Palatino Linotype',Palatino,serif">Palatino</option>
+            <option value='"Book Antiqua",serif' style="font-family:'Book Antiqua',serif">Book Antiqua</option>
+            <option value='"Baskerville",serif' style="font-family:Baskerville,serif">Baskerville</option>
+            <option value='"Rockwell",serif' style="font-family:Rockwell,serif">Rockwell</option>
+            <option value='"Arial",sans-serif' style="font-family:Arial,sans-serif">Arial</option>
+            <option value='"Helvetica",sans-serif' style="font-family:Helvetica,sans-serif">Helvetica</option>
+            <option value='"Verdana",sans-serif' style="font-family:Verdana,sans-serif">Verdana</option>
+            <option value='"Tahoma",sans-serif' style="font-family:Tahoma,sans-serif">Tahoma</option>
+            <option value='"Calibri",sans-serif' style="font-family:Calibri,sans-serif">Calibri</option>
+            <option value='"Trebuchet MS",sans-serif' style="font-family:'Trebuchet MS',sans-serif">Trebuchet MS</option>
+            <option value='"Franklin Gothic Medium",sans-serif' style="font-family:'Franklin Gothic Medium',sans-serif">Franklin Gothic</option>
+            <option value='"Futura","Century Gothic",sans-serif' style="font-family:Futura,'Century Gothic',sans-serif">Futura</option>
+            <option value='"Optima",sans-serif' style="font-family:Optima,sans-serif">Optima</option>
+            <option value='"Consolas",monospace' style="font-family:Consolas,monospace">Consolas</option>
+            <option value='"Courier New",monospace' style="font-family:'Courier New',monospace">Courier New</option>
+            <option value='"Lucida Console",monospace' style="font-family:'Lucida Console',monospace">Lucida Console</option>
+            <option value='"Monaco",monospace' style="font-family:Monaco,monospace">Monaco</option>
+            <option value='"Menlo",monospace' style="font-family:Menlo,monospace">Menlo</option>
+            <option value='"Comic Sans MS",cursive' style="font-family:'Comic Sans MS',cursive">Comic Sans MS</option>
+        </select>
+    </div>
+    <div class="style-row">
+        <label>文字颜色：</label>
+        R:<input class="rgb-input" type="number" id="colorR" min="0" max="255" value="0" oninput="updateColorPreview()">
+        G:<input class="rgb-input" type="number" id="colorG" min="0" max="255" value="0" oninput="updateColorPreview()">
+        B:<input class="rgb-input" type="number" id="colorB" min="0" max="255" value="0" oninput="updateColorPreview()">
+        <span id="colorPreview" class="color-preview" title="颜色预览"></span>
+    </div>
+    <div class="style-row">
+        <label>内容字号(px)：</label>
+        <input type="number" id="fontSizeInput" min="1" step="1" value="22">
+    </div>
+    <div class="style-row">
+        <label>上午课程数量：</label>
+        <input type="number" id="morningCourseCountInput" min="1" max="20" step="1" value="5" style="width:100px">
+        <span style="font-size:13px;color:#888;">（决定课程表中"午休"分割线的位置）</span>
+    </div>
+    <div class="style-row">
+        <label>名言轮播周期（秒）：</label>
+        <input type="number" id="quoteIntervalSec" min="0.01" step="any" value="10">
+    </div>
+    <div class="style-row">
+        <label>使用背景图片：</label>
+        <label class="toggle-switch">
+            <input type="checkbox" id="useBgImageSwitch" onchange="toggleBgImageSetting()">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div id="bgImageSettings">
+        <div class="style-row">
+            <label>背景图片：</label>
+            <button onclick="importBgImageFile()">点击导入</button>
+        </div>
+        <div class="style-row">
+            <label>背景图片透明度(0~1)：</label>
+            <input type="number" step="0.05" min="0" max="1" id="bgOpacityInput" value="0">
+            <span style="font-size:14px;margin-left:8px;">0=原图完全显示，1=图片完全看不见</span>
+        </div>
+    </div>
+    <div style="margin-top:16px;text-align:center;">
+        <button onclick="applyGlobalSetting()">应用设置</button>
+        <button onclick="closeGlobalSettingModal()">关闭</button>
+    </div>
+</div>
+
+<div id="editModal">
+    <h3 id="modalTitle">新增条目</h3>
+    <div style="margin:12px 0;" id="editCatRow">
+        <label>分类：</label>
+        <select id="editCategory" onchange="onEditCategoryChange()">
+            <option value="语文">语文</option><option value="数学">数学</option>
+            <option value="英语A">英语A</option><option value="英语B">英语B</option>
+            <option value="物理">物理</option><option value="化学">化学</option>
+            <option value="生物">生物</option><option value="地理">地理</option>
+            <option value="政治">政治</option><option value="历史">历史</option>
+            <option value="体育">体育</option><option value="研学">研学</option>
+            <option value="音乐">音乐</option><option value="美术">美术</option>
+            <option value="劳动安排">劳动安排</option><option value="通知">通知</option>
+            <option value="每日一题">每日一题</option>
+            <option value="课表">课表</option>
+            <option value="值日生">值日生</option>
+        </select>
+    </div>
+    <div style="margin:12px 0;" id="editTagRow">
+        <label>标签：</label>
+        <input type="text" id="editTag" placeholder="例如：明天不收" style="width:220px">
+    </div>
+    <div style="margin:12px 0;">
+        <label>内容：</label><br>
+        <textarea id="editContent" rows="4" style="width:100%"></textarea>
+        <div style="margin-top: 8px; text-align: right;">
+            <button type="button" onclick="openLatexGuideModal()" style="font-size: 15px; padding: 5px 10px;">📖 LaTeX 使用指南</button>
+        </div>
+    </div>
+    <div style="margin:12px 0; padding:10px 12px; border-radius:10px; background:linear-gradient(180deg,#fdfaff 0%,#f6eefa 100%); border:1px solid rgba(160,96,200,0.18);" id="editStyleRow">
+        <div style="font-size:14px; color:#5a1e7c; font-weight:700; margin-bottom:6px;">
+            本条样式（留空＝跟随全局设置）
+        </div>
+        <div class="style-row" style="margin:8px 0;">
+            <label>字体：</label>
+            <select id="itemFontSelect" style="max-width:230px;">
+                <option value="">跟随全局</option>
+            </select>
+        </div>
+        <div class="style-row" style="margin:8px 0;">
+            <label>字号(px)：</label>
+            <input type="number" id="itemFontSize" min="1" step="1" placeholder="跟随全局" style="width:110px;">
+        </div>
+        <div class="style-row" style="margin:8px 0;">
+            <label>颜色：</label>
+            R:<input class="rgb-input" type="number" id="itemColorR" min="0" max="255" placeholder="-" oninput="updateItemColorPreview()">
+            G:<input class="rgb-input" type="number" id="itemColorG" min="0" max="255" placeholder="-" oninput="updateItemColorPreview()">
+            B:<input class="rgb-input" type="number" id="itemColorB" min="0" max="255" placeholder="-" oninput="updateItemColorPreview()">
+            <span id="itemColorPreview" class="color-preview" title="颜色预览" style="background:transparent;"></span>
+        </div>
+        <div style="text-align:right;">
+            <button type="button" onclick="clearItemStyle()" style="font-size:13px; padding:6px 12px;">清除本条样式</button>
+        </div>
+    </div>
+    <input type="hidden" id="editSubIndex">
+    <input type="hidden" id="editItemIndex">
+    <div style="text-align:center;">
+        <button onclick="saveEdit()">保存</button>
+        <button onclick="closeEditModal()">取消</button>
+    </div>
+</div>
+
+<div id="dayCountdownModal">
+    <h3 id="cdModalTitle">添加倒计时</h3>
+    <div class="style-row" style="margin:16px 0;">
+        <label>内容：</label>
+        <input type="text" id="cdNameInput" placeholder="例如：月考 / 高考" style="width:260px">
+    </div>
+    <div class="style-row" style="margin:16px 0;">
+        <label>目标日期：</label>
+        <input type="date" id="cdDateInput" style="width:180px;">
+    </div>
+    <div class="style-row" style="margin:16px 0;">
+        <label>目标时间：</label>
+        <input type="time" id="cdTimeInput" value="00:00" style="width:140px;">
+        <span style="font-size:13px;color:#888;">格式 HH:MM，精确到分钟</span>
+    </div>
+    <div style="text-align:center; margin-top:18px;">
+        <button onclick="saveDayCountdown()">保存</button>
+        <button onclick="closeDayCountdownModal()">取消</button>
+    </div>
+</div>
+
+<div id="latexGuideModal">
+    <h3>LaTeX 使用指南</h3>
+    <div style="text-align:center; font-size: 13px; color: #888; margin-top: 4px;">
+        用 $...$ 包裹公式即可渲染，例如 $x^2 + \frac{1}{2}$
+    </div>
+    <div id="latexGuideContent" class="latex-guide-scroll"></div>
+    <button onclick="closeLatexGuideModal()">关闭</button>
+</div>
+
+<!-- ================== 应用程序（分类视图） ================== -->
+<div id="appModal">
+    <h3>应用程序</h3>
+    <div id="appCategoryView">
+        <div style="margin:20px 0;">
+            <div class="app-item" onclick="openAppCategory('time')">
+                <span class="app-icon">⏱</span>
+                <span>时间工具</span>
+                <span class="app-arrow">›</span>
+            </div>
+            <div class="app-item" onclick="openAppCategory('teaching')">
+                <span class="app-icon">📚</span>
+                <span>教学工具</span>
+                <span class="app-arrow">›</span>
+            </div>
+            <div class="app-item" onclick="openAppCategory('math')">
+                <span class="app-icon">∑</span>
+                <span>数学工具</span>
+                <span class="app-arrow">›</span>
+            </div>
+            <div class="app-item" onclick="runAppAction('openDictModal()')">
+                <span class="app-icon">📖</span>
+                <span>英语词典</span>
+            </div>
+        </div>
+    </div>
+    <div id="appSubView" style="display:none;">
+        <div class="app-sub-head">
+            <span class="app-sub-back" onclick="backToAppCategories()">← 返回</span>
+            <span class="app-sub-title" id="appSubTitle"></span>
+        </div>
+        <div id="appSubList" style="margin: 4px 0 8px;"></div>
+    </div>
+    <button onclick="closeAppModal()">关闭</button>
+</div>
+
+<div id="randomStudentModal">
+    <h3>抽学号</h3>
+    <div class="style-row">
+        <label>起始学号：</label>
+        <input type="number" id="stuMin" value="1">
+    </div>
+    <div class="style-row">
+        <label>结束学号：</label>
+        <input type="number" id="stuMax" value="45">
+    </div>
+    <div class="style-row">
+        <label>屏蔽学号（多个用英文逗号隔开）：</label>
+        <input type="text" id="stuBan" placeholder="例如：3,5,12">
+    </div>
+    <div class="style-row" style="justify-content:center; gap:16px;">
+        <button onclick="startStudentRoll()">开始</button>
+        <button onclick="pauseStudentRoll()">暂停</button>
+    </div>
+    <div style="font-size:32px;text-align:center;margin:16px 0;font-weight:bold;color:#702090;min-height:44px;" id="stuResult">--</div>
+    <button onclick="backToAppList()">返回</button>
+</div>
+
+<div id="stopwatchModal">
+    <h3>秒表</h3>
+    <div class="time-display" id="swTime">00:00:00.00</div>
+    <div class="timer-btn-group">
+        <button onclick="swStart()">开始</button>
+        <button onclick="swPause()">暂停</button>
+        <button onclick="swReset()">重置</button>
+    </div>
+    <div style="margin-top:16px;text-align:center;">
+        <button onclick="backToAppList()">返回</button>
+    </div>
+</div>
+
+<div id="countdownModal">
+    <h3>倒计时</h3>
+    <div class="style-row" style="justify-content:center;">
+        <label>分：<input type="number" id="cdMin" value="5" min="0" style="width:70px"></label>
+        <label>秒：<input type="number" id="cdSec" value="0" min="0" max="59" style="width:70px"></label>
+    </div>
+    <div class="time-display" id="cdTime">05:00</div>
+    <div class="timer-btn-group">
+        <button onclick="cdStart()">开始</button>
+        <button onclick="cdPause()">暂停</button>
+        <button onclick="cdReset()">重置</button>
+    </div>
+    <div style="margin-top:16px;text-align:center;">
+        <button onclick="backToAppList()">返回</button>
+    </div>
+</div>
+
+<div id="calcModal">
+    <h3>计算器</h3>
+    <input class="calc-input" id="calcInput" readonly value="">
+    <div class="calc-grid">
+        <button onclick="calcAppend('7')">7</button>
+        <button onclick="calcAppend('8')">8</button>
+        <button onclick="calcAppend('9')">9</button>
+        <button onclick="calcAppend('/')">÷</button>
+        <button onclick="calcAppend('4')">4</button>
+        <button onclick="calcAppend('5')">5</button>
+        <button onclick="calcAppend('6')">6</button>
+        <button onclick="calcAppend('*')">×</button>
+        <button onclick="calcAppend('1')">1</button>
+        <button onclick="calcAppend('2')">2</button>
+        <button onclick="calcAppend('3')">3</button>
+        <button onclick="calcAppend('-')">−</button>
+        <button onclick="calcAppend('0')">0</button>
+        <button onclick="calcAppend('.')">.</button>
+        <button onclick="calcClear()">C</button>
+        <button onclick="calcAppend('+')">+</button>
+        <button onclick="calcEqual()" class="equal-btn">=</button>
+    </div>
+    <div style="margin-top:16px;text-align:center;">
+        <button onclick="backToAppList()">返回</button>
+    </div>
+</div>
+
+<div id="eqSolverModal">
+    <h3>解方程</h3>
+    <div class="eq-input-row">
+        <label>方程（每行一个，等号两边用 = 分隔；一元方程自变量可选）：</label>
+        <textarea id="eqEquationInput" spellcheck="false" placeholder="例如：&#10;2x + 3 = 7&#10;x^2 - 5x + 6 = 0&#10;sin(x) = 0.5&#10;1/x = 2"></textarea>
+    </div>
+    <div class="eq-options-row">
+        <label>未知数：</label>
+        <select id="eqVarInput">
+            <option value="x" selected>x</option>
+            <option value="y">y</option>
+            <option value="z">z</option>
+            <option value="t">t</option>
+            <option value="a">a</option>
+            <option value="b">b</option>
+            <option value="n">n</option>
+            <option value="m">m</option>
+        </select>
+    </div>
+    <div class="eq-range-toggle-row">
+        <label class="main-label">限定求解区间：</label>
+        <label class="toggle-switch">
+            <input type="checkbox" id="eqUseRangeSwitch" onchange="toggleEqRangeSetting()">
+            <span class="slider"></span>
+        </label>
+        <span style="font-size:12.5px;color:#888;">（关闭时自动在 [-100, 100] 内搜索）</span>
+    </div>
+    <div class="eq-range-settings disabled-section" id="eqRangeSettings">
+        <label>求解区间：</label>
+        <input type="number" id="eqRangeMin" value="-100" step="any">
+        <span class="sep">~</span>
+        <input type="number" id="eqRangeMax" value="100" step="any">
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;margin:14px 0 12px;">
+        <button onclick="solveEquations()">求解</button>
+        <button onclick="clearEquations()">清空</button>
+    </div>
+    <div class="eq-results" id="eqResults">
+        <div class="eq-info">请输入方程后点击"求解"</div>
+    </div>
+    <div class="eq-hint">
+        支持 <code>+ - * / ^</code> 与 <code>sin cos tan asin acos atan sinh cosh tanh sqrt cbrt abs exp ln lg log log2 floor ceil round sign min max</code>
+        <br>
+        常量 <code>pi</code> <code>e</code> · 隐式乘法（如 <code>2x</code>、<code>3sin(x)</code>）· Ctrl/⌘ + Enter 求解
+    </div>
+    <button onclick="backToAppList()">返回</button>
+</div>
+
+<div id="funcPlotModal">
+    <h3>函数图像绘制</h3>
+    <div class="plot-input-row">
+        <label>函数表达式（每行一个，自变量为 x）：</label>
+        <textarea id="funcExprInput" spellcheck="false" placeholder="例如：&#10;sin(x)&#10;x^2/4&#10;1/x"></textarea>
+    </div>
+    <div class="plot-range-row">
+        <label>x 范围：</label>
+        <input type="number" id="plotXMin" value="-10" step="any">
+        <span class="sep">~</span>
+        <input type="number" id="plotXMax" value="10" step="any">
+        <label style="margin-left:14px;">y 范围：</label>
+        <input type="number" id="plotYMin" placeholder="自动" step="any">
+        <span class="sep">~</span>
+        <input type="number" id="plotYMax" placeholder="自动" step="any">
+        <span class="hint-mini">（y 留空则自动）</span>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;margin:14px 0 12px;">
+        <button onclick="plotFunctions()">重新绘制</button>
+        <button onclick="resetPlotView()">重置视图</button>
+        <button onclick="clearPlotFunctions()">清空函数</button>
+    </div>
+    <div class="plot-canvas-wrap">
+        <canvas id="funcPlotCanvas"></canvas>
+        <div class="plot-cursor-info" id="plotCursorInfo"></div>
+    </div>
+    <div class="plot-legend" id="plotLegend"></div>
+    <div class="plot-hint">
+        滚轮缩放 · 拖动平移 · Ctrl/⌘ + Enter 绘制
+        <br>
+        支持 <code>+ - * / ^</code> 与 <code>sin cos tan asin acos atan sinh cosh tanh sqrt cbrt abs exp ln lg log log2 floor ceil round sign min max</code>
+        <br>
+        常量 <code>pi</code> <code>e</code> · 支持隐式乘法（如 <code>2x</code>、<code>3sin(x)</code>）
+    </div>
+    <button onclick="backToAppList()">返回</button>
+</div>
+
+<div id="dictModal">
+    <h3>英语词典</h3>
+    <div id="dictEmptyState">
+        <div class="dict-empty-state">
+            <div class="dict-empty-title">尚未导入词典文件</div>
+            <div class="dict-empty-sub">文件格式：每行一个词条，格式为</div>
+            <div class="dict-empty-code">word="英文", meaning="释义"</div>
+        </div>
+        <div class="dict-empty-actions">
+            <button onclick="importDictFile()" style="padding:10px 24px; font-size:15px;">📂 点击导入 txt 文件</button>
+        </div>
+    </div>
+    <div id="dictMainState">
+        <div class="dict-search-wrap">
+            <input type="text" id="dictSearchInput" placeholder="输入英文单词开始查询…" autocomplete="off" spellcheck="false">
+            <button class="dict-action-btn" onclick="clearDictSearch()" title="清空搜索框">✕</button>
+            <button class="dict-action-btn" onclick="importDictFile()" title="重新导入词典">重新导入</button>
+            <div class="dict-suggestions" id="dictSuggestions"></div>
+        </div>
+        <div class="dict-result" id="dictResult">
+            <span class="dict-result-empty">请输入单词开始查询</span>
+        </div>
+        <div class="dict-info" id="dictInfo"></div>
+    </div>
+    <input type="file" id="dictFileInput" accept=".txt" style="display:none" onchange="loadDictFile(event)">
+    <button onclick="backToAppList()">返回</button>
+</div>
+
+<!-- ============================================================
+     ⬇⬇⬇  html2canvas 1.4.1 (MIT) —— 可选内联位置  ⬇⬇⬇
+     ============================================================ -->
+<script>
+/* ⬇ 可选：把原文件中内联的 html2canvas 1.4.1 库代码整段粘贴到这里 ⬇ */
+</script>
+<!-- ⬆⬆⬆ html2canvas 结束 ⬆⬆⬆ -->
+
+<script>
+/* ====================== 常量与全局状态 ====================== */
+const $ = id => document.getElementById(id);
+const SUBJECT_ORDER = ["语文","数学","英语A","英语B","物理","化学","生物","地理","政治","历史","体育","研学","音乐","美术","劳动安排"];
+const HOMEWORK_CATS = SUBJECT_ORDER.slice();
+const COPYRIGHT_NOTICE = "此软件版权归 nfls G20230151 所有，禁止在非允许情况下拷贝或转发，侵权必究。";
+const APP_VERSION = "V2.3";
+
+const SIMPLE_EDIT_MAP = {
+    editNotice:    { key:"notice",    cat:"通知" },
+    editThink:     { key:"think",     cat:"每日一题" },
+    editTimetable: { key:"timetable", cat:"课表" },
+    editDuty:      { key:"duty",      cat:"值日生" }
+};
+const CAT_TO_KEY = { "通知":"notice", "每日一题":"think", "课表":"timetable", "值日生":"duty" };
+
+/* ====================== 单条文本样式 ====================== */
+function normItem(x){
+    if(x && typeof x === "object"){
+        if(typeof x.text !== "string") x.text = String(x.text == null ? "" : x.text);
+        return x;
+    }
+    return { text: String(x == null ? "" : x) };
+}
+function itemText(x){ return normItem(x).text; }
+function itemHasStyle(x){ const s = normItem(x).style; return !!(s && (s.fontFamily || s.color || s.size)); }
+
+function normalizeAllItems(){
+    ["notice","think","timetable","duty"].forEach(k => {
+        if(Array.isArray(appData[k])) appData[k] = appData[k].map(normItem);
+    });
+    (appData.homework || []).forEach(sub => {
+        if(Array.isArray(sub.list)) sub.list = sub.list.map(normItem);
+    });
+}
+
+function itemStyleCss(x){
+    const st = normItem(x).style;
+    if(!st) return "";
+    let css = "";
+    if(st.fontFamily) css += `font-family:${st.fontFamily};`;
+    if(st.color)      css += `color:${st.color};`;
+    if(st.size)       css += `font-size:${st.size}px;`;
+    return css;
+}
+function itemStyleAttr(x){
+    const css = itemStyleCss(x);
+    return ` style="${escapeHtml(css)}"`;
+}
+
+function countItemStyles(){
+    let n = 0;
+    ["notice","think","timetable","duty"].forEach(k => {
+        (appData[k] || []).forEach(it => { if(itemHasStyle(it)) n++; });
+    });
+    (appData.homework || []).forEach(sub => {
+        (sub.list || []).forEach(it => { if(itemHasStyle(it)) n++; });
+    });
+    return n;
+}
+
+function clearAllItemStyles(){
+    ["notice","think","timetable","duty"].forEach(k => {
+        (appData[k] || []).forEach(it => { if(it && typeof it === "object") delete it.style; });
+    });
+    (appData.homework || []).forEach(sub => {
+        (sub.list || []).forEach(it => { if(it && typeof it === "object") delete it.style; });
+    });
+}
+
+const MODAL_IDS = ['importModal','exportModal','globalSettingModal','editModal','dayCountdownModal',
+                   'appModal','randomStudentModal','stopwatchModal','countdownModal','calcModal',
+                   'funcPlotModal','eqSolverModal','dictModal'];
+let _lastModalOpen = 0;
+const markModalOpen = () => { _lastModalOpen = Date.now(); };
+
+let appData = {
+    pageTitle:"高一(1)班 作业",
+    homework: [
+        {subject:"语文", list:[{text:"一篇随笔，下周一交，字数不限，题目不限，拿一个本子，要求手写。", tag:""}]},
+        {subject:"数学", list:[{text:"南外作业本 第2,3课时。", tag:""}]},
+        {subject:"英语A", list:[{text:"完成两个排比句仿写，注意书写。", tag:""},{text:"明天交VOA三篇听写", tag:""}]},
+        {subject:"物理", list:[{text:"选择性完成 南外作业本 第3课时。", tag:""}]},
+        {subject:"地理", list:[{text:"学案 第1课时。", tag:""},{text:"明天把地理学案的答案和试卷(答案上写名字，都带过来，早上交在讲台)。", tag:""}]}
+    ],
+    notice: [
+        "这是作业 PPT。",
+        "今日值日生：王奕沣，杨俊泽，杨智周，尹乐诚，惠婧恬，莫徐涵 (11~14+25+27) 请值日生午间安排：扫地，排桌椅，倒垃圾，擦黑板，检察人员（兼负责人，最后离开），组长等职。",
+        "汤允升征集政治课前演讲搭档！",
+        "明天交齐团员证给 39。"
+    ],
+    think: [
+        "(上期答案) 南极点，以及距离北极点 $1+\\frac{1}{2k\\pi}$ 公里 的纬线上的点（ k∈N*）",
+        "(本期题目）如果英国的交通规则由左侧通行变为右侧通行，一天的长度是增加了还是减少了还是没变？"
+    ],
+    timetable: ["外语","外语","物理","语文","数学","地理","体育","体育"],
+    duty: [],
+    dayCountdown: []
+};
+
+let baseFontPx = 22;
+let currentFontFamily = '"KaiTi","楷体",SimSun,serif';
+let currentTextColorRgb = {r:0,g:0,b:0};
+let bgImgOpacity = 0;
+let useBgImage = false;
+let bgImgUrl = "";
+let bgScale = 1, bgPosX = 0, bgPosY = 0;
+let bgDragging = false, bgDragStartX = 0, bgDragStartY = 0, bgImgStartX = 0, bgImgStartY = 0;
+
+let morningCourseCount = 5;
+let eqUseRange = false;
+
+let quoteList = [], currentQuoteIndex = 0, quoteTimer = null, quoteIntervalSecond = 10;
+
+/* ====================== 锁定状态 ====================== */
+let isLocked = false, _toastTimer = null;
+
+function showToast(msg){
+    const el = $("lockToast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => el.classList.remove("show"), 1500);
+}
+function toggleLock(){
+    isLocked = !isLocked;
+    const btn = $("lockBtn");
+    btn.textContent = isLocked ? "🔓 解锁" : "🔒 锁定";
+    btn.classList.toggle("locked", isLocked);
+    document.body.classList.toggle("locked-mode", isLocked);
+    showToast(isLocked ? "🔒 已锁定，编辑功能已禁用" : "🔓 已解锁，可以编辑");
+}
+function guardLock(){
+    if(!isLocked) return false;
+    showToast("🔒 已锁定，请先解锁");
+    return true;
+}
+
+/* ====================== 数据归一化 ====================== */
+function normalizeAllData(){
+    if(!Array.isArray(appData.homework)) appData.homework = [];
+    appData.homework = appData.homework
+        .filter(s => s && s.subject)
+        .map(s => ({
+            subject: s.subject,
+            list: (Array.isArray(s.list) ? s.list : []).map(it => {
+                if(typeof it === "string") return { text: it, tag: "" };
+                const obj = {
+                    text: String(it?.text ?? ""),
+                    tag: String(it?.tag ?? "")
+                };
+                const st = it?.style;
+                if(st && (st.fontFamily || st.color || st.size)) obj.style = st;
+                return obj;
+            })
+        }));
+
+    ["notice","think","timetable","duty"].forEach(k => { if(!Array.isArray(appData[k])) appData[k] = []; });
+
+    if(!Array.isArray(appData.dayCountdown)) appData.dayCountdown = [];
+    appData.dayCountdown = appData.dayCountdown
+        .filter(d => d && typeof d === "object")
+        .map(d => ({
+            name: String(d.name ?? ""),
+            date: String(d.date ?? ""),
+            time: String(d.time ?? "") || "00:00"
+        }))
+        .filter(d => d.name || d.date);
+
+    let mcc = Number(appData.morningCourseCount);
+    if(!isFinite(mcc) || mcc < 1) mcc = 5;
+    morningCourseCount = Math.round(mcc);
+
+    eqUseRange = !!appData.eqUseRange;
+}
+
+function serializeHomeworkItem(it){
+    if(typeof it === "string") return it;
+    const tag = it?.tag || "";
+    const text = it?.text ?? "";
+    const style = it?.style;
+    const hasStyle = !!(style && (style.fontFamily || style.color || style.size));
+    if(hasStyle) return { text, tag, style };
+    return tag ? { text, tag } : text;
+}
+
+function serializeSimpleItem(it){
+    if(it && typeof it === "object"){
+        const text = it.text ?? "";
+        const style = it.style;
+        const hasStyle = !!(style && (style.fontFamily || style.color || style.size));
+        if(hasStyle) return { text, style };
+        return text;
+    }
+    return String(it ?? "");
+}
+
+/* ====================== LaTeX 渲染引擎 ====================== */
+function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+function textToHtml(str){ return escapeHtml(str).replace(/\r\n|\r|\n/g, '<br>'); }
+
+const LATEX_SYMBOLS = {
+    'times':'×','cdot':'·','div':'÷','pm':'±','mp':'∓','ast':'∗','star':'⋆','circ':'∘','bullet':'•',
+    'oplus':'⊕','ominus':'⊖','otimes':'⊗','oslash':'⊘','odot':'⊙','bmod':' mod ',
+    'leq':'≤','le':'≤','geq':'≥','ge':'≥','neq':'≠','ne':'≠','equiv':'≡','approx':'≈','sim':'∼','simeq':'≃','propto':'∝','cong':'≅',
+    'll':'≪','gg':'≫','asymp':'≍','doteq':'≐','fallingdotseq':'≒','risingdotseq':'≓','circeq':'≗','triangleq':'≜',
+    'infty':'∞','partial':'∂','nabla':'∇','hbar':'ℏ','ell':'ℓ','wp':'℘','Re':'ℜ','Im':'ℑ','aleph':'ℵ','beth':'ℶ','gimel':'ℷ','daleth':'ℸ',
+    'prime':'′','angle':'∠','square':'□','blacksquare':'■','triangle':'△','triangleleft':'◁','triangleright':'▷','bigtriangleup':'△','bigtriangledown':'▽',
+    'checkmark':'✓','degree':'°','dagger':'†','ddagger':'‡','S':'§','P':'¶','copyright':'©','pounds':'£','euro':'€','yen':'¥','imath':'ı','jmath':'ȷ',
+    'to':'→','rightarrow':'→','leftarrow':'←','leftrightarrow':'↔','Rightarrow':'⇒','Leftarrow':'⇐','Leftrightarrow':'⇔',
+    'mapsto':'↦','longmapsto':'⟼','hookrightarrow':'↪','hookleftarrow':'↩','uparrow':'↑','downarrow':'↓','updownarrow':'↕',
+    'longrightarrow':'⟶','longleftarrow':'⟵','longleftrightarrow':'⟷','Longrightarrow':'⟹','Longleftarrow':'⟸','Longleftrightarrow':'⟺',
+    'implies':'⟹','impliedby':'⟸','iff':'⟺','leadsto':'⇝','rightsquigarrow':'⇝','rightleftharpoons':'⇌','leftrightharpoons':'⇋',
+    'curvearrowright':'↷','curvearrowleft':'↶','upuparrows':'⇈','downdownarrows':'⇊','nearrow':'↗','searrow':'↘','swarrow':'↙','nwarrow':'↖',
+    'in':'∈','notin':'∉','ni':'∋','subset':'⊂','subseteq':'⊆','subsetneq':'⊊','supset':'⊃','supseteq':'⊇','supsetneq':'⊋',
+    'nsubseteq':'⊈','nsupseteq':'⊉','nsubset':'⊄','nsupset':'⊅','cup':'∪','cap':'∩','bigcup':'⋃','bigcap':'⋂','sqcup':'⊔','sqcap':'⊓',
+    'emptyset':'∅','varnothing':'∅','complement':'∁','setminus':'∖','forall':'∀','exists':'∃','nexists':'∄',
+    'neg':'¬','lnot':'¬','land':'∧','wedge':'∧','lor':'∨','vee':'∨','veebar':'⊻','barwedge':'⊼','curlyvee':'⋎','curlywedge':'⋏',
+    'therefore':'∴','because':'∵','top':'⊤','bot':'⊥','sum':'∑','prod':'∏','int':'∫','oint':'∮','iint':'∬','iiint':'∭','oiint':'∯','oiiint':'∰',
+    'bigoplus':'⨁','bigotimes':'⨂','bigodot':'⨀','bigvee':'⋁','bigwedge':'⋀','coprod':'∐','biguplus':'⨄',
+    'lim':'lim','log':'log','ln':'ln','lg':'lg','exp':'exp','sin':'sin','cos':'cos','tan':'tan','cot':'cot',
+    'sec':'sec','csc':'csc','arcsin':'arcsin','arccos':'arccos','arctan':'arctan','sinh':'sinh','cosh':'cosh','tanh':'tanh',
+    'max':'max','min':'min','sup':'sup','inf':'inf','arg':'arg','det':'det','dim':'dim','gcd':'gcd','lcm':'lcm','deg':'deg','ker':'ker','Pr':'Pr','mod':'mod',
+    'langle':'⟨','rangle':'⟩','lceil':'⌈','rceil':'⌉','lfloor':'⌊','rfloor':'⌋','lvert':'|','rvert':'|','lVert':'‖','rVert':'‖',
+    'vert':'|','Vert':'‖','backslash':'\\','mid':'∣','nmid':'∤','parallel':'∥','nparallel':'∦','perp':'⊥',
+    'dots':'…','ldots':'…','cdots':'⋯','vdots':'⋮','ddots':'⋱',
+    'alpha':'α','beta':'β','gamma':'γ','delta':'δ','epsilon':'ε','varepsilon':'ϵ','zeta':'ζ','eta':'η',
+    'theta':'θ','vartheta':'ϑ','iota':'ι','kappa':'κ','varkappa':'ϰ','lambda':'λ','mu':'μ','nu':'ν','xi':'ξ','omicron':'ο',
+    'pi':'π','varpi':'ϖ','rho':'ρ','varrho':'ϱ','sigma':'σ','varsigma':'ς','tau':'τ','upsilon':'υ',
+    'phi':'φ','varphi':'ϕ','chi':'χ','psi':'ψ','omega':'ω',
+    'Alpha':'Α','Beta':'Β','Gamma':'Γ','Delta':'Δ','Epsilon':'Ε','Zeta':'Ζ','Eta':'Η','Theta':'Θ',
+    'Iota':'Ι','Kappa':'Κ','Lambda':'Λ','Mu':'Μ','Nu':'Ν','Xi':'Ξ','Omicron':'Ο','Pi':'Π',
+    'Rho':'Ρ','Sigma':'Σ','Tau':'Τ','Upsilon':'Υ','Phi':'Φ','Chi':'Χ','Psi':'Ψ','Omega':'Ω',
+    'left':'','right':'','displaystyle':'','textstyle':'','scriptstyle':'','scriptscriptstyle':'',
+    'limits':'','nolimits':'','label':'','ref':'','eqref':'','cite':'','notag':'','nonumber':'',
+    'big':'','Big':'','bigg':'','Bigg':'','bigl':'','bigr':'','Bigl':'','Bigr':'','middle':''
+};
+
+const ACCENT_MAP = {
+    'hat':{cls:'latex-hat',mark:'⌃'},'widehat':{cls:'latex-hat',mark:'⌃'},
+    'bar':{cls:'latex-bar',mark:''},'overline':{cls:'latex-bar',mark:''},'underline':{cls:'latex-underline',mark:''},
+    'vec':{cls:'latex-vec',mark:'→'},'dot':{cls:'latex-dot',mark:'˙'},'ddot':{cls:'latex-ddot',mark:'¨'},
+    'tilde':{cls:'latex-tilde',mark:'~'},'widetilde':{cls:'latex-tilde',mark:'~'},
+    'acute':{cls:'latex-acute',mark:'´'},'grave':{cls:'latex-grave',mark:'`'},
+    'breve':{cls:'latex-breve',mark:'˘'},'check':{cls:'latex-check',mark:'ˇ'},'mathring':{cls:'latex-ring',mark:'˚'}
+};
+
+const MATHBB_MAP = {
+    'A':'𝔸','B':'𝔹','C':'ℂ','D':'𝔻','E':'𝔼','F':'𝔽','G':'𝔾','H':'ℍ','I':'𝕀','J':'𝕁',
+    'K':'𝕂','L':'𝕃','M':'𝕄','N':'ℕ','O':'𝕆','P':'ℙ','Q':'ℚ','R':'ℝ','S':'𝕊','T':'𝕋',
+    'U':'𝕌','V':'𝕍','W':'𝕎','X':'𝕏','Y':'𝕐','Z':'ℤ',
+    'a':'𝕒','b':'𝕓','c':'𝕔','d':'𝕕','e':'𝕖','f':'𝕗','g':'𝕘','h':'𝕙','i':'𝕚','j':'𝕛',
+    'k':'𝕜','l':'𝕝','m':'𝕞','n':'𝕟','o':'𝕠','p':'𝕡','q':'𝕢','r':'𝕣','s':'𝕤','t':'𝕥',
+    'u':'𝕦','v':'𝕧','w':'𝕨','x':'𝕩','y':'𝕪','z':'𝕫',
+    '0':'𝟘','1':'𝟙','2':'𝟚','3':'𝟛','4':'𝟜','5':'𝟝','6':'𝟞','7':'𝟟','8':'𝟠','9':'𝟡'
+};
+const MATHCAL_MAP = {
+    'A':'𝒜','B':'ℬ','C':'𝒞','D':'𝒟','E':'ℰ','F':'ℱ','G':'𝒢','H':'ℋ','I':'ℐ','J':'𝒥',
+    'K':'𝒦','L':'ℒ','M':'ℳ','N':'𝒩','O':'𝒪','P':'𝒫','Q':'𝒬','R':'ℛ','S':'𝒮','T':'𝒯',
+    'U':'𝒰','V':'𝒱','W':'𝒲','X':'𝒳','Y':'𝒴','Z':'𝒵'
+};
+const convertMap = (str, map) => str.split('').map(c => map[c] || c).join('');
+const mathbbConvert = s => convertMap(s, MATHBB_MAP);
+const mathcalConvert = s => convertMap(s, MATHCAL_MAP);
+
+function getArgCount(name){
+    switch(name){
+        case 'frac': case 'dfrac': case 'tfrac':
+        case 'binom': case 'dbinom': case 'tbinom':
+        case 'overset': case 'underset': case 'stackrel': return 2;
+        case 'sqrt':
+        case 'hat': case 'widehat': case 'bar': case 'overline': case 'underline':
+        case 'vec': case 'dot': case 'ddot': case 'tilde': case 'widetilde':
+        case 'acute': case 'grave': case 'breve': case 'check': case 'mathring':
+        case 'overrightarrow': case 'overleftarrow': case 'overbrace': case 'underbrace':
+        case 'mathbb': case 'mathcal': case 'mathrm': case 'mathbf':
+        case 'mathit': case 'text': case 'operatorname':
+        case 'textbf': case 'textit': case 'boldsymbol': case 'bm':
+        case 'boxed': case 'xrightarrow': case 'xleftarrow': case 'pmod': return 1;
+        default: return 0;
+    }
+}
+function escapeToNode(ch){
+    if(ch === ',') return { type:'space', size:'thin' };
+    if(ch === ';' || ch === ':') return { type:'space', size:'med' };
+    if(ch === '!') return { type:'space', size:'neg' };
+    if(ch === ' ') return { type:'space', size:'normal' };
+    return { type:'char', value: ch };
+}
+function readBraces(str, pos){
+    if(str[pos] !== '{') return [null, pos];
+    let depth = 0, i = pos;
+    while(i < str.length){
+        if(str[i] === '{') depth++;
+        else if(str[i] === '}'){ depth--; if(depth === 0) return [str.slice(pos+1, i), i+1]; }
+        i++;
+    }
+    return [null, pos];
+}
+function parseFormula(str, pos = 0){
+    const nodes = [];
+    while (pos < str.length) {
+        const c = str[pos];
+        if (c === '}') break;
+        if (c === '{') {
+            const r = parseFormula(str, pos + 1);
+            nodes.push({ type:'group', children: r.nodes });
+            pos = r.pos + 1;
+            continue;
+        }
+        if (c === '\\') {
+            let j = pos + 1;
+            while (j < str.length && /[a-zA-Z]/.test(str[j])) j++;
+            if (j === pos + 1) {
+                nodes.push(escapeToNode(str[pos + 1] || ''));
+                pos += 2;
+                continue;
+            }
+            const name = str.slice(pos + 1, j);
+            pos = j;
+            if (name === 'begin') {
+                while (pos < str.length && str[pos] === ' ') pos++;
+                const [envName, afterName] = readBraces(str, pos);
+                if (envName !== null) {
+                    const endPattern = '\\end{' + envName + '}';
+                    const endIdx = str.indexOf(endPattern, afterName);
+                    if (endIdx !== -1) {
+                        nodes.push({ type:'env', name:envName, content: str.slice(afterName, endIdx) });
+                        pos = endIdx + endPattern.length;
+                        continue;
+                    }
+                }
+                nodes.push({ type:'cmd', name:'begin', args:[] });
+                continue;
+            }
+            const cmdNode = { type:'cmd', name, args: [] };
+            if (name === 'sqrt') {
+                while (pos < str.length && str[pos] === ' ') pos++;
+                let rootIndex = null;
+                if (pos < str.length && str[pos] === '[') {
+                    const endB = str.indexOf(']', pos + 1);
+                    if (endB !== -1) {
+                        rootIndex = str.slice(pos + 1, endB);
+                        pos = endB + 1;
+                        while (pos < str.length && str[pos] === ' ') pos++;
+                    }
+                }
+                const a = readArg(str, pos);
+                cmdNode.args.push(a.node);
+                cmdNode.rootIndex = rootIndex;
+                pos = a.pos;
+                nodes.push(cmdNode);
+                continue;
+            }
+            const argCount = getArgCount(name);
+            for (let k = 0; k < argCount; k++) {
+                while (pos < str.length && str[pos] === ' ') pos++;
+                const a = readArg(str, pos);
+                cmdNode.args.push(a.node);
+                pos = a.pos;
+            }
+            nodes.push(cmdNode);
+            continue;
+        }
+        if (c === '^' || c === '_') {
+            const kind = c === '^' ? 'sup' : 'sub';
+            pos++;
+            while (pos < str.length && str[pos] === ' ') pos++;
+            const a = readArg(str, pos);
+            pos = a.pos;
+            let targetIdx = nodes.length - 1;
+            while (targetIdx >= 0 && nodes[targetIdx].type === 'space') targetIdx--;
+            if (targetIdx >= 0) nodes[targetIdx][kind] = a.node;
+            else { const wrapper = { type:'char', value:'' }; wrapper[kind] = a.node; nodes.push(wrapper); }
+            continue;
+        }
+        if (c === ' ') { nodes.push({ type:'space', size:'normal' }); pos++; continue; }
+        nodes.push({ type:'char', value: c });
+        pos++;
+    }
+    return { nodes, pos };
+}
+function readArg(str, pos){
+    if (pos >= str.length) return { node:{ type:'char', value:'' }, pos };
+    const c = str[pos];
+    if (c === '{') {
+        const r = parseFormula(str, pos + 1);
+        return { node:{ type:'group', children: r.nodes }, pos: r.pos + 1 };
+    }
+    if (c === '\\') {
+        let j = pos + 1;
+        while (j < str.length && /[a-zA-Z]/.test(str[j])) j++;
+        if (j === pos + 1) return { node: escapeToNode(str[pos + 1] || ''), pos: pos + 2 };
+        const name = str.slice(pos + 1, j);
+        let p = j;
+        const node = { type:'cmd', name, args: [] };
+        if (name === 'sqrt') {
+            while (p < str.length && str[p] === ' ') p++;
+            let rootIndex = null;
+            if (p < str.length && str[p] === '[') {
+                const endB = str.indexOf(']', p + 1);
+                if (endB !== -1) {
+                    rootIndex = str.slice(p + 1, endB);
+                    p = endB + 1;
+                    while (p < str.length && str[p] === ' ') p++;
+                }
+            }
+            const a = readArg(str, p);
+            node.args.push(a.node);
+            node.rootIndex = rootIndex;
+            return { node, pos: a.pos };
+        }
+        const argCount = getArgCount(name);
+        for (let k = 0; k < argCount; k++) {
+            while (p < str.length && str[p] === ' ') p++;
+            const a = readArg(str, p);
+            node.args.push(a.node);
+            p = a.pos;
+        }
+        return { node, pos: p };
+    }
+    return { node:{ type:'char', value: c }, pos: pos + 1 };
+}
+function collectChars(node){
+    if (!node) return '';
+    if (node.type === 'char') return node.value;
+    if (node.type === 'space') return ' ';
+    if (node.type === 'group') return node.children.map(collectChars).join('');
+    return '';
+}
+function renderEnv(node){
+    const env = node.name;
+    const rows = node.content.split(/\\\\/);
+    const matrixEnvs = ['matrix','pmatrix','bmatrix','vmatrix','Vmatrix','smallmatrix',
+                        'array','aligned','align','gather','gathered','equation','split','cases'];
+    if (!matrixEnvs.includes(env)) {
+        return renderNodes(parseFormula(node.content, 0).nodes);
+    }
+    if (env === 'cases') {
+        let html = '<table class="latex-cases">';
+        for (const row of rows) {
+            if (row.trim() === '') continue;
+            html += '<tr>';
+            for (const col of row.split('&')) {
+                html += '<td>' + renderNodes(parseFormula(col, 0).nodes) + '</td>';
+            }
+            html += '</tr>';
+        }
+        html += '</table>';
+        return `<span class="latex-cases-wrap"><span class="latex-cases-delim">{</span>${html}</span>`;
+    }
+    const delims = {
+        'pmatrix':['(',')'],'bmatrix':['[',']'],'vmatrix':['|','|'],'Vmatrix':['‖','‖'],
+        'matrix':['',''],'smallmatrix':['',''],'array':['',''],'aligned':['',''],
+        'align':['',''],'gather':['',''],'gathered':['',''],'equation':['',''],'split':['','']
+    };
+    const [ld, rd] = delims[env] || ['', ''];
+    let html = '<table class="latex-matrix">';
+    for (const row of rows) {
+        if (row.trim() === '') continue;
+        html += '<tr>';
+        for (const col of row.split('&')) {
+            html += '<td>' + renderNodes(parseFormula(col, 0).nodes) + '</td>';
+        }
+        html += '</tr>';
+    }
+    html += '</table>';
+    if (ld === '' && rd === '') return html;
+    return `<span class="latex-matrix-wrap"><span class="latex-matrix-delim">${ld}</span>${html}<span class="latex-matrix-delim">${rd}</span></span>`;
+}
+function renderCommand(n){
+    const name = n.name;
+    const arg0 = n.args[0] ? renderNode(n.args[0]) : '';
+    if (name === 'frac' || name === 'dfrac' || name === 'tfrac') {
+        const den = n.args[1] ? renderNode(n.args[1]) : '';
+        return `<span class="latex-frac"><span class="latex-num">${arg0}</span><span class="latex-den">${den}</span></span>`;
+    }
+    if (name === 'binom' || name === 'dbinom' || name === 'tbinom') {
+        const b = n.args[1] ? renderNode(n.args[1]) : '';
+        return `<span class="latex-binom"><span class="latex-binom-paren">(</span><span class="latex-binom-stack"><span>${arg0}</span><span>${b}</span></span><span class="latex-binom-paren">)</span></span>`;
+    }
+    if (name === 'sqrt') {
+        if (n.rootIndex) {
+            return `<span class="latex-sqrt"><span class="latex-sqrt-index">${renderNodes(parseFormula(n.rootIndex, 0).nodes)}</span>√<span class="latex-sqrt-inner">${arg0}</span></span>`;
+        }
+        return `<span class="latex-sqrt">√<span class="latex-sqrt-inner">${arg0}</span></span>`;
+    }
+    if (name === 'boxed') return `<span class="latex-boxed">${arg0}</span>`;
+    if (name === 'xrightarrow' || name === 'xleftarrow') {
+        const arrow = name === 'xrightarrow' ? '→' : '←';
+        return `<span class="latex-xarrow"><span class="latex-xarrow-label">${arg0}</span><span class="latex-xarrow-arrow">${arrow}</span></span>`;
+    }
+    if (name === 'overset' || name === 'stackrel') {
+        const bottom = n.args[1] ? renderNode(n.args[1]) : '';
+        return `<span class="latex-over"><span class="latex-over-top">${arg0}</span>${bottom}</span>`;
+    }
+    if (name === 'underset') {
+        const top = n.args[1] ? renderNode(n.args[1]) : '';
+        return `<span class="latex-under">${top}<span class="latex-under-bottom">${arg0}</span></span>`;
+    }
+    if (name === 'pmod') return `<span style="padding-left:0.3em;">(mod&nbsp;${arg0})</span>`;
+    if (name === 'overrightarrow' || name === 'overleftarrow') {
+        const cls = name === 'overrightarrow' ? 'latex-vec-over' : 'latex-vec-over latex-vec-over-left';
+        return `<span class="${cls}">${arg0}</span>`;
+    }
+    if (name === 'overbrace') return `<span class="latex-overbrace">${arg0}</span>`;
+    if (name === 'underbrace') return `<span class="latex-underbrace">${arg0}</span>`;
+    if (ACCENT_MAP[name]) {
+        const conf = ACCENT_MAP[name];
+        if (conf.mark === '') return `<span class="latex-accent ${conf.cls}">${arg0}</span>`;
+        return `<span class="latex-accent ${conf.cls}"><span class="latex-accent-mark">${conf.mark}</span>${arg0}</span>`;
+    }
+    if (name === 'mathbb') return `<span class="latex-mathbb">${mathbbConvert(collectChars(n.args[0]))}</span>`;
+    if (name === 'mathcal') return `<span class="latex-mathcal">${mathcalConvert(collectChars(n.args[0]))}</span>`;
+    if (name === 'mathrm' || name === 'textrm' || name === 'textnormal') return `<span class="latex-mathrm">${arg0}</span>`;
+    if (name === 'mathbf' || name === 'boldsymbol' || name === 'bm' || name === 'textbf') return `<span class="latex-mathbf">${arg0}</span>`;
+    if (name === 'mathit' || name === 'textit') return `<span class="latex-mathit">${arg0}</span>`;
+    if (name === 'text' || name === 'operatorname') return `<span class="latex-text">${escapeHtml(collectChars(n.args[0]))}</span>`;
+    if (name === 'quad') return '<span class="latex-space-1"></span>';
+    if (name === 'qquad') return '<span class="latex-space-2"></span>';
+    if (Object.prototype.hasOwnProperty.call(LATEX_SYMBOLS, name)) {
+        const sym = LATEX_SYMBOLS[name];
+        return sym === '' ? '' : `<span class="latex-sym">${sym}</span>`;
+    }
+    return escapeHtml('\\' + name);
+}
+function renderNode(n){
+    if (!n) return '';
+    let core = '';
+    switch (n.type) {
+        case 'char': core = escapeHtml(n.value); break;
+        case 'space': {
+            const sizes = { thin:'latex-space-thin', med:'latex-space-med', neg:'latex-space-neg' };
+            if (n.size && n.size !== 'normal') return `<span class="${sizes[n.size]}"></span>`;
+            return '&nbsp;';
+        }
+        case 'group': core = renderNodes(n.children); break;
+        case 'cmd': core = renderCommand(n); break;
+        case 'env': core = renderEnv(n); break;
+    }
+    if (n.sup || n.sub) {
+        let mods = '';
+        if (n.sup) mods += `<sup class="latex-sup">${renderNode(n.sup)}</sup>`;
+        if (n.sub) mods += `<sub class="latex-sub">${renderNode(n.sub)}</sub>`;
+        return `<span class="latex-atom">${core}${mods}</span>`;
+    }
+    return core;
+}
+function renderNodes(nodes){ return nodes.map(renderNode).join(''); }
+
+function renderLatex(text){
+    if (typeof text !== 'string') return text;
+    return text.split(/(\$[^$]*\$)/g).map(part => {
+        if (part.length >= 2 && part[0] === '$' && part[part.length - 1] === '$') {
+            try {
+                return `<span class="latex-formula">${renderNodes(parseFormula(part.slice(1, -1), 0).nodes)}</span>`;
+            } catch (e) { return textToHtml(part); }
+        }
+        return textToHtml(part);
+    }).join('');
+}
+
+/* ====================== LaTeX 使用指南内容 ====================== */
+const LATEX_GUIDE_SECTIONS = [
+    { title:'基础', rows:[
+        ['^','上标','$x^2$'],['_','下标','$x_1$'],['\\frac{a}{b}','分数','$\\frac{1}{2}$'],
+        ['\\dfrac{a}{b} \\tfrac{a}{b}','大/小分数','$\\dfrac{1}{2}$ $\\tfrac{1}{2}$'],
+        ['\\sqrt{x}','平方根','$\\sqrt{2}$'],['\\sqrt[n]{x}','n 次根号','$\\sqrt[3]{x}$'],
+        ['\\sum','求和','$\\sum_{i=1}^n a_i$'],['\\int','积分','$\\int_0^1 x\\,dx$'],
+        ['\\leq \\geq \\neq','≤ ≥ ≠','$a \\leq b \\geq c \\neq d$'],['\\infty','无穷','$\\infty$'],
+        ['\\partial','偏导','$\\frac{\\partial f}{\\partial x}$'],['\\nabla','梯度/散度/旋度','$\\nabla f$'],
+        ['\\cdot \\times','点乘 / 叉乘','$a\\cdot b \\times c$'],['\\to \\rightarrow','箭头','$a \\to b$'],
+        ['\\in','属于','$x \\in A$'],['\\left( \\right)','自适应括号','$\\left(\\frac{a}{b}\\right)$']
+    ]},
+    { title:'希腊字母 小写', rows:[
+        ['\\alpha \\beta \\gamma \\delta','α β γ δ','$\\alpha \\beta \\gamma \\delta$'],
+        ['\\epsilon \\varepsilon \\zeta \\eta','ε ϵ ζ η','$\\epsilon \\varepsilon \\zeta \\eta$'],
+        ['\\theta \\vartheta \\iota \\kappa','θ ϑ ι κ','$\\theta \\vartheta \\iota \\kappa$'],
+        ['\\lambda \\mu \\nu \\xi \\omicron','λ μ ν ξ ο','$\\lambda \\mu \\nu \\xi \\omicron$'],
+        ['\\pi \\varpi \\rho \\varrho','π ϖ ρ ϱ','$\\pi \\varpi \\rho \\varrho$'],
+        ['\\sigma \\varsigma \\tau \\upsilon','σ ς τ υ','$\\sigma \\varsigma \\tau \\upsilon$'],
+        ['\\phi \\varphi \\chi \\psi \\omega','φ ϕ χ ψ ω','$\\phi \\varphi \\chi \\psi \\omega$'],
+        ['\\varkappa','ϰ','$\\varkappa$']
+    ]},
+    { title:'希腊字母 大写', rows:[
+        ['\\Gamma \\Delta \\Theta \\Lambda','Γ Δ Θ Λ','$\\Gamma \\Delta \\Theta \\Lambda$'],
+        ['\\Xi \\Pi \\Sigma \\Upsilon','Ξ Π Σ Υ','$\\Xi \\Pi \\Sigma \\Upsilon$'],
+        ['\\Phi \\Psi \\Omega','Φ Ψ Ω','$\\Phi \\Psi \\Omega$']
+    ]},
+    { title:'比较、逻辑与集合', rows:[
+        ['\\pm \\mp','± ∓','$a \\pm b \\mp c$'],
+        ['\\approx \\sim \\equiv \\propto','≈ ∼ ≡ ∝','$a \\approx b \\equiv c$'],
+        ['\\doteq \\fallingdotseq \\risingdotseq','≐ ≒ ≓','$a \\doteq b \\fallingdotseq c$'],
+        ['\\cong \\ll \\gg','≅ ≪ ≫','$a \\cong b \\ll c$'],
+        ['\\subset \\subseteq \\supset \\supseteq','⊂ ⊆ ⊃ ⊇','$A \\subset B \\subseteq C$'],
+        ['\\subsetneq \\supsetneq \\nsubseteq','⊊ ⊋ ⊈','$A \\subsetneq B \\nsubseteq C$'],
+        ['\\cup \\cap \\sqcup \\sqcap','∪ ∩ ⊔ ⊓','$A \\cup B \\cap C$'],
+        ['\\emptyset \\varnothing \\complement','∅ ∅ ∁','$\\emptyset \\complement A$'],
+        ['\\forall \\exists \\nexists','∀ ∃ ∄','$\\forall x \\exists y$'],
+        ['\\neg \\land \\lor \\veebar','¬ ∧ ∨ ⊻','$p \\land q \\lor r$'],
+        ['\\top \\bot \\therefore \\because','⊤ ⊥ ∴ ∵','$\\top \\bot$'],
+        ['\\notin \\ni','∉ ∋','$x \\notin A, a \\ni b$']
+    ]},
+    { title:'箭头与映射', rows:[
+        ['\\to \\rightarrow','→','$a \\to b$'],
+        ['\\leftarrow \\leftrightarrow','← ↔','$a \\leftarrow b \\leftrightarrow c$'],
+        ['\\Rightarrow \\Leftrightarrow','⇒ ⇔','$a \\Rightarrow b \\Leftrightarrow c$'],
+        ['\\implies \\impliedby \\iff','⟹ ⟸ ⟺','$a \\implies b \\iff c$'],
+        ['\\mapsto \\longmapsto','↦ ⟼','$f: x \\mapsto x^2$'],
+        ['\\longrightarrow \\Longrightarrow','⟶ ⟹','$a \\longrightarrow b \\Longrightarrow c$'],
+        ['\\hookrightarrow \\hookleftarrow','↪ ↩','$A \\hookrightarrow B$'],
+        ['\\leadsto \\rightsquigarrow','⇝ ⇝','$a \\leadsto b$'],
+        ['\\rightleftharpoons \\leftrightharpoons','⇌ ⇋','$A \\rightleftharpoons B$'],
+        ['\\curvearrowright \\curvearrowleft','↷ ↶','$x \\curvearrowright y$'],
+        ['\\nearrow \\searrow \\swarrow \\nwarrow','↗ ↘ ↙ ↖','$a \\nearrow b \\searrow c$'],
+        ['\\uparrow \\downarrow \\updownarrow','↑ ↓ ↕','$a \\uparrow b$'],
+        ['\\xrightarrow{f}','带文字箭头','$A \\xrightarrow{f} B$']
+    ]},
+    { title:'函数与运算符', rows:[
+        ['\\lim_{x \\to 0}','极限','$\\lim_{x \\to 0} f(x)$'],
+        ['\\log \\ln \\lg \\exp','对数 / 指数','$\\log x, \\ln x, \\exp x$'],
+        ['\\sin \\cos \\tan','三角','$\\sin\\theta + \\cos\\theta$'],
+        ['\\arcsin \\arccos \\arctan','反三角','$\\arcsin x$'],
+        ['\\sinh \\cosh \\tanh','双曲','$\\sinh x$'],
+        ['\\max \\min \\sup \\inf','最值','$\\max\\{a,b\\}$'],
+        ['\\arg \\det \\dim \\ker','常用算子','$\\arg\\max f(x)$'],
+        ['\\prod \\coprod','连乘 / 余积','$\\prod_i a_i \\coprod_i b_i$'],
+        ['\\oint \\oiint \\oiiint','环路 / 多重环路积分','$\\oint_C \\vec{F}\\cdot d\\vec{r}$'],
+        ['\\bigoplus \\bigotimes \\bigodot','大圈运算','$\\bigoplus_{i} V_i$'],
+        ['\\bigvee \\bigwedge \\biguplus','大逻辑 / 多重并','$\\bigvee_i A_i$'],
+        ['\\binom{n}{k}','组合数','$\\binom{n}{k}$'],
+        ['\\bmod \\pmod{n}','模运算','$a \\equiv b \\pmod{n}$'],
+        ['\\operatorname{arg}','自定义算子','$\\operatorname{argmax}$']
+    ]},
+    { title:'字体与重音', rows:[
+        ['\\mathbb{R}','黑板粗体','$\\mathbb{R} \\mathbb{N} \\mathbb{Z} \\mathbb{C} \\mathbb{Q}$'],
+        ['\\mathcal{L}','花体','$\\mathcal{L} \\mathcal{F}$'],
+        ['\\mathrm{d}','正体','$\\mathrm{d}x$'],
+        ['\\mathbf{v}','粗体','$\\mathbf{v}$'],
+        ['\\mathit{i}','斜体','$\\mathit{i}$'],
+        ['\\text{速度}','文本','$\\text{速度}$'],
+        ['\\hat{a} \\bar{a} \\underline{a}','帽子 / 横线 / 下划线','$\\hat{a} \\bar{a} \\underline{a}$'],
+        ['\\vec{a} \\dot{a} \\ddot{a}','向量 / 点 / 双点','$\\vec{a} \\dot{a} \\ddot{a}$'],
+        ['\\tilde{a} \\widetilde{abc}','波浪线','$\\tilde{a} \\widetilde{abc}$'],
+        ['\\acute{a} \\grave{a}','尖音符 / 钝音符','$\\acute{a} \\grave{a}$'],
+        ['\\breve{a} \\check{a} \\mathring{a}','短 / 抑扬 / 圆环','$\\breve{a} \\check{a} \\mathring{a}$'],
+        ['\\overline{ab}','上划线','$\\overline{ab}$'],
+        ['\\overrightarrow{AB}','向量箭头','$\\overrightarrow{AB}$'],
+        ['\\overleftarrow{AB}','反向向量箭头','$\\overleftarrow{AB}$'],
+        ['\\overbrace{x+y}','上大括号','$\\overbrace{x+y}$'],
+        ['\\underbrace{x+y}','下大括号','$\\underbrace{x+y}$']
+    ]},
+    { title:'间距与装饰', rows:[
+        ['\\quad \\qquad','大空格','$a \\quad b \\qquad c$'],
+        ['\\, \\; \\:','小空格','$a\\,b\\;c\\:d$'],
+        ['\\!','负空格','$a\\!b$'],
+        ['\\boxed{x}','加框','$\\boxed{E=mc^2}$'],
+        ['\\overset{a}{X}','上方加符','$\\overset{a}{X}$'],
+        ['\\underset{b}{X}','下方加符','$\\underset{b}{X}$'],
+        ['\\langle \\rangle','尖括号','$\\langle a, b \\rangle$'],
+        ['\\lceil \\rceil \\lfloor \\rfloor','取整括号','$\\lceil x \\rceil \\lfloor y \\rfloor$'],
+        ['\\mid \\nmid \\parallel \\perp','整除 / 不整除 / 平行 / 垂直','$a \\mid b, c \\parallel d \\perp e$'],
+        ['\\cdots \\ldots \\vdots \\ddots','各类省略号','$a_1, a_2, \\cdots, a_n$']
+    ]},
+    { title:'矩阵与分段函数', rows:[
+        ['pmatrix','圆括号矩阵','$\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$'],
+        ['bmatrix','方括号矩阵','$\\begin{bmatrix} 1 & 0 \\\\ 0 & 1 \\end{bmatrix}$'],
+        ['vmatrix','行列式','$\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}$'],
+        ['Vmatrix','双竖线范数','$\\begin{Vmatrix} x \\end{Vmatrix}$'],
+        ['cases','分段函数','$\\begin{cases} x^2 & x \\geq 0 \\\\ -x & x < 0 \\end{cases}$'],
+        ['aligned','多行对齐','$\\begin{aligned} a &= b + c \\\\ &= d \\end{aligned}$']
+    ]},
+    { title:'常用符号（补充）', rows:[
+        ['\\dagger \\ddagger','剑号','$a^\\dagger \\quad b^\\ddagger$'],
+        ['\\S \\P','章节 / 段落','$\\S 1 \\quad \\P 2$'],
+        ['\\copyright','版权符号','$\\copyright$'],
+        ['\\pounds \\euro \\yen','货币符号','$\\pounds \\euro \\yen$'],
+        ['\\degree','度数','$45\\degree$'],
+        ['\\square \\blacksquare','空心 / 实心方块','$\\square \\blacksquare$'],
+        ['\\triangle \\triangleleft \\triangleright','三角','$\\triangle \\triangleleft \\triangleright$'],
+        ['\\star \\ast \\bullet','星号 / 项目符号','$a \\star b \\ast c \\bullet d$'],
+        ['\\aleph \\beth \\gimel','希伯来字母','$\\aleph_0 \\beth_1 \\gimel_2$'],
+        ['\\hbar \\ell \\wp','常用手写体','$\\hbar \\ell \\wp$'],
+        ['\\Re \\Im','实部 / 虚部','$\\Re z, \\Im z$'],
+        ['\\imath \\jmath','无点 i / j','$\\imath \\jmath$']
+    ]}
+];
+function buildLatexGuide(){
+    let html = '';
+    for (const sec of LATEX_GUIDE_SECTIONS) {
+        html += `<div class="latex-guide-section"><h4>${sec.title}</h4><div class="latex-guide-table">`;
+        html += '<div class="head">命令</div><div class="head">含义</div><div class="head">预览</div>';
+        for (const [cmd, meaning, sample] of sec.rows) {
+            html += `<div class="cmd-cell">${escapeHtml(cmd)}</div>`;
+            html += `<div class="meaning-cell">${escapeHtml(meaning)}</div>`;
+            html += `<div class="preview-cell">${renderLatex(sample)}</div>`;
+        }
+        html += '</div></div>';
+    }
+    $("latexGuideContent").innerHTML = html;
+}
+function openLatexGuideModal(){
+    if (!$("latexGuideContent").innerHTML) buildLatexGuide();
+    $("latexGuideModal").classList.add("show");
+    markModalOpen();
+}
+function closeLatexGuideModal(){ $("latexGuideModal").classList.remove("show"); }
+
+/* ====================== 通用工具 ====================== */
+function rgbToHex(r,g,b){
+    const toHex = c => c.toString(16).padStart(2,'0');
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+function hexToRgb(hex) {
+    hex = hex.replace('#','');
+    return { r: parseInt(hex.substring(0,2),16), g: parseInt(hex.substring(2,4),16), b: parseInt(hex.substring(4,6),16) };
+}
+function clampRgbValue(v){
+    v = Number(v);
+    if(isNaN(v)) v = 0;
+    return Math.max(0, Math.min(255, Math.round(v)));
+}
+function updateColorPreview(){
+    const r = clampRgbValue($("colorR").value);
+    const g = clampRgbValue($("colorG").value);
+    const b = clampRgbValue($("colorB").value);
+    const box = $("colorPreview");
+    if(!box) return;
+    box.style.background = `rgb(${r},${g},${b})`;
+    box.title = `预览：rgb(${r},${g},${b})  ${rgbToHex(r,g,b)}`;
+}
+
+/* ====================== 日期倒计时 ====================== */
+let dayCdEditIndex = -1;
+
+function todayStr(){
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function parseDateOnly(s){
+    if(!s) return null;
+    const m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(String(s).trim());
+    if(!m) return null;
+    const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    if(isNaN(d.getTime())) return null;
+    d.setHours(0,0,0,0);
+    return d;
+}
+function parseTimeStr(s){
+    if(!s) return null;
+    const m = /^(\d{1,2}):(\d{1,2})$/.exec(String(s).trim());
+    if(!m) return null;
+    const hh = Number(m[1]), mm = Number(m[2]);
+    if(hh < 0 || hh > 23 || mm < 0 || mm > 59) return null;
+    return { hh, mm };
+}
+function parseDateTime(dateStr, timeStr){
+    const d = parseDateOnly(dateStr);
+    if(!d) return null;
+    const t = parseTimeStr(timeStr);
+    if(!t) return null;
+    d.setHours(t.hh, t.mm, 0, 0);
+    return d;
+}
+function formatDuration(totalMin){
+    const days = Math.floor(totalMin / 1440);
+    const hours = Math.floor((totalMin % 1440) / 60);
+    const minutes = totalMin % 60;
+    const parts = [];
+    if(days > 0) parts.push(`${days}天`);
+    if(hours > 0 || days > 0) parts.push(`${hours}小时`);
+    parts.push(`${minutes}分钟`);
+    return parts.join(' ');
+}
+
+function countdownInnerHtml(item, now){
+    const nameHtml = `<span class="cd-name">${escapeHtml(item.name || "未命名")}</span>`;
+    const target = parseDateTime(item.date, item.time);
+    if(!target) return `${nameHtml}<span class="cd-invalid">（日期或时间无效）</span>`;
+
+    const diffMs = target.getTime() - now.getTime();
+    if(Math.abs(diffMs) < 60000){
+        return `${nameHtml} <span class="cd-days">就是现在</span>`;
+    }
+    const totalMin = Math.floor(Math.abs(diffMs) / 60000);
+    const timeStr = `<span class="cd-days">${formatDuration(totalMin)}</span>`;
+    return diffMs > 0
+        ? `距离 ${nameHtml} 还有 ${timeStr}`
+        : `${nameHtml} 已过去 ${timeStr}`;
+}
+
+function renderDayCountdown(){
+    const wrap = $("countdownWrap");
+    const list = appData.dayCountdown || [];
+    wrap.innerHTML = "";
+    if(!list.length){
+        wrap.innerHTML = '<div class="countdown-empty">暂无倒计时，点击右上角 ＋ 添加</div>';
+        return;
+    }
+    const now = new Date();
+    list.forEach((item, i) => {
+        const div = document.createElement("div");
+        div.className = "item-row countdown-row";
+        div.dataset.idx = i;
+        div.innerHTML = `<div class="item-index">${i+1}.</div><div class="item-text" onclick="openDayCountdownModal(${i})">${countdownInnerHtml(item, now)}</div><button class="del-circle-btn" onclick="delDayCountdown(${i})">×</button>`;
+        wrap.appendChild(div);
+    });
+}
+
+function refreshCountdownTexts(){
+    const rows = document.querySelectorAll("#countdownWrap .countdown-row");
+    if(!rows.length) return;
+    const now = new Date();
+    rows.forEach(row => {
+        const item = (appData.dayCountdown || [])[Number(row.dataset.idx)];
+        const el = row.querySelector(".item-text");
+        if(!item || !el) return;
+        const html = countdownInnerHtml(item, now);
+        if(el.dataset.lastHtml !== html){
+            el.dataset.lastHtml = html;
+            el.innerHTML = html;
+        }
+    });
+}
+
+function openDayCountdownModal(idx){
+    if(guardLock()) return;
+    dayCdEditIndex = (typeof idx === "number" && idx >= 0) ? idx : -1;
+    const nameInput = $("cdNameInput");
+    const dateInput = $("cdDateInput");
+    const timeInput = $("cdTimeInput");
+    if(dayCdEditIndex >= 0 && appData.dayCountdown[dayCdEditIndex]){
+        const item = appData.dayCountdown[dayCdEditIndex];
+        $("cdModalTitle").innerText = "修改倒计时";
+        nameInput.value = item.name || "";
+        dateInput.value = item.date || "";
+        timeInput.value = item.time || "00:00";
+    } else {
+        $("cdModalTitle").innerText = "添加倒计时";
+        nameInput.value = "";
+        dateInput.value = todayStr();
+        timeInput.value = "00:00";
+    }
+    $("dayCountdownModal").style.display = "block";
+    markModalOpen();
+    nameInput.focus();
+}
+function closeDayCountdownModal(){ $("dayCountdownModal").style.display = "none"; }
+
+function saveDayCountdown(){
+    if(guardLock()) return;
+    const name = $("cdNameInput").value.trim();
+    const date = $("cdDateInput").value.trim();
+    const time = ($("cdTimeInput").value || "").trim();
+    if(!name){ alert("请输入倒计时内容，例如：月考"); return; }
+    if(!date){ alert("请选择目标日期"); return; }
+    if(!parseDateOnly(date)){ alert("日期格式不正确"); return; }
+    if(!time){ alert("请填写目标时间（几点几分）"); return; }
+    if(!parseTimeStr(time)){ alert("时间格式不正确，应为 HH:MM（例如 08:30）"); return; }
+    if(dayCdEditIndex >= 0 && appData.dayCountdown[dayCdEditIndex]){
+        appData.dayCountdown[dayCdEditIndex] = { name, date, time };
+    } else {
+        appData.dayCountdown.push({ name, date, time });
+    }
+    saveLocal();
+    renderDayCountdown();
+    closeDayCountdownModal();
+}
+function delDayCountdown(i){
+    if(guardLock()) return;
+    if(!confirm("确定删除这条倒计时？")) return;
+    appData.dayCountdown.splice(i, 1);
+    saveLocal();
+    renderDayCountdown();
+}
+
+/* ====================== 提示音 ====================== */
+let audioCtx = null, beepTimer = null;
+function getAudioCtx(){
+    if(!audioCtx){
+        try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        catch(e){ return null; }
+    }
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+}
+function playBeepOnce(){
+    const ctx = getAudioCtx();
+    if(!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = 880;
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.4);
+}
+function startBeep(){
+    if(beepTimer) return;
+    playBeepOnce();
+    beepTimer = setInterval(playBeepOnce, 500);
+}
+function stopBeep(){
+    if(beepTimer){ clearInterval(beepTimer); beepTimer = null; }
+}
+
+/* ====================== 背景图片 ====================== */
+const BG_DB_NAME = "classScreenBgDB", BG_STORE = "bgImages", BG_KEY = "currentBg";
+function openBgDB(){
+    return new Promise((resolve, reject) => {
+        const req = indexedDB.open(BG_DB_NAME, 1);
+        req.onupgradeneeded = e => {
+            const db = e.target.result;
+            if(!db.objectStoreNames.contains(BG_STORE)) db.createObjectStore(BG_STORE);
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+async function saveBgImageToDB(dataUrl){
+    const db = await openBgDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(BG_STORE, "readwrite");
+        tx.objectStore(BG_STORE).put(dataUrl, BG_KEY);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+    });
+}
+async function loadBgImageFromDB(){
+    const db = await openBgDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(BG_STORE, "readonly");
+        const req = tx.objectStore(BG_STORE).get(BG_KEY);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => reject(req.error);
+    });
+}
+function applyBgImageVisibility(){
+    const show = useBgImage && bgImgUrl;
+    $("bgImageLayer").style.display = show ? "block" : "none";
+    if(show) $("bgImage").style.display = "block";
+}
+function toggleBgImageSetting(){
+    useBgImage = $("useBgImageSwitch").checked;
+    updateBgSettingsDisabledState();
+    applyBgImageVisibility();
+    saveLocal();
+}
+function updateBgSettingsDisabledState(){
+    const settings = $("bgImageSettings");
+    if(!settings) return;
+    settings.classList.toggle("disabled-section", !useBgImage);
+}
+async function restoreBgImage(){
+    try{
+        const dataUrl = await loadBgImageFromDB();
+        if(dataUrl){
+            bgImgUrl = dataUrl;
+            $("bgImage").src = dataUrl;
+            applyBgImageVisibility();
+        }
+    }catch(err){ console.warn("恢复背景图片失败:", err); }
+}
+
+/* ====================== 每日渐变背景 ====================== */
+function hashString(str){
+    let h = 0x811c9dc5;
+    for(let i = 0; i < str.length; i++){
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 0x01000193);
+    }
+    return h >>> 0;
+}
+
+let _bgDayKey = "";
+function setDailyGradientBg(){
+    const now = new Date();
+    const key = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
+    if(key === _bgDayKey) return;
+    _bgDayKey = key;
+
+    const dayIndex = Math.floor(
+        new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / 86400000
+    );
+    const h = hashString(key);
+
+    const hue1 = ((dayIndex * 137.508) % 360 + 360) % 360;
+    const hue2 = (hue1 + 90 + (h % 60)) % 360;
+
+    const sat  = 60 + ((h >>> 3) % 22);
+    const lig1 = 80 + ((h >>> 9) % 8);
+    const lig2 = Math.min(93, lig1 + 3);
+
+    document.body.style.background =
+        `linear-gradient(90deg, hsl(${hue1.toFixed(1)},${sat}%,${lig1}%), hsl(${hue2.toFixed(1)},${sat}%,${lig2}%))`;
+}
+
+/* ====================== 午休模式 ====================== */
+let napTimer = null;
+
+function enterNapMode(){
+    closeAllModals();
+    $("napModeOverlay").classList.add("show");
+    updateNapClock();
+    clearInterval(napTimer);
+    napTimer = setInterval(updateNapClock, 1000);
+}
+
+function exitNapMode(){
+    $("napModeOverlay").classList.remove("show");
+    clearInterval(napTimer);
+    napTimer = null;
+}
+
+function updateNapClock(){
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    const ss = String(now.getSeconds()).padStart(2, '0');
+    const el = $("napClock");
+    if(el) el.textContent = `${hh}:${mm}:${ss}`;
+}
+
+document.addEventListener("keydown", e => {
+    if(e.key === "Escape" && $("napModeOverlay").classList.contains("show")){
+        exitNapMode();
+    }
+});
+
+/* ====================== 表达式引擎（函数图像 / 解方程共用） ====================== */
+const PLOT_CONSTS = {
+    pi: Math.PI, PI: Math.PI, e: Math.E, E: Math.E,
+    tau: Math.PI * 2
+};
+const PLOT_FUNCS = {
+    sin: Math.sin, cos: Math.cos, tan: Math.tan,
+    asin: Math.asin, acos: Math.acos, atan: Math.atan,
+    arcsin: Math.asin, arccos: Math.acos, arctan: Math.atan,
+    sinh: Math.sinh, cosh: Math.cosh, tanh: Math.tanh,
+    sqrt: Math.sqrt, cbrt: Math.cbrt, abs: Math.abs,
+    exp: Math.exp,
+    ln: Math.log, log: Math.log, lg: Math.log10,
+    log2: Math.log2, log10: Math.log10,
+    floor: Math.floor, ceil: Math.ceil, round: Math.round,
+    sign: Math.sign, trunc: Math.trunc,
+    min: Math.min, max: Math.max, pow: Math.pow, atan2: Math.atan2,
+    sec: x => 1 / Math.cos(x),
+    csc: x => 1 / Math.sin(x),
+    cot: x => 1 / Math.tan(x)
+};
+
+function preprocessExpr(src){
+    let s = String(src || "").trim();
+    if(!s) return "";
+    s = s.replace(/（/g, "(").replace(/）/g, ")");
+    s = s.replace(/，/g, ",").replace(/；/g, ";");
+    s = s.replace(/×/g, "*").replace(/÷/g, "/");
+    s = s.replace(/[－—–]/g, "-").replace(/＋/g, "+");
+    s = s.replace(/π/g, "pi");
+    s = s.replace(/\s+/g, "");
+    s = s.replace(/\^/g, "**");
+    s = s.replace(/(\d)([a-zA-Z(])/g, "$1*$2");
+    s = s.replace(/\)(\d)/g, ")*$1");
+    s = s.replace(/\)\(/g, ")*(");
+    s = s.replace(/\)([a-zA-Z])/g, ")*$1");
+    return s;
+}
+
+function compileExprWithVar(src, varName){
+    varName = varName || "x";
+    const pre = preprocessExpr(src);
+    if(!pre) return { ok: false, error: "空表达式" };
+    try{
+        const constNames = Object.keys(PLOT_CONSTS);
+        const funcNames = Object.keys(PLOT_FUNCS);
+        const constVals = constNames.map(k => PLOT_CONSTS[k]);
+        const funcVals = funcNames.map(k => PLOT_FUNCS[k]);
+        const body = `"use strict";return (${pre});`;
+        const raw = new Function(varName, ...constNames, ...funcNames, body);
+        raw(1, ...constVals, ...funcVals);
+        return { ok: true, fn: (v) => raw(v, ...constVals, ...funcVals) };
+    }catch(err){
+        return { ok: false, error: err.message };
+    }
+}
+function compileExpr(src){ return compileExprWithVar(src, "x"); }
+
+function safeEval(fn, x){
+    try{
+        const y = fn(x);
+        return typeof y === "number" ? y : NaN;
+    }catch(e){
+        return NaN;
+    }
+}
+
+function fmtNum(v){
+    if(!isFinite(v)) return String(v);
+    return String(Number(v.toFixed(4)));
+}
+
+/* ====================== 解方程 ====================== */
+function openEqSolverModal(){
+    closeAppModal();
+    $("eqSolverModal").style.display = "block";
+    markModalOpen();
+    if(!$("eqEquationInput").value.trim()){
+        $("eqEquationInput").value = "2x + 3 = 7\nx^2 - 5x + 6 = 0";
+    }
+    $("eqUseRangeSwitch").checked = eqUseRange;
+    updateEqRangeDisabledState();
+}
+function closeEqSolverModal(){ $("eqSolverModal").style.display = "none"; }
+function clearEquations(){
+    $("eqEquationInput").value = "";
+    $("eqResults").innerHTML = '<div class="eq-info">请输入方程后点击"求解"</div>';
+}
+
+function toggleEqRangeSetting(){
+    eqUseRange = $("eqUseRangeSwitch").checked;
+    updateEqRangeDisabledState();
+    saveLocal();
+}
+function updateEqRangeDisabledState(){
+    const s = $("eqRangeSettings");
+    if(!s) return;
+    s.classList.toggle("disabled-section", !eqUseRange);
+}
+
+function parseEquationSource(src){
+    const eqPositions = [];
+    for(let i = 0; i < src.length; i++){
+        if(src[i] !== '=') continue;
+        const prev = src[i-1], next = src[i+1];
+        if(prev === '<' || prev === '>' || prev === '!' || prev === '=') continue;
+        if(next === '=') continue;
+        eqPositions.push(i);
+    }
+    if(eqPositions.length === 0){
+        return { left: src, right: "0", hasEq: false };
+    }
+    if(eqPositions.length > 1){
+        return { error: "方程中出现了多个 = 号，请检查输入" };
+    }
+    const i = eqPositions[0];
+    return {
+        left: src.slice(0, i).trim(),
+        right: src.slice(i + 1).trim() || "0",
+        hasEq: true
+    };
+}
+
+function compileEquation(src, varName){
+    const parsed = parseEquationSource(src);
+    if(parsed.error) return { ok: false, error: parsed.error };
+
+    const leftR = compileExprWithVar(parsed.left, varName);
+    if(!leftR.ok) return { ok: false, error: "左边表达式：" + leftR.error };
+    const rightR = compileExprWithVar(parsed.right, varName);
+    if(!rightR.ok) return { ok: false, error: "右边表达式：" + rightR.error };
+
+    const fn = (v) => {
+        try{
+            const l = leftR.fn(v);
+            const r = rightR.fn(v);
+            if(typeof l !== "number" || typeof r !== "number") return NaN;
+            const d = l - r;
+            return isFinite(d) ? d : NaN;
+        }catch(e){
+            return NaN;
+        }
+    };
+    return { ok: true, fn };
+}
+
+function bisectRoot(f, a, b, tol){
+    let fa = f(a), fb = f(b);
+    if(fa === 0) return a;
+    if(fb === 0) return b;
+    if(!isFinite(fa) || !isFinite(fb) || fa * fb > 0) return (a + b) / 2;
+    for(let i = 0; i < 300; i++){
+        const m = (a + b) / 2;
+        const fm = f(m);
+        if(fm === 0 || (b - a) < tol) return m;
+        if(fa * fm < 0){ b = m; fb = fm; }
+        else { a = m; fa = fm; }
+    }
+    return (a + b) / 2;
+}
+
+function newtonRefine(f, x0, tol){
+    let x = x0;
+    for(let i = 0; i < 80; i++){
+        const fx = f(x);
+        if(!isFinite(fx)) return null;
+        if(Math.abs(fx) < tol) return x;
+        const h = Math.max(1e-10, Math.abs(x) * 1e-8);
+        const dfx = (f(x + h) - f(x - h)) / (2 * h);
+        if(!isFinite(dfx) || Math.abs(dfx) < 1e-16) return x;
+        const nx = x - fx / dfx;
+        if(!isFinite(nx)) return x;
+        if(Math.abs(nx - x) < tol) return nx;
+        x = nx;
+    }
+    return x;
+}
+
+function findEquationRoots(f, xMin, xMax){
+    const roots = [];
+    const span = xMax - xMin;
+    let N = Math.min(60000, Math.max(2000, Math.round(span * 200)));
+    const dx = span / N;
+
+    const ys = new Array(N + 1);
+    const xs = new Array(N + 1);
+    for(let i = 0; i <= N; i++){
+        xs[i] = xMin + i * dx;
+        ys[i] = f(xs[i]);
+    }
+
+    for(let i = 1; i <= N; i++){
+        const ya = ys[i-1], yb = ys[i];
+        if(!isFinite(ya) || !isFinite(yb)) continue;
+        if(ya === 0){
+            roots.push(xs[i-1]);
+            continue;
+        }
+        if(ya * yb < 0){
+            const r = bisectRoot(f, xs[i-1], xs[i], Math.min(1e-13, span * 1e-15));
+            if(isFinite(r)) roots.push(r);
+        }
+    }
+    if(ys[N] === 0) roots.push(xs[N]);
+
+    for(let i = 1; i < N; i++){
+        const ya = ys[i-1], yb = ys[i], yc = ys[i+1];
+        if(!isFinite(ya) || !isFinite(yb) || !isFinite(yc)) continue;
+        if((yb <= ya && yb <= yc) || (yb >= ya && yb >= yc)){
+            const threshold = Math.max(1e-6, Math.abs(yb) * 0.01);
+            if(Math.abs(yb) < 1e-3 && Math.abs(yb) < threshold + 1e-9){
+                const r = newtonRefine(f, xs[i], 1e-12);
+                if(r !== null && isFinite(r) && Math.abs(f(r)) < 1e-9){
+                    roots.push(r);
+                }
+            }
+        }
+    }
+
+    roots.sort((a, b) => a - b);
+    const dedupEps = Math.max(1e-9, span * 1e-10);
+    const uniq = [];
+    for(const r of roots){
+        if(!isFinite(r)) continue;
+        if(uniq.length === 0 || Math.abs(r - uniq[uniq.length - 1]) > dedupEps){
+            uniq.push(r);
+        }
+    }
+    return uniq.filter(r => r >= xMin - dedupEps && r <= xMax + dedupEps);
+}
+
+function subNum(n){
+    const subs = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
+    return String(n).split('').map(d => subs[Number(d)] || d).join('');
+}
+
+function gcdInt(a, b){
+    a = Math.abs(a); b = Math.abs(b);
+    while(b){ const t = a % b; a = b; b = t; }
+    return a || 1;
+}
+
+function formatRootValue(v){
+    if(!isFinite(v)) return String(v);
+    if(Math.abs(v) < 1e-11) return "0";
+    const rv = Math.round(v);
+    if(Math.abs(v - rv) < 1e-10) return String(rv);
+    for(let den = 2; den <= 10000; den++){
+        const num = v * den;
+        const rn = Math.round(num);
+        if(Math.abs(num - rn) < 1e-9){
+            const g = gcdInt(rn, den);
+            return `${rn/g}/${den/g}`;
+        }
+    }
+    return Number(v.toFixed(10)).toString();
+}
+
+function solveOneEquationHtml(src, varName, rMin, rMax){
+    const comp = compileEquation(src, varName);
+    if(!comp.ok){
+        return `<div class="eq-block">
+            <div class="eq-source">${escapeHtml(src)}</div>
+            <div class="eq-error">✗ ${escapeHtml(comp.error)}</div>
+        </div>`;
+    }
+
+    const roots = findEquationRoots(comp.fn, rMin, rMax);
+
+    let rootsHtml = "";
+    if(roots.length === 0){
+        rootsHtml = `<div class="eq-no-solution">该区间内未找到实数根</div>`;
+    } else {
+        rootsHtml = roots.map((r, i) => {
+            const v = Math.abs(r) < 1e-11 ? 0 : r;
+            const disp = formatRootValue(v);
+            const approx = disp.indexOf('/') >= 0
+                ? `<span class="eq-root-approx">≈ ${v.toFixed(10)}</span>`
+                : "";
+            return `<div class="eq-roots">${escapeHtml(varName)}${subNum(i+1)} = ` +
+                   `<span class="eq-root-value">${disp}</span>${approx}</div>`;
+        }).join("");
+    }
+
+    return `<div class="eq-block">
+        <div class="eq-source">${escapeHtml(src)}</div>
+        ${rootsHtml}
+        <div class="eq-info">共 ${roots.length} 个实根（区间 [${fmtNum(rMin)}, ${fmtNum(rMax)}] 内）</div>
+    </div>`;
+}
+
+function solveEquations(){
+    const lines = $("eqEquationInput").value.split(/\r?\n/).map(s => s.trim()).filter(s => s);
+    if(!lines.length){
+        $("eqResults").innerHTML = '<div class="eq-error">请输入至少一个方程</div>';
+        return;
+    }
+
+    const varName = ($("eqVarInput").value || "x").trim();
+
+    let rMin, rMax;
+    if(eqUseRange){
+        rMin = Number($("eqRangeMin").value);
+        rMax = Number($("eqRangeMax").value);
+        if(!isFinite(rMin)) rMin = -100;
+        if(!isFinite(rMax)) rMax = 100;
+        if(rMin >= rMax){
+            $("eqResults").innerHTML = '<div class="eq-error">求解区间无效：左端必须小于右端</div>';
+            return;
+        }
+    } else {
+        rMin = -100;
+        rMax = 100;
+    }
+
+    const html = lines.map(src => solveOneEquationHtml(src, varName, rMin, rMax)).join("");
+    $("eqResults").innerHTML = html;
+}
+
+/* ====================== 函数图像绘制 ====================== */
+const PLOT_COLORS = ['#e0502a', '#2a7ce0', '#1ea54c', '#a040d0', '#e0a020', '#0aa0a0', '#d04080', '#707070'];
+let plotView = { xMin: -10, xMax: 10, yMin: -6, yMax: 6 };
+let plotAutoY = true;
+let plotDragging = false, plotDragStartX = 0, plotDragStartY = 0, plotStartView = null;
+let plotCompiledFuncs = [];
+let plotResizeTimer = null;
+
+function resizePlotCanvas(){
+    const cv = $("funcPlotCanvas");
+    if(!cv) return;
+    const rect = cv.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(rect.width * dpr));
+    const h = Math.max(1, Math.round(rect.height * dpr));
+    if(cv.width !== w || cv.height !== h){
+        cv.width = w;
+        cv.height = h;
+    }
+}
+
+function openFuncPlotModal(){
+    closeAppModal();
+    $("funcPlotModal").style.display = "block";
+    markModalOpen();
+    const ta = $("funcExprInput");
+    if(!ta.value){
+        ta.value = "sin(x)\nx^2/4";
+    }
+    requestAnimationFrame(() => {
+        resizePlotCanvas();
+        plotFunctions();
+    });
+}
+
+function closeFuncPlotModal(){ $("funcPlotModal").style.display = "none"; }
+
+function plotFunctions(){
+    const cv = $("funcPlotCanvas");
+    if(!cv) return;
+    resizePlotCanvas();
+
+    const lines = $("funcExprInput").value.split(/\n/).map(s => s.trim()).filter(s => s);
+    plotCompiledFuncs = lines.map((src, i) => {
+        const r = compileExpr(src);
+        return {
+            src,
+            color: PLOT_COLORS[i % PLOT_COLORS.length],
+            fn: r.ok ? r.fn : null,
+            error: r.ok ? null : r.error
+        };
+    });
+
+    let xMin = Number($("plotXMin").value);
+    let xMax = Number($("plotXMax").value);
+    if(!isFinite(xMin) || !isFinite(xMax) || xMin >= xMax){
+        xMin = -10; xMax = 10;
+        $("plotXMin").value = xMin;
+        $("plotXMax").value = xMax;
+    }
+    plotView.xMin = xMin;
+    plotView.xMax = xMax;
+
+    const yMinStr = $("plotYMin").value.trim();
+    const yMaxStr = $("plotYMax").value.trim();
+    if(yMinStr !== "" && yMaxStr !== ""){
+        const ym = Number(yMinStr), yM = Number(yMaxStr);
+        if(isFinite(ym) && isFinite(yM) && ym < yM){
+            plotView.yMin = ym;
+            plotView.yMax = yM;
+            plotAutoY = false;
+        }
+    }
+    if(plotAutoY){
+        autoYRange();
+        syncPlotYInputs();
+    }
+
+    redrawPlot();
+    renderPlotLegend();
+}
+
+function autoYRange(){
+    const { xMin, xMax } = plotView;
+    const N = 500;
+    const samples = [];
+    for(let i = 0; i <= N; i++){
+        const x = xMin + (xMax - xMin) * i / N;
+        for(const f of plotCompiledFuncs){
+            if(!f.fn) continue;
+            const y = safeEval(f.fn, x);
+            if(isFinite(y)) samples.push(y);
+        }
+    }
+    if(!samples.length){
+        plotView.yMin = -6; plotView.yMax = 6;
+        return;
+    }
+    samples.sort((a, b) => a - b);
+    const lo = samples[Math.floor(samples.length * 0.02)];
+    const hi = samples[Math.floor(samples.length * 0.98)];
+    let span = hi - lo;
+    if(!(span > 0)) span = Math.max(1, Math.abs(hi) || 1);
+    const mid = (lo + hi) / 2;
+    const half = span * 0.62;
+    plotView.yMin = mid - half;
+    plotView.yMax = mid + half;
+}
+
+function syncPlotYInputs(){
+    $("plotYMin").value = fmtNum(plotView.yMin);
+    $("plotYMax").value = fmtNum(plotView.yMax);
+}
+
+function syncPlotInputs(){
+    $("plotXMin").value = fmtNum(plotView.xMin);
+    $("plotXMax").value = fmtNum(plotView.xMax);
+    $("plotYMin").value = fmtNum(plotView.yMin);
+    $("plotYMax").value = fmtNum(plotView.yMax);
+}
+
+function resetPlotView(){
+    plotAutoY = true;
+    $("plotXMin").value = -10;
+    $("plotXMax").value = 10;
+    $("plotYMin").value = "";
+    $("plotYMax").value = "";
+    if(plotCompiledFuncs.length){
+        plotView.xMin = -10; plotView.xMax = 10;
+        autoYRange();
+        syncPlotInputs();
+        redrawPlot();
+    } else {
+        plotFunctions();
+    }
+}
+
+function clearPlotFunctions(){
+    $("funcExprInput").value = "";
+    plotCompiledFuncs = [];
+    renderPlotLegend();
+    redrawPlot();
+}
+
+function redrawPlot(){
+    const cv = $("funcPlotCanvas");
+    if(!cv) return;
+    const ctx = cv.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const w = cv.width / dpr, h = cv.height / dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    drawPlot(ctx, w, h);
+}
+
+function drawPlot(ctx, w, h){
+    const { xMin, xMax, yMin, yMax } = plotView;
+    const xSpan = xMax - xMin;
+    const ySpan = yMax - yMin;
+    if(!(xSpan > 0) || !(ySpan > 0)) return;
+
+    const toPx = x => (x - xMin) / xSpan * w;
+    const toPy = y => h - (y - yMin) / ySpan * h;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, w, h);
+
+    const xStep = niceStep(xSpan, w, 80);
+    const yStep = niceStep(ySpan, h, 60);
+
+    ctx.strokeStyle = "rgba(160, 96, 200, 0.13)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for(let k = Math.ceil(xMin / xStep); k * xStep <= xMax; k++){
+        const px = Math.round(toPx(k * xStep)) + 0.5;
+        ctx.moveTo(px, 0);
+        ctx.lineTo(px, h);
+    }
+    for(let k = Math.ceil(yMin / yStep); k * yStep <= yMax; k++){
+        const py = Math.round(toPy(k * yStep)) + 0.5;
+        ctx.moveTo(0, py);
+        ctx.lineTo(w, py);
+    }
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(80, 30, 110, 0.55)";
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    if(yMin <= 0 && yMax >= 0){
+        const y0 = Math.round(toPy(0)) + 0.5;
+        ctx.moveTo(0, y0);
+        ctx.lineTo(w, y0);
+    }
+    if(xMin <= 0 && xMax >= 0){
+        const x0 = Math.round(toPx(0)) + 0.5;
+        ctx.moveTo(x0, 0);
+        ctx.lineTo(x0, h);
+    }
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(90, 30, 124, 0.78)";
+    ctx.font = '12px Consolas, "Courier New", monospace';
+
+    const xAxisY = (yMin <= 0 && yMax >= 0) ? toPy(0) : h - 2;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    for(let k = Math.ceil(xMin / xStep); k * xStep <= xMax; k++){
+        const v = k * xStep;
+        if(Math.abs(v) < xStep * 1e-6) continue;
+        const px = toPx(v);
+        if(px < 14 || px > w - 14) continue;
+        ctx.fillText(formatTick(v, xStep), px, Math.min(xAxisY + 4, h - 16));
+    }
+
+    const yAxisX = (xMin <= 0 && xMax >= 0) ? toPx(0) : 4;
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for(let k = Math.ceil(yMin / yStep); k * yStep <= yMax; k++){
+        const v = k * yStep;
+        if(Math.abs(v) < yStep * 1e-6) continue;
+        const py = toPy(v);
+        if(py < 10 || py > h - 10) continue;
+        ctx.fillText(formatTick(v, yStep), Math.max(yAxisX - 5, 46), py);
+    }
+
+    if(xMin <= 0 && xMax >= 0 && yMin <= 0 && yMax >= 0){
+        const x0 = toPx(0), y0 = toPy(0);
+        ctx.fillStyle = "rgba(80, 30, 110, 0.78)";
+        ctx.font = '13px Consolas, "Courier New", monospace';
+        ctx.textAlign = "right";
+        ctx.textBaseline = "top";
+        ctx.fillText("O", x0 - 5, y0 + 4);
+    }
+
+    for(const f of plotCompiledFuncs){
+        if(!f.fn) continue;
+        drawFunction(ctx, f, w, h, xMin, xMax, yMin, yMax, toPx, toPy);
+    }
+}
+
+function niceStep(span, pixels, targetPx){
+    if(!(span > 0) || !(pixels > 0)) return 1;
+    const rough = span * targetPx / pixels;
+    const mag = Math.pow(10, Math.floor(Math.log10(rough)));
+    const norm = rough / mag;
+    let nice;
+    if(norm <= 1.5) nice = 1;
+    else if(norm <= 3) nice = 2;
+    else if(norm <= 7) nice = 5;
+    else nice = 10;
+    return nice * mag;
+}
+
+function formatTick(v, step){
+    const decimals = Math.max(0, -Math.floor(Math.log10(step)) + 1);
+    let s = v.toFixed(Math.min(decimals, 6));
+    s = s.replace(/\.?0+$/, "");
+    if(s === "-0" || s === "") s = "0";
+    return s;
+}
+
+function drawFunction(ctx, f, w, h, xMin, xMax, yMin, yMax, toPx, toPy){
+    const xSpan = xMax - xMin;
+    const ySpan = yMax - yMin;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, w, h);
+    ctx.clip();
+
+    ctx.strokeStyle = f.color;
+    ctx.lineWidth = 2;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.beginPath();
+
+    let started = false;
+    let prevY = NaN;
+    const samples = Math.max(2, Math.ceil(w));
+
+    for(let i = 0; i <= samples; i++){
+        const px = i / samples * w;
+        const x = xMin + (px / w) * xSpan;
+        const y = safeEval(f.fn, x);
+
+        if(!isFinite(y)){
+            started = false;
+            prevY = NaN;
+            continue;
+        }
+
+        let jump = false;
+        if(started && isFinite(prevY)){
+            const dy = Math.abs(y - prevY);
+            if(dy > ySpan * 1.5 && prevY * y < 0) jump = true;
+        }
+
+        const py = toPy(y);
+
+        if(jump) started = false;
+
+        if(!started){
+            ctx.moveTo(px, py);
+            started = true;
+        } else {
+            ctx.lineTo(px, py);
+        }
+        prevY = y;
+    }
+    ctx.stroke();
+    ctx.restore();
+}
+
+function renderPlotLegend(){
+    const el = $("plotLegend");
+    if(!el) return;
+    if(!plotCompiledFuncs.length){
+        el.innerHTML = '<span style="color:#bbb;font-size:13px;">（未输入函数）</span>';
+        return;
+    }
+    el.innerHTML = plotCompiledFuncs.map(f => {
+        const swatch = `<span class="legend-swatch" style="background:${f.color};"></span>`;
+        if(f.error){
+            return `<span class="legend-item">${swatch}y = ${escapeHtml(f.src)}<span class="legend-error">（${escapeHtml(f.error)}）</span></span>`;
+        }
+        return `<span class="legend-item">${swatch}y = ${escapeHtml(f.src)}</span>`;
+    }).join("");
+}
+
+(function bindPlotInteractions(){
+    const cv = $("funcPlotCanvas");
+    if(!cv) return;
+
+    cv.addEventListener("wheel", e => {
+        if($("funcPlotModal").style.display !== "block") return;
+        e.preventDefault();
+        const rect = cv.getBoundingClientRect();
+        const mx = (e.clientX - rect.left) / rect.width;
+        const my = 1 - (e.clientY - rect.top) / rect.height;
+
+        const xAt = plotView.xMin + (plotView.xMax - plotView.xMin) * mx;
+        const yAt = plotView.yMin + (plotView.yMax - plotView.yMin) * my;
+        const factor = e.deltaY < 0 ? 0.86 : 1 / 0.86;
+
+        plotView.xMin = xAt - (xAt - plotView.xMin) * factor;
+        plotView.xMax = xAt + (plotView.xMax - xAt) * factor;
+        plotView.yMin = yAt - (yAt - plotView.yMin) * factor;
+        plotView.yMax = yAt + (plotView.yMax - yAt) * factor;
+
+        plotAutoY = false;
+        syncPlotInputs();
+        redrawPlot();
+    }, { passive: false });
+
+    cv.addEventListener("mousedown", e => {
+        if($("funcPlotModal").style.display !== "block") return;
+        plotDragging = true;
+        plotDragStartX = e.clientX;
+        plotDragStartY = e.clientY;
+        plotStartView = { ...plotView };
+        cv.style.cursor = "grabbing";
+        e.preventDefault();
+    });
+
+    window.addEventListener("mousemove", e => {
+        if($("funcPlotModal").style.display !== "block") return;
+        const rect = cv.getBoundingClientRect();
+
+        if(plotDragging && plotStartView){
+            const dx = (e.clientX - plotDragStartX) / rect.width * (plotStartView.xMax - plotStartView.xMin);
+            const dy = (e.clientY - plotDragStartY) / rect.height * (plotStartView.yMax - plotStartView.yMin);
+            plotView.xMin = plotStartView.xMin - dx;
+            plotView.xMax = plotStartView.xMax - dx;
+            plotView.yMin = plotStartView.yMin + dy;
+            plotView.yMax = plotStartView.yMax + dy;
+            plotAutoY = false;
+            syncPlotInputs();
+            redrawPlot();
+        }
+
+        const inside = e.clientX >= rect.left && e.clientX <= rect.right
+                    && e.clientY >= rect.top  && e.clientY <= rect.bottom;
+        const info = $("plotCursorInfo");
+        if(!info) return;
+        if(!inside){
+            info.textContent = "";
+            return;
+        }
+        const mx = (e.clientX - rect.left) / rect.width;
+        const my = 1 - (e.clientY - rect.top) / rect.height;
+        const x = plotView.xMin + (plotView.xMax - plotView.xMin) * mx;
+        const y = plotView.yMin + (plotView.yMax - plotView.yMin) * my;
+        let txt = `x = ${x.toFixed(3)}\ny = ${y.toFixed(3)}`;
+        for(const f of plotCompiledFuncs){
+            if(!f.fn) continue;
+            const v = safeEval(f.fn, x);
+            if(isFinite(v)){
+                const label = f.src.length > 14 ? f.src.slice(0, 13) + "…" : f.src;
+                txt += `\n${label} = ${v.toFixed(3)}`;
+            }
+        }
+        info.textContent = txt;
+    });
+
+    window.addEventListener("mouseup", () => {
+        if(!plotDragging) return;
+        plotDragging = false;
+        cv.style.cursor = "crosshair";
+    });
+
+    cv.addEventListener("mouseleave", () => {
+        const info = $("plotCursorInfo");
+        if(info) info.textContent = "";
+    });
+
+    $("funcExprInput").addEventListener("keydown", e => {
+        if((e.ctrlKey || e.metaKey) && e.key === "Enter"){
+            e.preventDefault();
+            plotFunctions();
+        }
+    });
+
+    window.addEventListener("resize", () => {
+        if($("funcPlotModal").style.display !== "block") return;
+        clearTimeout(plotResizeTimer);
+        plotResizeTimer = setTimeout(() => {
+            resizePlotCanvas();
+            redrawPlot();
+        }, 120);
+    });
+})();
+
+(function bindEqSolverShortcut(){
+    const ta = $("eqEquationInput");
+    if(!ta) return;
+    ta.addEventListener("keydown", e => {
+        if((e.ctrlKey || e.metaKey) && e.key === "Enter"){
+            e.preventDefault();
+            solveEquations();
+        }
+    });
+})();
+
+/* ====================== 英语词典 ====================== */
+const DICT_DB_NAME = "classScreenDictDB", DICT_STORE = "dict", DICT_KEY = "currentDict";
+
+let dictEntries = [];         // 已解析并排序的词条数组（wordLower 用于大小写不敏感查找）
+let dictLoadAttempted = false;
+
+function openDictDB(){
+    return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DICT_DB_NAME, 1);
+        req.onupgradeneeded = e => {
+            const db = e.target.result;
+            if(!db.objectStoreNames.contains(DICT_STORE)) db.createObjectStore(DICT_STORE);
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+async function saveDictToDB(text){
+    const db = await openDictDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(DICT_STORE, "readwrite");
+        tx.objectStore(DICT_STORE).put(text, DICT_KEY);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+    });
+}
+async function loadDictFromDB(){
+    const db = await openDictDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(DICT_STORE, "readonly");
+        const req = tx.objectStore(DICT_STORE).get(DICT_KEY);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+/* 解析词典文本：每行 word="...", meaning="..." */
+function parseDictText(text){
+    dictEntries = [];
+    if(!text) return 0;
+    const lines = String(text).split(/\r?\n/);
+    const re = /^\s*word\s*=\s*"([^"]*)"\s*,\s*meaning\s*=\s*"(.*)"\s*$/;
+    for(const line of lines){
+        const t = line.trim();
+        if(!t) continue;
+        const m = re.exec(t);
+        if(!m) continue;
+        const word = m[1].trim();
+        const meaning = m[2];
+        if(!word) continue;
+        dictEntries.push({
+            word: word,
+            wordLower: word.toLowerCase(),
+            meaning: meaning
+        });
+    }
+    dictEntries.sort((a, b) =>
+        a.wordLower < b.wordLower ? -1 : a.wordLower > b.wordLower ? 1 : 0
+    );
+    return dictEntries.length;
+}
+
+/* 精确查找（二分） */
+function dictFindExact(q){
+    if(!q || !dictEntries.length) return null;
+    q = q.toLowerCase();
+    let lo = 0, hi = dictEntries.length - 1;
+    while(lo <= hi){
+        const mid = (lo + hi) >> 1;
+        const w = dictEntries[mid].wordLower;
+        if(w === q) return dictEntries[mid];
+        if(w < q) lo = mid + 1; else hi = mid - 1;
+    }
+    return null;
+}
+
+/* 前缀优先 + 包含其次 的候选 */
+function dictSearchSuggestions(q, limit){
+    limit = limit || 12;
+    if(!q || !dictEntries.length) return [];
+    const starts = [], contains = [];
+    for(let i = 0; i < dictEntries.length; i++){
+        const e = dictEntries[i];
+        if(e.wordLower.startsWith(q)){
+            starts.push(e);
+            if(starts.length >= limit * 2 && contains.length >= limit) break;
+        } else if(contains.length < limit && e.wordLower.includes(q)){
+            contains.push(e);
+        }
+    }
+    return starts.concat(contains).slice(0, limit);
+}
+
+function openDictModal(){
+    closeAppModal();
+    $("dictModal").style.display = "flex";
+    markModalOpen();
+
+    if(dictEntries.length > 0){
+        showDictMainState();
+        return;
+    }
+    if(dictLoadAttempted){
+        showDictEmptyState();
+        return;
+    }
+
+    /* 首次打开：尝试从 IndexedDB 中恢复 */
+    $("dictMainState").classList.remove("on");
+    const el = $("dictEmptyState");
+    el.classList.add("on");
+    el.innerHTML = '<div style="color:#888; font-size:15px;">正在加载词典…</div>';
+
+    loadDictFromDB().then(text => {
+        dictLoadAttempted = true;
+        if(text){
+            parseDictText(text);
+            showDictMainState();
+        } else {
+            showDictEmptyState();
+        }
+    }).catch(err => {
+        dictLoadAttempted = true;
+        console.error("加载词典失败:", err);
+        showDictEmptyState();
+    });
+}
+
+function closeDictModal(){
+    $("dictModal").style.display = "none";
+}
+
+function showDictEmptyState(){
+    $("dictMainState").classList.remove("on");
+    const el = $("dictEmptyState");
+    el.classList.add("on");
+    el.innerHTML = `
+        <div class="dict-empty-state">
+            <div class="dict-empty-title">尚未导入词典文件</div>
+            <div class="dict-empty-sub">文件格式：每行一个词条，格式为</div>
+            <div class="dict-empty-code">word="英文", meaning="释义"</div>
+        </div>
+        <div class="dict-empty-actions">
+            <button onclick="importDictFile()" style="padding:10px 24px; font-size:15px;">📂 点击导入 txt 文件</button>
+        </div>
+    `;
+}
+
+function showDictMainState(){
+    $("dictEmptyState").classList.remove("on");
+    $("dictMainState").classList.add("on");
+    $("dictInfo").textContent =
+        `词典已加载：共 ${dictEntries.length} 个词条 · 查询不区分大小写`;
+    /* 清空并聚焦搜索框 */
+    $("dictSearchInput").value = "";
+    $("dictResult").innerHTML = '<span class="dict-result-empty">请输入单词开始查询</span>';
+    hideDictSuggestions();
+    setTimeout(() => { try{ $("dictSearchInput").focus(); }catch(e){} }, 60);
+}
+
+function importDictFile(){
+    $("dictFileInput").click();
+}
+
+function loadDictFile(event){
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = async e => {
+        const text = e.target.result;
+        const count = parseDictText(text);
+        if(count === 0){
+            alert(
+                "未从文件中解析到任何词条。\n\n" +
+                "请确认每行格式为：\n" +
+                'word="英文", meaning="释义"'
+            );
+            event.target.value = "";
+            return;
+        }
+        dictLoadAttempted = true;
+        try{
+            await saveDictToDB(text);
+        }catch(err){
+            console.warn("词典保存失败:", err);
+            alert("词典已加载，但保存失败（浏览器存储空间不足或禁用了 IndexedDB）。\n刷新页面后需要重新导入。");
+        }
+        showDictMainState();
+        alert(`成功导入词典，共 ${count} 个词条`);
+    };
+    reader.readAsText(file);
+    event.target.value = "";
+}
+
+function clearDictSearch(){
+    $("dictSearchInput").value = "";
+    $("dictResult").innerHTML = '<span class="dict-result-empty">请输入单词开始查询</span>';
+    hideDictSuggestions();
+    $("dictSearchInput").focus();
+}
+
+function hideDictSuggestions(){
+    const el = $("dictSuggestions");
+    if(!el) return;
+    el.style.display = "none";
+    el.innerHTML = "";
+}
+
+function renderDictSuggestions(items){
+    const el = $("dictSuggestions");
+    if(!el) return;
+    el.innerHTML = "";
+    if(!items.length){
+        el.style.display = "none";
+        return;
+    }
+    el.style.display = "block";
+    for(const it of items){
+        const div = document.createElement("div");
+        div.className = "dict-suggestion-item";
+        div.textContent = it.word;
+        div.dataset.word = it.word;
+        el.appendChild(div);
+    }
+}
+
+function showDictEntry(entry){
+    const el = $("dictResult");
+    el.innerHTML = "";
+    if(!entry){
+        el.innerHTML = '<span class="dict-result-empty">未找到匹配的单词</span>';
+        return;
+    }
+    const w = document.createElement("div");
+    w.className = "dict-result-word";
+    w.textContent = entry.word;
+    const m = document.createElement("div");
+    m.className = "dict-result-meaning";
+    m.textContent = entry.meaning;
+    el.appendChild(w);
+    el.appendChild(m);
+}
+
+function showDictHint(text){
+    $("dictResult").innerHTML = '<span class="dict-result-empty">' + escapeHtml(text) + '</span>';
+}
+
+function onDictSearchInput(){
+    const raw = $("dictSearchInput").value.trim();
+    const q = raw.toLowerCase();
+    if(!q){
+        hideDictSuggestions();
+        showDictHint("请输入单词开始查询");
+        return;
+    }
+    const items = dictSearchSuggestions(q, 12);
+    renderDictSuggestions(items);
+
+    const exact = dictFindExact(q);
+    if(exact){
+        showDictEntry(exact);
+    } else if(items.length === 0){
+        showDictHint("未找到匹配的单词");
+    } else {
+        showDictHint(`找到 ${items.length} 个候选，点击上方进行查看`);
+    }
+}
+
+function dictLookup(word){
+    const e = dictFindExact(word);
+    $("dictSearchInput").value = word;
+    showDictEntry(e);
+    hideDictSuggestions();
+}
+
+function onDictSearchKeyDown(e){
+    if(e.key === "Enter"){
+        const q = $("dictSearchInput").value.trim().toLowerCase();
+        const exact = dictFindExact(q);
+        if(exact){ showDictEntry(exact); hideDictSuggestions(); return; }
+        const first = document.querySelector("#dictSuggestions .dict-suggestion-item");
+        if(first){ dictLookup(first.dataset.word); }
+    } else if(e.key === "Escape"){
+        hideDictSuggestions();
+    }
+}
+
+/* 点击候选建议 → 查询该词（阻止冒泡，避免点到候选后触发关闭弹窗） */
+(function bindDictSuggestionClick(){
+    const el = $("dictSuggestions");
+    if(!el) return;
+    el.addEventListener("click", e => {
+        e.stopPropagation();
+        const item = e.target.closest(".dict-suggestion-item");
+        if(!item) return;
+        dictLookup(item.dataset.word);
+    });
+})();
+
+(function bindDictSearchInput(){
+    const el = $("dictSearchInput");
+    if(!el) return;
+    el.addEventListener("input", onDictSearchInput);
+    el.addEventListener("keydown", onDictSearchKeyDown);
+})();
+
+/* ====================== 弹窗管理：点击外部关闭 ====================== */
+function closeAllModals(){
+    MODAL_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.style.display = 'none';
+    });
+    $("latexGuideModal").classList.remove("show");
+    stopBeep();
+    stopStudentRoll();
+}
+document.addEventListener('click', function(e){
+    for(const id of MODAL_IDS){
+        const el = document.getElementById(id);
+        if(el && el.contains(e.target)) return;
+    }
+    const lg = document.getElementById('latexGuideModal');
+    if(lg && lg.contains(e.target)) return;
+    if(Date.now() - _lastModalOpen < 200) return;
+    closeAllModals();
+});
+
+/* ====================== 弹窗与导入导出 ====================== */
+function openImportModal(){ if(guardLock()) return; $("importModal").style.display="block"; markModalOpen(); }
+function closeImportModal(){ $("importModal").style.display="none"; }
+function importHomeworkData(){ if(!guardLock()) $('fileInput').click(); }
+function importQuoteFile(){ if(!guardLock()) $('quoteFileInput').click(); }
+function importTimetableFile(){ if(!guardLock()) $('timetableFileInput').click(); }
+function importBgImageFile(){ if(!guardLock()) $('bgFileInput').click(); }
+function openExportModal(){ $("exportModal").style.display="block"; markModalOpen(); }
+function closeExportModal(){ $("exportModal").style.display="none"; }
+
+function applySettingsToDOM(){
+    document.documentElement.style.setProperty('--baseFont', baseFontPx + "px");
+    document.documentElement.style.setProperty('--bgImgOpacity', bgImgOpacity);
+    document.body.style.fontFamily = currentFontFamily;
+    document.body.style.color = `rgb(${currentTextColorRgb.r},${currentTextColorRgb.g},${currentTextColorRgb.b})`;
+    const sw = $("useBgImageSwitch");
+    if(sw) sw.checked = useBgImage;
+    updateBgSettingsDisabledState();
+    applyBgImageVisibility();
+    const mcc = $("morningCourseCountInput");
+    if(mcc) mcc.value = morningCourseCount;
+    const eqSw = $("eqUseRangeSwitch");
+    if(eqSw) eqSw.checked = eqUseRange;
+    updateEqRangeDisabledState();
+}
+function loadHomeworkFile(event){
+    if(guardLock()){ event.target.value = ""; return; }
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        try{
+            appData = JSON.parse(e.target.result);
+            normalizeAllData();
+            baseFontPx = appData.baseFontPx ?? 22;
+            currentFontFamily = appData.currentFontFamily ?? '"KaiTi","楷体",SimSun,serif';
+            if(appData.currentTextColor) currentTextColorRgb = hexToRgb(appData.currentTextColor);
+            quoteIntervalSecond = appData.quoteIntervalSecond ?? 10;
+            bgImgOpacity = appData.bgImgOpacity ?? 0;
+            if(appData.useBgImage !== undefined) useBgImage = appData.useBgImage;
+
+            $("colorR").value = currentTextColorRgb.r;
+            $("colorG").value = currentTextColorRgb.g;
+            $("colorB").value = currentTextColorRgb.b;
+            updateColorPreview();
+            applySettingsToDOM();
+            resetQuoteTimer();
+            saveLocal();
+            renderAll();
+            alert("大屏数据导入成功！");
+        }catch(err){
+            alert("文件解析失败！\n"+err.message);
+        }
+        event.target.value = "";
+    };
+    reader.readAsText(file);
+}
+function exportToHomework(){
+    normalizeAllItems();
+    const saveJsonData = {
+        pageTitle: appData.pageTitle,
+        homework: (appData.homework || []).map(sub => ({
+            subject: sub.subject,
+            list: (sub.list || []).map(serializeHomeworkItem)
+        })),
+        notice:    (appData.notice    || []).map(serializeSimpleItem),
+        think:     (appData.think     || []).map(serializeSimpleItem),
+        timetable: (appData.timetable || []).map(serializeSimpleItem),
+        duty:      (appData.duty      || []).map(serializeSimpleItem),
+        dayCountdown: appData.dayCountdown,
+        baseFontPx, currentFontFamily,
+        currentTextColor: rgbToHex(currentTextColorRgb.r, currentTextColorRgb.g, currentTextColorRgb.b),
+        quoteIntervalSecond, bgImgOpacity, useBgImage,
+        morningCourseCount,
+        eqUseRange
+    };
+    const blob = new Blob([JSON.stringify(saveJsonData, null, 2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "班级大屏.classpanel";
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+/* ====================== 导出为图片 ====================== */
+const HTML2CANVAS_CDN = "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js";
+let _h2cLoadingPromise = null;
+
+function ensureHtml2Canvas(){
+    if(typeof html2canvas !== "undefined") return Promise.resolve();
+    if(_h2cLoadingPromise) return _h2cLoadingPromise;
+
+    _h2cLoadingPromise = new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = HTML2CANVAS_CDN;
+        s.async = true;
+        let settled = false;
+        const timer = setTimeout(() => {
+            if(settled) return;
+            settled = true;
+            reject(new Error("加载 html2canvas 超时（可能是网络问题）"));
+        }, 12000);
+        s.onload = () => {
+            if(settled) return;
+            settled = true;
+            clearTimeout(timer);
+            if(typeof html2canvas === "undefined"){
+                reject(new Error("html2canvas 已下载但未正确挂载"));
+            } else {
+                resolve();
+            }
+        };
+        s.onerror = () => {
+            if(settled) return;
+            settled = true;
+            clearTimeout(timer);
+            reject(new Error("无法从 CDN 下载 html2canvas"));
+        };
+        document.head.appendChild(s);
+    }).catch(err => {
+        _h2cLoadingPromise = null;
+        throw err;
+    });
+
+    return _h2cLoadingPromise;
+}
+
+async function capturePageCanvas(){
+    await ensureHtml2Canvas();
+    if(typeof html2canvas === "undefined"){
+        throw new Error("html2canvas 未就绪");
+    }
+
+    closeAllModals();
+    await new Promise(r => setTimeout(r, 60));
+
+    const bottomTag = document.querySelector(".bottom-tag");
+    const prevBottomPos = bottomTag ? bottomTag.style.position : null;
+    if(bottomTag) bottomTag.style.position = "absolute";
+    const prevScrollX = window.scrollX, prevScrollY = window.scrollY;
+    window.scrollTo(0, 0);
+
+    const fullWidth  = Math.max(document.body.scrollWidth,  document.documentElement.scrollWidth,  window.innerWidth);
+    const fullHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, window.innerHeight);
+
+    try{
+        const canvas = await html2canvas(document.body, {
+            backgroundColor: null,
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            logging: false,
+            width: fullWidth,
+            height: fullHeight,
+            windowWidth: fullWidth,
+            windowHeight: fullHeight,
+            scrollX: 0,
+            scrollY: 0,
+            ignoreElements: (el) => {
+                if(!el || !el.classList) return false;
+                if(el.id === "lockBtn" || el.id === "lockToast") return true;
+                if(el.id === "napBtn") return true;
+                if(el.classList.contains("operate-bar")) return true;
+                if(el.classList.contains("collapse-btn")) return true;
+                if(el.classList.contains("expand-bar")) return true;
+                if(el.classList.contains("del-circle-btn")) return true;
+                return false;
+            }
+        });
+        return canvas;
+    }finally{
+        if(bottomTag && prevBottomPos !== null) bottomTag.style.position = prevBottomPos;
+        window.scrollTo(prevScrollX, prevScrollY);
+    }
+}
+
+async function exportAsImage(){
+    try{
+        showToast("📷 正在生成图片…");
+        const canvas = await capturePageCanvas();
+        const url = canvas.toDataURL("image/png");
+        const now = new Date();
+        const stamp = `${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`
+                    + `_${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`;
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `班级作业_${stamp}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast("📷 已导出图片");
+    }catch(err){
+        console.error("导出图片失败:", err);
+        const msg = (err && err.message) ? err.message : String(err);
+        alert(
+            "导出图片失败：" + msg + "\n\n" +
+            "可能的原因：\n" +
+            "  1. 当前网络无法访问 CDN（jsdelivr）。\n" +
+            "  2. 页面里没有内联 html2canvas 库代码。\n\n" +
+            "解决办法：\n" +
+            "  • 联网后重试；或\n" +
+            "  • 把原文件里内联的 html2canvas 代码整段粘贴到本 HTML 中标注的位置。"
+        );
+    }
+}
+
+/* ====================== 应用程序（分类） ====================== */
+const APP_CATEGORIES = {
+    time: {
+        title: "⏱ 时间工具",
+        items: [
+            { icon: "⏱", name: "秒表",   action: "openStopwatchModal()" },
+            { icon: "⏳", name: "倒计时", action: "openCountdownModal()" }
+        ]
+    },
+    teaching: {
+        title: "📚 教学工具",
+        items: [
+            { icon: "🎲", name: "抽学号", action: "openRandomStudentModal()" }
+        ]
+    },
+    math: {
+        title: "∑ 数学工具",
+        items: [
+            { icon: "🖩", name: "计算器",   action: "openCalcModal()" },
+            { icon: "🟰", name: "解方程",   action: "openEqSolverModal()" },
+            { icon: "📈", name: "函数图像", action: "openFuncPlotModal()" }
+        ]
+    }
+};
+
+let currentAppCategoryKey = null;
+
+function openAppModal(){
+    /* 从主工具栏打开 → 回到分类首页 */
+    currentAppCategoryKey = null;
+    $("appModal").style.display = "block";
+    renderAppCategoryView();
+    markModalOpen();
+}
+function closeAppModal(){
+    $("appModal").style.display = "none";
+}
+function renderAppCategoryView(){
+    $("appCategoryView").style.display = "";
+    $("appSubView").style.display = "none";
+}
+function backToAppCategories(){
+    currentAppCategoryKey = null;
+    renderAppCategoryView();
+}
+function openAppCategory(key){
+    const cat = APP_CATEGORIES[key];
+    if(!cat) return;
+    currentAppCategoryKey = key;
+    renderAppSubView(key);
+}
+function renderAppSubView(key){
+    const cat = APP_CATEGORIES[key];
+    if(!cat) return;
+
+    $("appSubTitle").textContent = cat.title;
+    $("appSubList").innerHTML = cat.items.map(it => `
+        <div class="app-item" onclick="runAppAction('${it.action.replace(/'/g, "\\'")}')">
+            <span class="app-icon">${it.icon || "•"}</span>
+            <span>${escapeHtml(it.name)}</span>
+        </div>
+    `).join("");
+
+    $("appCategoryView").style.display = "none";
+    $("appSubView").style.display = "";
+}
+
+/* 执行某个应用 */
+function runAppAction(actionSrc){
+    try{
+        /* 隐藏应用列表，但不重置所在分类 */
+        $("appModal").style.display = "none";
+        new Function(actionSrc)();
+    }catch(err){
+        console.error("打开应用失败:", err);
+        alert("打开应用失败：" + (err.message || err));
+    }
+}
+
+/* 应用内部的「返回」：关闭当前应用，回到应用列表（保留所在分类） */
+function backToAppList(){
+    closeStopwatchModal();
+    closeCountdownModal();
+    closeRandomStudentModal();
+    closeCalcModal();
+    closeEqSolverModal();
+    closeFuncPlotModal();
+    closeDictModal();
+
+    $("appModal").style.display = "block";
+    if(currentAppCategoryKey && APP_CATEGORIES[currentAppCategoryKey]){
+        renderAppSubView(currentAppCategoryKey);
+    } else {
+        renderAppCategoryView();
+    }
+    markModalOpen();
+}
+
+/* ====================== 应用本体 ====================== */
+let stuRollTimer = null;
+function startStudentRoll(){
+    if(stuRollTimer) return;
+    const min = Number($("stuMin").value);
+    const max = Number($("stuMax").value);
+    if(isNaN(min) || isNaN(max) || min > max || min < 1){
+        alert("范围输入错误，起始不能大于结束，且必须大于等于1");
+        return;
+    }
+    const banArr = $("stuBan").value.split(",").map(x => Number(x.trim())).filter(n => !isNaN(n));
+    const candidates = [];
+    for(let i = min; i <= max; i++) if(!banArr.includes(i)) candidates.push(i);
+    if(!candidates.length){ alert("没有可抽取的学号，范围内全部被屏蔽！"); return; }
+    const roll = () => {
+        $("stuResult").innerText = candidates[Math.floor(Math.random() * candidates.length)];
+    };
+    roll();
+    stuRollTimer = setInterval(roll, 60);
+}
+function pauseStudentRoll(){
+    if(!stuRollTimer) return;
+    clearInterval(stuRollTimer);
+    stuRollTimer = null;
+}
+function stopStudentRoll(){
+    if(stuRollTimer){ clearInterval(stuRollTimer); stuRollTimer = null; }
+}
+function openRandomStudentModal(){
+    closeAppModal();
+    $("stuResult").innerText = "--";
+    $("randomStudentModal").style.display = "block";
+    markModalOpen();
+}
+function closeRandomStudentModal(){
+    stopStudentRoll();
+    $("randomStudentModal").style.display = "none";
+}
+
+let swTimer = null, swStartTs = 0, swAcc = 0;
+function openStopwatchModal(){ closeAppModal(); swReset(); $("stopwatchModal").style.display="block"; markModalOpen(); }
+function closeStopwatchModal(){ clearInterval(swTimer); swTimer = null; $("stopwatchModal").style.display="none"; }
+function swStart(){
+    if(swTimer) return;
+    swStartTs = Date.now();
+    swTimer = setInterval(() => {
+        const t = swAcc + (Date.now() - swStartTs);
+        const h = Math.floor(t / 3600000);
+        const m = Math.floor((t % 3600000) / 60000);
+        const s = Math.floor((t % 60000) / 1000);
+        const ms = Math.floor((t % 1000) / 10);
+        $("swTime").innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(ms).padStart(2,'0')}`;
+    }, 20);
+}
+function swPause(){
+    if(!swTimer) return;
+    clearInterval(swTimer); swTimer = null;
+    swAcc += Date.now() - swStartTs;
+}
+function swReset(){
+    clearInterval(swTimer); swTimer = null; swAcc = 0;
+    $("swTime").innerText = "00:00:00.00";
+}
+
+let cdTimer = null, cdRemain = 0;
+function openCountdownModal(){
+    closeAppModal();
+    cdReset();
+    $("countdownModal").style.display = "block";
+    markModalOpen();
+}
+function closeCountdownModal(){
+    clearInterval(cdTimer); cdTimer = null;
+    stopBeep();
+    $("countdownModal").style.display = "none";
+}
+function renderCd(){
+    const m = Math.floor(cdRemain / 60), s = cdRemain % 60;
+    $("cdTime").innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function cdStart(){
+    if(cdTimer) return;
+    getAudioCtx();
+    const minInput = Number($("cdMin").value || 0);
+    const secInput = Number($("cdSec").value || 0);
+    if(cdRemain <= 0) cdRemain = minInput * 60 + secInput;
+    cdTimer = setInterval(() => {
+        cdRemain--;
+        renderCd();
+        if(cdRemain <= 0){
+            clearInterval(cdTimer); cdTimer = null;
+            startBeep();
+        }
+    }, 1000);
+}
+function cdPause(){ clearInterval(cdTimer); cdTimer = null; }
+function cdReset(){
+    clearInterval(cdTimer); cdTimer = null;
+    stopBeep();
+    cdRemain = Number($("cdMin").value || 0) * 60 + Number($("cdSec").value || 0);
+    renderCd();
+}
+
+function openCalcModal(){ closeAppModal(); calcClear(); $("calcModal").style.display="block"; markModalOpen(); }
+function closeCalcModal(){ $("calcModal").style.display="none"; }
+function calcAppend(v){ $("calcInput").value += v; }
+function calcClear(){ $("calcInput").value = ""; }
+function calcEqual(){
+    const inp = $("calcInput");
+    try{ inp.value = Function('"use strict";return (' + inp.value + ')')(); }
+    catch(e){ inp.value = "错误"; }
+}
+
+/* ====================== 系统设置 ====================== */
+function openGlobalSettingModal(){
+    if(guardLock()) return;
+    $("fontSelect").value = currentFontFamily;
+    $("colorR").value = currentTextColorRgb.r;
+    $("colorG").value = currentTextColorRgb.g;
+    $("colorB").value = currentTextColorRgb.b;
+    $("fontSizeInput").value = baseFontPx;
+    $("morningCourseCountInput").value = morningCourseCount;
+    $("quoteIntervalSec").value = quoteIntervalSecond;
+    $("bgOpacityInput").value = bgImgOpacity;
+    $("useBgImageSwitch").checked = useBgImage;
+    updateBgSettingsDisabledState();
+    updateColorPreview();
+    $("globalSettingModal").style.display = "block";
+    markModalOpen();
+}
+function closeGlobalSettingModal(){ $("globalSettingModal").style.display="none"; }
+
+function applyGlobalSetting(){
+    if(guardLock()) return;
+    currentFontFamily = $("fontSelect").value;
+    const r = clampRgbValue($("colorR").value);
+    const g = clampRgbValue($("colorG").value);
+    const b = clampRgbValue($("colorB").value);
+    currentTextColorRgb = {r, g, b};
+
+    baseFontPx = Number($("fontSizeInput").value);
+
+    let mcc = Number($("morningCourseCountInput").value);
+    if(isNaN(mcc) || mcc < 1){ alert("上午课程数量必须 ≥ 1"); return; }
+    mcc = Math.round(mcc);
+    if(mcc > 20) mcc = 20;
+    morningCourseCount = mcc;
+
+    quoteIntervalSecond = Number($("quoteIntervalSec").value);
+    bgImgOpacity = Number($("bgOpacityInput").value);
+    useBgImage = $("useBgImageSwitch").checked;
+
+    if(isNaN(baseFontPx) || baseFontPx < 1){ alert("字号必须大于等于1"); return; }
+    if(isNaN(quoteIntervalSecond) || quoteIntervalSecond <= 0){ alert("轮播周期必须大于0，可以填写小数"); return; }
+    if(isNaN(bgImgOpacity) || bgImgOpacity < 0 || bgImgOpacity > 1){ alert("透明度范围0~1"); return; }
+
+    const nStyled = countItemStyles();
+    if(nStyled > 0){
+        if(!confirm(`应用全局设置会覆盖全部单条自定义样式（共 ${nStyled} 处），确定继续？`)) return;
+        clearAllItemStyles();
+    }
+
+    applySettingsToDOM();
+    resetQuoteTimer();
+    saveLocal();
+    renderAll();
+    updateColorPreview();
+    alert(nStyled > 0 ? `设置已生效，并已覆盖 ${nStyled} 处单条样式` : "设置已生效");
+}
+
+/* ====================== 课表导入 ====================== */
+function loadTimetableTxt(event){
+    if(guardLock()){ event.target.value = ""; return; }
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        const lines = e.target.result.split(/\r?\n/).filter(line => line.trim());
+        const weekMap = { 1:"周一", 2:"周二", 3:"周三", 4:"周四", 5:"周五", 6:"周六", 0:"周日" };
+        const todayCnWeek = weekMap[new Date().getDay()];
+        let todayCourses = null;
+        for(const line of lines){
+            const [weekStr, courseStr] = line.split(":");
+            if(!weekStr || !courseStr) continue;
+            if(weekStr.trim() === todayCnWeek){
+                todayCourses = courseStr.split("，").map(item => item.trim()).filter(x => x);
+                break;
+            }
+        }
+        if(!todayCourses){ alert(`文件内没有找到【${todayCnWeek}】的课程`); return; }
+        appData.timetable = todayCourses;
+        saveLocal();
+        renderAll();
+        alert(`成功载入【${todayCnWeek}】课程，共${todayCourses.length}节`);
+    };
+    reader.readAsText(file);
+    event.target.value = "";
+}
+
+/* ====================== 背景图片拖拽 ====================== */
+const bgImageDom = $("bgImage");
+bgImageDom.addEventListener("mousedown", e => {
+    if(!bgImgUrl || !useBgImage) return;
+    bgDragging = true;
+    bgDragStartX = e.clientX; bgDragStartY = e.clientY;
+    bgImgStartX = bgPosX; bgImgStartY = bgPosY;
+    e.preventDefault();
+});
+document.addEventListener("mousemove", e => {
+    if(!bgDragging) return;
+    bgPosX = bgImgStartX + (e.clientX - bgDragStartX);
+    bgPosY = bgImgStartY + (e.clientY - bgDragStartY);
+    renderBgImageTransform();
+});
+document.addEventListener("mouseup", () => { bgDragging = false; });
+function renderBgImageTransform(){
+    bgImageDom.style.transform = `translate(${bgPosX}px,${bgPosY}px) scale(${bgScale})`;
+}
+function loadBgImage(event){
+    if(guardLock()){ event.target.value = ""; return; }
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = async e => {
+        bgImgUrl = e.target.result;
+        bgImageDom.src = bgImgUrl;
+        bgPosX = 0; bgPosY = 0;
+        renderBgImageTransform();
+        applyBgImageVisibility();
+        try{ await saveBgImageToDB(bgImgUrl); }
+        catch(err){
+            console.warn("背景图片保存失败:", err);
+            alert("背景图片已加载，但保存失败（可能浏览器不支持或空间不足），刷新后可能丢失。");
+        }
+    };
+    reader.readAsDataURL(file);
+    event.target.value = "";
+}
+
+/* ====================== 名言 ====================== */
+function loadQuoteFromFile(event){
+    if(guardLock()){ event.target.value = ""; return; }
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        quoteList = e.target.result.split("\n").map(line => line.trim()).filter(line => line.length > 0);
+        randomQuote(); startQuoteLoop();
+        alert(`成功导入 ${quoteList.length} 条名言`);
+    };
+    reader.readAsText(file);
+    event.target.value = "";
+}
+async function loadFamousSayings(){
+    try{
+        const resp = await fetch("./FamousSayings.txt");
+        if(!resp.ok) throw new Error("no file");
+        quoteList = (await resp.text()).split("\n").map(line => line.trim()).filter(line => line.length > 0);
+        randomQuote(); startQuoteLoop();
+    }catch(err){}
+}
+function renderQuote(){
+    $("quoteDisplay").innerText = quoteList.length ? quoteList[currentQuoteIndex] : "暂无名言，请在导入信息里导入名言文件";
+}
+function randomQuote(){
+    if(!quoteList.length) return;
+    currentQuoteIndex = Math.floor(Math.random() * quoteList.length);
+    renderQuote();
+    resetQuoteTimer();
+}
+function stopQuoteTimer(){ clearInterval(quoteTimer); quoteTimer = null; }
+function resetQuoteTimer(){ stopQuoteTimer(); quoteTimer = setInterval(randomQuote, quoteIntervalSecond * 1000); }
+const startQuoteLoop = resetQuoteTimer;
+
+/* ====================== 本地存储 ====================== */
+function loadLocal(){
+    const s = localStorage.getItem("classScreenData");
+    if(s){
+        Object.assign(appData, JSON.parse(s));
+        if(appData.baseFontPx) baseFontPx = appData.baseFontPx;
+        if(appData.currentFontFamily) currentFontFamily = appData.currentFontFamily;
+        if(appData.currentTextColor) currentTextColorRgb = hexToRgb(appData.currentTextColor);
+        if(appData.quoteIntervalSecond) quoteIntervalSecond = appData.quoteIntervalSecond;
+        if(appData.bgImgOpacity !== undefined) bgImgOpacity = appData.bgImgOpacity;
+        if(appData.useBgImage !== undefined) useBgImage = appData.useBgImage;
+    }
+    normalizeAllData();
+    applySettingsToDOM();
+    renderAll();
+}
+function saveLocal(){
+    localStorage.setItem("classScreenData", JSON.stringify({
+        ...appData, baseFontPx, currentFontFamily,
+        currentTextColor: rgbToHex(currentTextColorRgb.r, currentTextColorRgb.g, currentTextColorRgb.b),
+        quoteIntervalSecond, bgImgOpacity, useBgImage,
+        morningCourseCount,
+        eqUseRange
+    }));
+}
+
+/* ====================== 渲染 ====================== */
+function renderAll(){
+    normalizeAllItems();
+    $("pageTitle").innerText = stripDateFromTitle(appData.pageTitle);
+    renderDayCountdown();
+    renderLeft(); renderMid(); renderDuty(); renderRight();
+}
+function renderLeft(){
+    const dom = $("leftCol");
+    dom.innerHTML = "";
+    SUBJECT_ORDER.forEach(subName => {
+        const subData = appData.homework.find(s => s.subject === subName);
+        if(!subData || !subData.list.length) return;
+        const block = document.createElement("div");
+        block.className = "subject-block";
+        block.innerHTML = `<div class="subject-name">${subName}</div>`;
+        subData.list.forEach((item, li) => {
+            const div = document.createElement("div");
+            div.className = "item-row";
+            const tagText = (item.tag || '').replace(/^[【\[]+/, '').replace(/[】\]]+$/, '');
+            const tagHtml = tagText ? `<span class="item-tag">【${escapeHtml(tagText)}】</span>` : '';
+            const sty = itemStyleAttr(item);
+            div.innerHTML = `
+                <div class="item-index">${li+1}.</div>
+                <div class="item-text"${sty} onclick="editHomeworkItem('${subName}',${li})">${renderLatex(item.text)}</div>
+                ${tagHtml}
+                <button class="del-circle-btn" onclick="delHomeworkItem('${subName}',${li})">×</button>
+            `;
+            block.appendChild(div);
+        });
+        dom.appendChild(block);
+    });
+}
+function renderMid(){
+    const noticeWrap = $("noticeWrap");
+    noticeWrap.innerHTML = "";
+    appData.notice.forEach((it, i) => {
+        const div = document.createElement("div");
+        div.className = "item-row";
+        div.innerHTML = `
+            <div class="item-index">${i+1}.</div>
+            <div class="item-text"${itemStyleAttr(it)} onclick="editNotice(${i})">${renderLatex(itemText(it))}</div>
+            <button class="del-circle-btn" onclick="delNotice(${i})">×</button>
+        `;
+        noticeWrap.appendChild(div);
+    });
+
+    const thinkWrap = $("thinkWrap");
+    thinkWrap.innerHTML = "";
+    appData.think.forEach((it, i) => {
+        const div = document.createElement("div");
+        div.className = "item-row";
+        div.innerHTML = `
+            <div class="item-index">${i+1}.</div>
+            <div class="item-text"${itemStyleAttr(it)} onclick="editThink(${i})">${renderLatex(itemText(it))}</div>
+            <button class="del-circle-btn" onclick="delThink(${i})">×</button>
+        `;
+        thinkWrap.appendChild(div);
+    });
+}
+function renderDuty(){
+    const wrap = $("dutyWrap");
+    wrap.innerHTML = "";
+    appData.duty.forEach((it, i) => {
+        const div = document.createElement("div");
+        div.className = "item-row";
+        div.innerHTML = `
+            <div class="item-index">${i+1}.</div>
+            <div class="item-text"${itemStyleAttr(it)} onclick="editDuty(${i})">${renderLatex(itemText(it))}</div>
+            <button class="del-circle-btn" onclick="delDuty(${i})">×</button>
+        `;
+        wrap.appendChild(div);
+    });
+}
+function renderRight(){
+    const wrap = $("timetableWrap");
+    wrap.innerHTML = "";
+    const mcc = Math.max(1, morningCourseCount);
+    appData.timetable.forEach((it, i) => {
+        const div = document.createElement("div");
+        div.className = "course-table-item";
+        div.innerHTML = `
+            <span${itemStyleAttr(it)} onclick="editTimetable(${i})">${renderLatex(itemText(it))}</span>
+            <button class="del-circle-btn" onclick="delTimetable(${i})">×</button>
+        `;
+        wrap.appendChild(div);
+        if(i === mcc - 1 && i < appData.timetable.length - 1){
+            const sep = document.createElement("div");
+            sep.className = "course-divider";
+            sep.innerHTML = "<span>午休</span>";
+            wrap.appendChild(sep);
+        }
+    });
+}
+
+/* ====================== 编辑与保存 ====================== */
+let modalType = "";
+
+function editPageTitle(){
+    if(guardLock()) return;
+    openEditModal();
+    $("modalTitle").innerText = "修改标题";
+    const catRow = $("editCatRow"), tagRow = $("editTagRow"), styleRow = $("editStyleRow");
+    if(catRow) catRow.style.display = "none";
+    if(tagRow) tagRow.style.display = "none";
+    if(styleRow) styleRow.style.display = "none";
+    $("editContent").value = stripDateFromTitle(appData.pageTitle);
+    modalType = "editTitle";
+}
+function onEditCategoryChange(){
+    const row = $("editTagRow");
+    if(row) row.style.display = HOMEWORK_CATS.includes($("editCategory").value) ? "" : "none";
+}
+function openEditModal(){
+    if(guardLock()) return;
+    $("editModal").style.display = "block";
+    $("modalTitle").innerText = "新增条目";
+    $("editContent").value = "";
+    $("editTag").value = "";
+    $("editSubIndex").value = "";
+    $("editItemIndex").value = "";
+    const catRow = $("editCatRow"), tagRow = $("editTagRow"), styleRow = $("editStyleRow");
+    if(catRow) catRow.style.display = "";
+    if(tagRow) tagRow.style.display = "";
+    if(styleRow) styleRow.style.display = "";
+    fillItemStyleFields(null);
+    modalType = "add";
+    onEditCategoryChange();
+    markModalOpen();
+}
+function closeEditModal(){ $("editModal").style.display = "none"; }
+
+function populateItemFontOptions(){
+    const src = $("fontSelect"), dst = $("itemFontSelect");
+    if(!src || !dst) return;
+    if(dst.options.length > 1) return;
+    Array.from(src.options).forEach(op => {
+        const o = document.createElement("option");
+        o.value = op.value;
+        o.textContent = op.textContent;
+        o.style.fontFamily = op.style.fontFamily;
+        dst.appendChild(o);
+    });
+}
+function updateItemColorPreview(){
+    const box = $("itemColorPreview");
+    if(!box) return;
+    const r = $("itemColorR").value, g = $("itemColorG").value, b = $("itemColorB").value;
+    if(r === "" || g === "" || b === ""){
+        box.style.background = "transparent";
+        box.title = "未设置颜色（跟随全局）";
+        return;
+    }
+    const R = clampRgbValue(r), G = clampRgbValue(g), B = clampRgbValue(b);
+    box.style.background = `rgb(${R},${G},${B})`;
+    box.title = `预览：rgb(${R},${G},${B})  ${rgbToHex(R,G,B)}`;
+}
+function fillItemStyleFields(item){
+    populateItemFontOptions();
+    const st = (item && typeof item === "object" && item.style) ? item.style : {};
+    if($("itemFontSelect")) $("itemFontSelect").value = st.fontFamily || "";
+    if($("itemFontSize"))   $("itemFontSize").value   = st.size || "";
+    if(st.color){
+        const c = hexToRgb(st.color);
+        $("itemColorR").value = c.r; $("itemColorG").value = c.g; $("itemColorB").value = c.b;
+    }else{
+        $("itemColorR").value = ""; $("itemColorG").value = ""; $("itemColorB").value = "";
+    }
+    updateItemColorPreview();
+}
+function readItemStyleFromFields(){
+    const st = {};
+    const fam = $("itemFontSelect") ? $("itemFontSelect").value : "";
+    if(fam) st.fontFamily = fam;
+    const sz = Number($("itemFontSize") ? $("itemFontSize").value : "");
+    if(!isNaN(sz) && sz > 0) st.size = sz;
+    const r = $("itemColorR").value, g = $("itemColorG").value, b = $("itemColorB").value;
+    if(r !== "" && g !== "" && b !== ""){
+        st.color = rgbToHex(clampRgbValue(r), clampRgbValue(g), clampRgbValue(b));
+    }
+    return st;
+}
+function clearItemStyle(){
+    fillItemStyleFields(null);
+    showToast("已清除本条样式，将跟随全局设置");
+}
+function buildItem(text, tag, style){
+    const it = { text };
+    if(tag) it.tag = tag;
+    if(style && (style.fontFamily || style.color || style.size)) it.style = style;
+    return it;
+}
+
+function editHomeworkItem(subjectName, li){
+    if(guardLock()) return;
+    openEditModal();
+    $("modalTitle").innerText = "修改作业";
+    $("editCategory").value = subjectName;
+    const item = appData.homework.find(s => s.subject === subjectName).list[li];
+    $("editContent").value = itemText(item);
+    $("editTag").value = item.tag || "";
+    fillItemStyleFields(item);
+    modalType = "editHomework";
+    $("editSubIndex").value = subjectName;
+    $("editItemIndex").value = li;
+    onEditCategoryChange();
+}
+function editNotice(i){
+    if(guardLock()) return;
+    openEditModal(); $("modalTitle").innerText = "修改通知";
+    $("editCategory").value = "通知";
+    $("editContent").value = itemText(appData.notice[i]);
+    fillItemStyleFields(appData.notice[i]);
+    modalType = "editNotice"; $("editItemIndex").value = i;
+    onEditCategoryChange();
+}
+function editThink(i){
+    if(guardLock()) return;
+    openEditModal(); $("modalTitle").innerText = "修改每日一题";
+    $("editCategory").value = "每日一题";
+    $("editContent").value = itemText(appData.think[i]);
+    fillItemStyleFields(appData.think[i]);
+    modalType = "editThink"; $("editItemIndex").value = i;
+    onEditCategoryChange();
+}
+function editTimetable(i){
+    if(guardLock()) return;
+    openEditModal(); $("modalTitle").innerText = "修改课表";
+    $("editCategory").value = "课表";
+    $("editContent").value = itemText(appData.timetable[i]);
+    fillItemStyleFields(appData.timetable[i]);
+    modalType = "editTimetable"; $("editItemIndex").value = i;
+    onEditCategoryChange();
+}
+function editDuty(i){
+    if(guardLock()) return;
+    openEditModal(); $("modalTitle").innerText = "修改值日生";
+    $("editCategory").value = "值日生";
+    $("editContent").value = itemText(appData.duty[i]);
+    fillItemStyleFields(appData.duty[i]);
+    modalType = "editDuty"; $("editItemIndex").value = i;
+    onEditCategoryChange();
+}
+function addContentToCategory(cat, content, tag, style){
+    if(HOMEWORK_CATS.includes(cat)){
+        let subObj = appData.homework.find(x => x.subject === cat);
+        if(!subObj){ subObj = { subject: cat, list: [] }; appData.homework.push(subObj); }
+        const it = { text: content, tag: tag || "" };
+        if(style && (style.fontFamily || style.color || style.size)) it.style = style;
+        subObj.list.push(it);
+        return;
+    }
+    const key = CAT_TO_KEY[cat];
+    if(key){
+        const it = { text: content };
+        if(style && (style.fontFamily || style.color || style.size)) it.style = style;
+        appData[key].push(it);
+    }
+}
+function saveEdit(){
+    if(guardLock()) return;
+    const cat = $("editCategory").value;
+    const content = $("editContent").value.trim();
+    const tag = $("editTag").value.trim();
+    const style = readItemStyleFromFields();
+    if(!content){ alert("内容不能为空"); return; }
+
+    if(modalType === "editTitle"){
+        appData.pageTitle = content;
+        saveLocal();
+        renderAll();
+        closeEditModal();
+        return;
+    }
+
+    if(modalType === "add"){
+        addContentToCategory(cat, content, tag, style);
+    } else if(modalType === "editHomework"){
+        const subName = $("editSubIndex").value;
+        const idx = Number($("editItemIndex").value);
+        const subObj = appData.homework.find(x => x.subject === subName);
+        if(cat === subName){
+            if(subObj) subObj.list[idx] = buildItem(content, tag, style);
+        } else {
+            if(subObj){
+                subObj.list.splice(idx, 1);
+                if(!subObj.list.length) appData.homework = appData.homework.filter(x => x.subject !== subName);
+            }
+            addContentToCategory(cat, content, tag, style);
+        }
+    } else {
+        const m = SIMPLE_EDIT_MAP[modalType];
+        if(m){
+            const idx = Number($("editItemIndex").value);
+            if(cat === m.cat) appData[m.key][idx] = buildItem(content, "", style);
+            else { appData[m.key].splice(idx, 1); addContentToCategory(cat, content, tag, style); }
+        }
+    }
+    saveLocal();
+    renderAll();
+    closeEditModal();
+}
+
+/* ====================== 删除 ====================== */
+function delHomeworkItem(subjectName, li){
+    if(guardLock()) return;
+    if(!confirm("确定删除这条作业？")) return;
+    const subObj = appData.homework.find(x => x.subject === subjectName);
+    subObj.list.splice(li, 1);
+    if(!subObj.list.length) appData.homework = appData.homework.filter(x => x.subject !== subjectName);
+    saveLocal(); renderAll();
+}
+function delNotice(i){
+    if(guardLock()) return;
+    if(!confirm("确定删除这条通知？")) return;
+    appData.notice.splice(i, 1);
+    saveLocal(); renderAll();
+}
+function delThink(i){
+    if(guardLock()) return;
+    if(!confirm("确定删除这条每日一题？")) return;
+    appData.think.splice(i, 1);
+    saveLocal(); renderAll();
+}
+function delTimetable(i){
+    if(guardLock()) return;
+    if(!confirm("确定删除这节课？")) return;
+    appData.timetable.splice(i, 1);
+    saveLocal(); renderAll();
+}
+function delDuty(i){
+    if(guardLock()) return;
+    if(!confirm("确定删除这条值日生记录？")) return;
+    appData.duty.splice(i, 1);
+    saveLocal(); renderAll();
+}
+
+/* ====================== 时钟 / 版本号 / 标题 ====================== */
+function updateClock(){
+    const now = new Date();
+    const week = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"][now.getDay()];
+    const dateEl = $("clockDate"), weekEl = $("clockWeek");
+    const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+    if(dateEl && dateEl.textContent !== dateStr) dateEl.textContent = dateStr;
+    if(weekEl && weekEl.textContent !== week) weekEl.textContent = week;
+}
+
+function stripDateFromTitle(t){
+    const raw = String(t == null ? "" : t);
+    const s = raw.replace(/^\s*\d{4}\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日\s*(星期[一二三四五六日天]\s*)?/, "").trim();
+    return s || raw;
+}
+
+function renderBottomTag(){
+    const v = $("versionText"), c = $("copyrightText");
+    if(v) v.textContent = APP_VERSION;
+    if(c) c.textContent = COPYRIGHT_NOTICE;
+}
+
+/* ====================== 三栏折叠 / 展开 ====================== */
+let collapsedCols = { mid: false, right: false };
+
+function applyCollapseState(){
+    const wrap = document.querySelector(".main-wrap");
+    const midEl = $("midCol");
+    const rightEl = document.querySelector(".col-right");
+    if(!wrap || !midEl || !rightEl) return;
+
+    wrap.classList.toggle("mid-collapsed", collapsedCols.mid);
+    wrap.classList.toggle("right-collapsed", collapsedCols.right);
+
+    midEl.style.display   = collapsedCols.mid   ? "none" : "";
+    rightEl.style.display = collapsedCols.right ? "none" : "";
+
+    const bar = $("expandBar");
+    const midBtn = $("expandMidBtn");
+    const rightBtn = $("expandRightBtn");
+    if(midBtn)   midBtn.style.display   = collapsedCols.mid   ? "" : "none";
+    if(rightBtn) rightBtn.style.display = collapsedCols.right ? "" : "none";
+    if(bar) bar.style.display = (collapsedCols.mid || collapsedCols.right) ? "" : "none";
+}
+
+function collapseColumn(which){
+    if(which === "mid")   collapsedCols.mid = true;
+    if(which === "right") collapsedCols.right = true;
+    applyCollapseState();
+}
+
+function expandColumn(which){
+    if(which === "mid")   collapsedCols.mid = false;
+    if(which === "right") collapsedCols.right = false;
+    applyCollapseState();
+}
+
+/* ====================== 页面初始化 ====================== */
+window.onload = function(){
+    setDailyGradientBg();
+    loadLocal();
+    loadFamousSayings();
+    updateColorPreview();
+    restoreBgImage();
+    renderBottomTag();
+    applyCollapseState();
+    updateClock();
+    setInterval(updateClock, 1000);
+    setInterval(refreshCountdownTexts, 1000);
+    setInterval(setDailyGradientBg, 30000);
+};
+</script>
+</body>
+</html>
