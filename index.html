@@ -3,20 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>南京外国语学校 高一(1)班 · 官网</title>
-<meta name="description" content="南京外国语学校高一(1)班官方网站：作业、新闻、文章、名言、题集与投稿。">
+<title>南京外国语学校 G202301 · 官网</title>
+<meta name="description" content="南京外国语学校 G202301 班官方网站：作业、新闻、文章、名言、题集与投稿。">
 <style>
-/* ============ 基础变量 & 重置 ============ */
 :root{
-  --navy:#0f2547;
-  --navy-2:#1b3a63;
-  --gold:#c9a227;
-  --gold-light:#e8c96a;
-  --bg:#f4f6fb;
-  --card:#ffffff;
-  --text:#1f2937;
-  --muted:#6b7280;
-  --line:#e5e9f2;
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
   --radius:16px;
   --shadow:0 10px 30px rgba(15,37,71,.08);
   --shadow-hover:0 18px 40px rgba(15,37,71,.16);
@@ -25,27 +19,17 @@
 html{scroll-behavior:smooth}
 body{
   font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.65;
+  background:var(--bg);color:var(--text);line-height:1.65;
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;text-decoration:none}
 ul{list-style:none}
-.wrap{
-  width:100%;
-  max-width:1100px;
-  margin:0 auto;
-  padding:0 20px;
-  position:relative;
-  z-index:1;
-}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
-/* ============ 顶部导航 ============ */
+/* 顶部导航 */
 .site-header{
   position:sticky;top:0;z-index:100;
-  background:rgba(15,37,71,.97);
-  backdrop-filter:blur(12px);
+  background:rgba(15,37,71,.97);backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(255,255,255,.08);
 }
 .header-inner{
@@ -54,8 +38,7 @@ ul{list-style:none}
 }
 .brand{display:flex;align-items:center;gap:12px;color:#fff}
 .brand-badge{
-  width:44px;height:44px;border-radius:13px;
-  display:grid;place-items:center;
+  width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
   background:linear-gradient(135deg,var(--gold-light),var(--gold));
   color:var(--navy);font-weight:800;font-size:20px;
   box-shadow:0 6px 18px rgba(201,162,39,.4);
@@ -64,8 +47,7 @@ ul{list-style:none}
 .brand-text small{color:#9fb3d1;font-size:12px;letter-spacing:2px}
 .nav{display:flex;gap:4px;flex-wrap:wrap}
 .nav a{
-  color:#cfd9e8;font-size:14.5px;
-  padding:8px 15px;border-radius:999px;
+  color:#cfd9e8;font-size:14.5px;padding:8px 15px;border-radius:999px;
   transition:all .22s ease;
 }
 .nav a:hover{color:#fff;background:rgba(255,255,255,.09)}
@@ -75,7 +57,7 @@ ul{list-style:none}
   box-shadow:0 6px 16px rgba(201,162,39,.35);
 }
 
-/* ============ Hero ============ */
+/* Hero */
 .hero{
   position:relative;overflow:hidden;
   padding:86px 0 90px;color:#fff;
@@ -87,23 +69,15 @@ ul{list-style:none}
 .hero::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
-  background-size:24px 24px;
-  opacity:.45;
+  background-size:24px 24px;opacity:.45;
 }
 .eyebrow{
-  display:inline-block;
-  font-size:12px;letter-spacing:3.5px;text-transform:uppercase;
+  display:inline-block;font-size:12px;letter-spacing:3.5px;text-transform:uppercase;
   color:var(--gold-light);margin-bottom:14px;
   padding:5px 14px;border:1px solid rgba(201,162,39,.45);border-radius:999px;
 }
-.hero h1{
-  font-size:clamp(30px,5vw,46px);
-  line-height:1.25;letter-spacing:1px;margin-bottom:16px;
-}
-.hero .lead{
-  font-size:clamp(15px,1.6vw,17px);
-  color:#c3d2e6;max-width:640px;margin-bottom:34px;
-}
+.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.25;letter-spacing:1px;margin-bottom:16px}
+.hero .lead{font-size:clamp(15px,1.6vw,17px);color:#c3d2e6;max-width:640px;margin-bottom:34px}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
 .btn{
   display:inline-block;padding:13px 28px;border-radius:999px;
@@ -111,23 +85,16 @@ ul{list-style:none}
 }
 .btn-primary{
   background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  color:var(--navy);
-  box-shadow:0 10px 26px rgba(201,162,39,.35);
+  color:var(--navy);box-shadow:0 10px 26px rgba(201,162,39,.35);
 }
 .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(201,162,39,.45)}
-.btn-ghost{
-  color:#fff;border:1.5px solid rgba(255,255,255,.45);
-}
+.btn-ghost{color:#fff;border:1.5px solid rgba(255,255,255,.45)}
 .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;transform:translateY(-3px)}
 
-/* ============ 通用区块 ============ */
+/* 卡片 */
 .section{padding:64px 0}
-
-/* ============ 卡片网格 ============ */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:20px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
 }
 .card{
   background:var(--card);border:1px solid var(--line);
@@ -136,8 +103,7 @@ ul{list-style:none}
   transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
 }
 .nav-card:hover{
-  transform:translateY(-7px);
-  box-shadow:var(--shadow-hover);
+  transform:translateY(-7px);box-shadow:var(--shadow-hover);
   border-color:rgba(201,162,39,.65);
 }
 .nav-card .icon{
@@ -149,46 +115,34 @@ ul{list-style:none}
 .nav-card h3{font-size:18px;margin-bottom:8px;letter-spacing:.5px}
 .nav-card p{font-size:14px;color:var(--muted)}
 
-/* ============ 名言卡片 ============ */
+/* 名言 */
 .quote-card{
   position:relative;
   background:linear-gradient(135deg,#ffffff,#f7faff);
-  border:1px solid var(--line);
-  border-left:6px solid var(--gold);
-  border-radius:var(--radius);
-  padding:46px 40px 40px;
-  box-shadow:var(--shadow);
-  text-align:center;
+  border:1px solid var(--line);border-left:6px solid var(--gold);
+  border-radius:var(--radius);padding:46px 40px 40px;
+  box-shadow:var(--shadow);text-align:center;
 }
 .quote-card::before{
-  content:"“";
-  position:absolute;top:0;left:26px;
+  content:"“";position:absolute;top:0;left:26px;
   font-size:120px;line-height:1;color:rgba(201,162,39,.16);
   font-family:Georgia,serif;
 }
 .quote-card p{
   font-size:clamp(21px,2.8vw,30px);
-  letter-spacing:3px;color:var(--navy);margin-bottom:16px;font-weight:600;
-  position:relative;
+  letter-spacing:3px;color:var(--navy);margin-bottom:16px;font-weight:600;position:relative;
 }
-.quote-card cite{
-  font-size:13.5px;color:var(--muted);
-  font-style:normal;letter-spacing:2px;
-}
+.quote-card cite{font-size:13.5px;color:var(--muted);font-style:normal;letter-spacing:2px}
 
-/* ============ 页脚 ============ */
+/* 页脚 */
 .site-footer{
   background:var(--navy);color:#9fb3d1;
   padding:34px 0;margin-top:20px;font-size:13.5px;
 }
-.footer-inner{
-  display:flex;justify-content:space-between;
-  gap:20px;flex-wrap:wrap;line-height:2;
-}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
 
-/* ============ 响应式 ============ */
 @media (max-width:880px){
   .hero{padding:64px 0 68px}
   .quote-card{padding:36px 24px 30px}
@@ -208,82 +162,66 @@ ul{list-style:none}
 </head>
 <body>
 
-<!-- ===== 顶部导航 ===== -->
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="index.html">
+    <a class="brand" href="./">
       <span class="brand-badge">1</span>
       <span class="brand-text">
         <strong>南京外国语学校</strong>
-        <small>高一(1)班</small>
+        <small>G202301</small>
       </span>
     </a>
     <nav class="nav">
-      <a href="index.html" class="active">首页</a>
-      <a href="homework/index.html">作业</a>
-      <a href="news/index.html">新闻</a>
-      <a href="article/index.html">文章</a>
-      <a href="saying/index.html">名言</a>
-      <a href="problemset/index.html">题集</a>
-      <a href="submit/index.html">投稿</a>
+      <a href="./" class="active">首页</a>
+      <a href="homework">作业</a>
+      <a href="news">新闻</a>
+      <a href="article">文章</a>
+      <a href="saying">名言</a>
+      <a href="problemset">题集</a>
+      <a href="submit">投稿</a>
     </nav>
   </div>
 </header>
 
 <main>
 
-  <!-- ===== Hero ===== -->
   <section class="hero">
     <div class="wrap">
       <p class="eyebrow">Nanjing Foreign Language School</p>
-      <h1>高一(1)班 · 官网</h1>
+      <h1>G202301 · 官网</h1>
       <p class="lead">作业发布 · 班级新闻 · 优秀文章 · 每日名言 · 精选题集 · 在线投稿</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="homework/index.html">查看今日作业</a>
-        <a class="btn btn-ghost" href="submit/index.html">我要投稿</a>
+        <a class="btn btn-primary" href="homework">查看今日作业</a>
+        <a class="btn btn-ghost" href="submit">我要投稿</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== 六大板块卡片 ===== -->
   <section class="section">
     <div class="wrap">
       <div class="grid">
-        <a class="card nav-card" href="homework/index.html">
-          <span class="icon">📚</span>
-          <h3>作业</h3>
-          <p>每日作业安排与截止时间</p>
+        <a class="card nav-card" href="homework">
+          <span class="icon">📚</span><h3>作业</h3><p>每日作业安排与截止时间</p>
         </a>
-        <a class="card nav-card" href="news/index.html">
-          <span class="icon">📰</span>
-          <h3>新闻</h3>
-          <p>班级活动与校园动态</p>
+        <a class="card nav-card" href="news">
+          <span class="icon">📰</span><h3>新闻</h3><p>班级活动与校园动态</p>
         </a>
-        <a class="card nav-card" href="article/index.html">
-          <span class="icon">✍️</span>
-          <h3>文章</h3>
-          <p>同学原创随笔与佳作</p>
+        <a class="card nav-card" href="article">
+          <span class="icon">✍️</span><h3>文章</h3><p>同学原创随笔与佳作</p>
         </a>
-        <a class="card nav-card" href="saying/index.html">
-          <span class="icon">💬</span>
-          <h3>名言</h3>
-          <p>每日一句，伴你前行</p>
+        <a class="card nav-card" href="saying">
+          <span class="icon">💬</span><h3>名言</h3><p>每日一句，伴你前行</p>
         </a>
-        <a class="card nav-card" href="problemset/index.html">
-          <span class="icon">🧩</span>
-          <h3>题集</h3>
-          <p>精选好题与详细解析</p>
+        <a class="card nav-card" href="problemset">
+          <span class="icon">🧩</span><h3>题集</h3><p>精选好题与详细解析</p>
         </a>
-        <a class="card nav-card" href="submit/index.html">
-          <span class="icon">📮</span>
-          <h3>投稿</h3>
-          <p>把你的作品分享给大家</p>
+        <a class="card nav-card" href="submit">
+          <span class="icon">📮</span><h3>投稿</h3><p>把你的作品分享给大家</p>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ===== 每日一句 ===== -->
   <section class="section" style="padding-top:0">
     <div class="wrap">
       <blockquote class="quote-card">
@@ -295,16 +233,15 @@ ul{list-style:none}
 
 </main>
 
-<!-- ===== 页脚 ===== -->
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div>
-      <strong style="color:#fff">南京外国语学校 高一(1)班</strong><br>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
       班级官网 · 由 G20230151 维护
     </div>
     <div>
-      <a href="submit/index.html">投稿</a> ·
-      <a href="news/index.html">新闻</a> ·
+      <a href="submit">投稿</a> ·
+      <a href="news">新闻</a> ·
       联系 QQ：3051455202 / 3073701418
     </div>
   </div>

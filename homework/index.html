@@ -6,7 +6,6 @@
 <title>作业 · 南京外国语学校 G202301</title>
 <meta name="description" content="南京外国语学校 G202301 班作业发布：按日期查看每日作业安排。">
 <style>
-/* ============ 基础 ============ */
 :root{
   --navy:#0f2547; --navy-2:#1b3a63;
   --gold:#c9a227; --gold-light:#e8c96a;
@@ -27,7 +26,6 @@ a{color:inherit;text-decoration:none}
 ul{list-style:none}
 .wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
-/* ============ 页面头部 ============ */
 .page-hero{
   position:relative;overflow:hidden;
   padding:56px 0 52px;color:#fff;
@@ -47,7 +45,6 @@ ul{list-style:none}
 .crumb a:hover{color:var(--gold-light)}
 .crumb span{margin:0 7px;opacity:.6}
 
-/* ============ 内容区 ============ */
 .section{padding:40px 0 64px}
 
 .list-head{
@@ -65,9 +62,7 @@ ul{list-style:none}
 .list-head .count{font-size:13.5px;color:var(--muted)}
 .list-head .count b{color:var(--navy)}
 
-/* ============ 每日作业卡片 ============ */
 .day-list{display:flex;flex-direction:column;gap:16px}
-
 .day-card{
   display:flex;align-items:stretch;
   background:var(--card);
@@ -83,7 +78,6 @@ ul{list-style:none}
 }
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-/* 左侧日期块 */
 .day-date{
   flex:0 0 132px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -95,15 +89,10 @@ ul{list-style:none}
   content:"";position:absolute;right:0;top:0;bottom:0;width:4px;
   background:linear-gradient(180deg,var(--gold-light),var(--gold));
 }
-.day-date .y{
-  font-size:12.5px;letter-spacing:3px;color:var(--gold-light);font-weight:600;
-}
-.day-date .md{
-  font-size:22px;line-height:1.25;color:#fff;font-weight:700;letter-spacing:1px;
-}
+.day-date .y{font-size:12.5px;letter-spacing:3px;color:var(--gold-light);font-weight:600}
+.day-date .md{font-size:22px;line-height:1.25;color:#fff;font-weight:700;letter-spacing:1px}
 .day-date .w{font-size:12.5px;color:#a9bcd8;letter-spacing:1.5px}
 
-/* 右侧内容 */
 .day-main{flex:1;padding:22px 24px;min-width:0;display:flex;flex-direction:column;justify-content:center}
 .day-title{
   font-size:17.5px;font-weight:700;letter-spacing:.3px;
@@ -115,21 +104,18 @@ ul{list-style:none}
   color:var(--navy);letter-spacing:.5px;
 }
 
-/* 右侧箭头 */
 .day-arrow{
   flex:0 0 64px;display:grid;place-items:center;
   font-size:20px;color:#c3cbd8;transition:all .26s ease;
 }
 .day-card:hover .day-arrow{color:var(--gold);transform:translateX(5px)}
 
-/* 列表底部提示 */
 .list-end{
   margin-top:22px;text-align:center;font-size:13px;color:var(--muted);
   padding:18px;border:1px dashed var(--line);border-radius:var(--radius);
   background:rgba(255,255,255,.6);
 }
 
-/* ============ 页脚 ============ */
 .site-footer{
   background:var(--navy);color:#9fb3d1;
   padding:34px 0;font-size:13.5px;
@@ -138,7 +124,6 @@ ul{list-style:none}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
 
-/* ============ 响应式 ============ */
 @media (max-width:640px){
   .page-hero{padding:44px 0 40px}
   .section{padding:30px 0 48px}
@@ -154,16 +139,14 @@ ul{list-style:none}
 
 <main>
 
-  <!-- ===== 页面头部 ===== -->
   <section class="page-hero">
     <div class="wrap">
-      <p class="crumb"><a href="../index.html">首页</a><span>/</span>作业</p>
+      <p class="crumb"><a href="../">首页</a><span>/</span>作业</p>
       <h1>作业</h1>
       <p class="sub">每日作业按日期从上到下排列，点击进入当天作业详情。</p>
     </div>
   </section>
 
-  <!-- ===== 每日作业列表 ===== -->
   <section class="section">
     <div class="wrap">
 
@@ -174,8 +157,7 @@ ul{list-style:none}
 
       <div class="day-list">
 
-        <!-- ===== 2026年9月18日 ===== -->
-        <a class="day-card" href="./20260918/">
+        <a class="day-card" href="20260918">
           <div class="day-date">
             <span class="y">2026</span>
             <span class="md">9月18日</span>
@@ -199,7 +181,6 @@ ul{list-style:none}
 
 </main>
 
-<!-- ===== 页脚 ===== -->
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div>
@@ -207,8 +188,8 @@ ul{list-style:none}
       班级官网 · 由 G20230151 维护
     </div>
     <div>
-      <a href="../submit/index.html">投稿</a> ·
-      <a href="../news/index.html">新闻</a> ·
+      <a href="../submit">投稿</a> ·
+      <a href="../news">新闻</a> ·
       联系 QQ：3051455202 / 3073701418
     </div>
   </div>
