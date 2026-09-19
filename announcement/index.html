@@ -23,10 +23,9 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;text-decoration:none}
-ul{list-style:none}
+ul,ol{list-style:none}
 .wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
-/* 页面头部 */
 .page-hero{
   position:relative;overflow:hidden;
   padding:56px 0 52px;color:#fff;
@@ -46,11 +45,9 @@ ul{list-style:none}
 .crumb a:hover{color:var(--gold-light)}
 .crumb span{margin:0 7px;opacity:.6}
 
-/* 内容区 */
 .section{padding:44px 0 64px}
 .container{max-width:820px;margin:0 auto}
 
-/* 公告卡片 */
 .notice-card{
   position:relative;
   background:var(--card);
@@ -87,9 +84,10 @@ ul{list-style:none}
   background:linear-gradient(135deg,var(--gold-light),var(--gold));
   color:var(--navy);
 }
-.notice-tag.gray{
-  background:#eef1f5;color:#5b6b7f;
-}
+.notice-tag.gray{background:#eef1f5;color:#5b6b7f}
+.notice-tag.blue{background:#e8f0fc;color:#2f6bc0}
+.notice-tag.green{background:#e7f6ee;color:#218a55}
+.notice-tag.red{background:#fdeaea;color:#c2453c}
 
 .notice-title{
   font-size:clamp(18px,2.6vw,22px);
@@ -104,8 +102,9 @@ ul{list-style:none}
 .notice-body p:last-child{margin-bottom:0}
 .notice-body strong{color:var(--navy)}
 
-/* 列表式内容 */
-.notice-body ul{margin:0 0 14px}
+/* 列表 */
+.notice-body ul,
+.notice-body ol{margin:0 0 14px}
 .notice-body ul li{
   position:relative;padding-left:18px;
   margin-bottom:7px;line-height:1.8;
@@ -115,8 +114,18 @@ ul{list-style:none}
   width:6px;height:6px;border-radius:50%;
   background:var(--gold);opacity:.75;
 }
+.notice-body ol{counter-reset: n}
+.notice-body ol li{
+  position:relative;padding-left:30px;
+  margin-bottom:8px;line-height:1.85;
+}
+.notice-body ol li::before{
+  counter-increment: n;
+  content: counter(n) ".";
+  position:absolute;left:0;top:0;
+  font-weight:800;color:var(--gold);font-size:14.5px;
+}
 
-/* 高亮信息条 */
 .hl{
   display:inline-block;
   background:#fdf1e0;color:#a8791a;
@@ -127,7 +136,6 @@ ul{list-style:none}
 .hl.green{background:#e7f6ee;color:#218a55}
 .hl.blue{background:#e8f0fc;color:#2f6bc0}
 
-/* 底部返回 */
 .back-bar{margin-top:32px;text-align:center}
 .back-btn{
   display:inline-flex;align-items:center;gap:8px;
@@ -141,7 +149,6 @@ ul{list-style:none}
   box-shadow:var(--shadow-hover);
 }
 
-/* 页脚 */
 .site-footer{
   background:var(--navy);color:#9fb3d1;
   padding:34px 0;font-size:13.5px;
@@ -162,7 +169,6 @@ ul{list-style:none}
 
 <main>
 
-  <!-- 页面头部 -->
   <section class="page-hero">
     <div class="wrap">
       <p class="crumb"><a href="../">首页</a><span>/</span>通知</p>
@@ -171,7 +177,6 @@ ul{list-style:none}
     </div>
   </section>
 
-  <!-- 公告列表 -->
   <section class="section">
     <div class="wrap">
       <div class="container">
@@ -180,12 +185,12 @@ ul{list-style:none}
         <article class="notice-card">
           <div class="notice-meta">
             <span class="notice-date"><span class="dot"></span>2026年9月19日</span>
-            <span class="notice-tag">公告</span>
+            <span class="notice-tag gray">公告</span>
           </div>
           <h2 class="notice-title">班级官网上线！</h2>
           <div class="notice-body">
             <p>经过一段时间的筹备，<strong>南京外国语学校 G202301 班级官方网站</strong>于今日正式上线！</p>
-            <p>官网设有 <strong>通知、作业、新闻、文章、名言、题集、投稿</strong> 七大板块。作业板块按日期汇总每日各科作业，点进去还能逐项勾选完成情况；名言板块收录了课堂上老师们的“金句”，按说话者分类，点击即可筛选；投稿板块面向所有在校学生开放。</p>
+            <p>官网设有 <strong>通知、作业、新闻、文章、名言、题集、资源、投稿</strong> 八大板块。作业板块按日期汇总每日各科作业，点进去还能逐项勾选完成情况；名言板块收录了课堂上老师们的“金句”，按说话者分类，点击即可筛选；投稿板块面向所有在校学生开放。</p>
             <p>网站由 <strong>G20230151</strong> 同学负责维护，欢迎常来逛逛，也期待你的投稿！</p>
           </div>
         </article>
@@ -229,6 +234,129 @@ ul{list-style:none}
           </div>
         </article>
 
+        <!-- 9.15 科技创新大赛校内初选 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月15日</span>
+            <span class="notice-tag">比赛</span>
+          </div>
+          <h2 class="notice-title">南京市第三十二届中小学师生科技创新大赛校内初选通知</h2>
+          <div class="notice-body">
+            <p>南京市第三十二届中小学师生科技创新大赛即将举办，现进行<strong>校内初选</strong>。</p>
+            <p>
+              请准备参赛的同学于 <span class="hl red">2026年9月28日中午 12:50 – 13:20</span>，
+              将相关材料提交到 <span class="hl blue">B104</span>。
+            </p>
+            <p>
+              南京市比赛通知电子文件在 QQ 群：<span class="hl">822748867</span>，
+              请参赛的同学加群下载。谢谢！
+            </p>
+          </div>
+        </article>
+
+        <!-- 9.15 中秋、国庆调课及晚自习安排 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月15日</span>
+            <span class="notice-tag blue">安排</span>
+          </div>
+          <h2 class="notice-title">中秋、国庆调课及晚自习安排通知</h2>
+          <div class="notice-body">
+            <ol>
+              <li><strong>9月20日</strong>：调休，上周二课程，晚自习正常开展。</li>
+              <li><strong>9月24日</strong>：中秋放假前一日，当晚不安排晚自习。</li>
+              <li><strong>9月25日—27日</strong>：中秋节放假。</li>
+              <li><strong>9月30日</strong>：国庆放假前一日，当晚不安排晚自习。</li>
+              <li><strong>10月1日—7日</strong>：国庆节放假。</li>
+              <li><strong>10月10日</strong>：调休，上周三课程，晚自习正常开展。</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 9.15 高一年级体质测试 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月15日</span>
+            <span class="notice-tag green">体质测试</span>
+          </div>
+          <h2 class="notice-title">高一年级体质测试通知</h2>
+          <div class="notice-body">
+            <p>高一年级体质测试预计 <strong>9 月底至 10 月初</strong>在体育课上随堂开展，具体细则详见配套文档。</p>
+            <p>请大家通知学生和家长，做好准备。</p>
+          </div>
+        </article>
+
+        <!-- 9.13 选修课系统调整 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月13日</span>
+            <span class="notice-tag red">选修课</span>
+          </div>
+          <h2 class="notice-title">选修课系统重新开放通知</h2>
+          <div class="notice-body">
+            <p>今天早上系统显示课程数额不够，目前系统暂时关闭调整，<span class="hl red">十一点钟再次开放</span>释出剩余名额。</p>
+            <p>今天早上已经抢到的课保留不会取消，如有未报上的同学请十一点钟登录系统继续报选，感谢！</p>
+          </div>
+        </article>
+
+        <!-- 9.12 选修课系统故障 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月12日</span>
+            <span class="notice-tag red">选修课</span>
+          </div>
+          <h2 class="notice-title">选修课报选系统故障及重开通知</h2>
+          <div class="notice-body">
+            <p>因为今天选修课系统故障，选修课今日暂停报选。如有个别同学今日已报选，数据将会统一清除，预计于明日重新开放报选，会提前通知报选时间，谢谢！</p>
+            <p>高一选修课报选将于明天（<strong>9月13日</strong>）<span class="hl blue">10:00—11:00</span> 重新开放。请提醒学生在该时段登录教务系统，完成本学期选修课的选课操作。</p>
+          </div>
+        </article>
+
+        <!-- 9.9 文学之星 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月9日</span>
+            <span class="notice-tag">文学</span>
+          </div>
+          <h2 class="notice-title">文学之星中学生作文大赛（2026—2027）江苏赛区比赛通知</h2>
+          <div class="notice-body">
+            <p>各位好！文学之星中学生作文大赛（2026—2027）江苏赛区比赛通知已发，请同学们阅读，<strong>自愿参加</strong>（请高中学生注意：本赛事非保送加分项）。</p>
+            <p>请在比赛截止三天前上传作文以防网络拥堵，并将电子稿交由<strong>语文课代表</strong>汇总。</p>
+            <p>命名格式：<span class="hl">年级班级学号 + 姓名 + 参赛作文标题</span></p>
+            <p>谢谢！</p>
+          </div>
+        </article>
+
+        <!-- 9.8 连老师电话 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月8日</span>
+            <span class="notice-tag gray">信息</span>
+          </div>
+          <h2 class="notice-title">连老师联系方式</h2>
+          <div class="notice-body">
+            <p>连老师电话：<span class="hl blue">13675167393</span>。</p>
+            <p>希望之星报名可能需要，请同学们留存。</p>
+          </div>
+        </article>
+
+        <!-- 9.4 室内晨会 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月4日</span>
+            <span class="notice-tag">晨会</span>
+          </div>
+          <h2 class="notice-title">下周一室内晨会及学生证提醒</h2>
+          <div class="notice-body">
+            <p>下周一<strong>室内晨会</strong>，提醒提早出门：</p>
+            <ul>
+              <li>没有执勤任务的同学请 <span class="hl red">7:20</span> 到班；</li>
+              <li>其余时间 <span class="hl blue">7:30</span> 到班。</li>
+            </ul>
+            <p>别忘了下周把<strong>贴好照片的学生证</strong>带来。</p>
+          </div>
+        </article>
+
         <div class="back-bar">
           <a class="back-btn" href="../">← 返回首页</a>
         </div>
@@ -239,7 +367,6 @@ ul{list-style:none}
 
 </main>
 
-<!-- 页脚 -->
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div>
