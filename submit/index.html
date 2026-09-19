@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>投稿 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班投稿：欢迎所有在校学生分享你的作品。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* 页面头部 */
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:1px;margin-bottom:12px}
+.page-hero .sub{color:#c3d2e6;font-size:15px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+/* 内容区 */
+.section{padding:44px 0 64px}
+.container{max-width:760px;margin:0 auto}
+
+/* 主卡片 */
+.submit-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:38px 40px 34px;
+  animation:rise .45s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.card-title{
+  display:flex;align-items:center;gap:11px;
+  font-size:20px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin-bottom:16px;
+}
+.card-title::before{
+  content:"";width:5px;height:22px;border-radius:4px;
+  background:linear-gradient(180deg,var(--gold-light),var(--gold));
+}
+
+.lead-text{
+  font-size:15.5px;color:#3f4a5a;margin-bottom:26px;line-height:1.9;
+}
+
+/* 邮箱高亮框 */
+.mail-box{
+  display:flex;align-items:center;gap:16px;
+  background:linear-gradient(135deg,#fffaf0,#fef4dd);
+  border:1px solid rgba(201,162,39,.4);
+  border-radius:14px;
+  padding:20px 24px;
+  margin-bottom:26px;
+  flex-wrap:wrap;
+}
+.mail-icon{
+  flex:0 0 52px;height:52px;border-radius:14px;
+  display:grid;place-items:center;font-size:25px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 8px 20px rgba(201,162,39,.32);
+}
+.mail-info{min-width:0;flex:1}
+.mail-label{
+  font-size:12.5px;color:#a8791a;letter-spacing:1.5px;
+  font-weight:600;margin-bottom:4px;
+}
+.mail-addr{
+  font-size:clamp(17px,2.4vw,21px);
+  font-weight:800;color:var(--navy);letter-spacing:.4px;
+  word-break:break-all;font-family:Consolas,Menlo,monospace;
+}
+.mail-addr:hover{color:var(--gold)}
+.copy-btn{
+  flex:0 0 auto;
+  border:none;cursor:pointer;font-family:inherit;
+  font-size:13.5px;font-weight:700;
+  padding:10px 20px;border-radius:999px;
+  color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 8px 20px rgba(201,162,39,.3);
+  transition:all .24s ease;
+}
+.copy-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(201,162,39,.42)}
+
+/* 提示条 */
+.notice{
+  display:flex;align-items:flex-start;gap:11px;
+  background:#eef3fb;
+  border-left:4px solid #2f6bc0;
+  border-radius:10px;
+  padding:14px 18px;
+  font-size:14px;color:#3b4a61;
+  margin-bottom:30px;
+  line-height:1.75;
+}
+.notice .n-icon{flex:0 0 auto;font-size:16px;line-height:1.6}
+
+/* 投稿要求 */
+.req-title{
+  font-size:15px;font-weight:700;color:var(--navy);
+  letter-spacing:.5px;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.req-title::before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18);
+}
+.req-list{display:flex;flex-direction:column;gap:11px}
+.req-item{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14.5px;color:#4b5563;line-height:1.75;
+}
+.req-item .num{
+  flex:0 0 24px;height:24px;border-radius:8px;
+  display:grid;place-items:center;
+  font-size:12.5px;font-weight:800;
+  background:#eef3fb;color:#2f6bc0;
+  margin-top:1px;
+}
+
+/* 页脚 */
+.site-footer{
+  background:var(--navy);color:#9fb3d1;
+  padding:34px 0;font-size:13.5px;
+}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+/* 响应式 */
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:30px 0 48px}
+  .submit-card{padding:26px 20px 24px}
+  .mail-box{padding:16px 18px;gap:12px}
+  .mail-icon{flex:0 0 44px;height:44px;font-size:21px}
+  .copy-btn{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- 页面头部 -->
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="../">首页</a><span>/</span>投稿</p>
+      <h1>投稿</h1>
+      <p class="sub">欢迎所有在校学生投稿，把你写的文章、随笔、题解或摄影作品分享给大家。</p>
+    </div>
+  </section>
+
+  <!-- 投稿说明 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="container">
+
+        <div class="submit-card">
+
+          <h2 class="card-title">投稿方式</h2>
+
+          <p class="lead-text">
+            本班官网接受各类投稿，<strong>不限本班同学，欢迎所有在校学生投稿</strong>。
+            由于网站暂未开放在线提交功能，请将你的稿件通过邮件发送至下方邮箱，
+            我们会择优发布在对应板块中。
+          </p>
+
+          <!-- 邮箱 -->
+          <div class="mail-box">
+            <span class="mail-icon">✉️</span>
+            <div class="mail-info">
+              <div class="mail-label">投稿邮箱</div>
+              <a class="mail-addr" id="mailAddr" href="mailto:3051455202@qq.com">3051455202@qq.com</a>
+            </div>
+            <button class="copy-btn" id="copyBtn">复制邮箱</button>
+          </div>
+
+          <!-- 提示 -->
+          <div class="notice">
+            <span class="n-icon">⏳</span>
+            <span>邮箱会<strong>不定期查看</strong>，收到后我们会尽快处理，请耐心等待，无需重复发送。</span>
+          </div>
+
+          <!-- 投稿须知 -->
+          <div class="req-title">投稿须知</div>
+          <div class="req-list">
+            <div class="req-item">
+              <span class="num">1</span>
+              <span>邮件标题请写明<strong>投稿板块和标题</strong>，例如「投稿 · 文章 ·《秋天的南外》」。</span>
+            </div>
+            <div class="req-item">
+              <span class="num">2</span>
+              <span>稿件正文请使用<strong>纯文本</strong>，图片请以<strong>附件</strong>形式发送，不要直接贴在正文里。</span>
+            </div>
+            <div class="req-item">
+              <span class="num">3</span>
+              <span>请在邮件中写明<strong>投稿人身份</strong>（姓名 / 学校 / 班级），方便我们署名与联系。</span>
+            </div>
+            <div class="req-item">
+              <span class="num">4</span>
+              <span>请确保内容为本人原创，转载需注明出处。</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 页脚 -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 复制邮箱
+  const copyBtn = document.getElementById('copyBtn');
+  const mailAddr = document.getElementById('mailAddr');
+
+  copyBtn.addEventListener('click', () => {
+    const text = mailAddr.textContent.trim();
+    const done = () => {
+      copyBtn.textContent = '已复制 ✓';
+      setTimeout(() => copyBtn.textContent = '复制邮箱', 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
+    function fallback(){
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  });
+
+  // 地址栏不显示 index.html
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
+</script>
+
+</body>
+</html>

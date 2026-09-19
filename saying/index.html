@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>名言 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班课堂名言录。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* 头部 */
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:1px;margin-bottom:12px}
+.page-hero .sub{color:#c3d2e6;font-size:15px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+/* 内容区 */
+.section{padding:40px 0 64px}
+
+/* 分类筛选 */
+.filters{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;
+}
+.filter-btn{
+  border:1px solid var(--line);background:#fff;color:var(--muted);
+  font-size:13.5px;font-weight:600;padding:8px 16px;border-radius:999px;
+  cursor:pointer;font-family:inherit;transition:all .22s ease;
+  display:flex;align-items:center;gap:7px;
+}
+.filter-btn .dot{
+  width:8px;height:8px;border-radius:50%;background:var(--c,#94a3b8);
+  transition:all .22s ease;
+}
+.filter-btn:hover{border-color:var(--c,#c9a227);color:var(--navy)}
+.filter-btn.active{
+  color:#fff;border-color:transparent;
+  background:var(--c,#c9a227);
+  box-shadow:0 6px 16px rgba(15,37,71,.18);
+}
+.filter-btn.active .dot{background:rgba(255,255,255,.9)}
+.filter-btn[data-filter="all"]{--c:#0f2547}
+.filter-btn[data-filter="语文-韦"]{--c:#c2453c}
+.filter-btn[data-filter="数学-唐"]{--c:#2f6bc0}
+.filter-btn[data-filter="英语A-柴"]{--c:#218a55}
+.filter-btn[data-filter="英语B-连"]{--c:#0f8a8a}
+.filter-btn[data-filter="物理-叶"]{--c:#6b4bc0}
+.filter-btn[data-filter="化学-孙"]{--c:#c4761a}
+.filter-btn[data-filter="生物-马"]{--c:#b04a9b}
+.filter-btn[data-filter="地理-王"]{--c:#7a9b2a}
+.filter-btn[data-filter="政治-周"]{--c:#4b5fa8}
+.filter-btn[data-filter="历史-周"]{--c:#8a6a3a}
+.filter-btn[data-filter="其他"]{--c:#64748b}
+
+/* 统计条 */
+.bar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;margin-bottom:18px;
+}
+.bar .now{
+  font-size:16px;font-weight:700;color:var(--navy);letter-spacing:.5px;
+  display:flex;align-items:center;gap:9px;
+}
+.bar .now::before{
+  content:"";width:9px;height:9px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18);
+}
+.bar .num{font-size:13.5px;color:var(--muted)}
+.bar .num b{color:var(--navy)}
+
+/* 名言网格 */
+.sayings{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;
+}
+.saying{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-left:5px solid var(--c,#94a3b8);
+  border-radius:14px;
+  padding:22px 24px 18px;
+  box-shadow:var(--shadow);
+  transition:transform .26s ease, box-shadow .26s ease;
+  animation:rise .4s ease both;
+}
+.saying:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.saying .quote-mark{
+  position:absolute;top:6px;right:18px;
+  font-size:64px;line-height:1;color:rgba(15,37,71,.05);
+  font-family:Georgia,serif;pointer-events:none;
+}
+.saying-text{
+  font-size:15.5px;line-height:1.8;color:#2c3644;
+  letter-spacing:.3px;margin-bottom:14px;position:relative;
+}
+.saying-by{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:700;letter-spacing:.5px;
+  color:var(--c,#64748b);
+  padding:3px 11px;border-radius:7px;
+  background:color-mix(in srgb, var(--c,#64748b) 10%, transparent);
+}
+.saying-by::before{content:"—— "}
+
+/* 各分类配色 */
+.saying[data-by="语文-韦"]{--c:#c2453c}
+.saying[data-by="数学-唐"]{--c:#2f6bc0}
+.saying[data-by="英语A-柴"]{--c:#218a55}
+.saying[data-by="英语B-连"]{--c:#0f8a8a}
+.saying[data-by="物理-叶"]{--c:#6b4bc0}
+.saying[data-by="化学-孙"]{--c:#c4761a}
+.saying[data-by="生物-马"]{--c:#b04a9b}
+.saying[data-by="地理-王"]{--c:#7a9b2a}
+.saying[data-by="政治-周"]{--c:#4b5fa8}
+.saying[data-by="历史-周"]{--c:#8a6a3a}
+.saying[data-by="其他"]{--c:#64748b}
+
+/* 空状态 */
+.empty{
+  display:none;text-align:center;padding:70px 30px;
+  background:var(--card);border:1px dashed var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.empty .big{font-size:48px;display:block;margin-bottom:16px;opacity:.6}
+.empty h2{font-size:18px;color:var(--navy);letter-spacing:1px;margin-bottom:8px}
+.empty p{font-size:14px;color:var(--muted)}
+
+/* 页脚 */
+.site-footer{
+  background:var(--navy);color:#9fb3d1;
+  padding:34px 0;font-size:13.5px;
+}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:30px 0 48px}
+  .sayings{grid-template-columns:1fr}
+  .saying{padding:18px 20px 16px}
+  .saying-text{font-size:14.5px}
+  .filters{gap:6px}
+  .filter-btn{padding:7px 13px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- 页面头部 -->
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="../">首页</a><span>/</span>名言</p>
+      <h1>名言</h1>
+      <p class="sub">课堂上的金句合集，点击说话者分类即可查看。</p>
+    </div>
+  </section>
+
+  <!-- 名言列表 -->
+  <section class="section">
+    <div class="wrap">
+
+      <!-- 分类筛选 -->
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all"><span class="dot"></span>全部</button>
+        <button class="filter-btn" data-filter="语文-韦"><span class="dot"></span>语文-韦</button>
+        <button class="filter-btn" data-filter="数学-唐"><span class="dot"></span>数学-唐</button>
+        <button class="filter-btn" data-filter="英语A-柴"><span class="dot"></span>英语A-柴</button>
+        <button class="filter-btn" data-filter="英语B-连"><span class="dot"></span>英语B-连</button>
+        <button class="filter-btn" data-filter="物理-叶"><span class="dot"></span>物理-叶</button>
+        <button class="filter-btn" data-filter="化学-孙"><span class="dot"></span>化学-孙</button>
+        <button class="filter-btn" data-filter="生物-马"><span class="dot"></span>生物-马</button>
+        <button class="filter-btn" data-filter="地理-王"><span class="dot"></span>地理-王</button>
+        <button class="filter-btn" data-filter="政治-周"><span class="dot"></span>政治-周</button>
+        <button class="filter-btn" data-filter="历史-周"><span class="dot"></span>历史-周</button>
+        <button class="filter-btn" data-filter="其他"><span class="dot"></span>其他</button>
+      </div>
+
+      <!-- 统计 -->
+      <div class="bar">
+        <div class="now" id="nowTitle">全部名言</div>
+        <div class="num">共 <b id="sayCount">34</b> 条</div>
+      </div>
+
+      <!-- 名言网格 -->
+      <div class="sayings" id="sayings">
+
+        <!-- 语文-韦 -->
+        <div class="saying" data-by="语文-韦">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">我感觉很放松，因为没有人听课。</div>
+          <div class="saying-by">语文-韦</div>
+        </div>
+        <div class="saying" data-by="语文-韦">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">我是附中的，附中有个很好的语文组。</div>
+          <div class="saying-by">语文-韦</div>
+        </div>
+        <div class="saying" data-by="语文-韦">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">古人已经死掉了，没法活过来搞我们……喵喵喵……君子是聪明的好蛋。</div>
+          <div class="saying-by">语文-韦</div>
+        </div>
+        <div class="saying" data-by="语文-韦">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">Biang Biang Biang.</div>
+          <div class="saying-by">语文-韦</div>
+        </div>
+        <div class="saying" data-by="语文-韦">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">神金。</div>
+          <div class="saying-by">语文-韦</div>
+        </div>
+        <div class="saying" data-by="语文-韦">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">我的********全是豆包写的。</div>
+          <div class="saying-by">语文-韦</div>
+        </div>
+        <div class="saying" data-by="语文-韦">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">翻墙就很烦。</div>
+          <div class="saying-by">语文-韦</div>
+        </div>
+
+        <!-- 数学-唐 -->
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">仰之弥高，钻之弥坚。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">若 A⊆B，且 B⊇A，则 A=B.</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">我的手表提醒我锻炼是否结束了。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">B化铜。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">这句话太丢人了，不要打到上面去。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">这什么垃圾题啊。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">我也不想批作业。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">**降（酱）……你废了。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">周五是周五的作业，周末是周末的作业。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">这个 f 就像我们班某些人做的广播操。</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+        <div class="saying" data-by="数学-唐">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">你的数学是体育老师教的吗？</div>
+          <div class="saying-by">数学-唐</div>
+        </div>
+
+        <!-- 物理-叶 -->
+        <div class="saying" data-by="物理-叶">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">数学老师没一个吱声…导数可简单了。</div>
+          <div class="saying-by">物理-叶</div>
+        </div>
+
+        <!-- 化学-孙 -->
+        <div class="saying" data-by="化学-孙">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">这种物质我没见过。</div>
+          <div class="saying-by">化学-孙</div>
+        </div>
+        <div class="saying" data-by="化学-孙">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">弱电解质不是弱智。</div>
+          <div class="saying-by">化学-孙</div>
+        </div>
+
+        <!-- 生物-马 -->
+        <div class="saying" data-by="生物-马">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">人体口腔上皮细胞富含叶绿体。</div>
+          <div class="saying-by">生物-马</div>
+        </div>
+        <div class="saying" data-by="生物-马">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">既然孙老师都不知道，那我也不知道。</div>
+          <div class="saying-by">生物-马</div>
+        </div>
+        <div class="saying" data-by="生物-马">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">一班的孩子们无论说什么都是对的。</div>
+          <div class="saying-by">生物-马</div>
+        </div>
+        <div class="saying" data-by="生物-马">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">细胞里含有……氢氧化氢。</div>
+          <div class="saying-by">生物-马</div>
+        </div>
+        <div class="saying" data-by="生物-马">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">我是看着他长大的。</div>
+          <div class="saying-by">生物-马</div>
+        </div>
+        <div class="saying" data-by="生物-马">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">碳碳碳碳碳碳碳碳碳碳碳碳碳……链。</div>
+          <div class="saying-by">生物-马</div>
+        </div>
+        <div class="saying" data-by="生物-马">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">香蕉没有脑子。</div>
+          <div class="saying-by">生物-马</div>
+        </div>
+
+        <!-- 政治-周 -->
+        <div class="saying" data-by="政治-周">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">你好可爱啊。</div>
+          <div class="saying-by">政治-周</div>
+        </div>
+        <div class="saying" data-by="政治-周">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">都喝了溴水啊？</div>
+          <div class="saying-by">政治-周</div>
+        </div>
+        <div class="saying" data-by="政治-周">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">司马光有缸。</div>
+          <div class="saying-by">政治-周</div>
+        </div>
+
+        <!-- 历史-周 -->
+        <div class="saying" data-by="历史-周">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">父亲是流动的，父亲是未知的。</div>
+          <div class="saying-by">历史-周</div>
+        </div>
+        <div class="saying" data-by="历史-周">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">不要敲击饭卡，有点原始人的特征。</div>
+          <div class="saying-by">历史-周</div>
+        </div>
+
+        <!-- 其他 -->
+        <div class="saying" data-by="其他">
+          <span class="quote-mark">”</span>
+          <div class="saying-text">你万万不可自己决定任何事情。</div>
+          <div class="saying-by">A班众人</div>
+        </div>
+
+      </div>
+
+      <!-- 空状态 -->
+      <div class="empty" id="empty">
+        <span class="big">💬</span>
+        <h2>暂无收录</h2>
+        <p>该分类下暂时还没有名言，欢迎投稿补充。</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- 页脚 -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 分类筛选
+  const btns = document.querySelectorAll('.filter-btn');
+  const sayings = document.querySelectorAll('.saying');
+  const empty = document.getElementById('empty');
+  const countEl = document.getElementById('sayCount');
+  const titleEl = document.getElementById('nowTitle');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const f = btn.dataset.filter;
+      let shown = 0;
+
+      sayings.forEach(s => {
+        const match = (f === 'all' || s.dataset.by === f);
+        s.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+
+      countEl.textContent = shown;
+      titleEl.textContent = (f === 'all') ? '全部名言' : f + ' 的名言';
+      empty.style.display = shown === 0 ? 'block' : 'none';
+    });
+  });
+
+  // 地址栏不显示 index.html
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
+</script>
+
+</body>
+</html>
