@@ -26,7 +26,6 @@ a{color:inherit;text-decoration:none}
 ul{list-style:none}
 .wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
-/* 顶部导航 */
 .site-header{
   position:sticky;top:0;z-index:100;
   background:rgba(15,37,71,.97);backdrop-filter:blur(12px);
@@ -57,7 +56,6 @@ ul{list-style:none}
   box-shadow:0 6px 16px rgba(201,162,39,.35);
 }
 
-/* Hero */
 .hero{
   position:relative;overflow:hidden;
   padding:86px 0 90px;color:#fff;
@@ -91,7 +89,6 @@ ul{list-style:none}
 .btn-ghost{color:#fff;border:1.5px solid rgba(255,255,255,.45)}
 .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;transform:translateY(-3px)}
 
-/* 卡片 */
 .section{padding:64px 0}
 .grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
@@ -115,7 +112,6 @@ ul{list-style:none}
 .nav-card h3{font-size:18px;margin-bottom:8px;letter-spacing:.5px}
 .nav-card p{font-size:14px;color:var(--muted)}
 
-/* 名言 */
 .quote-card{
   position:relative;
   background:linear-gradient(135deg,#ffffff,#f7faff);
@@ -134,7 +130,6 @@ ul{list-style:none}
 }
 .quote-card cite{font-size:13.5px;color:var(--muted);font-style:normal;letter-spacing:2px}
 
-/* 页脚 */
 .site-footer{
   background:var(--navy);color:#9fb3d1;
   padding:34px 0;margin-top:20px;font-size:13.5px;
@@ -246,6 +241,13 @@ ul{list-style:none}
     </div>
   </div>
 </footer>
+
+<script>
+  // 让地址栏不显示 index.html
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
+</script>
 
 </body>
 </html>
