@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>通知 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班通知公告。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* 页面头部 */
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:1px;margin-bottom:12px}
+.page-hero .sub{color:#c3d2e6;font-size:15px;max-width:660px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+/* 内容区 */
+.section{padding:44px 0 64px}
+.container{max-width:820px;margin:0 auto}
+
+/* 公告卡片 */
+.notice-card{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:30px 34px 28px;
+  margin-bottom:20px;
+  border-left:5px solid var(--gold);
+  transition:transform .26s ease, box-shadow .26s ease;
+  animation:rise .45s ease both;
+}
+.notice-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.notice-meta{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.notice-date{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+  color:var(--navy);
+  background:linear-gradient(135deg,#eef3fb,#dde7f6);
+  padding:5px 13px;border-radius:999px;
+}
+.notice-date .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,162,39,.2);
+}
+.notice-tag{
+  font-size:12px;font-weight:700;letter-spacing:.5px;
+  padding:3px 12px;border-radius:999px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  color:var(--navy);
+}
+.notice-tag.gray{
+  background:#eef1f5;color:#5b6b7f;
+}
+
+.notice-title{
+  font-size:clamp(18px,2.6vw,22px);
+  line-height:1.45;letter-spacing:.5px;color:var(--navy);
+  margin-bottom:16px;
+  padding-bottom:14px;
+  border-bottom:1px dashed var(--line);
+}
+
+.notice-body{font-size:15.5px;color:#3f4a5a;line-height:1.95}
+.notice-body p{margin-bottom:14px}
+.notice-body p:last-child{margin-bottom:0}
+.notice-body strong{color:var(--navy)}
+
+/* 列表式内容 */
+.notice-body ul{margin:0 0 14px}
+.notice-body ul li{
+  position:relative;padding-left:18px;
+  margin-bottom:7px;line-height:1.8;
+}
+.notice-body ul li::before{
+  content:"";position:absolute;left:2px;top:.72em;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);opacity:.75;
+}
+
+/* 高亮信息条 */
+.hl{
+  display:inline-block;
+  background:#fdf1e0;color:#a8791a;
+  font-weight:700;padding:1px 8px;border-radius:5px;
+  font-size:14.5px;
+}
+.hl.red{background:#fdeaea;color:#c2453c}
+.hl.green{background:#e7f6ee;color:#218a55}
+.hl.blue{background:#e8f0fc;color:#2f6bc0}
+
+/* 底部返回 */
+.back-bar{margin-top:32px;text-align:center}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:10px 24px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* 页脚 */
+.site-footer{
+  background:var(--navy);color:#9fb3d1;
+  padding:34px 0;font-size:13.5px;
+}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:30px 0 48px}
+  .notice-card{padding:24px 20px 22px}
+  .notice-body{font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- 页面头部 -->
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="../">首页</a><span>/</span>通知</p>
+      <h1>通知</h1>
+      <p class="sub">班级通知与重要公告，请及时查看。</p>
+    </div>
+  </section>
+
+  <!-- 公告列表 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="container">
+
+        <!-- 9.19 网站上线 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月19日</span>
+            <span class="notice-tag">公告</span>
+          </div>
+          <h2 class="notice-title">班级官网上线！</h2>
+          <div class="notice-body">
+            <p>经过一段时间的筹备，<strong>南京外国语学校 G202301 班级官方网站</strong>于今日正式上线！</p>
+            <p>官网设有 <strong>通知、作业、新闻、文章、名言、题集、投稿</strong> 七大板块。作业板块按日期汇总每日各科作业，点进去还能逐项勾选完成情况；名言板块收录了课堂上老师们的“金句”，按说话者分类，点击即可筛选；投稿板块面向所有在校学生开放。</p>
+            <p>网站由 <strong>G20230151</strong> 同学负责维护，欢迎常来逛逛，也期待你的投稿！</p>
+          </div>
+        </article>
+
+        <!-- 9.18 运动会报名 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月18日</span>
+            <span class="notice-tag">体育</span>
+          </div>
+          <h2 class="notice-title">运动会项目报名</h2>
+          <div class="notice-body">
+            <p>想报名运动会项目的同学，请找<strong>两位体育委员</strong>报名。</p>
+            <p><strong>项目：</strong></p>
+            <ul>
+              <li>100 米、200 米、400 米、800 米（女）、1500 米（男）</li>
+              <li>4×100 米、实心球、跳高、立定三级跳、3 分钟跳绳</li>
+            </ul>
+            <p>
+              <span class="hl red">男子实心球已报满</span>
+              <span class="hl">男子 200、400 只剩一个名额</span>
+            </p>
+            <p>径赛项目需要提升的可以找男体育委员，<strong>不限男女，不收费</strong>。</p>
+          </div>
+        </article>
+
+        <!-- 9.18 小朱说校园招新 -->
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="notice-date"><span class="dot"></span>2026年9月18日</span>
+            <span class="notice-tag">招新</span>
+          </div>
+          <h2 class="notice-title">《小朱说校园》栏目组招新</h2>
+          <div class="notice-body">
+            <p>《小朱说校园》栏目组现面向全校招新。</p>
+            <p>
+              <strong>时间：</strong>9 月 14 日至 28 日，每天下午 5:00 – 6:00<br>
+              <strong>地点：</strong><span class="hl blue">C001</span>
+            </p>
+            <p>有意向者可前往参与，欢迎加入！</p>
+          </div>
+        </article>
+
+        <div class="back-bar">
+          <a class="back-btn" href="../">← 返回首页</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 页脚 -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
+</script>
+
+</body>
+</html>
