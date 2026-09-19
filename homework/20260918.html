@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026年9月18日 作业 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 2026年9月18日各科作业。">
+<style>
+/* ============ 基础 ============ */
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* ============ 页面头部 ============ */
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(26px,4.2vw,38px);letter-spacing:1px;margin-bottom:0}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+/* ============ 内容区 ============ */
+.section{padding:40px 0 64px}
+
+.back-bar{margin-bottom:22px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ============ 科目卡片 ============ */
+.subjects{display:flex;flex-direction:column;gap:16px}
+
+.subject-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  transition:transform .26s ease, box-shadow .26s ease;
+  animation:rise .45s ease both;
+}
+.subject-card:hover{box-shadow:var(--shadow-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.subject-head{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 22px;
+  border-bottom:1px solid var(--line);
+  border-left:5px solid var(--c,#94a3b8);
+  background:linear-gradient(90deg,var(--cbg,#f7f9fc),#ffffff 70%);
+}
+.subject-name{
+  font-size:16px;font-weight:700;letter-spacing:1px;color:var(--c,#475569);
+}
+.subject-count{
+  margin-left:auto;font-size:12.5px;color:var(--muted);
+}
+
+/* 各科配色 */
+.subject-card[data-subject="chinese"]  {--c:#c2453c;--cbg:#fdeeee}
+.subject-card[data-subject="math"]     {--c:#2f6bc0;--cbg:#eaf1fc}
+.subject-card[data-subject="english"]  {--c:#218a55;--cbg:#e9f7ef}
+.subject-card[data-subject="physics"]  {--c:#6b4bc0;--cbg:#f0ecfc}
+.subject-card[data-subject="chemistry"]{--c:#c4761a;--cbg:#fdf3e4}
+.subject-card[data-subject="biology"]  {--c:#0f8a8a;--cbg:#e6f6f6}
+.subject-card[data-subject="politics"] {--c:#4b5fa8;--cbg:#edf0fa}
+.subject-card[data-subject="history"]  {--c:#8a6a3a;--cbg:#f7f1e8}
+
+/* ============ 作业条目 ============ */
+.task-list{padding:6px 0}
+.task{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 22px;
+  border-bottom:1px dashed var(--line);
+  transition:background .2s ease;
+}
+.task:last-child{border-bottom:none}
+.task:hover{background:#fafbfe}
+
+/* 勾选按钮 */
+.tick{
+  flex:0 0 26px;height:26px;margin-top:1px;
+  border:2px solid #cbd5e1;border-radius:8px;
+  background:#fff;cursor:pointer;
+  display:grid;place-items:center;
+  font-size:15px;font-weight:800;line-height:1;
+  color:#c3cbd8;font-family:inherit;
+  transition:all .22s ease;
+}
+.tick:hover{border-color:var(--gold);color:var(--gold)}
+.tick::before{content:"×"}
+
+.task.done .tick{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  border-color:transparent;color:var(--navy);
+}
+.task.done .tick::before{content:"✓"}
+
+.task-text{
+  font-size:15px;line-height:1.6;letter-spacing:.2px;
+  transition:all .22s ease;
+}
+.task-text .no{
+  color:var(--muted);font-weight:600;margin-right:6px;font-size:14px;
+}
+.task.done .task-text{
+  color:#a8b0bd;text-decoration:line-through;
+}
+
+/* ============ 页脚 ============ */
+.site-footer{
+  background:var(--navy);color:#9fb3d1;
+  padding:34px 0;font-size:13.5px;
+}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+/* ============ 响应式 ============ */
+@media (max-width:640px){
+  .page-hero{padding:40px 0 36px}
+  .section{padding:28px 0 46px}
+  .subject-head{padding:13px 16px}
+  .task{padding:13px 16px;gap:11px}
+  .task-text{font-size:14.5px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- ===== 页面头部 ===== -->
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../index.html">首页</a><span>/</span>
+        <a href="../index.html">作业</a><span>/</span>2026年9月18日
+      </p>
+      <h1>2026年9月18日 作业</h1>
+    </div>
+  </section>
+
+  <!-- ===== 各科作业 ===== -->
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../index.html">← 返回作业列表</a>
+      </div>
+
+      <div class="subjects">
+
+        <!-- 语文 -->
+        <article class="subject-card" data-subject="chinese">
+          <div class="subject-head">
+            <span class="subject-name">语文</span>
+            <span class="subject-count">1 项</span>
+          </div>
+          <ul class="task-list">
+            <li class="task">
+              <button class="tick" aria-label="标记完成"></button>
+              <span class="task-text"><span class="no">1.</span>《师说》背诵。五三。</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 数学 -->
+        <article class="subject-card" data-subject="math">
+          <div class="subject-head">
+            <span class="subject-name">数学</span>
+            <span class="subject-count">1 项</span>
+          </div>
+          <ul class="task-list">
+            <li class="task">
+              <button class="tick" aria-label="标记完成"></button>
+              <span class="task-text"><span class="no">1.</span>南外作业本　从 y=ax<sup>2</sup>+bx+c (a≠0) 看 ax<sup>2</sup>+bx+c (a≠0)=0。</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 英语A -->
+        <article class="subject-card" data-subject="english">
+          <div class="subject-head">
+            <span class="subject-name">英语A</span>
+            <span class="subject-count">1 项</span>
+          </div>
+          <ul class="task-list">
+            <li class="task">
+              <button class="tick" aria-label="标记完成"></button>
+              <span class="task-text"><span class="no">1.</span>听力；背书。</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 物理 -->
+        <article class="subject-card" data-subject="physics">
+          <div class="subject-head">
+            <span class="subject-name">物理</span>
+            <span class="subject-count">1 项</span>
+          </div>
+          <ul class="task-list">
+            <li class="task">
+              <button class="tick" aria-label="标记完成"></button>
+              <span class="task-text"><span class="no">1.</span>南作 p36–p38。</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 化学 -->
+        <article class="subject-card" data-subject="chemistry">
+          <div class="subject-head">
+            <span class="subject-name">化学</span>
+            <span class="subject-count">1 项</span>
+          </div>
+          <ul class="task-list">
+            <li class="task">
+              <button class="tick" aria-label="标记完成"></button>
+              <span class="task-text"><span class="no">1.</span>南外作业本　Na 的化合物。</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 生物 -->
+        <article class="subject-card" data-subject="biology">
+          <div class="subject-head">
+            <span class="subject-name">生物</span>
+            <span class="subject-count">1 项</span>
+          </div>
+          <ul class="task-list">
+            <li class="task">
+              <button class="tick" aria-label="标记完成"></button>
+              <span class="task-text"><span class="no">1.</span>南外作业本　蛋白质（1）只做选择。</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 政治 -->
+        <article class="subject-card" data-subject="politics">
+          <div class="subject-head">
+            <span class="subject-name">政治</span>
+            <span class="subject-count">1 项</span>
+          </div>
+          <ul class="task-list">
+            <li class="task">
+              <button class="tick" aria-label="标记完成"></button>
+              <span class="task-text"><span class="no">1.</span>第二课第二框。</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 历史 -->
+        <article class="subject-card" data-subject="history">
+          <div class="subject-head">
+            <span class="subject-name">历史</span>
+            <span class="subject-count">1 项</span>
+          </div>
+          <ul class="task-list">
+            <li class="task">
+              <button class="tick" aria-label="标记完成"></button>
+              <span class="task-text"><span class="no">1.</span>课堂本　第二课。</span>
+            </li>
+          </ul>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== 页脚 ===== -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../submit/index.html">投稿</a> ·
+      <a href="../../news/index.html">新闻</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<!-- ===== 勾选交互 ===== -->
+<script>
+  document.querySelectorAll('.tick').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.task').classList.toggle('done');
+    });
+  });
+</script>
+
+</body>
+</html>
