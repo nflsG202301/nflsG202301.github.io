@@ -152,7 +152,7 @@ ul{list-style:none}
 
       <div class="list-head">
         <h2>作业记录</h2>
-        <div class="count">共 <b>1</b> 天</div>
+        <div class="count">共 <b>4</b> 天</div>
       </div>
 
       <div class="day-list">
@@ -168,6 +168,42 @@ ul{list-style:none}
               2026年9月18日 作业
               <span class="badge-new">最新</span>
             </div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
+
+        <a class="day-card" href="20260917">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月17日</span>
+            <span class="w">周四</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月17日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
+
+        <a class="day-card" href="20260916">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月16日</span>
+            <span class="w">周三</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月16日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
+
+        <a class="day-card" href="20260915">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月15日</span>
+            <span class="w">周二</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月15日 作业</div>
           </div>
           <span class="day-arrow">→</span>
         </a>
@@ -194,6 +230,12 @@ ul{list-style:none}
     </div>
   </div>
 </footer>
+
+<script>
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
+</script>
 
 </body>
 </html>
