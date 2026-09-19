@@ -78,11 +78,13 @@ ul{list-style:none}
 }
 .hero h1{font-size:clamp(30px,5vw,46px);line-height:1.25;letter-spacing:1px;margin-bottom:16px}
 .hero .lead{font-size:clamp(15px,1.6vw,17px);color:#c3d2e6;max-width:680px;margin-bottom:34px}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .btn{
-  display:inline-block;padding:13px 28px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border-radius:999px;
   font-size:15px;font-weight:600;transition:all .25s ease;cursor:pointer;
 }
+.btn .bi{font-size:15px;line-height:1}
 .btn-primary{
   background:linear-gradient(135deg,var(--gold-light),var(--gold));
   color:var(--navy);box-shadow:0 10px 26px rgba(201,162,39,.35);
@@ -91,8 +93,115 @@ ul{list-style:none}
 .btn-ghost{color:#fff;border:1.5px solid rgba(255,255,255,.45)}
 .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;transform:translateY(-3px)}
 
-/* 卡片 */
+/* 投稿按钮：金色描边 + 淡淡金底，区别于前两个 */
+.btn-submit{
+  color:var(--gold-light);
+  border:1.5px solid rgba(201,162,39,.65);
+  background:rgba(201,162,39,.12);
+}
+.btn-submit:hover{
+  background:rgba(201,162,39,.22);
+  border-color:var(--gold-light);
+  color:#fff;
+  transform:translateY(-3px);
+}
+
+/* 通用区块 */
 .section{padding:64px 0}
+
+/* 倒计时 + 软件入口 */
+.feature-row{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:20px;
+}
+
+/* 高考倒计时 */
+.countdown{
+  position:relative;overflow:hidden;
+  border-radius:var(--radius);
+  padding:34px 36px 30px;
+  color:#fff;
+  background:
+    radial-gradient(620px 260px at 88% 0%, rgba(201,162,39,.30), transparent 62%),
+    linear-gradient(150deg,#0f2547,#1b3a63 65%,#14304f);
+  box-shadow:var(--shadow-hover);
+  animation:rise .45s ease both;
+}
+.countdown::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size:22px 22px;opacity:.5;
+}
+.cd-label{
+  position:relative;
+  font-size:13px;letter-spacing:5px;color:var(--gold-light);
+  margin-bottom:12px;font-weight:600;
+}
+.cd-main{
+  display:flex;align-items:baseline;gap:10px;
+  font-weight:800;line-height:1;
+  margin-bottom:14px;position:relative;
+}
+.cd-main #cdDays{
+  font-size:clamp(48px,9vw,74px);
+  color:#ff4d4f;
+  letter-spacing:1px;
+  font-variant-numeric:tabular-nums;
+  text-shadow:0 8px 26px rgba(255,77,79,.35);
+}
+.cd-unit{font-size:19px;color:#c3d2e6;font-weight:700;letter-spacing:1px}
+.cd-sub{
+  position:relative;
+  font-size:15px;color:#cfd9e8;letter-spacing:2.5px;
+  font-variant-numeric:tabular-nums;
+  margin-bottom:18px;
+}
+.cd-date{
+  position:relative;
+  display:inline-block;
+  font-size:12.5px;color:#a9bcd8;letter-spacing:1px;
+  padding:4px 13px;
+  border:1px solid rgba(255,255,255,.18);border-radius:999px;
+}
+
+/* 作业软件预览卡片 */
+.soft-card{
+  display:flex;align-items:center;gap:16px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px 24px;
+  box-shadow:var(--shadow);
+  transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  animation:rise .45s ease both;
+  animation-delay:.06s;
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.soft-card:hover{
+  transform:translateY(-7px);
+  box-shadow:var(--shadow-hover);
+  border-color:rgba(201,162,39,.65);
+}
+.soft-icon{
+  flex:0 0 56px;height:56px;border-radius:16px;
+  display:grid;place-items:center;font-size:26px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 8px 20px rgba(201,162,39,.32);
+}
+.soft-body{flex:1;min-width:0}
+.soft-title{
+  font-size:17px;font-weight:700;color:var(--navy);
+  letter-spacing:.3px;margin-bottom:6px;
+}
+.soft-desc{font-size:13.5px;color:var(--muted)}
+.soft-arrow{
+  flex:0 0 auto;font-size:20px;color:#c3cbd8;
+  transition:all .26s ease;
+}
+.soft-card:hover .soft-arrow{color:var(--gold);transform:translateX(5px)}
+
+/* 卡片网格 */
 .grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
 }
@@ -146,6 +255,7 @@ ul{list-style:none}
 @media (max-width:880px){
   .hero{padding:64px 0 68px}
   .quote-card{padding:36px 24px 30px}
+  .feature-row{grid-template-columns:1fr}
 }
 @media (max-width:640px){
   .header-inner{justify-content:center}
@@ -157,6 +267,10 @@ ul{list-style:none}
   .nav-card .icon{width:44px;height:44px;font-size:21px}
   .nav-card h3{font-size:16px}
   .nav-card p{font-size:13px}
+  .countdown{padding:26px 22px 24px}
+  .soft-card{padding:20px 18px}
+  .hero-actions{gap:10px}
+  .btn{padding:11px 20px;font-size:14px}
 }
 </style>
 </head>
@@ -193,12 +307,44 @@ ul{list-style:none}
       <h1>G202301 · 官网</h1>
       <p class="lead">通知公告 · 作业发布 · 班级新闻 · 优秀文章 · 每日名言 · 精选题集 · 学习资源 · 在线投稿</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="homework">查看今日作业</a>
-        <a class="btn btn-ghost" href="announcement">查看通知</a>
+        <a class="btn btn-primary" href="homework"><span class="bi">📚</span>查看今日作业</a>
+        <a class="btn btn-ghost" href="announcement"><span class="bi">🔔</span>查看通知</a>
+        <a class="btn btn-submit" href="submit"><span class="bi">📮</span>我要投稿</a>
       </div>
     </div>
   </section>
 
+  <!-- 倒计时 + 作业软件 -->
+  <section class="section" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="feature-row">
+
+        <!-- 高考倒计时 -->
+        <div class="countdown">
+          <div class="cd-label">距离高考还有</div>
+          <div class="cd-main">
+            <span id="cdDays">—</span>
+            <span class="cd-unit">天</span>
+          </div>
+          <div class="cd-sub" id="cdTime">00 : 00 : 00</div>
+          <span class="cd-date">目标 · 2029 年 6 月 7 日 9:00</span>
+        </div>
+
+        <!-- 作业软件预览 -->
+        <a class="soft-card" href="/Class%20Panel%202.3.html" target="_blank" rel="noopener">
+          <span class="soft-icon">🖥️</span>
+          <div class="soft-body">
+            <div class="soft-title">Class Panel 2.3</div>
+            <div class="soft-desc">最新版作业软件 · 点击预览</div>
+          </div>
+          <span class="soft-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 板块卡片 -->
   <section class="section">
     <div class="wrap">
       <div class="grid">
@@ -230,6 +376,7 @@ ul{list-style:none}
     </div>
   </section>
 
+  <!-- 名言 -->
   <section class="section" style="padding-top:0">
     <div class="wrap">
       <blockquote class="quote-card">
@@ -256,6 +403,33 @@ ul{list-style:none}
 </footer>
 
 <script>
+  /* ===== 高考倒计时：2029 年 6 月 7 日 09:00 ===== */
+  (function(){
+    const target = new Date(2029, 5, 7, 9, 0, 0);
+    const elDays = document.getElementById('cdDays');
+    const elTime = document.getElementById('cdTime');
+
+    function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+    function tick(){
+      const now = new Date();
+      let diff = target - now;
+      if (diff < 0) diff = 0;
+
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor(diff % 86400000 / 3600000);
+      const m = Math.floor(diff % 3600000 / 60000);
+      const s = Math.floor(diff % 60000 / 1000);
+
+      elDays.textContent = d;
+      elTime.textContent = pad(h) + ' : ' + pad(m) + ' : ' + pad(s);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  /* ===== 地址栏不显示 index.html ===== */
   if (location.pathname.endsWith('/index.html')) {
     history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
   }
