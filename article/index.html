@@ -4,32 +4,158 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>文章 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班同学原创随笔与佳作。">
 <style>
-:root{--navy:#0f2547;--navy-2:#1b3a63;--gold:#c9a227;--gold-light:#e8c96a;--bg:#f4f6fb;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e9f2;--radius:16px;--shadow:0 10px 30px rgba(15,37,71,.08)}
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
 a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
 .wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
-.page-hero{position:relative;overflow:hidden;padding:56px 0 52px;color:#fff;background:radial-gradient(760px 340px at 10% 0%,rgba(201,162,39,.20),transparent 62%),radial-gradient(680px 340px at 92% 20%,rgba(88,140,220,.26),transparent 62%),linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%)}
-.page-hero::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:24px 24px;opacity:.4}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
 .page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:1px;margin-bottom:12px}
 .page-hero .sub{color:#c3d2e6;font-size:15px;max-width:640px}
 .crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
 .crumb a:hover{color:var(--gold-light)}
 .crumb span{margin:0 7px;opacity:.6}
-.section{padding:60px 0 80px}
-.empty{text-align:center;padding:80px 30px;background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-.empty .big{font-size:56px;display:block;margin-bottom:18px;opacity:.65}
-.empty h2{font-size:19px;color:var(--navy);letter-spacing:1px;margin-bottom:10px}
-.empty p{font-size:14px;color:var(--muted)}
+
+.section{padding:40px 0 72px}
+.list-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.list-head h2{font-size:17px;letter-spacing:.5px;color:var(--navy);display:flex;align-items:center;gap:9px}
+.list-head h2::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18)}
+.list-head .count{font-size:13.5px;color:var(--muted)}
+.list-head .count b{color:var(--navy)}
+
+.art-list{display:flex;flex-direction:column;gap:16px}
+
+.art-card{
+  display:flex;align-items:stretch;
+  background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;
+  transition:transform .26s ease, box-shadow .26s ease, border-color .26s ease;
+  animation:rise .45s ease both;
+}
+.art-card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow-hover);
+  border-color:rgba(201,162,39,.55);
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.art-date{
+  flex:0 0 132px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:20px 10px;color:#fff;text-align:center;
+  background:linear-gradient(155deg,var(--navy-2),var(--navy));
+  position:relative;
+}
+.art-date::after{
+  content:"";position:absolute;right:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--gold-light),var(--gold));
+}
+.art-date .y{font-size:12.5px;letter-spacing:3px;color:var(--gold-light);font-weight:600}
+.art-date .md{font-size:22px;line-height:1.25;color:#fff;font-weight:700;letter-spacing:1px}
+
+.art-main{flex:1;padding:22px 26px;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.art-title{
+  font-size:17.5px;font-weight:700;letter-spacing:.3px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  color:var(--navy);margin-bottom:12px;
+}
+.badge-new{
+  font-size:11.5px;font-weight:700;padding:2px 10px;border-radius:999px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  color:var(--navy);letter-spacing:.5px;
+}
+
+/* 投稿信息行 */
+.art-info{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  font-size:13.5px;color:var(--muted);
+  margin-bottom:12px;
+}
+.art-info .item{
+  display:inline-flex;align-items:center;gap:6px;
+}
+.art-info .item .k{
+  color:#9aa6b8;
+}
+.art-info .item .v{
+  color:var(--navy);font-weight:700;
+}
+.art-info .item .v.gold{
+  color:#a8791a;
+  background:#fdf1e0;
+  padding:2px 10px;border-radius:6px;
+}
+
+.art-more{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13.5px;font-weight:700;letter-spacing:.3px;
+  color:var(--gold);
+  transition:all .24s ease;
+  align-self:flex-start;
+}
+.art-more .arw{
+  display:inline-block;
+  transition:transform .24s ease;
+}
+.art-card:hover .art-more{color:var(--navy)}
+.art-card:hover .art-more .arw{transform:translateX(4px)}
+
+.list-end{
+  margin-top:22px;text-align:center;font-size:13px;color:var(--muted);
+  padding:18px;border:1px dashed var(--line);border-radius:var(--radius);
+  background:rgba(255,255,255,.6);
+}
+
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:30px 0 48px}
+  .art-date{flex:0 0 104px;padding:16px 6px}
+  .art-date .md{font-size:18px}
+  .art-main{padding:16px 18px}
+  .art-title{font-size:16px}
+  .art-info{font-size:13px;gap:12px}
+}
 </style>
 </head>
 <body>
+
 <main>
+
   <section class="page-hero">
     <div class="wrap">
       <p class="crumb"><a href="../">首页</a><span>/</span>文章</p>
@@ -37,24 +163,70 @@ a{color:inherit;text-decoration:none}
       <p class="sub">同学原创随笔与佳作。</p>
     </div>
   </section>
+
   <section class="section">
     <div class="wrap">
-      <div class="empty">
-        <span class="big">✍️</span>
-        <h2>暂无内容</h2>
-        <p>欢迎投稿，把你的文字分享给大家。</p>
+
+      <div class="list-head">
+        <h2>文章列表</h2>
+        <div class="count">共 <b>1</b> 篇</div>
       </div>
+
+      <div class="art-list">
+
+        <a class="art-card" href="douququ">
+          <div class="art-date">
+            <span class="y">2026</span>
+            <span class="md">9月20日</span>
+          </div>
+          <div class="art-main">
+            <div class="art-title">
+              《蛐蛐在哪里？》
+              <span class="badge-new">最新</span>
+            </div>
+            <div class="art-info">
+              <span class="item">
+                <span class="k">投稿日期：</span>
+                <span class="v">2026 年 9 月 20 日</span>
+              </span>
+              <span class="item">
+                <span class="k">投稿人：</span>
+                <span class="v gold">G202104 lzx</span>
+              </span>
+            </div>
+            <span class="art-more">
+              点击查看全文 <span class="arw">→</span>
+            </span>
+          </div>
+        </a>
+
+      </div>
+
+      <p class="list-end">已经到底啦 · 欢迎同学投稿你的作品</p>
+
     </div>
   </section>
+
 </main>
+
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <div><strong style="color:#fff">南京外国语学校 G202301</strong><br>班级官网 · 由 G20230151 维护</div>
-    <div><a href="../">首页</a> · 联系 QQ：3051455202 / 3073701418</div>
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../submit">投稿</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
   </div>
 </footer>
+
 <script>
-if(location.pathname.endsWith('/index.html')){history.replaceState(null,'',location.pathname.replace(/index\.html$/,''));}
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
 </script>
+
 </body>
 </html>
