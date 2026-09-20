@@ -11,7 +11,7 @@
 html{scroll-behavior:smooth}
 body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-ul{list-style:none}
+ul,ol{list-style:none}
 .wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 .page-hero{position:relative;overflow:hidden;padding:56px 0 52px;color:#fff;background:radial-gradient(760px 340px at 10% 0%,rgba(201,162,39,.20),transparent 62%),radial-gradient(680px 340px at 92% 20%,rgba(88,140,220,.26),transparent 62%),linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%)}
 .page-hero::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:24px 24px;opacity:.4}
@@ -57,7 +57,9 @@ ul{list-style:none}
 </style>
 </head>
 <body>
+
 <main>
+
   <section class="page-hero">
     <div class="wrap">
       <p class="crumb"><a href="../">首页</a><span>/</span>作业</p>
@@ -65,55 +67,228 @@ ul{list-style:none}
       <p class="sub">每日作业按日期从上到下排列，点击进入当天作业详情。</p>
     </div>
   </section>
+
   <section class="section">
     <div class="wrap">
+
       <div class="list-head">
         <h2>作业记录</h2>
-        <div class="count">共 <b>14</b> 天</div>
+        <div class="count">共 <b>15</b> 天</div>
       </div>
+
       <div class="day-list">
 
-        <a class="day-card" href="20260918"><div class="day-date"><span class="y">2026</span><span class="md">9月18日</span><span class="w">周五</span></div><div class="day-main"><div class="day-title">2026年9月18日 作业 <span class="badge-new">最新</span></div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260920">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月20日</span>
+            <span class="w">周日</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">
+              2026年9月20日 作业
+              <span class="badge-new">最新</span>
+            </div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260917"><div class="day-date"><span class="y">2026</span><span class="md">9月17日</span><span class="w">周四</span></div><div class="day-main"><div class="day-title">2026年9月17日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260918">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月18日</span>
+            <span class="w">周五</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月18日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260916"><div class="day-date"><span class="y">2026</span><span class="md">9月16日</span><span class="w">周三</span></div><div class="day-main"><div class="day-title">2026年9月16日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260917">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月17日</span>
+            <span class="w">周四</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月17日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260915"><div class="day-date"><span class="y">2026</span><span class="md">9月15日</span><span class="w">周二</span></div><div class="day-main"><div class="day-title">2026年9月15日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260916">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月16日</span>
+            <span class="w">周三</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月16日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260914"><div class="day-date"><span class="y">2026</span><span class="md">9月14日</span><span class="w">周一</span></div><div class="day-main"><div class="day-title">2026年9月14日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260915">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月15日</span>
+            <span class="w">周二</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月15日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260911"><div class="day-date"><span class="y">2026</span><span class="md">9月11日</span><span class="w">周五</span></div><div class="day-main"><div class="day-title">2026年9月11日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260914">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月14日</span>
+            <span class="w">周一</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月14日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260910"><div class="day-date"><span class="y">2026</span><span class="md">9月10日</span><span class="w">周四</span></div><div class="day-main"><div class="day-title">2026年9月10日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260911">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月11日</span>
+            <span class="w">周五</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月11日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260909"><div class="day-date"><span class="y">2026</span><span class="md">9月9日</span><span class="w">周三</span></div><div class="day-main"><div class="day-title">2026年9月9日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260910">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月10日</span>
+            <span class="w">周四</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月10日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260908"><div class="day-date"><span class="y">2026</span><span class="md">9月8日</span><span class="w">周二</span></div><div class="day-main"><div class="day-title">2026年9月8日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260909">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月9日</span>
+            <span class="w">周三</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月9日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260907"><div class="day-date"><span class="y">2026</span><span class="md">9月7日</span><span class="w">周一</span></div><div class="day-main"><div class="day-title">2026年9月7日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260908">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月8日</span>
+            <span class="w">周二</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月8日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260904"><div class="day-date"><span class="y">2026</span><span class="md">9月4日</span><span class="w">周五</span></div><div class="day-main"><div class="day-title">2026年9月4日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260907">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月7日</span>
+            <span class="w">周一</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月7日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260903"><div class="day-date"><span class="y">2026</span><span class="md">9月3日</span><span class="w">周四</span></div><div class="day-main"><div class="day-title">2026年9月3日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260904">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月4日</span>
+            <span class="w">周五</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月4日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260902"><div class="day-date"><span class="y">2026</span><span class="md">9月2日</span><span class="w">周三</span></div><div class="day-main"><div class="day-title">2026年9月2日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260903">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月3日</span>
+            <span class="w">周四</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月3日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
-        <a class="day-card" href="20260901"><div class="day-date"><span class="y">2026</span><span class="md">9月1日</span><span class="w">周二</span></div><div class="day-main"><div class="day-title">2026年9月1日 作业</div></div><span class="day-arrow">→</span></a>
+        <a class="day-card" href="20260902">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月2日</span>
+            <span class="w">周三</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月2日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
+
+        <a class="day-card" href="20260901">
+          <div class="day-date">
+            <span class="y">2026</span>
+            <span class="md">9月1日</span>
+            <span class="w">周二</span>
+          </div>
+          <div class="day-main">
+            <div class="day-title">2026年9月1日 作业</div>
+          </div>
+          <span class="day-arrow">→</span>
+        </a>
 
       </div>
+
       <p class="list-end">已经到底啦 · 更早的作业记录会陆续整理上传</p>
+
     </div>
   </section>
+
 </main>
+
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <div><strong style="color:#fff">南京外国语学校 G202301</strong><br>班级官网 · 由 G20230151 维护</div>
-    <div><a href="../submit">投稿</a> · <a href="../news">新闻</a> · 联系 QQ：3051455202 / 3073701418</div>
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../submit">投稿</a> ·
+      <a href="../news">新闻</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
   </div>
 </footer>
+
 <script>
-  if(location.pathname.endsWith('/index.html')){history.replaceState(null,'',location.pathname.replace(/index\.html$/,''));}
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
 </script>
+
 </body>
 </html>

@@ -11,7 +11,7 @@
 html{scroll-behavior:smooth}
 body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-ul{list-style:none}
+ul,ol{list-style:none}
 .wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
 /* 页面头部 */
@@ -25,7 +25,6 @@ ul{list-style:none}
 
 /* 内容区 */
 .section{padding:40px 0 72px}
-
 .list-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
 .list-head h2{font-size:17px;letter-spacing:.5px;color:var(--navy);display:flex;align-items:center;gap:9px}
 .list-head h2::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18)}
@@ -81,14 +80,87 @@ ul{list-style:none}
   box-shadow:0 8px 20px rgba(201,162,39,.3);
   transition:all .24s ease;
   white-space:nowrap;
+  border:none;cursor:pointer;font-family:inherit;
 }
 .res-dl:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(201,162,39,.42)}
+.res-dl:disabled{opacity:.6;cursor:not-allowed;transform:none}
 
 /* 页脚 */
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
+
+/* ============ 邀请码弹窗 ============ */
+.modal-mask{
+  position:fixed;inset:0;z-index:999;
+  display:none;place-items:center;
+  padding:20px;
+  background:rgba(8,18,32,.62);
+  backdrop-filter:blur(4px);
+  animation:fade .22s ease both;
+}
+.modal-mask.open{display:grid}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.modal-box{
+  width:100%;max-width:420px;
+  background:var(--card);
+  border-radius:20px;
+  box-shadow:0 30px 70px rgba(0,0,0,.35);
+  padding:36px 30px 28px;
+  text-align:center;
+  animation:pop .28s ease both;
+  position:relative;
+}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+
+.modal-close{
+  position:absolute;top:14px;right:16px;
+  width:34px;height:34px;border-radius:50%;
+  border:none;background:#f2f5fa;color:var(--muted);
+  font-size:18px;line-height:1;cursor:pointer;
+  font-family:inherit;transition:all .2s ease;
+}
+.modal-close:hover{background:#e6ebf4;color:var(--navy)}
+
+.modal-icon{font-size:44px;line-height:1;margin-bottom:14px;display:block;}
+.modal-title{font-size:19px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:8px;}
+.modal-desc{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:22px;}
+
+.modal-form{display:flex;gap:10px}
+.modal-input{
+  flex:1;min-width:0;height:48px;
+  border:2px solid var(--line);border-radius:12px;
+  padding:0 14px;
+  font-size:16px;font-family:inherit;
+  letter-spacing:1px;text-align:center;
+  color:var(--navy);background:#fafbfe;
+  outline:none;transition:all .22s ease;
+}
+.modal-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
+.modal-input:focus{
+  border-color:var(--gold);background:#fff;
+  box-shadow:0 0 0 4px rgba(201,162,39,.15);
+}
+.modal-btn{
+  height:48px;padding:0 24px;
+  border:none;border-radius:12px;
+  font-family:inherit;font-size:14.5px;font-weight:700;
+  letter-spacing:.5px;color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(201,162,39,.32);
+  transition:all .24s ease;
+}
+.modal-btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(201,162,39,.45)}
+
+.modal-error{
+  min-height:20px;margin-top:12px;
+  font-size:13px;font-weight:600;letter-spacing:.2px;
+  color:#c2453c;
+}
+.modal-hint{margin-top:12px;font-size:12px;color:#9aa6b8;line-height:1.6;}
 
 /* 响应式 */
 @media (max-width:640px){
@@ -98,6 +170,9 @@ ul{list-style:none}
   .res-icon{flex:0 0 42px;height:42px;font-size:12px;border-radius:11px}
   .res-info{flex:1 1 100%;order:2}
   .res-dl{order:3;width:100%;justify-content:center}
+  .modal-box{padding:30px 22px 24px}
+  .modal-icon{font-size:38px}
+  .modal-title{font-size:17px}
 }
 </style>
 </head>
@@ -105,16 +180,14 @@ ul{list-style:none}
 
 <main>
 
-  <!-- 页面头部 -->
   <section class="page-hero">
     <div class="wrap">
       <p class="crumb"><a href="../">首页</a><span>/</span>资源</p>
       <h1>资源</h1>
-      <p class="sub">学习资料与实用文件，点击右侧按钮即可下载。</p>
+      <p class="sub">学习资料与实用文件，点击右侧按钮即可下载（需输入邀请码）。</p>
     </div>
   </section>
 
-  <!-- 资源列表 -->
   <section class="section">
     <div class="wrap">
 
@@ -130,11 +203,11 @@ ul{list-style:none}
           <div class="res-info">
             <div class="res-title">南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg</div>
           </div>
-          <a class="res-dl"
-             href="./南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg"
-             download="南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg">
+          <button class="res-dl"
+                  data-href="./南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg"
+                  data-name="南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg">
             ⬇ 下载
-          </a>
+          </button>
         </div>
 
         <div class="res-item">
@@ -142,11 +215,11 @@ ul{list-style:none}
           <div class="res-info">
             <div class="res-title">听力练习A  音频共3遍.mp3</div>
           </div>
-          <a class="res-dl"
-             href="./听力练习A  音频共3遍.mp3"
-             download="听力练习A  音频共3遍.mp3">
+          <button class="res-dl"
+                  data-href="./听力练习A  音频共3遍.mp3"
+                  data-name="听力练习A  音频共3遍.mp3">
             ⬇ 下载
-          </a>
+          </button>
         </div>
 
         <div class="res-item">
@@ -154,11 +227,11 @@ ul{list-style:none}
           <div class="res-info">
             <div class="res-title">U2Reading.mp3</div>
           </div>
-          <a class="res-dl"
-             href="./U2Reading.mp3"
-             download="U2Reading.mp3">
+          <button class="res-dl"
+                  data-href="./U2Reading.mp3"
+                  data-name="U2Reading.mp3">
             ⬇ 下载
-          </a>
+          </button>
         </div>
 
       </div>
@@ -168,7 +241,6 @@ ul{list-style:none}
 
 </main>
 
-<!-- 页脚 -->
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div>
@@ -182,10 +254,170 @@ ul{list-style:none}
   </div>
 </footer>
 
+<!-- ===== 邀请码弹窗 ===== -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="关闭">✕</button>
+    <span class="modal-icon">🔒</span>
+    <h3 class="modal-title">需要邀请码</h3>
+    <p class="modal-desc">下载资源需要验证身份<br>请输入邀请码以继续</p>
+    <form class="modal-form" id="modalForm" autocomplete="off">
+      <input
+        type="password"
+        id="modalInput"
+        class="modal-input"
+        placeholder="请输入邀请码"
+        autocomplete="off"
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        required>
+      <button type="submit" class="modal-btn">确认</button>
+    </form>
+    <p class="modal-error" id="modalError"></p>
+    <p class="modal-hint">邀请码由班级管理员口头或群内通知</p>
+  </div>
+</div>
+
 <script>
+/* ============================================================
+   资源下载 · 邀请码校验
+   ------------------------------------------------------------
+   1. 加载 passwordhash.txt 得到期望哈希
+   2. 点击下载按钮 → 弹出邀请码输入框
+   3. 校验通过 → 触发下载
+   4. 同一次会话内验证过一次后，后续下载免输（sessionStorage）
+   ============================================================ */
+(function(){
+  const modal       = document.getElementById('modalMask');
+  const modalClose  = document.getElementById('modalClose');
+  const modalForm   = document.getElementById('modalForm');
+  const modalInput  = document.getElementById('modalInput');
+  const modalError  = document.getElementById('modalError');
+
+  let expectedHash = null;
+  let loadingError = false;
+  let pendingUrl   = null;
+  let pendingName  = null;
+
+  const SESSION_KEY = 'g202301_resource_verified';
+
+  /* ===== 多项式哈希：h = (h * 31 + charCode) mod 1e9+7 ===== */
+  function hashPassword(s){
+    let h = 0;
+    const M = 1000000007;
+    for (let i = 0; i < s.length; i++){
+      h = (h * 31 + s.charCodeAt(i)) % M;
+    }
+    return String(h);
+  }
+
+  /* ===== 加载期望哈希 ===== */
+  fetch('../passwordhash.txt', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(text){
+      const v = text.trim().split(/\s+/)[0];
+      if (!/^\d+$/.test(v)) throw new Error('passwordhash.txt 内容无效');
+      expectedHash = v;
+    })
+    .catch(function(err){
+      loadingError = true;
+      console.warn('无法加载 passwordhash.txt：', err);
+    });
+
+  /* ===== 打开弹窗 ===== */
+  function openModal(url, name){
+    pendingUrl  = url;
+    pendingName = name;
+    modalError.textContent = '';
+    modalInput.value = '';
+    modal.classList.add('open');
+    setTimeout(function(){ modalInput.focus(); }, 60);
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    pendingUrl  = null;
+    pendingName = null;
+  }
+
+  /* ===== 触发下载 ===== */
+  function triggerDownload(url, name){
+    const a = document.createElement('a');
+    a.href = url;
+    if (name) a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  /* ===== 绑定下载按钮 ===== */
+  document.querySelectorAll('.res-dl').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const url  = btn.dataset.href;
+      const name = btn.dataset.name;
+
+      // 已在本会话验证过 → 直接下载
+      if (sessionStorage.getItem(SESSION_KEY) === '1'){
+        triggerDownload(url, name);
+        return;
+      }
+      openModal(url, name);
+    });
+  });
+
+  /* ===== 弹窗交互 ===== */
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  /* ===== 提交校验 ===== */
+  modalForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    modalError.textContent = '';
+
+    if (loadingError){
+      modalError.textContent = '验证文件加载失败，请检查网络后刷新页面';
+      return;
+    }
+    if (!expectedHash){
+      modalError.textContent = '验证文件尚未就绪，请稍后重试';
+      return;
+    }
+
+    const val = modalInput.value;
+    if (!val){
+      modalError.textContent = '请输入邀请码';
+      return;
+    }
+
+    if (hashPassword(val) === expectedHash){
+      // 记住本次会话已验证
+      try{ sessionStorage.setItem(SESSION_KEY, '1'); }catch(e){}
+
+      const url  = pendingUrl;
+      const name = pendingName;
+      closeModal();
+      triggerDownload(url, name);
+    } else {
+      modalError.textContent = '邀请码错误，请重试';
+      modalInput.value = '';
+      modalInput.focus();
+    }
+  });
+
+  /* ===== 地址栏不显示 index.html ===== */
   if (location.pathname.endsWith('/index.html')) {
     history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
   }
+})();
 </script>
 
 </body>
