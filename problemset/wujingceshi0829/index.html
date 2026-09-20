@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>物竞测试 3 —— 牛顿运动定律 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 物理竞赛测试 3——牛顿运动定律。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(24px,4vw,36px);letter-spacing:1px;margin-bottom:10px}
+.page-hero .sub{color:#c3d2e6;font-size:14.5px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 72px}
+.back-bar{margin-bottom:22px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ============ 邀请码遮罩 ============ */
+.lock-screen{
+  display:grid;place-items:center;
+  padding:40px 20px 80px;
+}
+.lock-box{
+  max-width:460px;width:100%;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow-hover);
+  padding:44px 36px 36px;
+  text-align:center;
+  animation:rise .5s ease both;
+}
+.lock-icon{font-size:52px;line-height:1;margin-bottom:18px;display:block;}
+.lock-title{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:10px;}
+.lock-desc{font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.75;}
+.lock-form{display:flex;gap:10px}
+.lock-input{
+  flex:1;min-width:0;height:50px;
+  border:2px solid var(--line);border-radius:12px;
+  padding:0 14px;
+  font-size:16px;font-family:inherit;
+  letter-spacing:1px;text-align:center;
+  color:var(--navy);background:#fafbfe;
+  outline:none;transition:all .22s ease;
+}
+.lock-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
+.lock-input:focus{
+  border-color:var(--gold);background:#fff;
+  box-shadow:0 0 0 4px rgba(201,162,39,.15);
+}
+.lock-btn{
+  height:50px;padding:0 28px;
+  border:none;border-radius:12px;
+  font-family:inherit;font-size:15px;font-weight:700;
+  letter-spacing:.5px;color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(201,162,39,.32);
+  transition:all .24s ease;
+}
+.lock-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(201,162,39,.45);
+}
+.lock-error{
+  min-height:20px;margin-top:14px;
+  font-size:13.5px;font-weight:600;letter-spacing:.2px;
+  color:#c2453c;
+}
+.lock-hint{margin-top:18px;font-size:12.5px;color:#9aa6b8;line-height:1.7;}
+
+#protectedContent{display:none}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============ 下载区 ============ */
+.download-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border-left:5px solid var(--gold);
+  padding:32px 34px;
+  display:flex;align-items:center;gap:24px;
+  animation:rise .5s ease both;
+}
+.dl-icon{
+  flex:0 0 76px;height:76px;border-radius:18px;
+  display:grid;place-items:center;
+  font-size:22px;font-weight:900;letter-spacing:1px;
+  color:#fff;
+  background:linear-gradient(135deg,#e05050,#b8332f);
+  box-shadow:0 10px 24px rgba(184,51,47,.32);
+}
+.dl-info{flex:1;min-width:0}
+.dl-title{
+  font-size:19px;font-weight:800;color:var(--navy);
+  letter-spacing:.4px;margin-bottom:8px;
+}
+.dl-desc{
+  font-size:14px;color:var(--muted);line-height:1.75;
+  margin-bottom:4px;
+}
+.dl-meta{
+  display:inline-block;font-size:12.5px;font-weight:700;
+  color:#a8791a;background:#fdf1e0;
+  padding:2px 10px;border-radius:6px;
+  margin-top:6px;
+}
+.dl-btn{
+  flex:0 0 auto;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 30px;border-radius:999px;
+  font-size:15px;font-weight:700;letter-spacing:.4px;
+  color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 12px 28px rgba(201,162,39,.35);
+  transition:all .25s ease;
+  white-space:nowrap;
+}
+.dl-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 38px rgba(201,162,39,.48);
+}
+
+/* 提示条 */
+.tip-bar{
+  margin-top:20px;
+  display:flex;align-items:flex-start;gap:11px;
+  background:#eef3fb;
+  border-left:4px solid #2f6bc0;
+  border-radius:10px;
+  padding:14px 18px;
+  font-size:14px;color:#3b4a61;
+  line-height:1.75;
+}
+.tip-bar .ti{flex:0 0 auto;font-size:16px;line-height:1.6}
+
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .lock-box{padding:34px 22px 28px}
+  .lock-icon{font-size:44px}
+  .lock-title{font-size:19px}
+  .lock-input{font-size:15px;height:46px}
+  .lock-btn{height:46px;padding:0 20px;font-size:14px}
+  .download-card{flex-direction:column;align-items:flex-start;padding:24px 22px;gap:18px}
+  .dl-icon{width:64px;height:64px;flex:0 0 64px;font-size:19px;border-radius:15px}
+  .dl-title{font-size:17px}
+  .dl-btn{width:100%;justify-content:center;padding:13px 20px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">题集</a><span>/</span>物竞测试 3
+      </p>
+      <h1>物竞测试 3 —— 牛顿运动定律</h1>
+      <p class="sub">2026 年 8 月 29 日 · 物理竞赛 · 试卷与解析</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../">← 返回题集列表</a>
+      </div>
+
+      <!-- ===== 邀请码遮罩 ===== -->
+      <div class="lock-screen" id="lockScreen">
+        <div class="lock-box">
+          <span class="lock-icon">🔒</span>
+          <h2 class="lock-title">需要邀请码</h2>
+          <p class="lock-desc">本页内容仅向本班同学开放<br>请输入邀请码以继续查看</p>
+          <form class="lock-form" id="lockForm" autocomplete="off">
+            <input
+              type="password"
+              id="lockInput"
+              class="lock-input"
+              placeholder="请输入邀请码"
+              autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
+              required>
+            <button type="submit" class="lock-btn" id="lockBtn">确认</button>
+          </form>
+          <p class="lock-error" id="lockError"></p>
+          <p class="lock-hint">邀请码由班级管理员口头或群内通知</p>
+        </div>
+      </div>
+
+      <!-- ===== 受保护内容 ===== -->
+      <div id="protectedContent">
+
+        <div class="download-card">
+          <div class="dl-icon">PDF</div>
+          <div class="dl-info">
+            <div class="dl-title">物竞测试 3 —— 牛顿运动定律</div>
+            <p class="dl-desc">本试卷为物理竞赛测试 3，考查内容涵盖牛顿运动定律相关题型，含完整试卷与解析。</p>
+            <span class="dl-meta">PDF 文件</span>
+          </div>
+          <a class="dl-btn"
+             href="../../resource/物竞测试3.pdf"
+             download="物竞测试3.pdf">
+            ⬇ 下载试卷与解析
+          </a>
+        </div>
+
+        <div class="tip-bar">
+          <span class="ti">💡</span>
+          <span>点击按钮后将直接下载 PDF 文件，请使用支持 PDF 的阅读器打开查看。</span>
+        </div>
+
+      </div><!-- /protectedContent -->
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   邀请码校验 · 多项式滚动哈希（底数 31，模 10^9+7）
+   ============================================================ */
+(function(){
+  const lockScreen = document.getElementById('lockScreen');
+  const content    = document.getElementById('protectedContent');
+  const form       = document.getElementById('lockForm');
+  const input      = document.getElementById('lockInput');
+  const errorEl    = document.getElementById('lockError');
+
+  let expectedHash = null;
+  let loadingError = false;
+
+  function hashPassword(s){
+    let h = 0;
+    const M = 1000000007;
+    for (let i = 0; i < s.length; i++){
+      h = (h * 31 + s.charCodeAt(i)) % M;
+    }
+    return String(h);
+  }
+
+  fetch('../../passwordhash.txt', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(text){
+      const v = text.trim().split(/\s+/)[0];
+      if (!/^\d+$/.test(v)) throw new Error('passwordhash.txt 内容无效');
+      expectedHash = v;
+    })
+    .catch(function(err){
+      loadingError = true;
+      errorEl.textContent = '验证文件加载失败：' + err.message;
+    });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorEl.textContent = '';
+
+    if (loadingError){
+      errorEl.textContent = '验证文件加载失败，请刷新页面';
+      return;
+    }
+    if (!expectedHash){
+      errorEl.textContent = '验证文件尚未就绪，请稍后重试';
+      return;
+    }
+
+    const val = input.value;
+    if (!val){
+      errorEl.textContent = '请输入邀请码';
+      return;
+    }
+
+    if (hashPassword(val) === expectedHash){
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+    } else {
+      errorEl.textContent = '邀请码错误，请重试';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  input.focus();
+
+  window.hashPassword = function(pw){
+    const h = hashPassword(String(pw));
+    console.log('%c哈希值：', 'color:#c9a227;font-weight:700', h);
+    return h;
+  };
+})();
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>

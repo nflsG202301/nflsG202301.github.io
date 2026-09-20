@@ -3,27 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>资源 · 南京外国语学校 G202301</title>
-<meta name="description" content="南京外国语学校 G202301 班学习资源：资料与实用链接。">
+<title>题集 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班精选好题与解析。">
 <style>
-:root{--navy:#0f2547;--navy-2:#1b3a63;--gold:#c9a227;--gold-light:#e8c96a;--bg:#f4f6fb;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e9f2;--radius:16px;--shadow:0 10px 30px rgba(15,37,71,.08);--shadow-hover:0 18px 40px rgba(15,37,71,.16)}
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
 a{color:inherit;text-decoration:none}
 ul,ol{list-style:none}
 .wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
-/* 页面头部 */
-.page-hero{position:relative;overflow:hidden;padding:56px 0 52px;color:#fff;background:radial-gradient(760px 340px at 10% 0%,rgba(201,162,39,.20),transparent 62%),radial-gradient(680px 340px at 92% 20%,rgba(88,140,220,.26),transparent 62%),linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%)}
-.page-hero::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:24px 24px;opacity:.4}
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
 .page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:1px;margin-bottom:12px}
 .page-hero .sub{color:#c3d2e6;font-size:15px;max-width:640px}
 .crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
 .crumb a:hover{color:var(--gold-light)}
 .crumb span{margin:0 7px;opacity:.6}
 
-/* 内容区 */
 .section{padding:40px 0 72px}
 .list-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
 .list-head h2{font-size:17px;letter-spacing:.5px;color:var(--navy);display:flex;align-items:center;gap:9px}
@@ -31,148 +52,88 @@ ul,ol{list-style:none}
 .list-head .count{font-size:13.5px;color:var(--muted)}
 .list-head .count b{color:var(--navy)}
 
-/* 资源列表 */
-.res-list{display:flex;flex-direction:column;gap:14px}
-
-.res-item{
-  display:flex;align-items:center;gap:18px;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:20px 24px;
-  transition:transform .26s ease, box-shadow .26s ease, border-color .26s ease;
+.prob-list{display:flex;flex-direction:column;gap:20px}
+.prob-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  border-left:5px solid var(--gold);overflow:hidden;
+  transition:transform .26s ease, box-shadow .26s ease;
   animation:rise .45s ease both;
 }
-.res-item:hover{
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-hover);
-  border-color:rgba(201,162,39,.55);
-}
+.prob-card:hover{box-shadow:var(--shadow-hover)}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-/* 文件图标 */
-.res-icon{
-  flex:0 0 48px;height:48px;border-radius:13px;
-  display:grid;place-items:center;
-  font-size:13px;font-weight:800;letter-spacing:.5px;
-  color:#fff;
+.prob-top{padding:22px 26px 18px}
+.prob-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.prob-id{
+  font-size:12.5px;font-weight:800;letter-spacing:.5px;
+  color:var(--navy);background:linear-gradient(135deg,#eef3fb,#dde7f6);
+  padding:4px 12px;border-radius:999px;
 }
-.res-icon.jpg{background:linear-gradient(135deg,#4f8fe0,#2f6bc0);box-shadow:0 6px 16px rgba(47,107,192,.3)}
-.res-icon.mp3{background:linear-gradient(135deg,#4fc08d,#218a55);box-shadow:0 6px 16px rgba(33,138,85,.3)}
+.prob-title{font-size:16.5px;font-weight:700;line-height:1.7;color:var(--navy)}
+.prob-info{font-size:13.5px;color:var(--muted);margin-top:8px}
+.prob-info b{color:#a8791a;font-weight:600}
 
-/* 文件信息 */
-.res-info{flex:1;min-width:0}
-.res-title{
-  font-size:16px;font-weight:700;letter-spacing:.2px;
-  line-height:1.6;color:var(--navy);
-  word-break:break-word;
-}
-
-/* 下载按钮 */
-.res-dl{
-  flex:0 0 auto;
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:13.5px;font-weight:700;
-  padding:10px 22px;border-radius:999px;
-  color:var(--navy);
+.badge-new{
+  font-size:11.5px;font-weight:700;padding:2px 10px;border-radius:999px;
   background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  box-shadow:0 8px 20px rgba(201,162,39,.3);
-  transition:all .24s ease;
-  white-space:nowrap;
-  border:none;cursor:pointer;font-family:inherit;
+  color:var(--navy);letter-spacing:.5px;
 }
-.res-dl:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(201,162,39,.42)}
-.res-dl:disabled{opacity:.6;cursor:not-allowed;transform:none}
 
-/* 页脚 */
+.badge-access{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11.5px;font-weight:700;letter-spacing:.5px;
+  padding:3px 11px;border-radius:999px;
+}
+.badge-access .bi{font-size:12px;line-height:1}
+.badge-access.public{color:#218a55;background:#e7f6ee}
+.badge-access.locked{color:#a8791a;background:#fdf1e0}
+
+.acc{border-top:1px dashed var(--line);background:#fafbfe}
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:10px;
+  padding:15px 26px;background:none;border:none;cursor:pointer;
+  font-family:inherit;text-align:left;
+  font-size:14px;font-weight:700;letter-spacing:.5px;
+  color:var(--navy);transition:background .2s ease;
+}
+.acc-head:hover{background:#f2f6fd}
+.acc-head .dot{
+  flex:0 0 6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18);
+  transition:all .22s ease;
+}
+.acc-head .label{flex:1}
+.acc-head .chev{
+  flex:0 0 auto;font-size:12px;color:var(--muted);
+  transition:transform .28s ease;
+}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc.open .acc-head{background:#f2f6fd}
+.acc.open .acc-head .dot{box-shadow:0 0 0 4px rgba(201,162,39,.28)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .36s ease}
+.acc-inner{padding:6px 26px 24px;font-size:15px;color:#3f4a5a;line-height:1.95}
+.acc-inner p{margin-bottom:10px}
+.acc-inner p:last-child{margin-bottom:0}
+.acc-inner strong{color:var(--navy)}
+
+.acc-links{border-top:1px dashed var(--line);background:#fafbfe}
+.acc-links .acc-head{cursor:pointer}
+.acc-links .acc-head + .acc-head{border-top:1px dashed var(--line)}
+.acc-links .acc-head:hover .chev{color:var(--gold);transform:translateX(4px)}
+
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
 
-/* ============ 邀请码弹窗 ============ */
-.modal-mask{
-  position:fixed;inset:0;z-index:999;
-  display:none;place-items:center;
-  padding:20px;
-  background:rgba(8,18,32,.62);
-  backdrop-filter:blur(4px);
-  animation:fade .22s ease both;
-}
-.modal-mask.open{display:grid}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-
-.modal-box{
-  width:100%;max-width:420px;
-  background:var(--card);
-  border-radius:20px;
-  box-shadow:0 30px 70px rgba(0,0,0,.35);
-  padding:36px 30px 28px;
-  text-align:center;
-  animation:pop .28s ease both;
-  position:relative;
-}
-@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
-
-.modal-close{
-  position:absolute;top:14px;right:16px;
-  width:34px;height:34px;border-radius:50%;
-  border:none;background:#f2f5fa;color:var(--muted);
-  font-size:18px;line-height:1;cursor:pointer;
-  font-family:inherit;transition:all .2s ease;
-}
-.modal-close:hover{background:#e6ebf4;color:var(--navy)}
-
-.modal-icon{font-size:44px;line-height:1;margin-bottom:14px;display:block;}
-.modal-title{font-size:19px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:8px;}
-.modal-desc{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:22px;}
-
-.modal-form{display:flex;gap:10px}
-.modal-input{
-  flex:1;min-width:0;height:48px;
-  border:2px solid var(--line);border-radius:12px;
-  padding:0 14px;
-  font-size:16px;font-family:inherit;
-  letter-spacing:1px;text-align:center;
-  color:var(--navy);background:#fafbfe;
-  outline:none;transition:all .22s ease;
-}
-.modal-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
-.modal-input:focus{
-  border-color:var(--gold);background:#fff;
-  box-shadow:0 0 0 4px rgba(201,162,39,.15);
-}
-.modal-btn{
-  height:48px;padding:0 24px;
-  border:none;border-radius:12px;
-  font-family:inherit;font-size:14.5px;font-weight:700;
-  letter-spacing:.5px;color:var(--navy);
-  background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(201,162,39,.32);
-  transition:all .24s ease;
-}
-.modal-btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(201,162,39,.45)}
-
-.modal-error{
-  min-height:20px;margin-top:12px;
-  font-size:13px;font-weight:600;letter-spacing:.2px;
-  color:#c2453c;
-}
-.modal-hint{margin-top:12px;font-size:12px;color:#9aa6b8;line-height:1.6;}
-
-/* 响应式 */
 @media (max-width:640px){
   .page-hero{padding:44px 0 40px}
   .section{padding:28px 0 52px}
-  .res-item{flex-wrap:wrap;gap:14px;padding:18px}
-  .res-icon{flex:0 0 42px;height:42px;font-size:12px;border-radius:11px}
-  .res-info{flex:1 1 100%;order:2}
-  .res-dl{order:3;width:100%;justify-content:center}
-  .modal-box{padding:30px 22px 24px}
-  .modal-icon{font-size:38px}
-  .modal-title{font-size:17px}
+  .prob-top{padding:18px 20px 16px}
+  .acc-head{padding:14px 20px;font-size:13.5px}
+  .acc-inner{padding:6px 16px 20px;font-size:14.5px}
+  .prob-title{font-size:15.5px}
 }
 </style>
 </head>
@@ -182,9 +143,9 @@ ul,ol{list-style:none}
 
   <section class="page-hero">
     <div class="wrap">
-      <p class="crumb"><a href="../">首页</a><span>/</span>资源</p>
-      <h1>资源</h1>
-      <p class="sub">学习资料与实用文件，点击右侧按钮即可下载（需输入邀请码）。</p>
+      <p class="crumb"><a href="../">首页</a><span>/</span>题集</p>
+      <h1>题集</h1>
+      <p class="sub">精选好题与详细解析。</p>
     </div>
   </section>
 
@@ -192,47 +153,163 @@ ul,ol{list-style:none}
     <div class="wrap">
 
       <div class="list-head">
-        <h2>资源列表</h2>
-        <div class="count">共 <b>3</b> 项</div>
+        <h2>题目列表</h2>
+        <div class="count">共 <b>6</b> 道</div>
       </div>
 
-      <div class="res-list">
+      <div class="prob-list">
 
-        <div class="res-item">
-          <span class="res-icon jpg">JPG</span>
-          <div class="res-info">
-            <div class="res-title">南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg</div>
+        <!-- ===== 2026 年 9 月 19 日 · CSP-S1 ===== -->
+        <article class="prob-card">
+          <div class="prob-top">
+            <div class="prob-meta">
+              <span class="prob-id">2026 年 9 月 19 日</span>
+              <span class="badge-access public"><span class="bi">🌐</span>公开</span>
+              <span class="badge-new">最新</span>
+            </div>
+            <h3 class="prob-title">2026 CCF 非专业级别软件能力认证第一轮（CSP-S1）提高级 C++ 语言试题</h3>
+            <p class="prob-info">信息学 · 单项选择题 15 题 · 阅读程序 3 组 · 完善程序 2 组</p>
           </div>
-          <button class="res-dl"
-                  data-href="./南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg"
-                  data-name="南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg">
-            ⬇ 下载
-          </button>
-        </div>
 
-        <div class="res-item">
-          <span class="res-icon mp3">MP3</span>
-          <div class="res-info">
-            <div class="res-title">听力练习A  音频共3遍.mp3</div>
+          <div class="acc-links">
+            <a class="acc-head" href="2026csps1">
+              <span class="dot"></span>
+              <span class="label">查看试题</span>
+              <span class="chev">▼</span>
+            </a>
+            <a class="acc-head" href="2026csps1">
+              <span class="dot"></span>
+              <span class="label">答案与解析</span>
+              <span class="chev">▼</span>
+            </a>
           </div>
-          <button class="res-dl"
-                  data-href="./听力练习A  音频共3遍.mp3"
-                  data-name="听力练习A  音频共3遍.mp3">
-            ⬇ 下载
-          </button>
-        </div>
+        </article>
 
-        <div class="res-item">
-          <span class="res-icon mp3">MP3</span>
-          <div class="res-info">
-            <div class="res-title">U2Reading.mp3</div>
+        <!-- ===== 2026 年 9 月 15 日 · 随堂练习 ===== -->
+        <article class="prob-card">
+          <div class="prob-top">
+            <div class="prob-meta">
+              <span class="prob-id">2026 年 9 月 15 日</span>
+              <span class="badge-access locked"><span class="bi">🔒</span>需邀请码查看</span>
+            </div>
+            <h3 class="prob-title">随堂练习 0915</h3>
+            <p class="prob-info">数学 · 单选题 8 道 · 多选题 3 道 · 填空题 3 道 · 解答题 3 道</p>
           </div>
-          <button class="res-dl"
-                  data-href="./U2Reading.mp3"
-                  data-name="U2Reading.mp3">
-            ⬇ 下载
-          </button>
-        </div>
+
+          <div class="acc-links">
+            <a class="acc-head" href="suitanglianxi0915">
+              <span class="dot"></span>
+              <span class="label">查看试题</span>
+              <span class="chev">▼</span>
+            </a>
+            <a class="acc-head" href="suitanglianxi0915">
+              <span class="dot"></span>
+              <span class="label">答案与解析</span>
+              <span class="chev">▼</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- ===== 2026 年 9 月 8 日 · 数学竞赛选拔 ===== -->
+        <article class="prob-card">
+          <div class="prob-top">
+            <div class="prob-meta">
+              <span class="prob-id">2026 年 9 月 8 日</span>
+              <span class="badge-access locked"><span class="bi">🔒</span>需邀请码查看</span>
+            </div>
+            <h3 class="prob-title">2026 数学竞赛选修课选拔测试</h3>
+            <p class="prob-info">考试时间：<b>90 分钟</b> · 满分：<b>120 分</b></p>
+          </div>
+
+          <div class="acc-links">
+            <a class="acc-head" href="2026shujingxuanba">
+              <span class="dot"></span>
+              <span class="label">查看试题</span>
+              <span class="chev">▼</span>
+            </a>
+            <a class="acc-head" href="2026shujingxuanba">
+              <span class="dot"></span>
+              <span class="label">答案与解析</span>
+              <span class="chev">▼</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- ===== 2026 年 9 月 3 日 ===== -->
+        <article class="prob-card">
+          <div class="prob-top">
+            <div class="prob-meta">
+              <span class="prob-id">2026 年 9 月 3 日</span>
+              <span class="badge-access public"><span class="bi">🌐</span>公开</span>
+            </div>
+            <h3 class="prob-title">如果英国的交通规则由原来的左侧通行改为右侧通行，那么一天的长度是增加了还是减少了还是不变？</h3>
+          </div>
+
+          <div class="acc">
+            <button class="acc-head" aria-expanded="false">
+              <span class="dot"></span>
+              <span class="label">答案与解析</span>
+              <span class="chev">▼</span>
+            </button>
+            <div class="acc-body">
+              <div class="acc-inner">
+                <p><strong>答案：</strong>一天的长度会增加。</p>
+                <p>定义地球自转的方向（自西向东）为正，那么交通规则的改变将使得交通工具相对于转轴的角动量增加。这是因为向东的运动将比以前远离地球转动的轴，因而增加其对总角动量的正贡献；相反，向西方向的运动则减少了它的负贡献。</p>
+                <p>假定两个方向的交通量是相同的，整个系统的转动惯量不变，而总的角动量不变，因此地球的转动速度必然减小。可见，一天的长度将增加，只不过我们很难觉察而已。</p>
+                <p><strong>注：</strong>事实上，可以通过完全不同的方法来得到完全相同的结论。在英国，有许多环形道路，在这些道路上，交通规则的改变会使得交通流的角动量发生改变，进而引起地球转动的微小改变。整个交通系统，可以看作由这样一系列环形道路的整体构成的效应。</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== 2026 年 9 月 2 日 ===== -->
+        <article class="prob-card">
+          <div class="prob-top">
+            <div class="prob-meta">
+              <span class="prob-id">2026 年 9 月 2 日</span>
+              <span class="badge-access public"><span class="bi">🌐</span>公开</span>
+            </div>
+            <h3 class="prob-title">地球上的什么地方向北走一公里，然后向东走一公里，再向南走一公里，又会回到原来的位置？</h3>
+          </div>
+
+          <div class="acc">
+            <button class="acc-head" aria-expanded="false">
+              <span class="dot"></span>
+              <span class="label">答案与解析</span>
+              <span class="chev">▼</span>
+            </button>
+            <div class="acc-body">
+              <div class="acc-inner">
+                <p><strong>答案：</strong>南极点、以及距离北极点 \(1 + \dfrac{1}{2k\pi}\) 公里的纬线上的点（\(k\) 为正整数）。</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== 2026 年 8 月 29 日 · 物竞测试 3 ===== -->
+        <article class="prob-card">
+          <div class="prob-top">
+            <div class="prob-meta">
+              <span class="prob-id">2026 年 8 月 29 日</span>
+              <span class="badge-access locked"><span class="bi">🔒</span>需邀请码查看</span>
+            </div>
+            <h3 class="prob-title">物竞测试 3 —— 牛顿运动定律</h3>
+            <p class="prob-info">物理竞赛课暑假选拔试卷（可下载 PDF）</p>
+          </div>
+
+          <div class="acc-links">
+            <a class="acc-head" href="wujingceshi0829">
+              <span class="dot"></span>
+              <span class="label">查看试题</span>
+              <span class="chev">▼</span>
+            </a>
+            <a class="acc-head" href="wujingceshi0829">
+              <span class="dot"></span>
+              <span class="label">答案与解析</span>
+              <span class="chev">▼</span>
+            </a>
+          </div>
+        </article>
 
       </div>
 
@@ -254,170 +331,20 @@ ul,ol{list-style:none}
   </div>
 </footer>
 
-<!-- ===== 邀请码弹窗 ===== -->
-<div class="modal-mask" id="modalMask">
-  <div class="modal-box">
-    <button class="modal-close" id="modalClose" aria-label="关闭">✕</button>
-    <span class="modal-icon">🔒</span>
-    <h3 class="modal-title">需要邀请码</h3>
-    <p class="modal-desc">下载资源需要验证身份<br>请输入邀请码以继续</p>
-    <form class="modal-form" id="modalForm" autocomplete="off">
-      <input
-        type="password"
-        id="modalInput"
-        class="modal-input"
-        placeholder="请输入邀请码"
-        autocomplete="off"
-        autocapitalize="off"
-        autocorrect="off"
-        spellcheck="false"
-        required>
-      <button type="submit" class="modal-btn">确认</button>
-    </form>
-    <p class="modal-error" id="modalError"></p>
-    <p class="modal-hint">邀请码由班级管理员口头或群内通知</p>
-  </div>
-</div>
-
 <script>
-/* ============================================================
-   资源下载 · 邀请码校验
-   ------------------------------------------------------------
-   1. 加载 passwordhash.txt 得到期望哈希
-   2. 点击下载按钮 → 弹出邀请码输入框
-   3. 校验通过 → 触发下载
-   4. 同一次会话内验证过一次后，后续下载免输（sessionStorage）
-   ============================================================ */
-(function(){
-  const modal       = document.getElementById('modalMask');
-  const modalClose  = document.getElementById('modalClose');
-  const modalForm   = document.getElementById('modalForm');
-  const modalInput  = document.getElementById('modalInput');
-  const modalError  = document.getElementById('modalError');
-
-  let expectedHash = null;
-  let loadingError = false;
-  let pendingUrl   = null;
-  let pendingName  = null;
-
-  const SESSION_KEY = 'g202301_resource_verified';
-
-  /* ===== 多项式哈希：h = (h * 31 + charCode) mod 1e9+7 ===== */
-  function hashPassword(s){
-    let h = 0;
-    const M = 1000000007;
-    for (let i = 0; i < s.length; i++){
-      h = (h * 31 + s.charCodeAt(i)) % M;
-    }
-    return String(h);
-  }
-
-  /* ===== 加载期望哈希 ===== */
-  fetch('../passwordhash.txt', { cache: 'no-store' })
-    .then(function(r){
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.text();
-    })
-    .then(function(text){
-      const v = text.trim().split(/\s+/)[0];
-      if (!/^\d+$/.test(v)) throw new Error('passwordhash.txt 内容无效');
-      expectedHash = v;
-    })
-    .catch(function(err){
-      loadingError = true;
-      console.warn('无法加载 passwordhash.txt：', err);
-    });
-
-  /* ===== 打开弹窗 ===== */
-  function openModal(url, name){
-    pendingUrl  = url;
-    pendingName = name;
-    modalError.textContent = '';
-    modalInput.value = '';
-    modal.classList.add('open');
-    setTimeout(function(){ modalInput.focus(); }, 60);
-  }
-
-  function closeModal(){
-    modal.classList.remove('open');
-    pendingUrl  = null;
-    pendingName = null;
-  }
-
-  /* ===== 触发下载 ===== */
-  function triggerDownload(url, name){
-    const a = document.createElement('a');
-    a.href = url;
-    if (name) a.download = name;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-
-  /* ===== 绑定下载按钮 ===== */
-  document.querySelectorAll('.res-dl').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      const url  = btn.dataset.href;
-      const name = btn.dataset.name;
-
-      // 已在本会话验证过 → 直接下载
-      if (sessionStorage.getItem(SESSION_KEY) === '1'){
-        triggerDownload(url, name);
-        return;
-      }
-      openModal(url, name);
+  document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const acc  = btn.parentElement;
+      const body = acc.querySelector('.acc-body');
+      const open = acc.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
     });
   });
 
-  /* ===== 弹窗交互 ===== */
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', function(e){
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
-  });
-
-  /* ===== 提交校验 ===== */
-  modalForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    modalError.textContent = '';
-
-    if (loadingError){
-      modalError.textContent = '验证文件加载失败，请检查网络后刷新页面';
-      return;
-    }
-    if (!expectedHash){
-      modalError.textContent = '验证文件尚未就绪，请稍后重试';
-      return;
-    }
-
-    const val = modalInput.value;
-    if (!val){
-      modalError.textContent = '请输入邀请码';
-      return;
-    }
-
-    if (hashPassword(val) === expectedHash){
-      // 记住本次会话已验证
-      try{ sessionStorage.setItem(SESSION_KEY, '1'); }catch(e){}
-
-      const url  = pendingUrl;
-      const name = pendingName;
-      closeModal();
-      triggerDownload(url, name);
-    } else {
-      modalError.textContent = '邀请码错误，请重试';
-      modalInput.value = '';
-      modalInput.focus();
-    }
-  });
-
-  /* ===== 地址栏不显示 index.html ===== */
   if (location.pathname.endsWith('/index.html')) {
     history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
   }
-})();
 </script>
 
 </body>

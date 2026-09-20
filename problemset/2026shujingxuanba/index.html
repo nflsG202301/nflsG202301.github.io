@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 数学竞赛选修课选拔测试 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 2026 数学竞赛选修课选拔测试卷。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(24px,4vw,36px);letter-spacing:1px;margin-bottom:10px}
+.page-hero .sub{color:#c3d2e6;font-size:14.5px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 72px}
+.back-bar{margin-bottom:22px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ============ 邀请码遮罩 ============ */
+.lock-screen{
+  display:grid;place-items:center;
+  padding:40px 20px 80px;
+}
+.lock-box{
+  max-width:460px;width:100%;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow-hover);
+  padding:44px 36px 36px;
+  text-align:center;
+  animation:rise .5s ease both;
+}
+.lock-icon{font-size:52px;line-height:1;margin-bottom:18px;display:block;}
+.lock-title{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:10px;}
+.lock-desc{font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.75;}
+.lock-form{display:flex;gap:10px}
+.lock-input{
+  flex:1;min-width:0;height:50px;
+  border:2px solid var(--line);border-radius:12px;
+  padding:0 14px;
+  font-size:16px;font-family:inherit;
+  letter-spacing:1px;text-align:center;
+  color:var(--navy);background:#fafbfe;
+  outline:none;transition:all .22s ease;
+}
+.lock-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
+.lock-input:focus{
+  border-color:var(--gold);background:#fff;
+  box-shadow:0 0 0 4px rgba(201,162,39,.15);
+}
+.lock-btn{
+  height:50px;padding:0 28px;
+  border:none;border-radius:12px;
+  font-family:inherit;font-size:15px;font-weight:700;
+  letter-spacing:.5px;color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(201,162,39,.32);
+  transition:all .24s ease;
+}
+.lock-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(201,162,39,.45);
+}
+.lock-error{
+  min-height:20px;margin-top:14px;
+  font-size:13.5px;font-weight:600;letter-spacing:.2px;
+  color:#c2453c;
+}
+.lock-hint{margin-top:18px;font-size:12.5px;color:#9aa6b8;line-height:1.7;}
+
+#protectedContent{display:none}
+
+/* ============ 内容区 ============ */
+.acc{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin-bottom:20px;
+  animation:rise .45s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.exam-card-head{
+  display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border-left:5px solid var(--gold);
+  border-bottom:1px solid var(--line);
+}
+.exam-card-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+}
+.exam-card-head .label{flex:1;font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy)}
+.exam-card-head .cnt{font-size:12px;font-weight:600;color:var(--muted)}
+.exam-card-body{padding:22px 26px 26px;background:#fafbfe}
+
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border:none;border-left:5px solid var(--gold);
+  cursor:pointer;font-family:inherit;text-align:left;
+  font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  transition:background .2s ease;
+}
+.acc-head:hover{background:#f2f6fd}
+.acc-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+  transition:all .22s ease;
+}
+.acc-head .label{flex:1}
+.acc-head .cnt{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--muted);margin-right:8px}
+.acc-head .chev{flex:0 0 auto;font-size:12px;color:var(--muted);transition:transform .28s ease}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc.open .acc-head{background:#f2f6fd}
+.acc.open .acc-head .dot{box-shadow:0 0 0 5px rgba(201,162,39,.28)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc-inner{padding:22px 26px 26px;background:#fafbfe}
+
+.exam-section{
+  font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin:18px 0 14px;padding-bottom:8px;
+  border-bottom:2px solid #f0f3f9;
+  display:flex;align-items:center;gap:9px;
+}
+.exam-section::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18);
+}
+.exam-section:first-child{margin-top:0}
+.exam-list{list-style:none;counter-reset: q}
+.exam-list li{
+  position:relative;padding-left:30px;margin-bottom:16px;
+  line-height:2;font-size:15px;color:#3f4a5a;
+}
+.exam-list li:last-child{margin-bottom:0}
+.exam-list li::before{
+  counter-increment: q;content: counter(q) ".";
+  position:absolute;left:0;top:0;
+  font-weight:800;color:var(--gold);font-size:14.5px;
+}
+.exam-list.cont{counter-reset: q 8;}
+
+.sol{
+  padding:18px 20px;margin-bottom:14px;
+  background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--gold);border-radius:12px;
+}
+.sol:last-child{margin-bottom:0}
+.sol-head{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:10px;padding-bottom:9px;
+  border-bottom:1px dashed var(--line);
+}
+.sol-no{
+  flex:0 0 auto;font-size:12.5px;font-weight:800;letter-spacing:.5px;
+  color:#fff;background:linear-gradient(135deg,var(--navy-2),var(--navy));
+  padding:3px 11px;border-radius:999px;
+}
+.sol-ans{font-size:14px;font-weight:700;color:var(--navy)}
+.sol-ans b{
+  color:#a8791a;
+  background:linear-gradient(135deg,#fff7e6,#fdeecd);
+  padding:2px 10px;border-radius:6px;margin-left:4px;
+}
+.sol-body{font-size:14.5px;color:#4b5563;line-height:1.95}
+.sol-body p{margin-bottom:9px}
+.sol-body p:last-child{margin-bottom:0}
+.sol-body .steps{
+  margin:6px 0;padding:12px 16px;
+  background:#f7f9fc;border-radius:10px;
+  border-left:3px solid rgba(201,162,39,.5);
+}
+.sol-body .steps p{margin-bottom:6px}
+.sol-body .steps p:last-child{margin-bottom:0}
+
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .lock-box{padding:34px 22px 28px}
+  .lock-icon{font-size:44px}
+  .lock-title{font-size:19px}
+  .lock-input{font-size:15px;height:46px}
+  .lock-btn{height:46px;padding:0 20px;font-size:14px}
+  .exam-card-head{padding:15px 18px;font-size:14.5px}
+  .exam-card-body{padding:16px 14px 20px}
+  .acc-head{padding:15px 18px;font-size:14.5px}
+  .acc-inner{padding:16px 14px 20px}
+  .exam-list li{font-size:14.5px;padding-left:26px;line-height:1.95}
+  .exam-section{font-size:14.5px}
+  .sol{padding:14px 15px}
+  .sol-body{font-size:14px}
+}
+</style>
+
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">题集</a><span>/</span>2026 数学竞赛选修课选拔测试
+      </p>
+      <h1>2026 数学竞赛选修课选拔测试</h1>
+      <p class="sub">2026 年 9 月 8 日 · 考试时间 90 分钟 · 满分 120 分</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../">← 返回题集列表</a>
+      </div>
+
+      <!-- ===== 邀请码遮罩 ===== -->
+      <div class="lock-screen" id="lockScreen">
+        <div class="lock-box">
+          <span class="lock-icon">🔒</span>
+          <h2 class="lock-title">需要邀请码</h2>
+          <p class="lock-desc">本页内容仅向本班同学开放<br>请输入邀请码以继续查看</p>
+          <form class="lock-form" id="lockForm" autocomplete="off">
+            <input
+              type="password"
+              id="lockInput"
+              class="lock-input"
+              placeholder="请输入邀请码"
+              autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
+              required>
+            <button type="submit" class="lock-btn" id="lockBtn">确认</button>
+          </form>
+          <p class="lock-error" id="lockError"></p>
+          <p class="lock-hint">邀请码由班级管理员口头或群内通知</p>
+        </div>
+      </div>
+
+      <!-- ===== 受保护内容 ===== -->
+      <div id="protectedContent">
+
+        <!-- 试题 -->
+        <div class="acc">
+          <div class="exam-card-head">
+            <span class="dot"></span>
+            <span class="label">试题</span>
+            <span class="cnt">共 11 题</span>
+          </div>
+          <div class="exam-card-body">
+
+            <div class="exam-section">一、填空题（每小题 8 分，共 64 分）</div>
+            <ol class="exam-list">
+              <li>设数列 \(\{a_n\}\) 的前 \(n\) 项和为 \(S_n\)，若 \(S_n + (-1)^n a_n = n^2 - 1\)，则 \(a_1 = \underline{\qquad}\)。</li>
+              <li>从 \(1, 2, 3, 4, 5, 6\) 中随机选取 3 个不同的数组成一个三位数，则这个三位数能被 3 整除但不能被 5 整除的概率为 \(\underline{\qquad}\)。</li>
+              <li>设椭圆 \(\dfrac{x^2}{9} + \dfrac{y^2}{5} = 1\) 的左、右焦点分别为 \(F_1, F_2\)，\(A\) 是其上一点，满足 \(\cos \angle AF_2F_1 = \dfrac{1}{4}\)，则 \(\triangle AF_1F_2\) 的面积为 \(\underline{\qquad}\)。</li>
+              <li>过半径为 5 的球面上一点 \(P\) 作三条两两垂直的弦 \(PA, PB, PC\)，且满足 \(PA = 2PB\)，则 \(PA + PB + PC\) 的最大值为 \(\underline{\qquad}\)。</li>
+              <li>实数集合 \(S = \{-3, -2, -1, 1, e, \pi\}\)，它的非空子集为 \(S_1, S_2, \dots, S_{63}\)，设 \(S_i\) 中所有元素的乘积为 \(s_i\)，\(i = 1, 2, \dots, 63\)，则 \(s_1 + s_2 + \dots + s_{63} = \underline{\qquad}\)。</li>
+              <li>设 \(x \in (0, \pi)\)，则函数 \(f(x) = \dfrac{(\sin x)^3}{1 + \cos x} + \dfrac{(\cos x)^3}{1 + \sin x}\) 的值域为 \(\underline{\qquad}\)。</li>
+              <li>已知平面单位向量 \(\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}, \boldsymbol{x}\)，且 \(\boldsymbol{a} + \boldsymbol{b} + \boldsymbol{c} = \boldsymbol{0}\)。记 \(y = |\boldsymbol{x} - \boldsymbol{a}| + |\boldsymbol{x} - \boldsymbol{b}| + |\boldsymbol{x} - \boldsymbol{c}|\)，则 \(y\) 的最大值为 \(\underline{\qquad}\)。</li>
+              <li>已知正实数 \(a, b\) 满足 \(a + b = 6\)，则 \(\dfrac{a}{a^2 + 1} + \dfrac{b}{b^2 + 1}\) 的最大值为 \(\underline{\qquad}\)。</li>
+            </ol>
+
+            <div class="exam-section">二、解答题（第 9 小题 16 分，第 10、11 小题 20 分，共 56 分）</div>
+            <ol class="exam-list cont">
+              <li>在 \(\triangle ABC\) 中，\(\sin A \cos B + \sin B \cos C + \sin C \cos A = \dfrac{1}{2}(\sin A + \sin B + \sin C)\)。试判断 \(\triangle ABC\) 的形状，并说明理由。</li>
+              <li>已知复数 \(z\) 满足 \(|z| = 1\)，试求 \(|z^3 - 3z - 2|\) 的最大值。</li>
+              <li>已知 \(P\) 是以椭圆 \(\dfrac{x^2}{4} + \dfrac{y^2}{3} = 1\) 的长轴为直径的圆上任一点（异于椭圆顶点），\(PA, PB\) 分别与椭圆相切于点 \(A\) 和 \(B\)，求 \(\triangle OAB\) 面积的最大值（其中 \(O\) 为坐标原点）。</li>
+            </ol>
+
+          </div>
+        </div>
+
+        <!-- 答案与解析 -->
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false">
+            <span class="dot"></span>
+            <span class="label">答案与解析</span>
+            <span class="cnt">共 11 题</span>
+            <span class="chev">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+
+              <!-- 1 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 1 题</span>
+                  <span class="sol-ans">答案：<b>\(a_1 = 13\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>分别取 \(n=1,2,3\) 代入。</p>
+                  <p>\(n=1\)：\(S_1 - a_1 = 0\)，即 \(a_1 - a_1 = 0\)，恒成立，无法直接求出 \(a_1\)。</p>
+                  <p>\(n=2\)：\(S_2 + a_2 = 3\)，即 \((a_1+a_2)+a_2 = 3\)，得 \(a_1 + 2a_2 = 3\)。</p>
+                  <p>\(n=3\)：\(S_3 - a_3 = 8\)，即 \((a_1+a_2+a_3)-a_3 = 8\)，得 \(a_1+a_2 = 8\)。</p>
+                  <p>联立两式相减得 \(a_2 = -5\)，代回得 \(a_1 = 13\)。</p>
+                </div>
+              </div>
+
+              <!-- 2 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 2 题</span>
+                  <span class="sol-ans">答案：<b>\(\dfrac{1}{3}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>总三位数个数为 \(\mathrm{A}_6^3 = 120\)。</p>
+                  <p>能被 3 整除的组合有 \((1,2,3)\)、\((1,2,6)\)、\((1,3,5)\)、\((1,5,6)\)、\((2,3,4)\)、\((2,4,6)\)、\((3,4,5)\)、\((4,5,6)\)，共 8 组，每组可排列成 \(3! = 6\) 个三位数，共 \(48\) 个。</p>
+                  <p>其中能被 5 整除的末位为 5。含 5 的组合有 4 组，5 固定末位后前两位有 \(2! = 2\) 种，共 \(8\) 个。</p>
+                  <p>故满足条件的有 \(48 - 8 = 40\) 个，概率为 \(\dfrac{40}{120} = \dfrac{1}{3}\)。</p>
+                </div>
+              </div>
+
+              <!-- 3 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 3 题</span>
+                  <span class="sol-ans">答案：<b>\(\sqrt{15}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>椭圆中 \(a=3,\ b=\sqrt{5},\ c=2\)，焦距 \(F_1F_2 = 4\)。</p>
+                  <p>设 \(AF_1=m,\ AF_2=n\)，由椭圆定义 \(m+n=6\)。</p>
+                  <p>在 \(\triangle AF_1F_2\) 中，由余弦定理：</p>
+                  <p>\(m^2 = n^2 + 16 - 8n \cdot \dfrac{1}{4} = n^2 + 16 - 2n\)。</p>
+                  <p>又 \(m = 6-n\)，代入得 \((6-n)^2 = n^2 + 16 - 2n\)，解得 \(n=2,\ m=4\)。</p>
+                  <p>面积 \(S = \dfrac{1}{2} mn \sin\angle AF_2F_1 = \dfrac{1}{2} \cdot 4 \cdot 2 \cdot \dfrac{\sqrt{15}}{4} = \sqrt{15}\)。</p>
+                </div>
+              </div>
+
+              <!-- 4 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 4 题</span>
+                  <span class="sol-ans">答案：<b>\(2\sqrt{70}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(PA, PB, PC\) 两两垂直，构成内接于球的长方体的三条棱，体对角线为球的直径 10，因此</p>
+                  <p>\(PA^2 + PB^2 + PC^2 = 100\)。又 \(PA = 2PB\)，得 \(5PB^2 + PC^2 = 100\)。</p>
+                  <p>设 \(PB = 2\sqrt{5}\cos\alpha,\ PC = 10\sin\alpha\)，则</p>
+                  <p>\(PA + PB + PC = 6\sqrt{5}\cos\alpha + 10\sin\alpha = 2\sqrt{70}\sin(\alpha + \varphi) \le 2\sqrt{70}\)。</p>
+                  <p>等号可取，最大值为 \(2\sqrt{70}\)。</p>
+                </div>
+              </div>
+
+              <!-- 5 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 5 题</span>
+                  <span class="sol-ans">答案：<b>\(-1\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>考虑多项式 \(\displaystyle\prod_{x\in S}(1+x) = (1-3)(1-2)(1-1)(1+1)(1+e)(1+\pi)\)。</p>
+                  <p>展开后每项对应 \(S\) 的一个子集，常数项 \(1\) 对应空集，其余项之和对应所有非空子集的乘积之和。</p>
+                  <p>计算得 \((-2)(-1)(0)(2)(1+e)(1+\pi) = 0\)。</p>
+                  <p>故所有非空子集的乘积之和为 \(0 - 1 = -1\)。</p>
+                </div>
+              </div>
+
+              <!-- 6 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 6 题</span>
+                  <span class="sol-ans">答案：<b>\([\sqrt{2}-1,\ 1)\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>利用 \(\sin^3 x = \sin x (1 - \cos x)(1 + \cos x)\)，得</p>
+                  <p>\(\dfrac{\sin^3 x}{1 + \cos x} = \sin x - \sin x\cos x\)，同理 \(\dfrac{\cos^3 x}{1 + \sin x} = \cos x - \sin x\cos x\)。</p>
+                  <p>因此 \(f(x) = \sin x + \cos x - 2\sin x\cos x\)。</p>
+                  <p>令 \(t = \sin x + \cos x \in (1, \sqrt{2}]\)，则 \(2\sin x\cos x = t^2 - 1\)，于是 \(f = -t^2 + t + 1\)。</p>
+                  <p>对称轴 \(t = \dfrac{1}{2}\)，在 \(t \in (1, \sqrt{2}]\) 上单调递减，值域为 \([\sqrt{2}-1,\ 1)\)。</p>
+                </div>
+              </div>
+
+              <!-- 7 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 7 题</span>
+                  <span class="sol-ans">答案：<b>\(4\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由 \(\boldsymbol{a} + \boldsymbol{b} + \boldsymbol{c} = \boldsymbol{0}\) 且均为单位向量，知 \(\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}\) 两两夹角 \(120^\circ\)，构成单位圆上的等边三角形。</p>
+                  <p>当 \(\boldsymbol{x} = -\boldsymbol{a}\) 时：</p>
+                  <p>\(|\boldsymbol{x} - \boldsymbol{a}| = 2\)，\(|\boldsymbol{x} - \boldsymbol{b}| = |\boldsymbol{c}| = 1\)，\(|\boldsymbol{x} - \boldsymbol{c}| = |\boldsymbol{b}| = 1\)。</p>
+                  <p>故 \(y = 2 + 1 + 1 = 4\)，为最大值。</p>
+                </div>
+              </div>
+
+              <!-- 8 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 8 题</span>
+                  <span class="sol-ans">答案：<b>\(\dfrac{\sqrt{10} + 1}{6}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>令 \(b = 6 - a\)，求 \(f(a) = \dfrac{a}{a^2+1} + \dfrac{6-a}{(6-a)^2+1}\) 的最大值。</p>
+                  <p>求导并令 \(g(x) = \dfrac{1-x^2}{(x^2+1)^2}\)，极值点满足 \(g(a) = g(b)\)，即</p>
+                  <p>\((1-a^2)(b^2+1)^2 = (1-b^2)(a^2+1)^2\)。</p>
+                  <p>约去 \(b^2 - a^2\)（\(a \ne b\)），得 \(a^2 + b^2 + 3 = a^2b^2\)。</p>
+                  <p>设 \(p = ab\)，则 \(a^2 + b^2 = 36 - 2p,\ a^2b^2 = p^2\)，代入得 \(p^2 + 2p - 39 = 0\)，</p>
+                  <p>解得 \(p = 2\sqrt{10} - 1\)（取正）。</p>
+                  <p>再计算：</p>
+                  <p>\(f = \dfrac{(a+b)(ab+1)}{a^2b^2 + a^2 + b^2 + 1} = \dfrac{6(p+1)}{p^2 - 2p + 37}\)。</p>
+                  <p>代入 \(p = 2\sqrt{10} - 1\)，得 \(f = \dfrac{12\sqrt{10}}{80 - 8\sqrt{10}} = \dfrac{\sqrt{10} + 1}{6}\)。</p>
+                </div>
+              </div>
+
+              <!-- 9 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 9 题</span>
+                  <span class="sol-ans">答案：<b>等边三角形</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>两边乘以 2 并利用 \(2\sin A\cos B = \sin C + \sin(A-B)\)，化简得</p>
+                  <p>\(\sin(A-B) + \sin(B-C) + \sin(C-A) = 0\)。</p>
+                  <p>设 \(u = A-B,\ v = B-C,\ w = C-A\)，则 \(u + v + w = 0\)，且</p>
+                  <p>\(\sin u + \sin v + \sin w = 4\sin\dfrac{u+v}{2}\sin\dfrac{v+w}{2}\sin\dfrac{w+u}{2} = 0\)。</p>
+                  <p>即 \(\sin\dfrac{w}{2}\sin\dfrac{u}{2}\sin\dfrac{v}{2} = 0\)。因 \(A,B,C \in (0,\pi)\)，得 \(u,v,w\) 中至少一个为 0，结合 \(u+v+w=0\) 推出 \(u=v=w=0\)。</p>
+                  <p>故 \(A = B = C\)，\(\triangle ABC\) 为等边三角形。</p>
+                </div>
+              </div>
+
+              <!-- 10 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 10 题</span>
+                  <span class="sol-ans">答案：<b>\(3\sqrt{3}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>设 \(z = e^{i\theta}\)。计算模的平方：</p>
+                  <p>\(|z^3 - 3z - 2|^2 = 14 - 6\text{Re}(z^2) - 4\text{Re}(z^3) + 12\text{Re}(z)\)。</p>
+                  <p>令 \(t = \cos\theta\)，则 \(\text{Re}(z^2) = 2t^2 - 1,\ \text{Re}(z^3) = 4t^3 - 3t\)，代入得</p>
+                  <p>\(h(t) = 20 + 24t - 12t^2 - 16t^3,\ t \in [-1, 1]\)。</p>
+                  <p>求导 \(h'(t) = -24(2t-1)(t+1)\)，临界点 \(t = -1,\ \dfrac{1}{2}\)。</p>
+                  <p>计算：\(h(-1) = 0,\ h(\tfrac{1}{2}) = 27,\ h(1) = 16\)。最大值为 27。</p>
+                  <p>故 \(|z^3 - 3z - 2|_{\max} = \sqrt{27} = 3\sqrt{3}\)。</p>
+                </div>
+              </div>
+
+              <!-- 11 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 11 题</span>
+                  <span class="sol-ans">答案：<b>\(\dfrac{3}{2}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>设 \(P(x_0, y_0)\)，由极线方程得 \(AB\) 所在直线为</p>
+                  <p>\(\dfrac{x_0 x}{4} + \dfrac{y_0 y}{3} = 1\)。</p>
+                  <p>由于对称性，只需考虑 \(P\) 在 \(x\) 轴上方的情形，即 \(y_0 > 0\)。</p>
+                  <p>此时 \(AB\) 与 \(y\) 轴交点 \(M\) 为 \(\left(0, \dfrac{3}{y_0}\right)\)，所以 \(OM = \dfrac{3}{y_0}\)。</p>
+                  <p>联立方程组：</p>
+                  <div class="steps">
+                    <p>\(\begin{cases}\dfrac{x_0 x}{4} + \dfrac{y_0 y}{3} = 1\\[6pt] \dfrac{x^2}{4} + \dfrac{y^2}{3} = 1\\[6pt] x_0^2 + y_0^2 = 4\end{cases}\)</p>
+                  </div>
+                  <p>消去 \(y\) 并整理得关于 \(x\) 的一元二次方程</p>
+                  <p>\((y_0^2 + 12)x^2 - 24x_0 x + 48 - 16y_0^2 = 0\)。</p>
+                  <p>设两根为 \(x_A, x_B\)，则</p>
+                  <p>\(\Delta x = |x_A - x_B| = \dfrac{\sqrt{(24x_0)^2 - 4(y_0^2+12)(48-16y_0^2)}}{y_0^2+12} = \dfrac{8y_0^2}{y_0^2+12}\)。</p>
+                  <p>故</p>
+                  <p>\(S = \dfrac{1}{2}\,\Delta x \cdot OM = \dfrac{1}{2} \cdot \dfrac{8y_0^2}{y_0^2+12} \cdot \dfrac{3}{y_0} = \dfrac{12y_0}{y_0^2+12} = \dfrac{12}{y_0 + \dfrac{12}{y_0}}\)。</p>
+                  <p>由于 \(P\) 在圆 \(x^2 + y^2 = 4\) 上，故 \(y_0 \in (0, 2]\)。当 \(y_0 \in (0, 2]\) 时，函数 \(y_0 + \dfrac{12}{y_0}\) 单调递减（因 \(y_0 < \sqrt{12}\)），所以它在 \(y_0 = 2\) 处取得最小值 \(2 + 6 = 8\)，对应 \(S\) 的最大值：</p>
+                  <p>\(S_{\max} = \dfrac{12}{8} = \dfrac{3}{2}\)。</p>
+                  <p>（当 \(y_0 = 2\) 时，\(x_0 = 0\)，\(P = (0, 2)\)，此时 \(AB\) 为 \(y = \dfrac{3}{2}\)，\(A = (1, \tfrac{3}{2})\)，\(B = (-1, \tfrac{3}{2})\)，验证 \(S = \dfrac{1}{2} \cdot 2 \cdot \dfrac{3}{2} = \dfrac{3}{2}\)。）</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /protectedContent -->
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   邀请码校验 · 多项式滚动哈希（底数 31，模 10^9+7）
+   ============================================================ */
+(function(){
+  const lockScreen = document.getElementById('lockScreen');
+  const content    = document.getElementById('protectedContent');
+  const form       = document.getElementById('lockForm');
+  const input      = document.getElementById('lockInput');
+  const errorEl    = document.getElementById('lockError');
+
+  let expectedHash = null;
+  let loadingError = false;
+
+  function hashPassword(s){
+    let h = 0;
+    const M = 1000000007;
+    for (let i = 0; i < s.length; i++){
+      h = (h * 31 + s.charCodeAt(i)) % M;
+    }
+    return String(h);
+  }
+
+  fetch('../../passwordhash.txt', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(text){
+      const v = text.trim().split(/\s+/)[0];
+      if (!/^\d+$/.test(v)) throw new Error('passwordhash.txt 内容无效');
+      expectedHash = v;
+    })
+    .catch(function(err){
+      loadingError = true;
+      errorEl.textContent = '验证文件加载失败：' + err.message;
+    });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorEl.textContent = '';
+
+    if (loadingError){
+      errorEl.textContent = '验证文件加载失败，请刷新页面';
+      return;
+    }
+    if (!expectedHash){
+      errorEl.textContent = '验证文件尚未就绪，请稍后重试';
+      return;
+    }
+
+    const val = input.value;
+    if (!val){
+      errorEl.textContent = '请输入邀请码';
+      return;
+    }
+
+    if (hashPassword(val) === expectedHash){
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise){
+        MathJax.startup.promise.then(function(){ /* 渲染完成 */ });
+      }
+    } else {
+      errorEl.textContent = '邀请码错误，请重试';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  input.focus();
+
+  window.hashPassword = function(pw){
+    const h = hashPassword(String(pw));
+    console.log('%c哈希值：', 'color:#c9a227;font-weight:700', h);
+    return h;
+  };
+  console.log('%c提示：运行 hashPassword(\'你的邀请码\') 可获取哈希值',
+              'color:#0f2547;font-weight:700');
+})();
+
+document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const acc  = btn.parentElement;
+    const body = acc.querySelector('.acc-body');
+    const open = acc.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  });
+});
+
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>

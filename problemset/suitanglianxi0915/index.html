@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>随堂练习 0915 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 2026年9月15日数学随堂练习。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(24px,4vw,36px);letter-spacing:1px;margin-bottom:10px}
+.page-hero .sub{color:#c3d2e6;font-size:14.5px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 72px}
+.back-bar{margin-bottom:22px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ============ 邀请码遮罩 ============ */
+.lock-screen{
+  display:grid;place-items:center;
+  padding:40px 20px 80px;
+}
+.lock-box{
+  max-width:460px;width:100%;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow-hover);
+  padding:44px 36px 36px;
+  text-align:center;
+  animation:rise .5s ease both;
+}
+.lock-icon{font-size:52px;line-height:1;margin-bottom:18px;display:block;}
+.lock-title{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:10px;}
+.lock-desc{font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.75;}
+.lock-form{display:flex;gap:10px}
+.lock-input{
+  flex:1;min-width:0;height:50px;
+  border:2px solid var(--line);border-radius:12px;
+  padding:0 14px;
+  font-size:16px;font-family:inherit;
+  letter-spacing:1px;text-align:center;
+  color:var(--navy);background:#fafbfe;
+  outline:none;transition:all .22s ease;
+}
+.lock-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
+.lock-input:focus{
+  border-color:var(--gold);background:#fff;
+  box-shadow:0 0 0 4px rgba(201,162,39,.15);
+}
+.lock-btn{
+  height:50px;padding:0 28px;
+  border:none;border-radius:12px;
+  font-family:inherit;font-size:15px;font-weight:700;
+  letter-spacing:.5px;color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(201,162,39,.32);
+  transition:all .24s ease;
+}
+.lock-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(201,162,39,.45);
+}
+.lock-error{
+  min-height:20px;margin-top:14px;
+  font-size:13.5px;font-weight:600;letter-spacing:.2px;
+  color:#c2453c;
+}
+.lock-hint{margin-top:18px;font-size:12.5px;color:#9aa6b8;line-height:1.7;}
+
+#protectedContent{display:none}
+
+/* ============ 内容区 ============ */
+.acc{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin-bottom:20px;
+  animation:rise .45s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.exam-card-head{
+  display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border-left:5px solid var(--gold);
+  border-bottom:1px solid var(--line);
+}
+.exam-card-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+}
+.exam-card-head .label{flex:1;font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy)}
+.exam-card-head .cnt{font-size:12px;font-weight:600;color:var(--muted)}
+.exam-card-body{padding:22px 26px 26px;background:#fafbfe}
+
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border:none;border-left:5px solid var(--gold);
+  cursor:pointer;font-family:inherit;text-align:left;
+  font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  transition:background .2s ease;
+}
+.acc-head:hover{background:#f2f6fd}
+.acc-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+  transition:all .22s ease;
+}
+.acc-head .label{flex:1}
+.acc-head .cnt{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--muted);margin-right:8px}
+.acc-head .chev{flex:0 0 auto;font-size:12px;color:var(--muted);transition:transform .28s ease}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc.open .acc-head{background:#f2f6fd}
+.acc.open .acc-head .dot{box-shadow:0 0 0 5px rgba(201,162,39,.28)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc-inner{padding:22px 26px 26px;background:#fafbfe}
+
+.exam-section{
+  font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin:18px 0 14px;padding-bottom:8px;
+  border-bottom:2px solid #f0f3f9;
+  display:flex;align-items:center;gap:9px;
+}
+.exam-section::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18);
+}
+.exam-section:first-child{margin-top:0}
+.exam-list{list-style:none;counter-reset: q}
+.exam-list li{
+  position:relative;padding-left:30px;margin-bottom:16px;
+  line-height:2;font-size:15px;color:#3f4a5a;
+}
+.exam-list li:last-child{margin-bottom:0}
+.exam-list li::before{
+  counter-increment: q;content: counter(q) ".";
+  position:absolute;left:0;top:0;
+  font-weight:800;color:var(--gold);font-size:14.5px;
+}
+.exam-list.cont{counter-reset: q 8;}
+.exam-list.cont2{counter-reset: q 11;}
+.exam-list.cont3{counter-reset: q 14;}
+
+.sol{
+  padding:18px 20px;margin-bottom:14px;
+  background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--gold);border-radius:12px;
+}
+.sol:last-child{margin-bottom:0}
+.sol-head{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:10px;padding-bottom:9px;
+  border-bottom:1px dashed var(--line);
+}
+.sol-no{
+  flex:0 0 auto;font-size:12.5px;font-weight:800;letter-spacing:.5px;
+  color:#fff;background:linear-gradient(135deg,var(--navy-2),var(--navy));
+  padding:3px 11px;border-radius:999px;
+}
+.sol-ans{font-size:14px;font-weight:700;color:var(--navy)}
+.sol-ans b{
+  color:#a8791a;
+  background:linear-gradient(135deg,#fff7e6,#fdeecd);
+  padding:2px 10px;border-radius:6px;margin-left:4px;
+}
+.sol-body{font-size:14.5px;color:#4b5563;line-height:1.95}
+.sol-body p{margin-bottom:9px}
+.sol-body p:last-child{margin-bottom:0}
+
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .lock-box{padding:34px 22px 28px}
+  .lock-icon{font-size:44px}
+  .lock-title{font-size:19px}
+  .lock-input{font-size:15px;height:46px}
+  .lock-btn{height:46px;padding:0 20px;font-size:14px}
+  .exam-card-head{padding:15px 18px;font-size:14.5px}
+  .exam-card-body{padding:16px 14px 20px}
+  .acc-head{padding:15px 18px;font-size:14.5px}
+  .acc-inner{padding:16px 14px 20px}
+  .exam-list li{font-size:14.5px;padding-left:26px;line-height:1.95}
+  .exam-section{font-size:14.5px}
+  .sol{padding:14px 15px}
+  .sol-body{font-size:14px}
+}
+</style>
+
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">题集</a><span>/</span>随堂练习 0915
+      </p>
+      <h1>随堂练习 0915</h1>
+      <p class="sub">2026 年 9 月 15 日 · 数学 · 单选题 8 道 · 多选题 3 道 · 填空题 3 道 · 解答题 3 道</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../">← 返回题集列表</a>
+      </div>
+
+      <!-- ===== 邀请码遮罩 ===== -->
+      <div class="lock-screen" id="lockScreen">
+        <div class="lock-box">
+          <span class="lock-icon">🔒</span>
+          <h2 class="lock-title">需要邀请码</h2>
+          <p class="lock-desc">本页内容仅向本班同学开放<br>请输入邀请码以继续查看</p>
+          <form class="lock-form" id="lockForm" autocomplete="off">
+            <input
+              type="password"
+              id="lockInput"
+              class="lock-input"
+              placeholder="请输入邀请码"
+              autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
+              required>
+            <button type="submit" class="lock-btn" id="lockBtn">确认</button>
+          </form>
+          <p class="lock-error" id="lockError"></p>
+          <p class="lock-hint">邀请码由班级管理员口头或群内通知</p>
+        </div>
+      </div>
+
+      <!-- ===== 受保护内容 ===== -->
+      <div id="protectedContent">
+
+        <!-- 试题 -->
+        <div class="acc">
+          <div class="exam-card-head">
+            <span class="dot"></span>
+            <span class="label">试题</span>
+            <span class="cnt">共 17 题</span>
+          </div>
+          <div class="exam-card-body">
+
+            <div class="exam-section">一、单选题（8×5=40）</div>
+            <ol class="exam-list">
+              <li>设集合 \(A=\{0,-a\}\)，\(B=\{1, a-2, 2a-2\}\)，若 \(A\subseteq B\)，则 \(a=\)（　　）<br>A. 2　　B. 1　　C. \(\frac{2}{3}\)　　D. \(-1\)</li>
+              <li>“黄沙百战穿金甲，不破楼兰终不还”是我国唐代著名诗人王昌龄的《从军行》中的两句诗，描写了当时战事的艰苦以及戍边将士的豪情壮志。从逻辑关系角度看，“破楼兰”是“终还”的（　　）<br>A. 充分不必要条件　　B. 必要不充分条件<br>C. 充要条件　　D. 既不充分也不必要条件</li>
+              <li>已知集合 \(A=\{x|x^2-3x+2=0, x\in R\}\)，\(B=\{x|0<x<5, x\in N\}\)，则满足条件 \(A\subseteq C\subseteq B\) 的集合 \(C\) 的个数为（　　）<br>A. 1　　B. 2　　C. 3　　D. 4</li>
+              <li>定义集合运算 \(A-B=\{x|x\in A且x\notin B\}\)，将 \(A\triangle B=(A-B)\cup(B-A)\) 称为集合 \(A\) 与集合 \(B\) 的对称差。命题甲：\(A\cap(B\triangle C)=(A\cap B)\triangle(A\cap C)\)；命题乙：\(A\cup(B\triangle C)=(A\cup B)\triangle(A\cup C)\)。则下列说法正确的是（　　）<br>A. 甲乙都是真命题　　B. 只有甲是真命题<br>C. 只有乙是真命题　　D. 甲乙都不是真命题</li>
+              <li>已知命题“对任意 \(\frac{5}{2}\le x_1\le 5\)，存在 \(\frac{3}{4}+m\le x_2\le 4\)，使得 \(x_1\le x_2\) 成立”为假命题，则实数 \(m\) 的取值范围是（　　）<br>A. \([\frac{5}{4}, \frac{9}{4})\)　　B. \((\frac{5}{4}, \frac{13}{4})\)　　C. \((\frac{7}{4}, \frac{17}{4})\)　　D. \((\frac{7}{4}, \frac{13}{4}]\)</li>
+              <li>已知 \([x]\) 表示不超过 \(x\) 的最大整数，集合 \(A=\{x\in Z|0<[x]<3\}\)，\(B=\{x|(x^2+ax)(x^2+2x+b)=0\}\)，且 \(A\cap(\complement_R B)=\emptyset\)，则集合 \(B\) 的子集个数为（　　）<br>A. 4　　B. 8　　C. 16　　D. 32</li>
+              <li>已知 \(x\) 为正实数，\(y\) 为非负实数，且 \(x+2y=2\)，则 \(\frac{x^2+1}{x}+\frac{2y^2}{y+1}\) 的最小值为（　　）<br>A. \(\frac{3}{4}\)　　B. \(\frac{9}{4}\)　　C. \(\frac{3}{2}\)　　D. \(\frac{9}{2}\)</li>
+              <li>“\(\exists a>b>0, a^2+\lambda b^2 > \frac{a^3+3b^3}{a-b}\)”是假命题，则实数 \(\lambda\) 的最大值为（　　）<br>A. 2　　B. 4　　C. 6　　D. 8</li>
+            </ol>
+
+            <div class="exam-section">二、多选题（3×6=18）</div>
+            <ol class="exam-list cont">
+              <li>有限集合 \(S\) 中元素的个数记做 \(card(S)\)，设 \(A,B\) 都为有限集合，则下列命题真命题是（　　）<br>A. \(A\cap B=\emptyset\) 的充要条件是 \(card(A\cup B)=card(A)+card(B)\)<br>B. \(A\subseteq B\) 的必要不充分条件是 \(card(A)<card(B)+1\)<br>C. \(A\subseteq B\) 的充分不必要条件是 \(card(A)\le card(B)-1\)<br>D. \(A=B\) 的充要条件是 \(card(A)=card(B)\)</li>
+              <li>已知正数 \(a,b\) 满足 \(a+b=4\)，则（　　）<br>A. \(ab\) 的最大值为 4　　B. \(\sqrt{a}+\sqrt{b}\) 的最大值为 \(2\sqrt{2}\)<br>C. \(\frac{1}{2a}+\frac{2}{b}\) 的最大值为 2　　D. \(3a^2+b^2\) 的最小值为 16</li>
+              <li>非空数集 \(A\subseteq R\)，同时满足如下两个性质：(1) 若 \(a,b\in A\)，则 \(ab\in A\)；(2) 若 \(a\in A\)，则 \(\frac{1}{a}\in A\)。称 \(A\) 为一个“封闭集”。以下说法正确的是（　　）<br>A. 若 \(A\) 为一个“封闭集”，则 \(1\in A\)<br>B. 若 \(A\) 为一个“封闭集”，且 \(a,b\in A\)，则 \(\frac{a}{b}\in A\)<br>C. 若 \(A,B\) 都是“封闭集”，则 \(A\cap B\) 是“封闭集”的充要条件是 \(A\subseteq B\) 或 \(B\subseteq A\)<br>D. 若 \(A,B\) 都是“封闭集”，则 \(A\cup B\) 是“封闭集”的充要条件是 \(A\subseteq B\) 或 \(B\subseteq A\)</li>
+            </ol>
+
+            <div class="exam-section">三、填空题（3×5=15）</div>
+            <ol class="exam-list cont2">
+              <li>已知实数 \(a,b\) 满足 \(-1<2a-b<2\)，\(-2<a+b<1\)，则 \(2a+b\) 的取值范围为 \(\underline{\qquad}\)。</li>
+              <li>若 \(x>-1\)，则 \(\frac{2x^2+4x+4}{x+1}\) 的最小值为 \(\underline{\qquad}\)。</li>
+              <li>将基本不等式 \(\sqrt{ab}\le \frac{a+b}{2}(a>0,b>0)\) 推广可得正确结论 \(\sqrt[n]{a_1a_2\cdots a_n}\le \frac{a_1+a_2+\cdots+a_n}{n}(a_1>0,a_2>0,\cdots,a_n>0,n\in N^*)\)，当且仅当 \(a_1=a_2=\cdots=a_n\) 时，等号成立。利用此结论解决问题：已知 \(x>-2, y>0\)，不等式 \(\frac{4y^3}{x+2}+\frac{x+6}{y}\ge m^2-2m\) 恒成立，则实数 \(m\) 的取值范围是 \(\underline{\qquad}\)。</li>
+            </ol>
+
+            <div class="exam-section">四、解答题（8+18+21=47）</div>
+            <ol class="exam-list cont3">
+              <li>已知集合 \(A=\{x|x^2-ax+4>0\}\)，\(B=\{x|b+2<x<2b\}\)。若 \(1\in A, 2\notin A\)，则 \(a\) 的取值范围集合为 \(C\)。<br>(1) 求集合 \(C\)；<br>(2) 若 \(C\cup(\complement_R B)\ne R\)，求实数 \(b\) 的取值范围。</li>
+              <li>(1) 已知 \(a>0, b>0\)，且 \(a+2b+ab=6\)。求 \(ab\) 的最大值以及 \(a+2b\) 的最小值；<br>(2) 已知正实数 \(a,b\) 满足 \(a+b=3\)，求 \(\frac{a}{a^2+1}+\frac{b}{b^2+1}\) 的最大值。</li>
+              <li>问题：已知 \(a,b,c\) 均为正实数，且 \(\frac{1}{a}+\frac{1}{b}+\frac{1}{c}=1\)，求证：\(a+b+c\ge 9\)。<br>证明：\(a+b+c=(a+b+c)(\frac{1}{a}+\frac{1}{b}+\frac{1}{c})=3+(\frac{b}{a}+\frac{a}{b})+(\frac{c}{a}+\frac{a}{c})+(\frac{c}{b}+\frac{b}{c})\ge 3+2+2+2=9\)。当且仅当 \(a=b=c=3\) 时，等号成立。<br>学习上述解法并解决下列问题：<br>(1) 已知 \(a,b,c\) 均为正实数，且 \(a+b+c=4\)，求 \(\frac{1}{a}+\frac{9}{b}+\frac{16}{c}\) 的最小值；<br>(2) 已知 \(a,b,x,y\) 均为正实数，且 \(\frac{x^2}{a^2}-\frac{y^2}{b^2}=1\)，求证：\(a^2-b^2\le (x-y)^2\)；<br>(3) 求 \(T=\sqrt{7t-13}-\sqrt{t-2}\) 的最小值，并求出使得 \(T\) 取得最小值时 \(t\) 的值。</li>
+            </ol>
+
+          </div>
+        </div>
+
+        <!-- 答案与解析 -->
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false">
+            <span class="dot"></span>
+            <span class="label">答案与解析</span>
+            <span class="cnt">共 17 题</span>
+            <span class="chev">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 1 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>因为 \(A\subseteq B\)，且 \(A=\{0,-a\}\)。若 \(0\in B\)，则 \(a-2=0\) 或 \(2a-2=0\)。若 \(a=2\)，此时 \(A=\{0,-2\}\)，\(B=\{1,0,2\}\)，\(A\not\subseteq B\)。若 \(a=1\)，此时 \(A=\{0,-1\}\)，\(B=\{1,-1,0\}\)，\(A\subseteq B\) 成立。验证其他情况均不成立，故选 B。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 2 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>设 \(P\)：破楼兰，\(Q\)：终还。原句“不破楼兰终不还”即 \(\neg P\rightarrow\neg Q\)，其逆否命题为 \(Q\rightarrow P\)，即“还了说明破了楼兰”。因此“破楼兰”是“终还”的必要条件，“终还”是“破楼兰”的充分条件。所以“破楼兰”是“终还”的必要不充分条件，选 B。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 3 题</span>
+                  <span class="sol-ans">答案：<b>D</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>解方程 \(x^2-3x+2=0\) 得 \(x=1,2\)，所以 \(A=\{1,2\}\)。\(B=\{x|0<x<5, x\in N\}=\{1,2,3,4\}\)。\(A\subseteq C\subseteq B\)，\(C\) 必须包含 1,2，还可包含 3,4 中的任意一个或两个，所以 \(C\) 可以是 \(\{1,2\}, \{1,2,3\}, \{1,2,4\}, \{1,2,3,4\}\)，共 4 个，选 D。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 4 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>命题甲：\(A\cap(B\triangle C)=(A\cap B)\triangle(A\cap C)\)，这是集合运算中“交对对称差”的分配律，正确。命题乙：\(A\cup(B\triangle C)=(A\cup B)\triangle(A\cup C)\)，不一定成立。例如 \(A=\{1\}, B=\{2\}, C=\{3\}\)，左边 \(\{1,2,3\}\)，右边 \(\{2,3\}\)，不相等。所以甲真乙假，选 B。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 5 题</span>
+                  <span class="sol-ans">答案：<b>D</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>原命题为假，则其否定为真：存在 \(x_1\in[\frac52,5]\)，对任意 \(x_2\in[\frac34+m,4]\)，都有 \(x_1>x_2\)。需 \([\frac34+m,4]\) 非空（\(\frac34+m\le4\Rightarrow m\le\frac{13}{4}\)），且 \(\frac34+m>\frac52\Rightarrow m>\frac74\)。故 \(m\in(\frac74,\frac{13}{4}]\)，选 D。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 6 题</span>
+                  <span class="sol-ans">答案：<b>C</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(A=\{x\in Z|0<[x]<3\}\)，\([x]=1\) 或 2，所以 \(A=\{1,2,3\}\)。\(A\cap(\complement_R B)=\emptyset\) 即 \(A\subseteq B\)。\(B\) 由 \(x^2+ax=0\) 和 \(x^2+2x+b=0\) 的根组成。若 \(A\subseteq B\)，则 1,2,3 都是 \(B\) 的元素。但 \(x^2+ax=0\) 的根为 0 和 \(-a\)，\(x^2+2x+b=0\) 的两根之和为 -2，不可能同时为 1,2,3 中的两个。因此题目应为 \(A\cap B=\emptyset\)。此时 \(B\) 有 4 个元素，子集个数为 \(2^4=16\)，选 C。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 7 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由 \(x+2y=2\) 得 \(x=2-2y\)，\(y\in[0,1)\)。原式 \(=x+\frac1x+\frac{2y^2}{y+1}\)。代入 \(x=2-2y\)，令 \(y=\frac13\) 得 \(x=\frac43\)，此时值为 \(\frac43+\frac34+\frac16=\frac94\)。验证 \(y=0\) 和 \(y=\frac12\) 时均大于 \(\frac94\)，故最小值为 \(\frac94\)，选 B。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 8 题</span>
+                  <span class="sol-ans">答案：<b>C</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>命题为假，即对任意 \(a>b>0\)，都有 \(a^2+\lambda b^2\le\frac{a^3+3b^3}{a-b}\)。得 \(\lambda\le\frac{3b^2+a^2}{b(a-b)}\)。令 \(t=\frac{a}{b}>1\)，则 \(\lambda\le\frac{3+t^2}{t-1}=(t-1)+\frac{4}{t-1}+2\ge6\)。所以 \(\lambda\) 的最大值为 6，选 C。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 9 题</span>
+                  <span class="sol-ans">答案：<b>AB</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>A 正确，两个集合不相交时，并集的元素个数等于各自元素个数之和。B 正确，\(A\subseteq B\) 必有 \(card(A)\le card(B)<card(B)+1\)，是必要条件；反之不成立，故为必要不充分条件。C 错误，表述容易引起歧义。D 错误，基数相同不能推出集合相等。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 10 题</span>
+                  <span class="sol-ans">答案：<b>AB</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>A 正确，\(ab\le(\frac{a+b}{2})^2=4\)。B 正确，\(\sqrt{a}+\sqrt{b}\le\sqrt{2(a+b)}=2\sqrt2\)。C 错误，\(\frac{1}{2a}+\frac{2}{b}\) 的最大值不是 2。D 错误，\(3a^2+b^2=4a^2-8a+16=4(a-1)^2+12\ge12\)，最小值为 12，不是 16。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 11 题</span>
+                  <span class="sol-ans">答案：<b>ABD</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>A 正确，取 \(a=1\) 即得 \(1\in A\)。B 正确，因 \(b\in A\Rightarrow\frac1b\in A\)，所以 \(a\cdot\frac1b=\frac ab\in A\)。C 错误，\(A\cap B\) 总是封闭集，不需要 \(A\subseteq B\) 或 \(B\subseteq A\)。D 正确，若 \(A\cup B\) 是封闭集，取 \(a\in A, b\in B\)，则 \(ab\in A\cup B\)，可推出 \(A\subseteq B\) 或 \(B\subseteq A\)；反之显然成立。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 12 题</span>
+                  <span class="sol-ans">答案：<b>\((-3,2)\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>令 \(2a+b=x(2a-b)+y(a+b)=(2x+y)a+(-x+y)b\)。比较系数得 \(x=\frac13, y=\frac43\)。所以 \(2a+b=\frac13(2a-b)+\frac43(a+b)\)。由范围相加得 \(-3<2a+b<2\)，即 \((-3,2)\)。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 13 题</span>
+                  <span class="sol-ans">答案：<b>4</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\frac{2x^2+4x+4}{x+1}=\frac{2[(x+1)^2+1]}{x+1}=2[(x+1)+\frac{1}{x+1}]\ge2\cdot2=4\)。当且仅当 \(x=0\) 时取等号。最小值为 4。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 14 题</span>
+                  <span class="sol-ans">答案：<b>\([-2,4]\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>令 \(a=x+2>0\)，则 \(x+6=a+4\)。原式 \(=\frac{4y^3}{a}+\frac{a}{y}+\frac4y\ge4y+\frac4y\ge8\)。当且仅当 \(y=1, a=2\)，即 \(x=0\) 时取等号。所以 \(m^2-2m\le8\)，解得 \(-2\le m\le4\)。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 15 题</span>
+                  <span class="sol-ans">答案：<b>(1) \(C=[4,5)\)　(2) \(b\in(\frac52,+\infty)\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>(1) \(1\in A\Rightarrow1-a+4>0\Rightarrow a<5\)；\(2\notin A\Rightarrow4-2a+4\le0\Rightarrow a\ge4\)。所以 \(a\in[4,5)\)，即 \(C=[4,5)\)。</p>
+                  <p>(2) \(B=(b+2,2b)\)。\(C\cup(\complement_R B)=R\) 等价于 \(B\subseteq C\)，即 \(b+2\ge4\) 且 \(2b\le5\)，解得 \(b\in[2,\frac52]\)。所以 \(C\cup(\complement_R B)\ne R\) 时 \(b\notin[2,\frac52]\)。又 \(B\) 非空，\(b>2\)。故 \(b\in(\frac52,+\infty)\)。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 16 题</span>
+                  <span class="sol-ans">答案：<b>(1) \(ab\) 最大值为 2，\(a+2b\) 最小值为 4　(2) \(\frac{12}{13}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>(1) \(a+2b+ab=6\)，由基本不等式 \(a+2b\ge2\sqrt{2ab}\)，所以 \(6\ge2\sqrt{2ab}+ab\)。令 \(t=\sqrt{ab}\)，得 \(t^2+2\sqrt2 t-6\le0\)，解得 \(t\le\sqrt2\)，所以 \(ab\le2\)。当 \(a=2, b=1\) 时取等号，此时 \(a+2b=4\)，为最小值。</p>
+                  <p>(2) \(a+b=3\)，\(b=3-a\)。令 \(t=ab\in(0,\frac94]\)。原式 \(=\frac{3t+3}{t^2-2t+10}\)。令 \(f(t)=\frac{3(t+1)}{t^2-2t+10}\)，求导得 \(f'(t)=\frac{-3(t^2+2t-12)}{(t^2-2t+10)^2}>0\) 在 \((0,\frac94]\) 上恒成立，所以 \(f(t)\) 单调递增。最大值在 \(t=\frac94\) 处取得，\(f(\frac94)=\frac{12}{13}\)。</p>
+                </div>
+              </div>
+
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 17 题</span>
+                  <span class="sol-ans">答案：<b>(1) 16　(2) 证明见解析　(3) 最小值为 \(\frac{\sqrt{42}}{7}\)，此时 \(t=\frac{85}{42}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>(1) \((\frac1a+\frac9b+\frac{16}{c})(a+b+c)\ge(1+3+4)^2=64\)，所以 \(\frac1a+\frac9b+\frac{16}{c}\ge\frac{64}{4}=16\)，当 \(a=\frac14, b=\frac34, c=1\) 时取等号。</p>
+                  <p>(2) 由 \(\frac{x^2}{a^2}-\frac{y^2}{b^2}=1\) 得 \(x^2=a^2+\frac{a^2y^2}{b^2}\)。要证 \(a^2-b^2\le(x-y)^2\)，即证 \(2xy\le\frac{a^2y^2}{b^2}+y^2+b^2\)。由基本不等式 \(\frac{a^2y^2}{b^2}+b^2\ge2ay\)，可证 \(2xy\le2ay+y^2\)，从而原不等式成立。</p>
+                  <p>(3) 令 \(x=\sqrt{7t-13}, y=\sqrt{t-2}\)，则 \(x^2-7y^2=1\)，\(T=x-y\)。直接求：\(T=\sqrt{1+7y^2}-y\)。求导得 \(7y=\sqrt{1+7y^2}\Rightarrow42y^2=1\Rightarrow y=\frac1{\sqrt{42}}\)。此时 \(T=\frac7{\sqrt{42}}-\frac1{\sqrt{42}}=\frac6{\sqrt{42}}=\frac{\sqrt{42}}7\)。对应 \(t=y^2+2=\frac1{42}+2=\frac{85}{42}\)。</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /protectedContent -->
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   邀请码校验 · 多项式滚动哈希（底数 31，模 10^9+7）
+   ------------------------------------------------------------
+   1. 页面加载时从 ../../passwordhash.txt 读取期望哈希（十进制）
+   2. 用户提交时对输入做同样的哈希，比对
+   3. 匹配则显示受保护内容
+   ============================================================ */
+(function(){
+  const lockScreen = document.getElementById('lockScreen');
+  const content    = document.getElementById('protectedContent');
+  const form       = document.getElementById('lockForm');
+  const input      = document.getElementById('lockInput');
+  const errorEl    = document.getElementById('lockError');
+
+  let expectedHash = null;
+  let loadingError = false;
+
+  /* ===== 多项式哈希：h = (h * 31 + charCode) mod 1e9+7 ===== */
+  function hashPassword(s){
+    let h = 0;
+    const M = 1000000007;
+    for (let i = 0; i < s.length; i++){
+      h = (h * 31 + s.charCodeAt(i)) % M;
+    }
+    return String(h);
+  }
+
+  /* ===== 加载期望哈希 ===== */
+  fetch('../../passwordhash.txt', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(text){
+      const v = text.trim().split(/\s+/)[0];
+      if (!/^\d+$/.test(v)) throw new Error('passwordhash.txt 内容无效');
+      expectedHash = v;
+    })
+    .catch(function(err){
+      loadingError = true;
+      errorEl.textContent = '验证文件加载失败：' + err.message;
+    });
+
+  /* ===== 提交校验 ===== */
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorEl.textContent = '';
+
+    if (loadingError){
+      errorEl.textContent = '验证文件加载失败，请刷新页面';
+      return;
+    }
+    if (!expectedHash){
+      errorEl.textContent = '验证文件尚未就绪，请稍后重试';
+      return;
+    }
+
+    const val = input.value;
+    if (!val){
+      errorEl.textContent = '请输入邀请码';
+      return;
+    }
+
+    if (hashPassword(val) === expectedHash){
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise){
+        MathJax.startup.promise.then(function(){ /* 渲染完成 */ });
+      }
+    } else {
+      errorEl.textContent = '邀请码错误，请重试';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  input.focus();
+
+  /* ===== 控制台辅助：hashPassword('你的邀请码') ===== */
+  window.hashPassword = function(pw){
+    const h = hashPassword(String(pw));
+    console.log('%c哈希值：', 'color:#c9a227;font-weight:700', h);
+    return h;
+  };
+  console.log('%c提示：运行 hashPassword(\'你的邀请码\') 可获取哈希值',
+              'color:#0f2547;font-weight:700');
+})();
+
+/* ===== 折叠面板（受保护内容内部） ===== */
+document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const acc  = btn.parentElement;
+    const body = acc.querySelector('.acc-body');
+    const open = acc.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  });
+});
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 CCF 非专业级别软件能力认证第一轮（CSP-S1）提高级 C++ 语言试题 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 2026 CCF CSP-S1 提高级 C++ 语言试题。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(20px,3.2vw,30px);letter-spacing:.5px;margin-bottom:10px;line-height:1.4}
+.page-hero .sub{color:#c3d2e6;font-size:14.5px;max-width:760px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 72px}
+
+.back-bar{margin-bottom:22px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+.exam-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin-bottom:20px;
+  animation:rise .45s ease both;
+}
+.exam-card-head{
+  display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border-left:5px solid var(--gold);
+  border-bottom:1px solid var(--line);
+}
+.exam-card-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+}
+.exam-card-head .label{flex:1;font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy)}
+.exam-card-head .cnt{font-size:12px;font-weight:600;color:var(--muted)}
+.exam-card-body{padding:22px 26px 26px;background:#fafbfe}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.acc{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;animation:rise .45s ease both;
+}
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border:none;border-left:5px solid var(--gold);
+  cursor:pointer;font-family:inherit;text-align:left;
+  font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  transition:background .2s ease;
+}
+.acc-head:hover{background:#f2f6fd}
+.acc-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+  transition:all .22s ease;
+}
+.acc-head .label{flex:1}
+.acc-head .cnt{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--muted);margin-right:8px}
+.acc-head .chev{flex:0 0 auto;font-size:12px;color:var(--muted);transition:transform .28s ease}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc.open .acc-head{background:#f2f6fd}
+.acc.open .acc-head .dot{box-shadow:0 0 0 5px rgba(201,162,39,.28)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc-inner{padding:22px 26px 26px;background:#fafbfe}
+
+.exam-section{
+  font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin:26px 0 16px;padding-bottom:9px;
+  border-bottom:2px solid #f0f3f9;
+  display:flex;align-items:center;gap:9px;
+}
+.exam-section::before{
+  content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18);
+}
+.exam-section:first-child{margin-top:0}
+
+.exam-subsection{
+  font-size:14.5px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin:20px 0 12px;
+  display:flex;align-items:center;gap:8px;
+}
+.exam-subsection::before{
+  content:"";width:5px;height:5px;border-radius:50%;
+  background:var(--gold);
+}
+
+.exam-desc{
+  font-size:13.5px;color:var(--muted);
+  margin:-6px 0 14px;line-height:1.8;
+}
+.exam-desc b{color:#a8791a;font-weight:600}
+
+.exam-list > li{
+  position:relative;padding-left:34px;margin-bottom:20px;
+  line-height:1.95;font-size:15px;color:#3f4a5a;
+}
+.exam-list > li:last-child{margin-bottom:0}
+.exam-list > li .qno{
+  position:absolute;left:0;top:0;
+  font-weight:800;color:var(--gold);font-size:14.5px;
+}
+.exam-list > li p{margin-bottom:8px}
+.exam-list > li p:last-child{margin-bottom:0}
+.exam-list > li strong{color:var(--navy)}
+
+.opts{
+  display:flex;flex-wrap:wrap;gap:6px 24px;
+  margin:8px 0 2px;color:#3f4a5a;font-size:15px;
+}
+.opts span{white-space:nowrap}
+
+.code-block{
+  margin:10px 0 14px;
+  background:#0f2547;
+  color:#e2e8f0;
+  border-radius:10px;
+  padding:14px 18px;
+  font-family:"SF Mono",Consolas,Menlo,Monaco,monospace;
+  font-size:13.5px;
+  line-height:1.75;
+  overflow-x:auto;
+  white-space:pre;
+  tab-size:4;
+  border-left:4px solid var(--gold);
+}
+.code-block code{font-family:inherit;color:inherit}
+
+.sol{
+  padding:18px 20px;margin-bottom:14px;
+  background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--gold);border-radius:12px;
+}
+.sol:last-child{margin-bottom:0}
+.sol-head{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:10px;padding-bottom:9px;
+  border-bottom:1px dashed var(--line);
+}
+.sol-no{
+  flex:0 0 auto;font-size:12.5px;font-weight:800;letter-spacing:.5px;
+  color:#fff;background:linear-gradient(135deg,var(--navy-2),var(--navy));
+  padding:3px 11px;border-radius:999px;
+}
+.sol-ans{font-size:14px;font-weight:700;color:var(--navy)}
+.sol-ans b{
+  color:#a8791a;
+  background:linear-gradient(135deg,#fff7e6,#fdeecd);
+  padding:2px 10px;border-radius:6px;margin-left:4px;
+}
+.sol-body{font-size:14.5px;color:#4b5563;line-height:2}
+.sol-body p{margin-bottom:8px}
+.sol-body p:last-child{margin-bottom:0}
+.sol-body strong{color:var(--navy)}
+
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .exam-card-head{padding:15px 18px;font-size:14.5px}
+  .exam-card-body{padding:16px 14px 20px}
+  .acc-head{padding:15px 18px;font-size:14.5px}
+  .acc-inner{padding:16px 14px 20px}
+  .exam-list > li{font-size:14.5px;padding-left:30px;line-height:1.9}
+  .exam-section{font-size:15px}
+  .code-block{font-size:12.5px;padding:12px 14px}
+  .opts{font-size:14.5px;gap:4px 18px}
+  .sol{padding:14px 15px}
+  .sol-body{font-size:14px}
+}
+</style>
+
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">题集</a><span>/</span>CSP-S1 2026
+      </p>
+      <h1>2026 CCF 非专业级别软件能力认证第一轮（CSP-S1）提高级 C++ 语言试题</h1>
+      <p class="sub">\(2026\) 年 \(9\) 月 \(19\) 日 · 信息学 · 单项选择题 \(15\) 题 · 阅读程序 \(3\) 组 · 完善程序 \(2\) 组</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../">← 返回题集列表</a>
+      </div>
+
+      <!-- ===== 试题 ===== -->
+      <div class="exam-card">
+        <div class="exam-card-head">
+          <span class="dot"></span>
+          <span class="label">试题</span>
+          <span class="cnt">共 \(43\) 题</span>
+        </div>
+        <div class="exam-card-body">
+
+          <div class="exam-section">一、单项选择题</div>
+          <p class="exam-desc">共 \(15\) 题，每题 \(2\) 分，共计 \(30\) 分；每题有且仅有一个正确选项。</p>
+
+          <ol class="exam-list">
+            <li>
+              <span class="qno">\(1.\)</span>
+              <p>执行下列代码后，<code>cnt</code> 的值是（　　）。</p>
+<pre class="code-block"><code>int x = 2026, cnt = 0;
+while (x) {
+    x &amp;= x - 1;
+    cnt++;
+}</code></pre>
+              <p class="opts"><span>A. \(6\)</span><span>B. \(7\)</span><span>C. \(11\)</span><span>D. \(8\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(2.\)</span>
+              <p>用权值 \(\{1,2,3,4,5,6,7,8\}\) 构造哈夫曼树，其带权路径长度是（　　）。</p>
+              <p class="opts"><span>A. \(108\)</span><span>B. \(96\)</span><span>C. \(99\)</span><span>D. \(102\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(3.\)</span>
+              <p>把 \(1\) 到 \(1000\) 的所有整数按十进制写出，数字“\(1\)”总共出现了多少次（　　）。</p>
+              <p class="opts"><span>A. \(300\)</span><span>B. \(271\)</span><span>C. \(301\)</span><span>D. \(320\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(4.\)</span>
+              <p>将 \(5\) 封信随机装入 \(5\) 个写好地址的信封（每封一个），恰好有 \(2\) 封装对的方案数是（　　）。</p>
+              <p class="opts"><span>A. \(44\)</span><span>B. \(24\)</span><span>C. \(10\)</span><span>D. \(20\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(5.\)</span>
+              <p>\(3^{2026}\bmod 100\) 的值是（　　）。</p>
+              <p class="opts"><span>A. \(29\)</span><span>B. \(9\)</span><span>C. \(43\)</span><span>D. \(81\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(6.\)</span>
+              <p>有 \(5\) 堆石子排成一行，重量依次为 \(4\)、\(1\)、\(3\)、\(2\)、\(5\)。每次只能把相邻的两堆合并成一堆，代价为这两堆重量之和。将所有石子合并成一堆的最小总代价是（　　）。</p>
+              <p class="opts"><span>A. \(36\)</span><span>B. \(35\)</span><span>C. \(34\)</span><span>D. \(33\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(7.\)</span>
+              <p>树状数组维护长度 \(n=16\) 的序列，查询前缀和 <code>sum(11)</code> 与单点修改 <code>add(3, x)</code> 分别需要访问树状数组中多少个下标（　　）。</p>
+              <p class="opts"><span>A. \(3\) 和 \(4\)</span><span>B. \(4\) 和 \(4\)</span><span>C. \(3\) 和 \(5\)</span><span>D. \(4\) 和 \(3\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(8.\)</span>
+              <p>有向无环图 \(G\) 顶点集为 \(\{1,2,3,4\}\)，边集为 \(\{(1,2),(1,3)\}\)，顶点 \(4\) 与任何顶点均不相邻。该图不同的拓扑序共有多少种（　　）。</p>
+              <p class="opts"><span>A. \(12\)</span><span>B. \(8\)</span><span>C. \(4\)</span><span>D. \(6\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(9.\)</span>
+              <p>某分治算法满足 \(T(n)=T(n/3)+T(2n/3)+\Theta(n)\)，\(T(1)=O(1)\)，则 \(T(n)\) 是（　　）。</p>
+              <p class="opts"><span>A. \(\Theta(n\log n)\)</span><span>B. \(\Theta(n^2)\)</span><span>C. \(\Theta(n^{1.5})\)</span><span>D. \(\Theta(n)\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(10.\)</span>
+              <p>无根树含 \(9\) 个结点（编号为 \(1\)—\(9\)），边集为 \(\{(1,2),(1,3),(2,4),(2,5),(3,6),(6,7),(7,8),(5,9)\}\)。该树的直径（以边数计）与重心分别是（　　）。</p>
+              <p class="opts"><span>A. 直径 \(6\)，重心为结点 \(3\)</span><span>B. 直径 \(7\)，重心为结点 \(2\)</span><span>C. 直径 \(8\)，重心为结点 \(1\)</span><span>D. 直径 \(7\)，重心为结点 \(1\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(11.\)</span>
+              <p>一张有向图缩点后得到的有向无环图含 \(6\) 个顶点，其中入度为 \(0\) 的顶点有 \(3\) 个，出度为 \(0\) 的顶点有 \(4\) 个。为使原图变成强连通图，至少需要添加多少条有向边（　　）。</p>
+              <p class="opts"><span>A. \(7\)</span><span>B. \(6\)</span><span>C. \(4\)</span><span>D. \(3\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(12.\)</span>
+              <p>含 \(6\) 个结点的不同形态的二叉树共有多少棵（结点不带标号，区分左右子树）（　　）。</p>
+              <p class="opts"><span>A. \(42\)</span><span>B. \(429\)</span><span>C. \(132\)</span><span>D. \(720\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(13.\)</span>
+              <p>字符串 \(S=\text{"ababaabab"}\)，其所有既是真前缀又是真后缀的子串（非空）的长度之和是（　　）。</p>
+              <p class="opts"><span>A. \(4\)</span><span>B. \(6\)</span><span>C. \(7\)</span><span>D. \(5\)</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(14.\)</span>
+              <p>用归并排序统计逆序对，合并部分的核心代码为：</p>
+<pre class="code-block"><code>if (a[i] &lt;= a[j]) {
+    tmp[k++] = a[i++];
+} else {
+    tmp[k++] = a[j++];
+    ans += mid - i + 1;
+}</code></pre>
+              <p>若把判断条件中的 <code>a[i] &lt;= a[j]</code> 改成 <code>a[i] &lt; a[j]</code>，则 <code>ans</code> 统计出的结果（　　）。</p>
+              <p class="opts"><span>A. 完全不变</span><span>B. 变为原来的 \(2\) 倍</span><span>C. 变为满足 \(i&lt;j\) 且 \(a[i]\ge a[j]\) 的数对个数</span><span>D. 变为原来的一半</span></p>
+            </li>
+
+            <li>
+              <span class="qno">\(15.\)</span>
+              <p>执行 <code>power(2, 100, 1000)</code> 调用下列函数，返回值是（　　）。</p>
+<pre class="code-block"><code>long long power(long long a, long long b, long long p) {
+    long long r = 1 % p;
+    while (b) {
+        if (b &amp; 1) r = r * a % p;
+        a = a * a % p;
+        b &gt;&gt;= 1;
+    }
+    return r;
+}</code></pre>
+              <p class="opts"><span>A. \(576\)</span><span>B. \(376\)</span><span>C. \(976\)</span><span>D. \(176\)</span></p>
+            </li>
+          </ol>
+
+          <div class="exam-section">二、阅读程序</div>
+          <p class="exam-desc">程序输入不超过数组或字符串定义的范围；判断题正确填 √，错误填 ×；除特殊说明外，判断题 \(1.5\) 分，选择题 \(3\) 分，共计 \(40\) 分。</p>
+
+          <div class="exam-subsection">（\(1\)）</div>
+<pre class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int a[100];
+string s;
+int gen[13] = {1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1};
+int main() {
+    cin &gt;&gt; s;
+    for (int i = 0; i &lt; 32; ++i) a[i] = s[i] - '0';
+    for (int i = 32; i &lt; 44; ++i) a[i] = 0;
+    for (int i = 0; i &lt; 32; ++i) {
+        if (a[i] == 0) continue;
+        for (int j = 0; j &lt; 13; ++j) a[i + j] ^= gen[j];
+    }
+    for (int i = 32; i &lt; 44; ++i) cout &lt;&lt; a[i];
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+          <p class="exam-desc">说明：输入保证为一个长度恰为 \(32\) 的 <code>'0'</code>/<code>'1'</code> 字符串。</p>
+
+          <div class="exam-subsection">判断题</div>
+          <ol class="exam-list">
+            <li><span class="qno">\(16.\)</span><p>（\(1\) 分）当输入为 \(32\) 个 <code>'0'</code> 时，程序输出 \(12\) 个 \(0\)。（　　）</p></li>
+            <li><span class="qno">\(17.\)</span><p>程序运行结束后，数组 <code>a</code> 中下标从 \(0\) 到 \(31\) 的元素一定全部为 \(0\)。（　　）</p></li>
+            <li><span class="qno">\(18.\)</span><p>若将第 \(12\)—\(14\) 行（为 <code>a[32]</code> 到 <code>a[43]</code> 补 \(0\) 的循环）删除，会改变程序输出的结果。（　　）</p></li>
+          </ol>
+
+          <div class="exam-subsection">单选题</div>
+          <ol class="exam-list">
+            <li>
+              <span class="qno">\(19.\)</span>
+              <p>关于第 \(6\) 行定义的数组 <code>gen</code>，下列说法正确的是（　　）。</p>
+              <p class="opts"><span>A. 共 \(12\) 个元素，表示一个 \(12\) 位的除数</span><span>B. 共 \(13\) 个元素，表示一个 \(13\) 位的被除数</span><span>C. 共 \(13\) 个元素，其中 <code>gen[0]</code> 是除数的最高位</span><span>D. 共 \(13\) 个元素，其中 <code>gen[12]</code> 是除数的最高位</span></p>
+            </li>
+            <li>
+              <span class="qno">\(20.\)</span>
+              <p>该程序实现的功能，最准确的说法是（　　）。</p>
+              <p class="opts"><span>A. 输出 \(M\) 与 \(13\) 位二进制数按位异或的结果</span><span>B. 补 \(12\) 个 \(0\) 后做模 \(2\) 除法求余数，输出 \(12\) 位余数</span><span>C. 逐位取反</span><span>D. 统计 \(1\) 的个数</span></p>
+            </li>
+            <li>
+              <span class="qno">\(21.\)</span>
+              <p>若把第 \(16\) 行 <code>if (a[i] == 0) continue;</code> 删除，说法正确的是（　　）。</p>
+              <p class="opts"><span>A. 输出不变</span><span>B. 可能运行错误</span><span>C. 能正常输出 \(12\) 位串，但与输入 <code>s</code> 无关</span><span>D. <code>a[0]</code> 一定为 \(0\)</span></p>
+            </li>
+          </ol>
+
+          <div class="exam-subsection">（\(2\)）</div>
+<pre class="code-block"><code>#include &lt;iostream&gt;
+using namespace std;
+int n, m, a[100007], L, R, lg[100007], i, j, t, dp[100007][25], pw[25];
+int gcd(int x, int y) {
+    if (y == 0) return x;
+    return gcd(y, x % y);
+}
+int main() {
+    cin &gt;&gt; n &gt;&gt; m;
+    for (i = 1; i &lt;= n; i++) cin &gt;&gt; a[i];
+    t = 0;
+    pw[0] = 1;
+    for (i = 1; i &lt;= 24; i++) pw[i] = pw[i - 1] * 2;
+    for (i = 1; i &lt;= 100000; i++)
+        if (pw[t + 1] &gt;= i) lg[i] = t;
+        else { t++; lg[i] = t; }
+    for (i = 1; i &lt;= n; i++) dp[i][0] = a[i];
+    for (j = 1; j &lt;= lg[n]; j++)
+        for (i = 1; i + pw[j] - 1 &lt;= n; i++)
+            dp[i][j] = gcd(dp[i][j - 1], dp[i + pw[j - 1]][j - 1]);
+    for (i = 1; i &lt;= m; i++) {
+        cin &gt;&gt; L &gt;&gt; R;
+        cout &lt;&lt; gcd(dp[L][lg[R - L + 1]], dp[R - pw[lg[R - L + 1]] + 1][lg[R - L + 1]]) &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre>
+          <p class="exam-desc">说明：保证 \(1\le n\le 100000\)，每次查询满足 \(1\le L\le R\le n\)，且数组 <code>a</code> 的元素均为正整数。</p>
+
+          <div class="exam-subsection">判断题</div>
+          <ol class="exam-list">
+            <li><span class="qno">\(22.\)</span><p>当 \(n=5\)，\(a=\{4,2,6,3,3\}\)，且仅有一次查询 \(L=2,R=5\) 时，输出为 \(1\)。（　　）</p></li>
+            <li><span class="qno">\(23.\)</span><p>当某次查询的区间长度为 \(1\)（即 \(L=R\)）时，该次查询的输出一定等于 <code>a[L]</code>。（　　）</p></li>
+            <li><span class="qno">\(24.\)</span><p>任意一次查询的输出结果一定不小于该查询区间内的最小值。（　　）</p></li>
+          </ol>
+
+          <div class="exam-subsection">单选题</div>
+          <ol class="exam-list">
+            <li>
+              <span class="qno">\(25.\)</span>
+              <p>对于 \(j\ge 1\)，数组 <code>dp[i][j]</code> 保存的是（　　）。</p>
+              <p class="opts"><span>A. 连续 \(j\) 个数的 gcd</span><span>B. 连续 \(2^j\) 个数的 gcd</span><span>C. <code>a[i]</code> 与 <code>a[j]</code> 的 gcd</span><span>D. <code>a[1..i]</code> 的 gcd</span></p>
+            </li>
+            <li>
+              <span class="qno">\(26.\)</span>
+              <p>若把一次求最大公约数的运算视为 \(O(1)\)，则第 \(17\)—\(22\) 行建表过程的时间复杂度为（　　）。</p>
+              <p class="opts"><span>A. \(\Theta(n)\)</span><span>B. \(\Theta(n\log n)\)</span><span>C. \(\Theta(n^2)\)</span><span>D. \(\Theta(mn)\)</span></p>
+            </li>
+            <li>
+              <span class="qno">\(27.\)</span>
+              <p>设 \(x=R-L+1\)，则使得 <code>lg[x] = 5</code> 的 \(x\) 的取值范围是（　　）。</p>
+              <p class="opts"><span>A. \([16,31]\)</span><span>B. \([17,32]\)</span><span>C. \([32,63]\)</span><span>D. \([33,64]\)</span></p>
+            </li>
+          </ol>
+
+          <div class="exam-subsection">（\(3\)）</div>
+<pre class="code-block"><code>#include &lt;iostream&gt;
+using namespace std;
+int n, fa[100007], f[100007], ans;
+int main() {
+    cin &gt;&gt; n;
+    for (int i = 2; i &lt;= n; ++i) cin &gt;&gt; fa[i];
+    for (int i = n; i &gt;= 2; --i) {
+        if (f[fa[i]] + f[i] + 1 &gt; ans) ans = f[fa[i]] + f[i] + 1;
+        if (f[i] + 1 &gt; f[fa[i]]) f[fa[i]] = f[i] + 1;
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</code></pre>
+          <p class="exam-desc">说明：输入第一行为结点个数 \(n\)，第二行为 \(n-1\) 个整数，依次表示结点 \(2\)—\(n\) 的父结点编号，满足 \(2\le n\le 10000\) 且 \(1\le fa[i]&lt;i\)，根结点为 \(1\)。</p>
+
+          <div class="exam-subsection">判断题</div>
+          <ol class="exam-list">
+            <li><span class="qno">\(28.\)</span><p>当 \(n=5\)，\(fa[2]\sim fa[5]=\{1,2,3,4\}\) 时，程序输出 \(4\)。（　　）</p></li>
+            <li><span class="qno">\(29.\)</span><p>程序输出前，<code>f[1]</code> 的值一定等于 <code>ans</code> 的值。（　　）</p></li>
+            <li><span class="qno">\(30.\)</span><p>将第 \(10\)—\(12\) 行与第 \(13\)—\(15\) 行两个 <code>if</code> 语句的顺序交换后，程序输出结果不受影响。（　　）</p></li>
+          </ol>
+
+          <div class="exam-subsection">单选题</div>
+          <ol class="exam-list">
+            <li>
+              <span class="qno">\(31.\)</span>
+              <p>程序输出的 <code>ans</code> 表示的是（　　）。</p>
+              <p class="opts"><span>A. 树的直径</span><span>B. 根到最深叶子的边数</span><span>C. 叶子个数</span><span>D. 父结点编号之和</span></p>
+            </li>
+            <li>
+              <span class="qno">\(32.\)</span>
+              <p>当 \(n=7\)，\(fa[2]\sim fa[7]=\{1,1,2,2,3,3\}\) 时，输出为（　　）。</p>
+              <p class="opts"><span>A. \(2\)</span><span>B. \(3\)</span><span>C. \(4\)</span><span>D. \(5\)</span></p>
+            </li>
+            <li>
+              <span class="qno">\(33.\)</span>
+              <p>当 \(n=10\)，满足输出为 \(9\) 的合法输入种类数为（　　）。</p>
+              <p class="opts"><span>A. \(0\)</span><span>B. \(9\)</span><span>C. \(256\)</span><span>D. \(512\)</span></p>
+            </li>
+          </ol>
+
+          <div class="exam-section">三、完善程序</div>
+          <p class="exam-desc">单选题，每小题 \(3\) 分，共计 \(30\) 分。</p>
+
+          <div class="exam-subsection">（\(1\)）平衡路线</div>
+          <p class="exam-desc" style="margin:0 0 14px">
+            给定一张有 \(n\) 个顶点、\(m\) 条边的无向图，每条边带有符号 <code>'+'</code> 或 <code>'-'</code>。对于一条从 \(s\) 到 \(t\) 的路线，允许重复经过顶点和边。记 \(n_+,n_-\) 分别为经过的 <code>'+'</code>/<code>'-'</code> 边数，路线权值为 \(|n_+-n_-|\)。求最小权值，无路线输出 \(-1\)。<br>
+            数据满足 \(2\le n\le 2\times 10^5\)，\(1\le m\le 4\times 10^5\)，\(1\le s,t\le n\) 且 \(s\ne t\)，可能出现重边。
+          </p>
+<pre class="code-block"><code>#include &lt;iostream&gt;
+constexpr int N = 200005;
+constexpr int M = 400005;
+int n, m, s, t;
+int h[N], e[M &lt;&lt; 1], ne[M &lt;&lt; 1], w[M &lt;&lt; 1], idx;
+int q[N], d[N], c[N];
+void add(int a, int b, int z) {
+    e[idx] = b; w[idx] = z; ne[idx] = h[a]; h[a] = idx++;
+}
+int main() {
+    std::cin &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; t;
+    for (int i = 1; i &lt;= n; i++) h[i] = d[i] = c[i] = -1;
+    for (int i = 0; i &lt; m; i++) {
+        int a, b; char op[2];
+        std::cin &gt;&gt; a &gt;&gt; b &gt;&gt; op;
+        int z = /* ① */;
+        add(a, b, z); add(b, a, z);
+    }
+    int hh = 0, tt = 0;
+    int p = 0, ng = 0, ok = 1;
+    q[tt++] = s; d[s] = c[s] = 0;
+    while (/* ② */) {
+        int x = q[hh++];
+        for (int i = h[x]; i != -1; i = ne[i]) {
+            int y = e[i];
+            if (w[i] &gt; 0) p = 1;
+            if (w[i] &lt; 0) ng = 1;
+            if (d[y] == -1) {
+                d[y] = /* ③ */;
+                c[y] = c[x] ^ 1;
+                q[tt++] = y;
+            } else if (/* ④ */) ok = 0;
+        }
+    }
+    if (d[t] == -1) { std::cout &lt;&lt; -1; return 0; }
+    if (!p || !ng) { std::cout &lt;&lt; d[t]; return 0; }
+    if (/* ⑤ */) std::cout &lt;&lt; 0;
+    else std::cout &lt;&lt; 1;
+    return 0;
+}</code></pre>
+
+          <ol class="exam-list">
+            <li>
+              <span class="qno">\(34.\)</span>
+              <p>①处应填（　　）。</p>
+              <p class="opts"><span>A. <code>op[0] == '+' ? 0 : 1</code></span><span>B. <code>op[0] == '+'</code></span><span>C. <code>op[0] == '+' ? 1 : -1</code></span><span>D. <code>op[0] == '-' ? 1 : 0</code></span></p>
+            </li>
+            <li>
+              <span class="qno">\(35.\)</span>
+              <p>②处应填（　　）。</p>
+              <p class="opts"><span>A. <code>hh &lt; n</code></span><span>B. <code>tt &lt; n</code></span><span>C. <code>hh &lt;= tt</code></span><span>D. <code>hh &lt; tt</code></span></p>
+            </li>
+            <li>
+              <span class="qno">\(36.\)</span>
+              <p>③处应填（　　）。</p>
+              <p class="opts"><span>A. <code>d[y] + 1</code></span><span>B. <code>d[x] + 1</code></span><span>C. <code>d[x]</code></span><span>D. <code>d[x] - 1</code></span></p>
+            </li>
+            <li>
+              <span class="qno">\(37.\)</span>
+              <p>④处应填（　　）。</p>
+              <p class="opts"><span>A. <code>c[y] == c[x]</code></span><span>B. <code>w[i] == 1</code></span><span>C. <code>c[y] != c[x]</code></span><span>D. <code>d[y] + 1 != d[x]</code></span></p>
+            </li>
+            <li>
+              <span class="qno">\(38.\)</span>
+              <p>⑤处应填（　　）。</p>
+              <p class="opts"><span>A. <code>ok &amp;&amp; c[s] == c[t]</code></span><span>B. <code>ok &amp;&amp; c[s] != c[t]</code></span><span>C. <code>!ok || c[s] == c[t]</code></span><span>D. <code>!ok &amp;&amp; c[s] != c[t]</code></span></p>
+            </li>
+          </ol>
+
+          <div class="exam-subsection">（\(2\)）标准答案</div>
+          <p class="exam-desc" style="margin:0 0 14px">
+            给定 \(n\) 名学生参加考试，共 \(m\) 道选择题，每题只有 A、B 选项。第 \(i\) 名学生答案为长度 \(m\) 的字符串，最终得分 \(r_i\) 为与标准答案相同的题数。给定预期得分 \(x_i\)，构造标准答案使 \(\sum_{i=1}^{n}|r_i-x_i|\) 最大。<br>
+            数据满足 \(1\le n\le 18\)，\(1\le m\le 300\)，\(0\le x_i\le m\)。
+          </p>
+<pre class="code-block"><code>#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+int main() {
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+    vector&lt;ll&gt; x(n), c(n);
+    for (int i = 0; i &lt; n; i++) {
+        cin &gt;&gt; x[i];
+        c[i] = /* ① */;
+    }
+    vector&lt;string&gt; a(n);
+    for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];
+    vector&lt;int&gt; s(n, -1);
+    vector&lt;ll&gt; q(m, 0);
+    ll C = 0, S = 0;
+    for (int i = 0; i &lt; n; i++) {
+        C -= c[i];
+        for (int j = 0; j &lt; m; j++) {
+            if (a[i][j] == 'A') q[j]--;
+            else q[j]++;
+        }
+    }
+    for (int j = 0; j &lt; m; j++) S += abs(q[j]);
+    ll ans = C + S;
+    ull best = 0, lst = 0;
+    for (ull mask = 1; mask &lt; (1ULL &lt;&lt; n); mask++) {
+        ull g = /* ② */;
+        ull d = g ^ lst;
+        int k = /* ③ */;
+        C -= /* ④ */;
+        for (int j = 0; j &lt; m; j++) {
+            ll old = q[j];
+            int v = (a[k][j] == 'A' ? 1 : -1);
+            q[j] -= 2ll * s[k] * v;
+            S += abs(q[j]) - abs(old);
+        }
+        s[k] = -s[k];
+        if (C + S &gt; ans) { ans = C + S; best = g; }
+        lst = g;
+    }
+    for (int i = 0; i &lt; n; i++) {
+        if ((best &gt;&gt; i) &amp; 1) s[i] = 1;
+        else s[i] = -1;
+    }
+    string res(m, 'A');
+    for (int j = 0; j &lt; m; j++) {
+        ll v = 0;
+        for (int i = 0; i &lt; n; i++) {
+            if (a[i][j] == 'A') v += s[i];
+            else v -= s[i];
+        }
+        if (/* ⑤ */) res[j] = 'A';
+        else res[j] = 'B';
+    }
+    cout &lt;&lt; res &lt;&lt; endl;
+    return 0;
+}</code></pre>
+
+          <ol class="exam-list">
+            <li>
+              <span class="qno">\(39.\)</span>
+              <p>①处应填（　　）。</p>
+              <p class="opts"><span>A. <code>2 * x[i] - m</code></span><span>B. <code>-m + 2 * x[i] + 1</code></span><span>C. <code>m - 2 * x[i]</code></span><span>D. <code>m + 2 * x[i]</code></span></p>
+            </li>
+            <li>
+              <span class="qno">\(40.\)</span>
+              <p>②处应填（　　）。</p>
+              <p class="opts"><span>A. <code>mask | (mask &gt;&gt; 1)</code></span><span>B. <code>mask ^ (mask &gt;&gt; 1)</code></span><span>C. <code>mask &amp; (mask &gt;&gt; 1)</code></span><span>D. <code>mask ^ ((mask &gt;&gt; 1) + 1)</code></span></p>
+            </li>
+            <li>
+              <span class="qno">\(41.\)</span>
+              <p>③处应填（　　）。</p>
+              <p class="opts"><span>A. <code>__builtin_ctzll(d) + 1</code></span><span>B. <code>__builtin_popcountll(d)</code></span><span>C. <code>__builtin_ctzll(g)</code></span><span>D. <code>__builtin_ctzll(d)</code></span></p>
+            </li>
+            <li>
+              <span class="qno">\(42.\)</span>
+              <p>④处应填（　　）。</p>
+              <p class="opts"><span>A. <code>2ll * s[k] * c[k]</code></span><span>B. <code>s[k] * c[k]</code></span><span>C. <code>2ll * (s[k] - c[k])</code></span><span>D. <code>2ll * c[k]</code></span></p>
+            </li>
+            <li>
+              <span class="qno">\(43.\)</span>
+              <p>⑤处应填（　　）。</p>
+              <p class="opts"><span>A. <code>v &gt;= (n &amp; 1)</code></span><span>B. <code>v &gt; (n &amp; 1)</code></span><span>C. <code>v + (n &amp; 1) &gt;= 0</code></span><span>D. <code>v * (n &amp; 1) &gt;= 0</code></span></p>
+            </li>
+          </ol>
+
+        </div>
+      </div>
+
+      <!-- ===== 答案与解析 ===== -->
+      <div class="acc">
+        <button class="acc-head" aria-expanded="false">
+          <span class="dot"></span>
+          <span class="label">答案与解析</span>
+          <span class="cnt">共 \(43\) 题</span>
+          <span class="chev">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(1\) 题</span>
+                <span class="sol-ans">答案：<b>D</b></span>
+              </div>
+              <div class="sol-body">
+                <p>\(2026 = (11111101010)_2\)，共有 \(8\) 个 \(1\)。操作 \(x \mathrel{\&\!=} x - 1\) 每次消去最低位的 \(1\)，循环执行 \(8\) 次后 \(x = 0\)，故 \(cnt = 8\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(2\) 题</span>
+                <span class="sol-ans">答案：<b>D</b></span>
+              </div>
+              <div class="sol-body">
+                <p>哈夫曼树的 WPL 等于所有内部结点权值之和。合并过程：</p>
+                <p>\(1+2=3\)，\(3+3=6\)，\(4+5=9\)，\(6+6=12\)，\(7+8=15\)，\(9+12=21\)，\(15+21=36\)。</p>
+                <p>总计 \(3+6+9+12+15+21+36=102\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(3\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>分类统计：</p>
+                <p>\(1\)–\(9\)：\(1\) 出现 \(1\) 次；</p>
+                <p>\(10\)–\(99\)：十位 \(10\) 次 + 个位 \(9\) 次 = \(19\) 次；</p>
+                <p>\(100\)–\(999\)：百位 \(100\) 次 + 十位 \(90\) 次 + 个位 \(90\) 次 = \(280\) 次；</p>
+                <p>\(1000\)：\(1\) 次。</p>
+                <p>合计 \(1+19+280+1=301\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(4\) 题</span>
+                <span class="sol-ans">答案：<b>D</b></span>
+              </div>
+              <div class="sol-body">
+                <p>先从 \(5\) 封中选 \(2\) 封装对：\(\dbinom{5}{2}=10\)。剩下 \(3\) 封必须全部装错，即 \(3\) 元错排 \(D_3=2\)。</p>
+                <p>总数 \(10\times 2=20\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(5\) 题</span>
+                <span class="sol-ans">答案：<b>A</b></span>
+              </div>
+              <div class="sol-body">
+                <p>\(3^4=81\)，\(3^8\equiv 61\)，\(3^{16}\equiv 21\)，故 \(3^{20}\equiv 21\times 81=1701\equiv 1\pmod{100}\)。</p>
+                <p>\(2026 \bmod 20 = 6\)，所以 \(3^{2026}\equiv 3^6=729\equiv 29\pmod{100}\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(6\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>区间 DP 求得最优合并方案：先合并 \(1+3=4\)，再合并 \(2+5=7\)，再合并 \(4+4=8\)，最后 \(8+7=15\)。</p>
+                <p>总代价 \(4+7+8+15=34\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(7\) 题</span>
+                <span class="sol-ans">答案：<b>A</b></span>
+              </div>
+              <div class="sol-body">
+                <p><code>sum(11)</code>：访问 \(11\to 10\to 8\)（\(3\) 个下标）。</p>
+                <p><code>add(3, x)</code>：访问 \(3\to 4\to 8\to 16\)（\(4\) 个下标）。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(8\) 题</span>
+                <span class="sol-ans">答案：<b>B</b></span>
+              </div>
+              <div class="sol-body">
+                <p>\(1\) 必须排在 \(2,3\) 之前，\(2\) 与 \(3\) 顺序可交换（\(2\) 种）。\(4\) 是孤立点，可插入到 \(3\) 个位置中的任意一个（\(4\) 个空位）。</p>
+                <p>总数 \(2\times 4=8\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(9\) 题</span>
+                <span class="sol-ans">答案：<b>A</b></span>
+              </div>
+              <div class="sol-body">
+                <p>\(\dfrac{1}{3}+\dfrac{2}{3}=1\)，满足 Master 定理的临界情形，故 \(T(n)=\Theta(n\log n)\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(10\) 题</span>
+                <span class="sol-ans">答案：<b>D</b></span>
+              </div>
+              <div class="sol-body">
+                <p>最长路径为 \(8\to 7\to 6\to 3\to 1\to 2\to 5\to 9\)，共 \(7\) 条边，直径 \(=7\)。</p>
+                <p>依次尝试删去各点：删去 \(1\) 后最大连通块为 \(4\) 个点；删去 \(2\) 或 \(3\) 后最大连通块为 \(5\) 个点。故重心是结点 \(1\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(11\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>把 DAG 变成强连通图所需的最少边数为 \(\max(\#\text{源},\#\text{汇})\)（当二者都不为 \(0\) 时）。</p>
+                <p>\(\max(3,4)=4\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(12\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>\(n\) 个结点的二叉树形态数是卡特兰数 \(C_n=\dfrac{1}{n+1}\dbinom{2n}{n}\)。</p>
+                <p>\(C_6=\dfrac{1}{7}\dbinom{12}{6}=132\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(13\) 题</span>
+                <span class="sol-ans">答案：<b>B</b></span>
+              </div>
+              <div class="sol-body">
+                <p>\(S=\text{ababaabab}\)。找既是真前缀又是真后缀的串：</p>
+                <p>长度 \(2\)：前缀 “ab”，后缀 “ab”，匹配。</p>
+                <p>长度 \(4\)：前缀 “abab”，后缀 “abab”，匹配。</p>
+                <p>长度之和 \(2+4=6\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(14\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>原条件 <code>a[i] &lt;= a[j]</code> 统计 \(i&lt;j\) 且 \(a[i]&gt;a[j]\)（严格逆序对）。</p>
+                <p>改为 <code>a[i] &lt; a[j]</code> 后，等号被划分到另一分支，于是统计的是 \(i&lt;j\) 且 \(a[i]\ge a[j]\)（非严格逆序对）。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(15\) 题</span>
+                <span class="sol-ans">答案：<b>B</b></span>
+              </div>
+              <div class="sol-body">
+                <p>依次快速幂：\(2^{10}\equiv 24\)，\(2^{20}\equiv 576\)，\(2^{40}\equiv 776\)，\(2^{80}\equiv 176\)，\(2^{100}=2^{80}\cdot 2^{20}\equiv 176\times 576\)。</p>
+                <p>\(176\times 576=101376\equiv 376\pmod{1000}\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(16\) 题</span>
+                <span class="sol-ans">答案：<b>√</b></span>
+              </div>
+              <div class="sol-body">
+                <p>输入全 \(0\) 时，每次检查 <code>a[i] == 0</code> 都成立，直接 <code>continue</code>，数组完全不变。输出 <code>a[32..43]</code> 共 \(12\) 个 \(0\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(17\) 题</span>
+                <span class="sol-ans">答案：<b>√</b></span>
+              </div>
+              <div class="sol-body">
+                <p>处理完第 \(i\) 位后，只有 \(i+1\) 及之后的迭代会访问位置 \(i+j\)（\(j\ge 0\)），而 \(i'&gt;i\) 时 \(i'+j'&gt;i\) 不能等于 \(i\)。因此 \(a[i]\) 在处理后固定。若 \(a[i]=1\)，与 <code>gen[0]=1</code> 异或后变为 \(0\)；若 \(a[i]=0\) 则保持 \(0\)。故 \(a[0..31]\) 最终全为 \(0\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(18\) 题</span>
+                <span class="sol-ans">答案：<b>×</b></span>
+              </div>
+              <div class="sol-body">
+                <p>数组 <code>a</code> 是全局变量，默认初始化为 \(0\)，与手动补 \(0\) 效果完全相同，删除该循环不影响输出。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(19\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p><code>gen</code> 有 \(13\) 个元素，值为 \(1,1,0,0,0,0,0,0,0,1,1,1,1\)。在异或时 <code>a[i+j] ^= gen[j]</code>，即 <code>gen[0]</code> 对齐到 <code>a[i]</code>（二进制串的第 \(i\) 位，从左往右）。由于输入串按从高位到低位存储，<code>gen[0]</code> 对应最高位。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(20\) 题</span>
+                <span class="sol-ans">答案：<b>B</b></span>
+              </div>
+              <div class="sol-body">
+                <p>这是典型的模 \(2\) 除法（CRC 求余）过程：把 \(32\) 位输入当作多项式 \(M\)，在其后补 \(12\) 个 \(0\) 相当于 \(M\times 2^{12}\)，用 \(13\) 位生成多项式 <code>gen</code> 去除，输出 \(12\) 位余数。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(21\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>删除 <code>continue</code> 后，无论 <code>a[i]</code> 是 \(0\) 还是 \(1\) 都会执行异或。此时对每个 \(i\) 都固定执行 <code>a[i+j] ^= gen[j]</code>，输出变成与 <code>s</code> 无关的固定 \(12\) 位串。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(22\) 题</span>
+                <span class="sol-ans">答案：<b>√</b></span>
+              </div>
+              <div class="sol-body">
+                <p>区间 \(a[2..5]=\{2,6,3,3\}\)，\(\gcd(2,6,3,3)=\gcd(2,3)=1\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(23\) 题</span>
+                <span class="sol-ans">答案：<b>√</b></span>
+              </div>
+              <div class="sol-body">
+                <p>\(L=R\) 时 \(lg[1]=0\)，\(dp[L][0]=a[L]\)，两次查询的都是 \(a[L]\)，故输出 \(a[L]\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(24\) 题</span>
+                <span class="sol-ans">答案：<b>×</b></span>
+              </div>
+              <div class="sol-body">
+                <p>区间 \(\gcd\) 是区间内所有数的约数，故 \(\gcd\le\) 区间最小值。应为“一定<strong>不大于</strong>该区间最小值”。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(25\) 题</span>
+                <span class="sol-ans">答案：<b>B</b></span>
+              </div>
+              <div class="sol-body">
+                <p>倍增 ST 表的定义：<code>dp[i][j]</code> 表示从 <code>a[i]</code> 开始连续 \(2^j\) 个数的最大公约数。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(26\) 题</span>
+                <span class="sol-ans">答案：<b>B</b></span>
+              </div>
+              <div class="sol-body">
+                <p>外层 \(j\) 共 \(O(\log n)\) 层，内层 \(i\) 共 \(O(n)\) 次，每次 \(\gcd\) 为 \(O(1)\)，总复杂度 \(\Theta(n\log n)\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(27\) 题</span>
+                <span class="sol-ans">答案：<b>D</b></span>
+              </div>
+              <div class="sol-body">
+                <p>按题目中 <code>lg</code> 的构造：<code>lg[i] = t</code> 当 \(2^{t+1}\ge i\)，即 \(\lg[i]=\lceil\log_2 i\rceil-1\)。</p>
+                <p>当 \(i\in[33,64]\) 时 \(\lceil\log_2 i\rceil=6\)，故 \(\lg[i]=5\)。选 D。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(28\) 题</span>
+                <span class="sol-ans">答案：<b>√</b></span>
+              </div>
+              <div class="sol-body">
+                <p>链 \(1-2-3-4-5\)，依次处理：\(i=5\) 时 \(ans=1\)，\(f[4]=1\)；\(i=4\) 时 \(ans=2\)，\(f[3]=2\)；\(i=3\) 时 \(ans=3\)，\(f[2]=3\)；\(i=2\) 时 \(ans=4\)，\(f[1]=4\)。</p>
+                <p>输出 \(4\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(29\) 题</span>
+                <span class="sol-ans">答案：<b>×</b></span>
+              </div>
+              <div class="sol-body">
+                <p><code>f[1]</code> 表示以 \(1\) 为根的最长向下路径长度，<code>ans</code> 表示树的直径。对于非链的树，两者一般不等。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(30\) 题</span>
+                <span class="sol-ans">答案：<b>×</b></span>
+              </div>
+              <div class="sol-body">
+                <p>交换两个 <code>if</code> 后，第二个 <code>if</code> 会先执行，更新 <code>f[fa[i]]</code>，然后再用它计算 <code>ans</code>，导致 <code>ans</code> 使用错误的（新）值，可能把同一条路径算两遍。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(31\) 题</span>
+                <span class="sol-ans">答案：<b>A</b></span>
+              </div>
+              <div class="sol-body">
+                <p>\(ans=\max(f[fa[i]]+f[i]+1)\) 表示穿过 <code>fa[i]</code> 的两条最长向下路径拼成的路径，即树的直径。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(32\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>树为：\(1\) 的孩子 \(2,3\)；\(2\) 的孩子 \(4,5\)；\(3\) 的孩子 \(6,7\)。最长路径为 \(4-2-1-3-6\) 等，长度 \(4\)。逐步计算得 \(ans=4\)。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(33\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>输出为 \(9\) 意味着直径为 \(9\)，即树是一条含 \(10\) 个结点的链。在 \(fa[i]&lt;i\) 的约束下：</p>
+                <p>情形 A：根 \(1\) 为端点，链为 \(1-2-3-\cdots-10\)，只有 \(1\) 种。</p>
+                <p>情形 B：根 \(1\) 为内部结点，链在 \(1\) 处分成两支，一端为 \(10\)，另一端为 \(m\in\{2,\dots,9\}\)，其余点 \(2,\dots,9\) 中 \(&lt;m\) 的部分可任选分配到两支之一：</p>
+                <p>\(\displaystyle\sum_{m=2}^{9}2^{m-2}=2^{8}-1=255\) 种。</p>
+                <p>合计 \(1+255=256\) 种。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(34\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p><code>'+'</code> 需要让 <code>w[i] &gt; 0</code> 成立，<code>'-'</code> 需要让 <code>w[i] &lt; 0</code> 成立。故选 <code>op[0] == '+' ? 1 : -1</code>。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(35\) 题</span>
+                <span class="sol-ans">答案：<b>D</b></span>
+              </div>
+              <div class="sol-body">
+                <p>BFS 循环条件：<code>hh &lt; tt</code>（队列非空）。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(36\) 题</span>
+                <span class="sol-ans">答案：<b>B</b></span>
+              </div>
+              <div class="sol-body">
+                <p>BFS 层次距离递推 <code>d[y] = d[x] + 1</code>。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(37\) 题</span>
+                <span class="sol-ans">答案：<b>A</b></span>
+              </div>
+              <div class="sol-body">
+                <p>二分图判定：若已访问的邻居 \(y\) 与 \(x\) 颜色相同，则出现奇环，<code>ok = 0</code>。故填 <code>c[y] == c[x]</code>。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(38\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>最小权值为 \(0\) 的充要条件：图不是二分图（有奇环），或者 \(s,t\) 同为一种颜色（存在偶环可以调平衡）。即 <code>!ok || c[s] == c[t]</code>。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(39\) 题</span>
+                <span class="sol-ans">答案：<b>C</b></span>
+              </div>
+              <div class="sol-body">
+                <p>学生 \(i\) 的预期得分 \(x_i\) 对应的“平衡值”为 \(c_i=m-2x_i\)，使得 \(|r_i-x_i|\) 可写成关于 \(c_i\) 的线性贡献。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(40\) 题</span>
+                <span class="sol-ans">答案：<b>B</b></span>
+              </div>
+              <div class="sol-body">
+                <p><code>mask ^ (mask &gt;&gt; 1)</code> 是标准的格雷码，相邻枚举只改变一位。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(41\) 题</span>
+                <span class="sol-ans">答案：<b>D</b></span>
+              </div>
+              <div class="sol-body">
+                <p>两次格雷码异或得到一位差异，用 <code>__builtin_ctzll(d)</code> 求出是哪一位（即哪个下标 \(k\) 被翻转）。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(42\) 题</span>
+                <span class="sol-ans">答案：<b>A</b></span>
+              </div>
+              <div class="sol-body">
+                <p>翻转 <code>s[k]</code> 后，\(C\) 的增量应为 \(2\cdot s[k]\cdot c[k]\)（因为 <code>s[k]</code> 从 \(s\) 变为 \(-s\)，变化量是 \(-2s[k]\)，对 \(C\) 的贡献是 \(2s[k]c[k]\)）。</p>
+              </div>
+            </div>
+
+            <div class="sol">
+              <div class="sol-head">
+                <span class="sol-no">第 \(43\) 题</span>
+                <span class="sol-ans">答案：<b>A</b></span>
+              </div>
+              <div class="sol-body">
+                <p>最后决定第 \(j\) 题答案取 A 还是 B。若 <code>v &gt;= (n &amp; 1)</code> 取 A，否则取 B（奇偶性调整保证结果最优）。</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.acc-head').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const acc  = btn.parentElement;
+      const body = acc.querySelector('.acc-body');
+      const open = acc.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+    });
+  });
+
+  function refreshOpen(){
+    document.querySelectorAll('.acc.open .acc-body').forEach(body => {
+      body.style.maxHeight = body.scrollHeight + 'px';
+    });
+  }
+  window.addEventListener('load', refreshOpen);
+  window.addEventListener('resize', refreshOpen);
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+    MathJax.startup.promise.then(refreshOpen);
+  }
+  [300, 800, 1500].forEach(t => setTimeout(refreshOpen, t));
+
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
+</script>
+
+</body>
+</html>

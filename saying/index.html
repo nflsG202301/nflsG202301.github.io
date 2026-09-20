@@ -1,52 +1,430 @@
-仰之弥高，钻之弥坚。——数学-唐
-我感觉很放松，因为没有人听课。——语文-韦
-若A⊆B，且B⊇A，则A=B. ——数学-唐
-我是附中的，附中有个很好的语文组。——语文-韦
-你好可爱啊。——政治-周
-人体口腔上皮细胞富含叶绿体。——生物-马
-你万万不可自己决定任何事情。 ——A班众人
-数学老师没一个吱声…导数可简单了。 ——物理-叶
-每日一题并不是每日都有一题。 ——物理-叶
-古人已经死掉了，没法活过来搞我们……喵喵喵……君子是聪明的好蛋。 ——语文-韦
-我的手表提醒我锻炼是否结束了。——数学-唐
-B化铜。——数学-唐
-这种物质我没见过。——化学-孙
-既然孙老师都不知道，那我也不知道。——生物-马
-一班的孩子们无论说什么都是对的。——生物-马
-细胞里含有……氢氧化氢。——生物-马
-我是看着他长大的。——生物-马
-碳碳碳碳碳碳碳碳碳碳碳碳碳……链。——生物-马
-香蕉没有脑子。——生物-马
-Biang Biang Biang. ——语文-韦
-这句话太丢人了，不要打到上面去。——数学-唐
-这什么垃圾题啊。——数学-唐
-父亲是流动的，父亲是未知的。——历史-周
-弱电解质不是弱智。——化学-孙
-我也不想批作业。——数学-唐
-**降（酱）……你废了。——数学-唐
-神金。——语文-韦
-我的********全是豆包写的。——语文-韦
-翻墙就很烦。——语文-韦
-周五是周五的作业，周末是周末的作业。——数学-唐
-这个f就像我们班某些人做的广播操。——数学-唐
-你的数学是体育老师教的吗？——数学-唐
-都喝了溴水啊？——政治-周
-司马光有缸。——政治-周
-不要敲击饭卡，有点原始人的特征。——历史-周
-nia nia nia.——语文-韦
-兄弟帮我砍一刀。——数学-唐
-我们老师也很喜欢吃瓜的。——数学-唐
-你们不要跟我抬杠，你们肯定抬不过我。——化学-孙
-你们有点重口味。——化学-孙
-冤假错案可以找我平反。——英语B-连
-What can I say. ——英语B-连
-最喜欢当老师了，随便说一句话都能让同学们吵起来。——英语A-柴
-你不应该把老师当字典使用。——英语A-柴
-化学的本质是电子竞技。——化学-孙
-拉不动。 ——化学-孙
-Dong Dong Dong Dong Dong. ——语文-韦
-甚至有硫。——众人
-学好自然常数对你们以后谈恋爱很有帮助。——物理-杜
-Infinite Bananas. ——Eng-Felix
-同志们，消完啦，哈哈哈哈哈。——物理-杜
-南外毒素？——生物-马
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>名言 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班课堂名言合集。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:1px;margin-bottom:12px}
+.page-hero .sub{color:#c3d2e6;font-size:15px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 64px}
+
+/* 分类筛选 */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.filter-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid var(--line);background:#fff;color:var(--muted);
+  font-size:13.5px;font-weight:600;padding:8px 16px;border-radius:999px;
+  cursor:pointer;font-family:inherit;transition:all .22s ease;
+}
+.filter-btn .dot{
+  width:8px;height:8px;border-radius:50%;background:var(--c,#94a3b8);
+  transition:all .22s ease;
+}
+.filter-btn:hover{border-color:var(--c,#c9a227);color:var(--navy)}
+.filter-btn.active{
+  color:#fff;border-color:transparent;
+  background:var(--c,#c9a227);
+  box-shadow:0 6px 16px rgba(15,37,71,.18);
+}
+.filter-btn.active .dot{background:rgba(255,255,255,.9)}
+
+/* 统计条 */
+.bar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;margin-bottom:18px;
+}
+.bar .now{
+  font-size:16px;font-weight:700;color:var(--navy);letter-spacing:.5px;
+  display:flex;align-items:center;gap:9px;
+}
+.bar .now::before{
+  content:"";width:9px;height:9px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18);
+}
+.bar .num{font-size:13.5px;color:var(--muted)}
+.bar .num b{color:var(--navy)}
+
+/* 名言网格 */
+.sayings{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;
+}
+.saying{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-left:5px solid var(--c,#94a3b8);
+  border-radius:14px;
+  padding:22px 24px 18px;
+  box-shadow:var(--shadow);
+  transition:transform .26s ease, box-shadow .26s ease;
+  animation:rise .4s ease both;
+}
+.saying:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.saying .quote-mark{
+  position:absolute;top:6px;right:18px;
+  font-size:64px;line-height:1;color:rgba(15,37,71,.05);
+  font-family:Georgia,serif;pointer-events:none;
+}
+.saying-text{
+  font-size:15.5px;line-height:1.8;color:#2c3644;
+  letter-spacing:.3px;margin-bottom:14px;position:relative;
+  word-break:break-word;
+}
+.saying-by{
+  display:inline-flex;align-items:center;
+  font-size:12.5px;font-weight:700;letter-spacing:.5px;
+  color:var(--c,#64748b);
+  padding:3px 11px;border-radius:7px;
+  background:rgba(15,37,71,.05);
+}
+
+/* 空状态 / 加载 / 错误 */
+.state{
+  text-align:center;padding:70px 30px;
+  background:var(--card);border:1px dashed var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.state .big{font-size:48px;display:block;margin-bottom:16px;opacity:.65}
+.state h2{font-size:18px;color:var(--navy);letter-spacing:1px;margin-bottom:8px}
+.state p{font-size:14px;color:var(--muted)}
+.state.error{color:#c2453c}
+.state.error h2{color:#c2453c}
+
+.site-footer{
+  background:var(--navy);color:#9fb3d1;
+  padding:34px 0;font-size:13.5px;
+}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:30px 0 48px}
+  .sayings{grid-template-columns:1fr;gap:12px}
+  .saying{padding:18px 20px 16px}
+  .saying-text{font-size:14.5px}
+  .filters{gap:6px}
+  .filter-btn{padding:7px 13px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- 页面头部 -->
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="../">首页</a><span>/</span>名言</p>
+      <h1>名言</h1>
+      <p class="sub">课堂上的金句合集，点击说话者分类即可查看。</p>
+    </div>
+  </section>
+
+  <!-- 名言列表 -->
+  <section class="section">
+    <div class="wrap">
+
+      <!-- 分类筛选（JS 动态生成） -->
+      <div class="filters" id="filters"></div>
+
+      <!-- 统计条 -->
+      <div class="bar">
+        <div class="now" id="nowTitle">全部名言</div>
+        <div class="num">共 <b id="sayCount">—</b> 条</div>
+      </div>
+
+      <!-- 加载提示 -->
+      <div class="state" id="loadingState">
+        <span class="big">⏳</span>
+        <h2>正在加载名言…</h2>
+        <p>请稍等片刻</p>
+      </div>
+
+      <!-- 名言网格 -->
+      <div class="sayings" id="sayings" style="display:none"></div>
+
+      <!-- 空 / 错误状态 -->
+      <div class="state" id="emptyState" style="display:none">
+        <span class="big">💬</span>
+        <h2>暂无收录</h2>
+        <p>该分类下暂时还没有名言，欢迎投稿补充。</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- 页脚 -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   名言板块：从 ./FamousSayings.txt 读取并解析
+   ------------------------------------------------------------
+   文本格式：<名言内容>——<说话者>
+   - 允许 "——" 前后有多余空格
+   - 允许说话者含有全角连字符（如 "语文‑韦"）
+   ============================================================ */
+
+/* ---------- 分类定义（顺序即筛选按钮顺序） ---------- */
+const CATEGORIES = [
+  { key: 'all',       name: '全部',       color: '#0f2547' },
+  { key: '语文-韦',   name: '语文-韦',   color: '#c2453c' },
+  { key: '数学-唐',   name: '数学-唐',   color: '#2f6bc0' },
+  { key: '英语A-柴',  name: '英语A-柴',  color: '#218a55' },
+  { key: '英语B-连',  name: '英语B-连',  color: '#0f8a8a' },
+  { key: '物理-叶',   name: '物理-叶',   color: '#6b4bc0' },
+  { key: '化学-孙',   name: '化学-孙',   color: '#c4761a' },
+  { key: '生物-马',   name: '生物-马',   color: '#b04a9b' },
+  { key: '地理-王',   name: '地理-王',   color: '#7a9b2a' },
+  { key: '政治-周',   name: '政治-周',   color: '#4b5fa8' },
+  { key: '历史-周',   name: '历史-周',   color: '#8a6a3a' },
+  { key: '其他',      name: '其他',      color: '#64748b' }
+];
+
+/* 已知作者 → 分类映射；其余作者归入「其他」 */
+const AUTHOR_TO_CATEGORY = {
+  '语文-韦':  '语文-韦',
+  '数学-唐':  '数学-唐',
+  '英语A-柴': '英语A-柴',
+  '英语B-连': '英语B-连',
+  '物理-叶':  '物理-叶',
+  '化学-孙':  '化学-孙',
+  '生物-马':  '生物-马',
+  '地理-王':  '地理-王',
+  '政治-周':  '政治-周',
+  '历史-周':  '历史-周'
+};
+
+const COLOR_MAP = {};
+CATEGORIES.forEach(c => COLOR_MAP[c.key] = c.color);
+
+/* ---------- 工具函数 ---------- */
+function escapeHtml(s){
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+/* 把各种连字符统一为半角 '-'，用于分类匹配 */
+function normalizeAuthor(s){
+  return String(s).replace(/[\u2010\u2011\u2012\u2013\u2014\u2015]/g, '-').trim();
+}
+
+/* ---------- 解析文本 ---------- */
+function parseSayings(text){
+  const lines = text.split(/\r?\n/);
+  const result = [];
+
+  lines.forEach(function(raw, idx){
+    const line = raw.trim();
+    if (!line) return;
+
+    let quote  = line;
+    let author = '';
+
+    // 用 "——" 分割（可能多次出现，取最后一段为说话者）
+    const parts = line.split('——');
+    if (parts.length >= 2){
+      author = parts.pop().trim();
+      quote  = parts.join('——').trim();
+    }
+
+    if (!quote) return;
+
+    const normAuthor = normalizeAuthor(author);
+    const category   = AUTHOR_TO_CATEGORY[normAuthor] || '其他';
+    const color      = COLOR_MAP[category];
+
+    result.push({
+      index: idx,
+      text: quote,
+      author: normAuthor || '未知',
+      category: category,
+      color: color
+    });
+  });
+
+  return result;
+}
+
+/* ---------- 状态显示 ---------- */
+const elFilters  = document.getElementById('filters');
+const elSayings  = document.getElementById('sayings');
+const elCount    = document.getElementById('sayCount');
+const elTitle    = document.getElementById('nowTitle');
+const elLoading  = document.getElementById('loadingState');
+const elEmpty    = document.getElementById('emptyState');
+
+function showState(el, opts){
+  elLoading.style.display = 'none';
+  elEmpty.style.display   = 'none';
+  elSayings.style.display = 'none';
+
+  if (!el) return;
+
+  if (opts && opts.error){
+    el.className = 'state error';
+    el.querySelector('.big').textContent = '⚠️';
+    el.querySelector('h2').textContent = '加载失败';
+    el.querySelector('p').textContent = opts.message || '请刷新页面后重试';
+  } else {
+    el.className = 'state';
+    el.querySelector('.big').textContent = '💬';
+    el.querySelector('h2').textContent = '暂无收录';
+    el.querySelector('p').textContent = '该分类下暂时还没有名言，欢迎投稿补充。';
+  }
+
+  el.style.display = 'block';
+}
+
+/* ---------- 渲染分类按钮 ---------- */
+function renderFilters(){
+  elFilters.innerHTML = '';
+  CATEGORIES.forEach(function(c){
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'filter-btn' + (c.key === 'all' ? ' active' : '');
+    btn.dataset.filter = c.key;
+    btn.style.setProperty('--c', c.color);
+    btn.innerHTML = '<span class="dot"></span>' + escapeHtml(c.name);
+    elFilters.appendChild(btn);
+  });
+}
+
+/* ---------- 渲染名言 ---------- */
+let ALL_SAYINGS = [];
+let CURRENT_FILTER = 'all';
+
+function renderSayings(){
+  const list = (CURRENT_FILTER === 'all')
+    ? ALL_SAYINGS
+    : ALL_SAYINGS.filter(s => s.category === CURRENT_FILTER);
+
+  elCount.textContent = list.length;
+  elTitle.textContent = (CURRENT_FILTER === 'all')
+    ? '全部名言'
+    : CURRENT_FILTER + ' 的名言';
+
+  if (!list.length){
+    showState(elEmpty);
+    return;
+  }
+
+  elLoading.style.display = 'none';
+  elEmpty.style.display   = 'none';
+
+  elSayings.style.display = 'grid';
+  elSayings.innerHTML = '';
+  list.forEach(function(s){
+    const div = document.createElement('div');
+    div.className = 'saying';
+    div.style.setProperty('--c', s.color);
+    div.innerHTML =
+      '<span class="quote-mark">”</span>' +
+      '<div class="saying-text">' + escapeHtml(s.text) + '</div>' +
+      '<div class="saying-by">' + escapeHtml(s.author) + '</div>';
+    elSayings.appendChild(div);
+  });
+}
+
+/* ---------- 绑定筛选交互 ---------- */
+elFilters.addEventListener('click', function(e){
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  CURRENT_FILTER = btn.dataset.filter;
+  renderSayings();
+});
+
+/* ---------- 主流程 ---------- */
+async function init(){
+  renderFilters();
+  showState(null); // 初始化时只显示 loading
+
+  try{
+    const res = await fetch('./FamousSayings.txt', { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    ALL_SAYINGS = parseSayings(text);
+    renderSayings();
+  }catch(err){
+    showState(elEmpty, {
+      error: true,
+      message: '无法加载 FamousSayings.txt：' + err.message +
+               '（提示：本地用 file:// 直接打开会失败，请通过 http/https 访问）'
+    });
+  }
+}
+
+init();
+
+/* ---------- 地址栏不显示 index.html ---------- */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>
