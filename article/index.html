@@ -24,8 +24,9 @@ body{
 }
 a{color:inherit;text-decoration:none}
 ul,ol{list-style:none}
-.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.wrap{width:100%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
+/* 页面头部 */
 .page-hero{
   position:relative;overflow:hidden;
   padding:56px 0 52px;color:#fff;
@@ -52,83 +53,107 @@ ul,ol{list-style:none}
 .list-head .count{font-size:13.5px;color:var(--muted)}
 .list-head .count b{color:var(--navy)}
 
-.art-list{display:flex;flex-direction:column;gap:16px}
+/* ============ 文章条目 ============ */
+.art-list{display:flex;flex-direction:column;gap:18px}
 
-.art-card{
-  display:flex;align-items:stretch;
+.art-item{
+  position:relative;
+  display:block;
   background:var(--card);
-  border:1px solid var(--line);border-radius:var(--radius);
-  box-shadow:var(--shadow);overflow:hidden;
-  transition:transform .26s ease, box-shadow .26s ease, border-color .26s ease;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:30px 34px 26px;
+  overflow:hidden;
+  transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
   animation:rise .45s ease both;
 }
-.art-card:hover{
-  transform:translateY(-5px);
+.art-item:hover{
+  transform:translateY(-4px);
   box-shadow:var(--shadow-hover);
   border-color:rgba(201,162,39,.55);
 }
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-.art-date{
-  flex:0 0 132px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;padding:20px 10px;color:#fff;text-align:center;
-  background:linear-gradient(155deg,var(--navy-2),var(--navy));
-  position:relative;
-}
-.art-date::after{
-  content:"";position:absolute;right:0;top:0;bottom:0;width:4px;
+/* 左侧金色竖条 */
+.art-item::before{
+  content:"";
+  position:absolute;left:0;top:26px;bottom:26px;
+  width:4px;border-radius:0 4px 4px 0;
   background:linear-gradient(180deg,var(--gold-light),var(--gold));
+  transition:top .28s ease, bottom .28s ease;
 }
-.art-date .y{font-size:12.5px;letter-spacing:3px;color:var(--gold-light);font-weight:600}
-.art-date .md{font-size:22px;line-height:1.25;color:#fff;font-weight:700;letter-spacing:1px}
+.art-item:hover::before{top:20px;bottom:20px}
 
-.art-main{flex:1;padding:22px 26px;min-width:0;display:flex;flex-direction:column;justify-content:center}
-.art-title{
-  font-size:17.5px;font-weight:700;letter-spacing:.3px;
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  color:var(--navy);margin-bottom:12px;
-}
-.badge-new{
-  font-size:11.5px;font-weight:700;padding:2px 10px;border-radius:999px;
-  background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  color:var(--navy);letter-spacing:.5px;
-}
-
-/* 投稿信息行 */
-.art-info{
-  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
-  font-size:13.5px;color:var(--muted);
-  margin-bottom:12px;
-}
-.art-info .item{
-  display:inline-flex;align-items:center;gap:6px;
-}
-.art-info .item .k{
-  color:#9aa6b8;
-}
-.art-info .item .v{
-  color:var(--navy);font-weight:700;
-}
-.art-info .item .v.gold{
+/* 顶部：体裁标签 */
+.art-genre{
+  display:inline-block;
+  font-size:11.5px;font-weight:700;letter-spacing:1.5px;
   color:#a8791a;
   background:#fdf1e0;
-  padding:2px 10px;border-radius:6px;
+  padding:3px 11px;border-radius:6px;
+  margin-bottom:14px;
+}
+.art-genre.dim{
+  color:#5b6b7f;background:#eef1f5;
 }
 
-.art-more{
+/* 标题（主角） */
+.art-title{
+  font-size:clamp(20px,3vw,24px);
+  font-weight:800;
+  letter-spacing:1px;
+  line-height:1.5;
+  color:var(--navy);
+  margin-bottom:16px;
+  transition:color .24s ease;
+}
+.art-item:hover .art-title{color:#a8791a}
+
+/* 作者 · 日期 */
+.art-meta{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding-top:16px;
+  border-top:1px dashed var(--line);
+  font-size:13.5px;
+  color:var(--muted);
+}
+.art-meta .author{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--navy);font-weight:700;
+}
+.art-meta .author .avatar{
+  width:18px;height:18px;border-radius:50%;
+  display:inline-grid;place-items:center;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  color:var(--navy);
+  flex:0 0 auto;
+}
+.art-meta .author .avatar svg{
+  width:10px;height:10px;display:block;
+  stroke:currentColor;fill:none;
+  stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
+}
+.art-meta .dot{
+  width:3px;height:3px;border-radius:50%;background:#c3cbd8;
+}
+.art-meta .date{
+  display:inline-flex;align-items:center;gap:6px;
+  color:#6b7280;
+  letter-spacing:.5px;
+}
+
+/* 右下角「阅读全文」 */
+.art-read{
+  position:absolute;right:34px;bottom:26px;
   display:inline-flex;align-items:center;gap:6px;
   font-size:13.5px;font-weight:700;letter-spacing:.3px;
   color:var(--gold);
   transition:all .24s ease;
-  align-self:flex-start;
 }
-.art-more .arw{
-  display:inline-block;
-  transition:transform .24s ease;
-}
-.art-card:hover .art-more{color:var(--navy)}
-.art-card:hover .art-more .arw{transform:translateX(4px)}
+.art-read .arw{transition:transform .24s ease}
+.art-item:hover .art-read{color:var(--navy)}
+.art-item:hover .art-read .arw{transform:translateX(4px)}
 
 .list-end{
   margin-top:22px;text-align:center;font-size:13px;color:var(--muted);
@@ -144,11 +169,15 @@ ul,ol{list-style:none}
 @media (max-width:640px){
   .page-hero{padding:44px 0 40px}
   .section{padding:30px 0 48px}
-  .art-date{flex:0 0 104px;padding:16px 6px}
-  .art-date .md{font-size:18px}
-  .art-main{padding:16px 18px}
-  .art-title{font-size:16px}
-  .art-info{font-size:13px;gap:12px}
+  .art-item{padding:24px 22px 22px}
+  .art-item::before{top:20px;bottom:20px}
+  .art-title{font-size:19px}
+  .art-read{
+    position:static;
+    margin-top:16px;
+    display:inline-flex;
+  }
+  .art-meta{padding-bottom:0}
 }
 </style>
 </head>
@@ -174,30 +203,28 @@ ul,ol{list-style:none}
 
       <div class="art-list">
 
-        <a class="art-card" href="douququ">
-          <div class="art-date">
-            <span class="y">2026</span>
-            <span class="md">9月20日</span>
-          </div>
-          <div class="art-main">
-            <div class="art-title">
-              《蛐蛐在哪里？》
-              <span class="badge-new">最新</span>
-            </div>
-            <div class="art-info">
-              <span class="item">
-                <span class="k">投稿日期：</span>
-                <span class="v">2026 年 9 月 20 日</span>
+        <a class="art-item" href="douququ">
+          <span class="art-genre">小小说</span>
+
+          <h3 class="art-title">斗蛐蛐</h3>
+
+          <div class="art-meta">
+            <span class="author">
+              <span class="avatar">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="8" r="4"/>
+                  <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+                </svg>
               </span>
-              <span class="item">
-                <span class="k">投稿人：</span>
-                <span class="v gold">G202104 lzx</span>
-              </span>
-            </div>
-            <span class="art-more">
-              点击查看全文 <span class="arw">→</span>
+              G202104 lzx
             </span>
+            <span class="dot"></span>
+            <span class="date">2026年9月20日</span>
           </div>
+
+          <span class="art-read">
+            阅读全文 <span class="arw">→</span>
+          </span>
         </a>
 
       </div>
@@ -219,8 +246,7 @@ ul,ol{list-style:none}
       <a href="../submit">投稿</a> ·
       联系 QQ：3051455202 / 3073701418
     </div>
-  </div>
-</footer>
+  </footer>
 
 <script>
   if (location.pathname.endsWith('/index.html')) {

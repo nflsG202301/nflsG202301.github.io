@@ -26,7 +26,6 @@ a{color:inherit;text-decoration:none}
 ul,ol{list-style:none}
 .wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
-/* ============ 顶部 ============ */
 .page-hero{
   position:relative;overflow:hidden;
   padding:56px 0 52px;color:#fff;
@@ -47,7 +46,9 @@ ul,ol{list-style:none}
 .crumb span{margin:0 7px;opacity:.6}
 
 .section{padding:44px 0 80px}
-.container{max-width:720px;margin:0 auto}
+
+/* ====== 容器加宽（原 720px → 现在 920px） ====== */
+.container{max-width:920px;margin:0 auto}
 
 .back-bar{margin-bottom:24px}
 .back-btn{
@@ -62,20 +63,20 @@ ul,ol{list-style:none}
   box-shadow:var(--shadow-hover);
 }
 
-/* ============ 文章卡片 ============ */
+/* ====== 文章卡片（左右内边距略微收紧以适应更宽的版面） ====== */
 .article-card{
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:48px 56px 52px;
+  padding:52px 72px 56px;
   animation:rise .5s ease both;
 }
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
 .article-head{
   padding-bottom:22px;
-  margin-bottom:28px;
+  margin-bottom:30px;
   border-bottom:1px solid #eef1f6;
 }
 .article-title{
@@ -87,12 +88,11 @@ ul,ol{list-style:none}
   margin-bottom:16px;
 }
 
-/* ============ 日期 + 投稿人 ============ */
+/* ====== 日期 + 投稿人 ====== */
 .article-meta{
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;
 }
 
-/* 日期：蓝灰胶囊 + 金色日历图标 */
 .meta-date{
   display:inline-flex;align-items:center;gap:8px;
   font-size:12.5px;font-weight:700;letter-spacing:.6px;
@@ -113,7 +113,6 @@ ul,ol{list-style:none}
   stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
 }
 
-/* 投稿人：金色胶囊 + 用户头像图标 */
 .meta-author{
   display:inline-flex;align-items:center;gap:8px;
   font-size:12.5px;font-weight:700;letter-spacing:.6px;
@@ -137,7 +136,7 @@ ul,ol{list-style:none}
   stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
 }
 
-/* ============ 正文 ============ */
+/* ====== 正文（行宽加大到适合阅读的范围） ====== */
 .article-body{
   font-size:16.5px;
   color:#2f3a48;
@@ -159,12 +158,15 @@ ul,ol{list-style:none}
 }
 .article-body p.closing.first{margin-bottom:8px}
 
-/* ============ 页脚 ============ */
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
 
+/* ====== 响应式：平板 / 手机 ====== */
+@media (max-width:960px){
+  .article-card{padding:44px 48px 48px}
+}
 @media (max-width:640px){
   .page-hero{padding:46px 0 42px}
   .page-hero .meta{font-size:12.5px}
