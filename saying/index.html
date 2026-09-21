@@ -144,6 +144,20 @@ ul,ol{list-style:none}
   padding:3px 11px;border-radius:7px;
   background:rgba(15,37,71,.05);
 }
+/* 署名可跳人物志时 */
+a.saying-by{
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+a.saying-by:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(15,37,71,.14);
+  background:rgba(15,37,71,.09);
+}
+a.saying-by::after{
+  content:"→";
+  font-size:11px;margin-left:5px;opacity:.7;
+}
 
 /* 空 / 加载 / 错误 */
 .state{
@@ -228,6 +242,12 @@ ul,ol{list-style:none}
   content:"—— ";
   opacity:.65;
 }
+.rand-by a{
+  color:inherit;
+  border-bottom:1.5px solid rgba(201,162,39,.5);
+  transition:border-color .2s ease;
+}
+.rand-by a:hover{border-bottom-color:currentColor}
 
 .rand-actions{display:flex;gap:10px;justify-content:center}
 .rand-btn{
@@ -397,6 +417,12 @@ const AUTHOR_TO_CATEGORY = {
 const COLOR_MAP = {};
 CATEGORIES.forEach(c => COLOR_MAP[c.key] = c.color);
 
+/* 署名对应的人物志：有此映射的署名在名言板块可点击跳转 */
+const AUTHOR_TO_BIO = {
+  '朱心桥': '/biography/zhuxinqiao/',
+  '李泽茼': '/biography/lizetong/'
+};
+
 function escapeHtml(s){
   return String(s)
     .replace(/&/g, '&amp;')
@@ -521,10 +547,16 @@ function renderSayings(){
     const div = document.createElement('div');
     div.className = 'saying';
     div.style.setProperty('--c', s.color);
+    const bioUrl = AUTHOR_TO_BIO[s.author];
+    const byHtml = bioUrl
+      ? '<a class="saying-by" href="' + escapeHtml(bioUrl) + '" title="查看 ' +
+          escapeHtml(s.author) + ' 的人物志">' + escapeHtml(s.author) + '</a>'
+      : '<div class="saying-by">' + escapeHtml(s.author) + '</div>';
+
     div.innerHTML =
       '<span class="quote-mark">”</span>' +
       '<div class="saying-text">' + escapeHtml(s.text) + '</div>' +
-      '<div class="saying-by">' + escapeHtml(s.author) + '</div>';
+      byHtml;
     elSayings.appendChild(div);
   });
 }
@@ -549,7 +581,15 @@ function showRandom(){
   const s = list[Math.floor(Math.random() * list.length)];
 
   randText.textContent = s.text;
-  randBy.textContent   = s.author;
+
+  const bioUrl = AUTHOR_TO_BIO[s.author];
+  if (bioUrl){
+    randBy.innerHTML = '<a href="' + escapeHtml(bioUrl) + '" title="查看 ' +
+      escapeHtml(s.author) + ' 的人物志">' + escapeHtml(s.author) + '</a>';
+  } else {
+    randBy.textContent = s.author;
+  }
+
   randBox.style.setProperty('--c', s.color);
   randBy.style.setProperty('--c', s.color);
 
