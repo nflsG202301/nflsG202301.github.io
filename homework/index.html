@@ -12,7 +12,7 @@ html{scroll-behavior:smooth}
 body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 ul,ol{list-style:none}
-.wrap{width:100%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.wrap{width:100%;max-width:920px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
 .page-hero{position:relative;overflow:hidden;padding:56px 0 52px;color:#fff;background:radial-gradient(760px 340px at 10% 0%,rgba(201,162,39,.20),transparent 62%),radial-gradient(680px 340px at 92% 20%,rgba(88,140,220,.26),transparent 62%),linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%)}
 .page-hero::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:24px 24px;opacity:.4}
@@ -24,174 +24,143 @@ ul,ol{list-style:none}
 
 .section{padding:40px 0 80px}
 
-/* ============ 日历卡片 ============ */
 .calendar-card{
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:26px 30px 30px;
+  padding:28px 32px 32px;
   animation:rise .5s ease both;
 }
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
-/* 月份标题栏 */
 .cal-header{
   display:flex;align-items:center;justify-content:space-between;
-  gap:14px;
-  padding-bottom:18px;
-  margin-bottom:20px;
+  gap:10px;padding-bottom:18px;margin-bottom:20px;
   border-bottom:1px solid #f0f3f9;
 }
 .cal-nav{
-  width:40px;height:40px;
-  border-radius:50%;
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--navy);
-  font-size:20px;line-height:1;
-  cursor:pointer;font-family:inherit;
-  display:grid;place-items:center;
-  transition:all .22s ease;
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;color:var(--navy);
+  font-size:20px;line-height:1;cursor:pointer;font-family:inherit;
+  display:grid;place-items:center;transition:all .22s ease;
 }
-.cal-nav:hover:not(:disabled){
-  border-color:rgba(201,162,39,.65);
+.cal-nav:hover{border-color:rgba(201,162,39,.65);color:var(--gold);transform:scale(1.06)}
+.cal-month-wrap{
+  flex:1;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.cal-month{font-size:22px;font-weight:800;letter-spacing:1.5px;color:var(--navy)}
+.cal-today-btn{
+  font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.5px;
+  padding:4px 12px;border-radius:999px;
   color:var(--gold);
-  transform:scale(1.06);
+  border:1px solid rgba(201,162,39,.55);
+  background:linear-gradient(135deg,#fffaf0,#fdf1e0);
+  cursor:pointer;transition:all .2s ease;
+  white-space:nowrap;
 }
-.cal-nav:disabled{
-  opacity:.3;cursor:not-allowed;
-}
-.cal-month{
-  font-size:22px;font-weight:800;letter-spacing:1.5px;
-  color:var(--navy);
-  text-align:center;
-  flex:1;
+.cal-today-btn:hover{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  color:var(--navy);border-color:transparent;
 }
 
-/* 统计行 */
 .cal-info{
   display:flex;align-items:center;justify-content:space-between;
-  gap:14px;flex-wrap:wrap;
-  margin-bottom:16px;
+  gap:14px;flex-wrap:wrap;margin-bottom:16px;
 }
-.cal-count{
-  font-size:13.5px;color:var(--muted);
-}
-.cal-count b{
-  font-size:17px;font-weight:800;color:var(--navy);
-  margin-right:3px;
-}
-.cal-legend{
-  display:flex;align-items:center;gap:14px;
-  font-size:12.5px;color:var(--muted);
-}
+.cal-count{font-size:13.5px;color:var(--muted)}
+.cal-count b{font-size:17px;font-weight:800;color:var(--navy);margin-right:3px}
+.cal-legend{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted)}
 .cal-legend span{display:inline-flex;align-items:center;gap:6px}
-.cal-legend i{
-  display:inline-block;width:12px;height:12px;border-radius:4px;
-}
+.cal-legend i{display:inline-block;width:12px;height:12px;border-radius:4px}
 .cal-legend i.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold))}
-.cal-legend i.gray{background:#eef1f5;border:1px solid var(--line)}
+.cal-legend i.gray{background:#fff;border:1px solid var(--line)}
 
-/* 星期表头 */
 .cal-weekdays{
   display:grid;grid-template-columns:repeat(7,1fr);
-  gap:8px;
-  margin-bottom:8px;
+  gap:6px;margin-bottom:6px;
 }
 .cal-weekdays span{
-  text-align:center;
-  font-size:13px;font-weight:700;letter-spacing:.5px;
-  color:#9aa6b8;
-  padding:6px 0;
+  text-align:center;font-size:13px;font-weight:700;letter-spacing:.5px;
+  color:#9aa6b8;padding:6px 0;
 }
+.cal-weekdays span.wk{ color:#c2453c }
 
-/* 日期网格 */
-.cal-grid{
-  display:grid;grid-template-columns:repeat(7,1fr);
-  gap:8px;
-}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 
-/* 日期单元格 */
 .cal-day{
   aspect-ratio:1;
   border-radius:12px;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  gap:4px;
-  background:#f8fafc;
-  border:1px solid var(--line);
+  gap:1px;
+  background:#fff;border:1px solid var(--line);
   position:relative;
-  transition:all .24s ease;
-  cursor:default;
+  padding:4px 4px;
+  transition:all .24s ease;cursor:default;text-align:center;line-height:1.1;
 }
 .cal-day .d{
-  font-size:17px;font-weight:700;
-  color:#a8b0bd;
-  line-height:1;
-  letter-spacing:.5px;
+  font-size:17px;font-weight:700;color:#4b5563;
+  letter-spacing:.3px;line-height:1.15;
 }
 
-/* 有作业的日期 */
+.cal-day .lunar{
+  font-size:10.5px;
+  color:#9aa6b6;
+  letter-spacing:0;
+  line-height:1.3;
+  width:100%;
+  padding:0 1px;
+  font-weight:500;
+  white-space:normal;
+  word-break:break-all;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.cal-day .lunar.festival{    color:#c2453c; font-weight:700 }
+.cal-day .lunar.observance{  color:#6b7f9e; font-weight:600 }
+.cal-day .lunar.term{        color:#a8791a; font-weight:700 }
+
 .cal-day.has-hw{
   background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  border-color:transparent;
-  box-shadow:0 4px 12px rgba(201,162,39,.32);
+  border-color:transparent;box-shadow:0 4px 12px rgba(201,162,39,.32);
   cursor:pointer;
 }
-.cal-day.has-hw .d{
-  color:var(--navy);
-  font-weight:800;
-}
-.cal-day.has-hw .dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--navy);
-  opacity:.75;
-}
-.cal-day.has-hw:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 22px rgba(201,162,39,.5);
-}
-.cal-day.has-hw:hover .d{ color:var(--navy) }
+.cal-day.has-hw .d{ color:var(--navy); font-weight:800 }
+.cal-day.has-hw .lunar{ opacity:.96 }
+.cal-day.has-hw .lunar.festival{    color:#8a2a24 }
+.cal-day.has-hw .lunar.observance{  color:#3a4a63 }
+.cal-day.has-hw .lunar.term{        color:#5a3f08 }
+.cal-day.has-hw .lunar:not(.festival):not(.observance):not(.term){ color:#6b4a08 }
+.cal-day.has-hw:hover{ transform:translateY(-4px); box-shadow:0 12px 24px rgba(201,162,39,.5) }
 
-/* 今天 */
-.cal-day.today{
-  box-shadow:0 0 0 3px rgba(201,162,39,.35), 0 6px 16px rgba(201,162,39,.3);
-}
-.cal-day.has-hw.today{
-  box-shadow:0 0 0 3px rgba(15,37,71,.28), 0 8px 20px rgba(201,162,39,.45);
-}
+.cal-day.today{ box-shadow:0 0 0 3px rgba(201,162,39,.35), 0 6px 16px rgba(201,162,39,.3) }
+.cal-day.has-hw.today{ box-shadow:0 0 0 3px rgba(15,37,71,.28), 0 8px 20px rgba(201,162,39,.45) }
 
-/* 空格占位 */
-.cal-day.empty{
-  background:transparent;
-  border:none;
-  pointer-events:none;
-}
+.cal-day.empty{ background:transparent;border:none;pointer-events:none }
 
-/* ============ 悬浮按钮 ============ */
+.cal-day .d.weekend{ color:#c2453c }
+.cal-day.has-hw .d.weekend{ color:var(--navy) }
+
 .back-top{
   position:fixed;right:28px;bottom:28px;
   width:54px;height:54px;border-radius:50%;
   border:none;cursor:pointer;font-family:inherit;
-  display:grid;place-items:center;
-  color:var(--navy);
+  display:grid;place-items:center;color:var(--navy);
   background:linear-gradient(135deg,var(--gold-light),var(--gold));
   box-shadow:0 14px 32px rgba(201,162,39,.45);
   opacity:0;visibility:hidden;
   transform:translateY(14px) scale(.9);
-  transition:all .3s cubic-bezier(.4,0,.2,1);
-  z-index:99;
+  transition:all .3s cubic-bezier(.4,0,.2,1);z-index:99;
 }
 .back-top.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
 .back-top:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 20px 40px rgba(201,162,39,.55)}
-.back-top svg{
-  width:22px;height:22px;
-  stroke:currentColor;fill:none;
-  stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
-}
+.back-top svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 
-/* 页脚 */
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
@@ -200,18 +169,20 @@ ul,ol{list-style:none}
 @media (max-width:640px){
   .page-hero{padding:44px 0 40px}
   .section{padding:26px 0 60px}
-  .calendar-card{padding:20px 16px 22px}
-  .cal-header{gap:8px;padding-bottom:14px;margin-bottom:16px}
-  .cal-nav{width:36px;height:36px;font-size:18px}
-  .cal-month{font-size:19px;letter-spacing:1px}
-  .cal-weekdays{gap:5px}
-  .cal-weekdays span{font-size:12px;padding:4px 0}
-  .cal-grid{gap:5px}
-  .cal-day{border-radius:10px}
-  .cal-day .d{font-size:15px}
-  .cal-day.has-hw .dot{width:5px;height:5px}
-  .cal-info{font-size:12.5px}
-  .cal-legend{font-size:11.5px;gap:10px}
+  .calendar-card{padding:20px 14px 22px}
+  .cal-header{gap:6px;padding-bottom:14px;margin-bottom:14px}
+  .cal-nav{width:34px;height:34px;font-size:17px}
+  .cal-month{font-size:18px;letter-spacing:1px}
+  .cal-today-btn{font-size:11px;padding:2px 9px}
+  .cal-weekdays{gap:3px}
+  .cal-weekdays span{font-size:11.5px;padding:3px 0}
+  .cal-grid{gap:3px}
+  .cal-day{border-radius:8px;padding:2px}
+  .cal-day .d{font-size:14px}
+  .cal-day .lunar{font-size:8.5px;line-height:1.25;padding:0}
+  .cal-info{font-size:12px}
+  .cal-legend{font-size:11px;gap:10px}
+  .cal-legend i{width:10px;height:10px}
   .back-top{right:18px;bottom:18px;width:48px;height:48px}
   .back-top svg{width:19px;height:19px}
 }
@@ -234,14 +205,15 @@ ul,ol{list-style:none}
 
       <div class="calendar-card">
 
-        <!-- 月份标题栏 -->
         <div class="cal-header">
           <button class="cal-nav" id="prevBtn" aria-label="上个月">‹</button>
-          <div class="cal-month" id="calMonth">2026 年 9 月</div>
+          <div class="cal-month-wrap">
+            <span class="cal-month" id="calMonth">2026 年 9 月</span>
+            <button class="cal-today-btn" id="todayBtn">回到今天</button>
+          </div>
           <button class="cal-nav" id="nextBtn" aria-label="下个月">›</button>
         </div>
 
-        <!-- 统计 + 图例 -->
         <div class="cal-info">
           <div class="cal-count">本月 <b id="count">0</b> 天有作业</div>
           <div class="cal-legend">
@@ -250,13 +222,11 @@ ul,ol{list-style:none}
           </div>
         </div>
 
-        <!-- 星期表头 -->
         <div class="cal-weekdays">
           <span>一</span><span>二</span><span>三</span><span>四</span>
-          <span>五</span><span>六</span><span>日</span>
+          <span>五</span><span class="wk">六</span><span class="wk">日</span>
         </div>
 
-        <!-- 日期网格 -->
         <div class="cal-grid" id="calGrid"></div>
 
       </div>
@@ -266,7 +236,6 @@ ul,ol{list-style:none}
 
 </main>
 
-<!-- 悬浮回到最新 -->
 <button class="back-top" id="backTop" aria-label="回到顶部">
   <svg viewBox="0 0 24 24">
     <line x1="12" y1="19" x2="12" y2="5"/>
@@ -292,76 +261,287 @@ ul,ol{list-style:none}
 /* ============================================================
    作业日历
    ------------------------------------------------------------
-   以后新增作业时，只需要在下面 HOMEWORK 数组里加一行日期
-   （格式：'YYYY-MM-DD'），日历会自动识别月份并渲染。
+   颜色分层：
+     红（festival）   —— 极其重要的节日（中国 + 世界级知名节日）
+     蓝灰（observance）—— 一般节日 / 国际日 / 主题日
+     金（term）       —— 二十四节气
+     中灰（默认）     —— 普通农历
    ============================================================ */
+
 const HOMEWORK = [
-  '2026-09-01',
-  '2026-09-02',
-  '2026-09-03',
-  '2026-09-04',
-  '2026-09-07',
-  '2026-09-08',
-  '2026-09-09',
-  '2026-09-10',
-  '2026-09-11',
-  '2026-09-14',
-  '2026-09-15',
-  '2026-09-16',
-  '2026-09-17',
-  '2026-09-18',
-  '2026-09-20',
-  '2026-09-21'
+  '2026-09-01','2026-09-02','2026-09-03','2026-09-04',
+  '2026-09-07','2026-09-08','2026-09-09','2026-09-10','2026-09-11',
+  '2026-09-14','2026-09-15','2026-09-16','2026-09-17','2026-09-18',
+  '2026-09-20','2026-09-21'
 ];
 
-/* ===== 基础工具 ===== */
+const LUNAR = {
+  /* ================= 2026 年 7 月 ================= */
+  '2026-07-01':'建党节','2026-07-02':'五月十八','2026-07-03':'五月十九',
+  '2026-07-04':'美国独立日','2026-07-05':'五月廿一',
+  '2026-07-06':'国际合作节','2026-07-07':'七七事变纪念日',
+  '2026-07-08':'五月廿四','2026-07-09':'五月廿五','2026-07-10':'五月廿六',
+  '2026-07-11':'中国航海日','2026-07-12':'五月廿八','2026-07-13':'五月廿九',
+  '2026-07-14':'法国国庆日','2026-07-15':'六月初二','2026-07-16':'六月初三',
+  '2026-07-17':'六月初四','2026-07-18':'曼德拉国际日','2026-07-19':'六月初六',
+  '2026-07-20':'六月初七','2026-07-21':'六月初八','2026-07-22':'国际接吻日',
+  '2026-07-23':'大暑','2026-07-24':'六月十一','2026-07-25':'世界预防溺水日',
+  '2026-07-26':'六月十三','2026-07-27':'六月十四','2026-07-28':'世界肝炎日',
+  '2026-07-29':'六月十六','2026-07-30':'国际友谊日','2026-07-31':'六月十八',
+
+  /* ================= 2026 年 8 月 ================= */
+  '2026-08-01':'建军节','2026-08-02':'六月二十','2026-08-03':'六月廿一',
+  '2026-08-04':'六月廿二','2026-08-05':'六月廿三','2026-08-06':'火把节',
+  '2026-08-07':'立秋','2026-08-08':'全民健身日','2026-08-09':'世界土著人民国际日',
+  '2026-08-10':'六月廿八','2026-08-11':'六月廿九','2026-08-12':'国际青年节',
+  '2026-08-13':'七月初一','2026-08-14':'巴基斯坦独立日','2026-08-15':'全国生态日',
+  '2026-08-16':'七月初四','2026-08-17':'七月初五','2026-08-18':'七月初六',
+  '2026-08-19':'中国医师节','2026-08-20':'七月初八','2026-08-21':'七月初九',
+  '2026-08-22':'七月初十','2026-08-23':'处暑','2026-08-24':'七月十二',
+  '2026-08-25':'圣纪节','2026-08-26':'深圳经济特区','2026-08-27':'中元节',
+  '2026-08-28':'七月十六','2026-08-29':'禁止核试验国际日',
+  '2026-08-30':'土耳其胜利日','2026-08-31':'马来西亚国庆节',
+
+  /* ================= 2026 年 9 月（有作业） ================= */
+  '2026-09-01':'台湾记者日',
+  '2026-09-02':'廿一',
+  '2026-09-03':'抗日战争胜利纪念日',
+  '2026-09-04':'廿三',
+  '2026-09-05':'中华慈善日',
+  '2026-09-06':'廿五',
+  '2026-09-07':'白露',
+  '2026-09-08':'国际扫盲日',
+  '2026-09-09':'保护教育免受攻击国际日',
+  '2026-09-10':'教师节',
+  '2026-09-11':'九一一事件纪念日',
+  '2026-09-12':'预防出生缺陷日',
+  '2026-09-13':'程序员节',
+  '2026-09-14':'中国网民节',
+  '2026-09-15':'国际民主日',
+  '2026-09-16':'国际保护臭氧层日',
+  '2026-09-17':'世界患者安全日',
+  '2026-09-18':'九一八事变纪念日',
+  '2026-09-19':'全民国防教育日',
+  '2026-09-20':'全国爱牙日',
+  '2026-09-21':'国际和平日',
+  '2026-09-22':'十二',
+  '2026-09-23':'秋分',
+  '2026-09-24':'世界海事日',
+  '2026-09-25':'中秋节',
+  '2026-09-26':'欧洲语言日',
+  '2026-09-27':'世界旅游日',
+  '2026-09-28':'世界狂犬病日',
+  '2026-09-29':'世界心脏日',
+  '2026-09-30':'中国烈士纪念日',
+
+  /* ================= 2026 年 10 月 ================= */
+  '2026-10-01':'国庆节',
+  '2026-10-02':'国际非暴力日',
+  '2026-10-03':'八月廿三',
+  '2026-10-04':'世界动物日',
+  '2026-10-05':'世界教师日',
+  '2026-10-06':'八月廿六',
+  '2026-10-07':'八月廿七',
+  '2026-10-08':'寒露',
+  '2026-10-09':'世界邮政日',
+  '2026-10-10':'辛亥革命纪念日',
+  '2026-10-11':'国际女童日',
+  '2026-10-12':'世界关节炎日',
+  '2026-10-13':'中国少年先锋队诞辰日',
+  '2026-10-14':'世界标准日',
+  '2026-10-15':'国际盲人节',
+  '2026-10-16':'世界粮食日',
+  '2026-10-17':'国家扶贫日',
+  '2026-10-18':'重阳节',
+  '2026-10-19':'世界骨质疏松日',
+  '2026-10-20':'世界厨师日',
+  '2026-10-21':'全球伦理日',
+  '2026-10-22':'世界传统医药日',
+  '2026-10-23':'霜降',
+  '2026-10-24':'联合国日',
+  '2026-10-25':'抗美援朝纪念日',
+  '2026-10-26':'环卫工人节',
+  '2026-10-27':'世界男性健康日',
+  '2026-10-28':'世界卒中日',
+  '2026-10-29':'世界勤俭日',
+  '2026-10-30':'世界城市日',
+  '2026-10-31':'万圣夜',
+
+  /* ================= 2026 年 11 月 ================= */
+  '2026-11-01':'万圣节',
+  '2026-11-02':'万灵节',
+  '2026-11-03':'九月廿五',
+  '2026-11-04':'九月廿六',
+  '2026-11-05':'世界海啸日',
+  '2026-11-06':'九月廿八',
+  '2026-11-07':'立冬',
+  '2026-11-08':'记者节',
+  '2026-11-09':'全国消防日',
+  '2026-11-10':'世界青年节',
+  '2026-11-11':'双十一',
+  '2026-11-12':'孙中山诞辰纪念日',
+  '2026-11-13':'十月初五',
+  '2026-11-14':'世界糖尿病日',
+  '2026-11-15':'城市公共安全日',
+  '2026-11-16':'国际宽容日',
+  '2026-11-17':'国际大学生节',
+  '2026-11-18':'世界慢阻肺日',
+  '2026-11-19':'世界厕所日',
+  '2026-11-20':'世界儿童日',
+  '2026-11-21':'世界电视日',
+  '2026-11-22':'小雪',
+  '2026-11-23':'十月十五',
+  '2026-11-24':'十月十六',
+  '2026-11-25':'国际消除对妇女暴力日',
+  '2026-11-26':'十月十八',
+  '2026-11-27':'国际消除童婚日',
+  '2026-11-28':'十月二十',
+  '2026-11-29':'十月廿一',
+  '2026-11-30':'十月廿二',
+
+  /* ================= 2026 年 12 月 ================= */
+  '2026-12-01':'世界艾滋病日',
+  '2026-12-02':'废除奴隶制国际日',
+  '2026-12-03':'国际残疾人日',
+  '2026-12-04':'国际银行日',
+  '2026-12-05':'国际志愿人员日',
+  '2026-12-06':'十月廿八',
+  '2026-12-07':'大雪',
+  '2026-12-08':'十月三十',
+  '2026-12-09':'国际反腐败日',
+  '2026-12-10':'国际人权日',
+  '2026-12-11':'国际山岳日',
+  '2026-12-12':'双十二',
+  '2026-12-13':'南京大屠杀死难者国家公祭日',
+  '2026-12-14':'十一月初六',
+  '2026-12-15':'权利法案纪念日',
+  '2026-12-16':'十一月初八',
+  '2026-12-17':'十一月初九',
+  '2026-12-18':'国际移民日',
+  '2026-12-19':'十一月十一',
+  '2026-12-20':'国际人类团结日',
+  '2026-12-21':'国际篮球日',
+  '2026-12-22':'冬至',
+  '2026-12-23':'十一月十五',
+  '2026-12-24':'平安夜',
+  '2026-12-25':'圣诞节',
+  '2026-12-26':'毛泽东诞辰纪念日',
+  '2026-12-27':'十一月十九',
+  '2026-12-28':'十一月二十',
+  '2026-12-29':'十一月廿一',
+  '2026-12-30':'十一月廿二',
+  '2026-12-31':'跨年夜'
+};
+
+/* ============================================================
+   红色：极其重要的节日 / 纪念日
+   ------------------------------------------------------------
+   - 中国重大节日 / 纪念日 / 传统节日
+   - 世界级知名节日（万圣节、圣诞节等）
+   ============================================================ */
+const FESTIVALS = new Set([
+  /* 中国法定 / 重大节日 */
+  '元旦','春节','除夕','元宵节','清明节','劳动节','端午节','中秋节','国庆节',
+  '教师节','建党节','建军节',
+  /* 中国重要纪念日 */
+  '抗日战争胜利纪念日','九一八事变纪念日','七七事变纪念日','中国烈士纪念日',
+  '辛亥革命纪念日','抗美援朝纪念日','南京大屠杀死难者国家公祭日',
+  '孙中山诞辰纪念日','毛泽东诞辰纪念日',
+  /* 中国传统节日 */
+  '中元节','火把节','重阳节',
+  /* 世界级知名节日 */
+  '万圣节','万圣夜','平安夜','圣诞节','跨年夜'
+]);
+
+/* ============================================================
+   蓝灰：一般节日 / 国际日 / 主题日 / 外国区域性节日
+   ============================================================ */
+const OBSERVANCES = new Set([
+  /* 7 月 */
+  '美国独立日','国际合作节','中国航海日','法国国庆日','曼德拉国际日',
+  '国际接吻日','世界预防溺水日','世界肝炎日','国际友谊日',
+  /* 8 月 */
+  '全民健身日','世界土著人民国际日','国际青年节','巴基斯坦独立日',
+  '全国生态日','中国医师节','圣纪节','深圳经济特区',
+  '禁止核试验国际日','土耳其胜利日','马来西亚国庆节',
+  /* 9 月 */
+  '台湾记者日','中华慈善日','国际扫盲日','保护教育免受攻击国际日',
+  '预防出生缺陷日','程序员节','中国网民节','国际民主日',
+  '国际保护臭氧层日','世界患者安全日','全民国防教育日','全国爱牙日',
+  '国际和平日','世界海事日','欧洲语言日','世界旅游日',
+  '世界狂犬病日','世界心脏日','九一一事件纪念日',
+  /* 10 月 */
+  '国际非暴力日','世界动物日','世界教师日','世界邮政日','国际女童日',
+  '世界关节炎日','中国少年先锋队诞辰日','世界标准日','国际盲人节',
+  '世界粮食日','国家扶贫日','世界骨质疏松日','世界厨师日','全球伦理日',
+  '世界传统医药日','联合国日','环卫工人节','世界男性健康日',
+  '世界卒中日','世界勤俭日','世界城市日',
+  /* 11 月 */
+  '万灵节','世界海啸日','记者节','全国消防日','世界青年节',
+  '双十一','世界糖尿病日','城市公共安全日','国际宽容日','国际大学生节',
+  '世界慢阻肺日','世界厕所日','世界儿童日','世界电视日',
+  '国际消除对妇女暴力日','国际消除童婚日',
+  /* 12 月 */
+  '世界艾滋病日','废除奴隶制国际日','国际残疾人日','国际银行日',
+  '国际志愿人员日','国际反腐败日','国际人权日','国际山岳日','双十二',
+  '权利法案纪念日','国际移民日','国际人类团结日','国际篮球日'
+]);
+
+/* ============================================================
+   金色：二十四节气
+   ============================================================ */
+const SOLAR_TERMS = new Set([
+  '立春','雨水','惊蛰','春分','清明','谷雨',
+  '立夏','小满','芒种','夏至','小暑','大暑',
+  '立秋','处暑','白露','秋分','寒露','霜降',
+  '立冬','小雪','大雪','冬至','小寒','大寒'
+]);
+
+/* ===== 工具 ===== */
 const hwSet = new Set(HOMEWORK);
-const sorted = [...HOMEWORK].sort();
-const minYM = sorted[0].slice(0, 7);
-const maxYM = sorted[sorted.length - 1].slice(0, 7);
+function pad2(n){ return String(n).padStart(2, '0'); }
+function ymd(y, m, d){ return `${y}-${pad2(m + 1)}-${pad2(d)}`; }
 
-let currentYM = maxYM;   // 当前显示的月份（默认最新）
+const latestDate = [...HOMEWORK].sort().pop() || ymd(new Date().getFullYear(), new Date().getMonth(), 1);
+let cursorY = Number(latestDate.slice(0, 4));
+let cursorM = Number(latestDate.slice(5, 7)) - 1;
 
-function parseYM(ym){
-  const [y, m] = ym.split('-').map(Number);
-  return { y, m: m - 1 };
-}
-function formatYM(y, m){
-  return `${y}-${String(m + 1).padStart(2, '0')}`;
-}
-
-/* ===== 渲染 ===== */
 function render(){
-  const { y, m } = parseYM(currentYM);
-
-  document.getElementById('calMonth').textContent = `${y} 年 ${m + 1} 月`;
+  document.getElementById('calMonth').textContent = `${cursorY} 年 ${cursorM + 1} 月`;
 
   const grid = document.getElementById('calGrid');
   grid.innerHTML = '';
 
-  const daysInMonth = new Date(y, m + 1, 0).getDate();
+  const daysInMonth = new Date(cursorY, cursorM + 1, 0).getDate();
 
-  // 该月 1 日是星期几（0=周一 …… 6=周日）
-  let firstWeekday = new Date(y, m, 1).getDay();
+  let firstWeekday = new Date(cursorY, cursorM, 1).getDay();
   firstWeekday = (firstWeekday + 6) % 7;
 
-  // 前导空格
   for (let i = 0; i < firstWeekday; i++){
     const cell = document.createElement('div');
     cell.className = 'cal-day empty';
     grid.appendChild(cell);
   }
 
-  // 今天的日期字符串
-  const today = new Date();
-  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  const now = new Date();
+  const todayStr = ymd(now.getFullYear(), now.getMonth(), now.getDate());
 
-  // 每日单元格
   let count = 0;
   for (let d = 1; d <= daysInMonth; d++){
-    const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const dateStr = ymd(cursorY, cursorM, d);
     const hasHw   = hwSet.has(dateStr);
     const isToday = dateStr === todayStr;
+
+    const wIdx = (firstWeekday + d - 1) % 7;
+    const isWeekend = wIdx >= 5;
+
+    const lunarText = LUNAR[dateStr] || '';
+    let lunarCls = 'lunar';
+    if (lunarText){
+      if (FESTIVALS.has(lunarText))        lunarCls += ' festival';
+      else if (OBSERVANCES.has(lunarText)) lunarCls += ' observance';
+      else if (SOLAR_TERMS.has(lunarText)) lunarCls += ' term';
+    }
 
     let cls = 'cal-day';
     if (hasHw)   cls += ' has-hw';
@@ -370,54 +550,57 @@ function render(){
     let cell;
     if (hasHw){
       cell = document.createElement('a');
-      cell.href = dateStr.replace(/-/g, '');   // 2026-09-21 → 20260921
+      cell.href = dateStr.replace(/-/g, '');
       count++;
     } else {
       cell = document.createElement('div');
     }
     cell.className = cls;
-    cell.innerHTML = `<span class="d">${d}</span>` + (hasHw ? '<span class="dot"></span>' : '');
+
+    const dCls = isWeekend && !hasHw ? 'd weekend' : 'd';
+    cell.innerHTML =
+      `<span class="${dCls}">${d}</span>` +
+      (lunarText ? `<span class="${lunarCls}">${lunarText}</span>` : '');
+
     grid.appendChild(cell);
   }
 
   document.getElementById('count').textContent = count;
-
-  // 上一月 / 下一月按钮状态
-  document.getElementById('prevBtn').disabled = currentYM <= minYM;
-  document.getElementById('nextBtn').disabled = currentYM >= maxYM;
 }
 
-/* ===== 月份切换 ===== */
 function shiftMonth(delta){
-  const { y, m } = parseYM(currentYM);
-  const next = new Date(y, m + delta, 1);
-  currentYM = formatYM(next.getFullYear(), next.getMonth());
+  cursorM += delta;
+  if (cursorM < 0){ cursorM = 11; cursorY--; }
+  if (cursorM > 11){ cursorM = 0;  cursorY++; }
   render();
 }
 
 document.getElementById('prevBtn').addEventListener('click', () => shiftMonth(-1));
 document.getElementById('nextBtn').addEventListener('click', () => shiftMonth(1));
 
+document.getElementById('todayBtn').addEventListener('click', () => {
+  const now = new Date();
+  cursorY = now.getFullYear();
+  cursorM = now.getMonth();
+  render();
+});
+
 render();
 
-/* ===== 悬浮回到顶部 ===== */
 (function(){
   const btn = document.getElementById('backTop');
   const SHOW_AFTER = 320;
-
   function update(){
     if (window.scrollY > SHOW_AFTER) btn.classList.add('show');
     else btn.classList.remove('show');
   }
   window.addEventListener('scroll', update, { passive: true });
   update();
-
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
 
-/* ===== 地址栏不显示 index.html ===== */
 if (location.pathname.endsWith('/index.html')) {
   history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
 }
