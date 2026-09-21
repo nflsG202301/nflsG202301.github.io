@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>汤允升 · 南京外国语学校 G202301</title>
+<meta name="description" content="汤允升 · 南京外国语学校 G202301">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:4px;margin-bottom:0;line-height:1.4}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:48px 0 80px}
+.container{max-width:820px;margin:0 auto}
+
+.back-bar{margin-bottom:24px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:48px 48px 52px;
+  animation:rise .5s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.figure{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#eef3fb,#e3eaf6);
+  box-shadow:0 10px 28px rgba(15,37,71,.12);
+  margin-bottom:28px;
+}
+.figure img{
+  width:100%;
+  height:auto;
+  display:block;
+  transition:transform .5s ease;
+}
+.figure:hover img{transform:scale(1.02)}
+
+.caption{
+  text-align:center;
+  font-size:15px;
+  color:var(--muted);
+  letter-spacing:.5px;
+}
+.caption .name{
+  display:inline-block;
+  font-size:17px;
+  font-weight:800;
+  color:var(--navy);
+  letter-spacing:2px;
+  margin-right:8px;
+}
+.caption .en{
+  font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;
+  color:#a8791a;
+  letter-spacing:.5px;
+}
+
+/* 称号 */
+.title-line{
+  margin-top:12px;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:4px;
+  color:#a8791a;
+}
+
+.site-footer{
+  background:var(--navy);color:#9fb3d1;
+  padding:34px 0;font-size:13.5px;
+}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:30px 0 60px}
+  .card{padding:26px 20px 32px}
+  .figure{border-radius:12px;margin-bottom:22px}
+  .caption{font-size:14px}
+  .caption .name{font-size:15.5px;letter-spacing:1.5px}
+  .title-line{font-size:14.5px;letter-spacing:3px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../">首页</a><span>/</span>汤允升
+      </p>
+      <h1>汤允升</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="container">
+
+        <div class="back-bar">
+          <a class="back-btn" href="../">← 返回首页</a>
+        </div>
+
+        <div class="card">
+
+          <div class="figure">
+            <img src="./happytang.png" alt="汤允升">
+          </div>
+
+          <div class="caption">
+            <p>
+              <span class="name">汤允升</span>
+              <span class="en">Tang Yunsheng</span>
+            </p>
+            <p class="title-line">伟大的纪检委</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
+</script>
+
+</body>
+</html>
