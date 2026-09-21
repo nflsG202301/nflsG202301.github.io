@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>作业 · 南京外国语学校 G202301</title>
-<meta name="description" content="南京外国语学校 G202301 班作业发布：按日期查看每日作业安排。">
+<meta name="description" content="南京外国语学校 G202301 班作业发布：以日历形式查看每日作业。">
 <style>
 :root{--navy:#0f2547;--navy-2:#1b3a63;--gold:#c9a227;--gold-light:#e8c96a;--bg:#f4f6fb;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e9f2;--radius:16px;--shadow:0 10px 30px rgba(15,37,71,.08);--shadow-hover:0 18px 40px rgba(15,37,71,.16)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -12,7 +12,8 @@ html{scroll-behavior:smooth}
 body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 ul,ol{list-style:none}
-.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.wrap{width:100%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
 .page-hero{position:relative;overflow:hidden;padding:56px 0 52px;color:#fff;background:radial-gradient(760px 340px at 10% 0%,rgba(201,162,39,.20),transparent 62%),radial-gradient(680px 340px at 92% 20%,rgba(88,140,220,.26),transparent 62%),linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%)}
 .page-hero::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:24px 24px;opacity:.4}
 .page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:1px;margin-bottom:12px}
@@ -20,39 +21,199 @@ ul,ol{list-style:none}
 .crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
 .crumb a:hover{color:var(--gold-light)}
 .crumb span{margin:0 7px;opacity:.6}
-.section{padding:40px 0 64px}
-.list-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
-.list-head h2{font-size:17px;letter-spacing:.5px;color:var(--navy);display:flex;align-items:center;gap:9px}
-.list-head h2::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18)}
-.list-head .count{font-size:13.5px;color:var(--muted)}
-.list-head .count b{color:var(--navy)}
-.day-list{display:flex;flex-direction:column;gap:16px}
-.day-card{display:flex;align-items:stretch;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .26s ease,box-shadow .26s ease,border-color .26s ease;animation:rise .45s ease both}
-.day-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);border-color:rgba(201,162,39,.55)}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.day-date{flex:0 0 132px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:20px 10px;color:#fff;text-align:center;background:linear-gradient(155deg,var(--navy-2),var(--navy));position:relative}
-.day-date::after{content:"";position:absolute;right:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--gold-light),var(--gold))}
-.day-date .y{font-size:12.5px;letter-spacing:3px;color:var(--gold-light);font-weight:600}
-.day-date .md{font-size:22px;line-height:1.25;color:#fff;font-weight:700;letter-spacing:1px}
-.day-date .w{font-size:12.5px;color:#a9bcd8;letter-spacing:1.5px}
-.day-main{flex:1;padding:22px 24px;min-width:0;display:flex;flex-direction:column;justify-content:center}
-.day-title{font-size:17.5px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.badge-new{font-size:11.5px;font-weight:700;padding:2px 10px;border-radius:999px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--navy);letter-spacing:.5px}
-.day-arrow{flex:0 0 64px;display:grid;place-items:center;font-size:20px;color:#c3cbd8;transition:all .26s ease}
-.day-card:hover .day-arrow{color:var(--gold);transform:translateX(5px)}
-.list-end{margin-top:22px;text-align:center;font-size:13px;color:var(--muted);padding:18px;border:1px dashed var(--line);border-radius:var(--radius);background:rgba(255,255,255,.6)}
+
+.section{padding:40px 0 80px}
+
+/* ============ 日历卡片 ============ */
+.calendar-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:26px 30px 30px;
+  animation:rise .5s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* 月份标题栏 */
+.cal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;
+  padding-bottom:18px;
+  margin-bottom:20px;
+  border-bottom:1px solid #f0f3f9;
+}
+.cal-nav{
+  width:40px;height:40px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--navy);
+  font-size:20px;line-height:1;
+  cursor:pointer;font-family:inherit;
+  display:grid;place-items:center;
+  transition:all .22s ease;
+}
+.cal-nav:hover:not(:disabled){
+  border-color:rgba(201,162,39,.65);
+  color:var(--gold);
+  transform:scale(1.06);
+}
+.cal-nav:disabled{
+  opacity:.3;cursor:not-allowed;
+}
+.cal-month{
+  font-size:22px;font-weight:800;letter-spacing:1.5px;
+  color:var(--navy);
+  text-align:center;
+  flex:1;
+}
+
+/* 统计行 */
+.cal-info{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.cal-count{
+  font-size:13.5px;color:var(--muted);
+}
+.cal-count b{
+  font-size:17px;font-weight:800;color:var(--navy);
+  margin-right:3px;
+}
+.cal-legend{
+  display:flex;align-items:center;gap:14px;
+  font-size:12.5px;color:var(--muted);
+}
+.cal-legend span{display:inline-flex;align-items:center;gap:6px}
+.cal-legend i{
+  display:inline-block;width:12px;height:12px;border-radius:4px;
+}
+.cal-legend i.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold))}
+.cal-legend i.gray{background:#eef1f5;border:1px solid var(--line)}
+
+/* 星期表头 */
+.cal-weekdays{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:8px;
+  margin-bottom:8px;
+}
+.cal-weekdays span{
+  text-align:center;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+  color:#9aa6b8;
+  padding:6px 0;
+}
+
+/* 日期网格 */
+.cal-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:8px;
+}
+
+/* 日期单元格 */
+.cal-day{
+  aspect-ratio:1;
+  border-radius:12px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:4px;
+  background:#f8fafc;
+  border:1px solid var(--line);
+  position:relative;
+  transition:all .24s ease;
+  cursor:default;
+}
+.cal-day .d{
+  font-size:17px;font-weight:700;
+  color:#a8b0bd;
+  line-height:1;
+  letter-spacing:.5px;
+}
+
+/* 有作业的日期 */
+.cal-day.has-hw{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  border-color:transparent;
+  box-shadow:0 4px 12px rgba(201,162,39,.32);
+  cursor:pointer;
+}
+.cal-day.has-hw .d{
+  color:var(--navy);
+  font-weight:800;
+}
+.cal-day.has-hw .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--navy);
+  opacity:.75;
+}
+.cal-day.has-hw:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 22px rgba(201,162,39,.5);
+}
+.cal-day.has-hw:hover .d{ color:var(--navy) }
+
+/* 今天 */
+.cal-day.today{
+  box-shadow:0 0 0 3px rgba(201,162,39,.35), 0 6px 16px rgba(201,162,39,.3);
+}
+.cal-day.has-hw.today{
+  box-shadow:0 0 0 3px rgba(15,37,71,.28), 0 8px 20px rgba(201,162,39,.45);
+}
+
+/* 空格占位 */
+.cal-day.empty{
+  background:transparent;
+  border:none;
+  pointer-events:none;
+}
+
+/* ============ 悬浮按钮 ============ */
+.back-top{
+  position:fixed;right:28px;bottom:28px;
+  width:54px;height:54px;border-radius:50%;
+  border:none;cursor:pointer;font-family:inherit;
+  display:grid;place-items:center;
+  color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 14px 32px rgba(201,162,39,.45);
+  opacity:0;visibility:hidden;
+  transform:translateY(14px) scale(.9);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  z-index:99;
+}
+.back-top.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.back-top:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 20px 40px rgba(201,162,39,.55)}
+.back-top svg{
+  width:22px;height:22px;
+  stroke:currentColor;fill:none;
+  stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* 页脚 */
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
+
 @media (max-width:640px){
   .page-hero{padding:44px 0 40px}
-  .section{padding:30px 0 48px}
-  .day-date{flex:0 0 104px;padding:16px 6px}
-  .day-date .md{font-size:18px}
-  .day-main{padding:16px}
-  .day-arrow{flex:0 0 40px;font-size:17px}
-  .day-title{font-size:16px}
+  .section{padding:26px 0 60px}
+  .calendar-card{padding:20px 16px 22px}
+  .cal-header{gap:8px;padding-bottom:14px;margin-bottom:16px}
+  .cal-nav{width:36px;height:36px;font-size:18px}
+  .cal-month{font-size:19px;letter-spacing:1px}
+  .cal-weekdays{gap:5px}
+  .cal-weekdays span{font-size:12px;padding:4px 0}
+  .cal-grid{gap:5px}
+  .cal-day{border-radius:10px}
+  .cal-day .d{font-size:15px}
+  .cal-day.has-hw .dot{width:5px;height:5px}
+  .cal-info{font-size:12.5px}
+  .cal-legend{font-size:11.5px;gap:10px}
+  .back-top{right:18px;bottom:18px;width:48px;height:48px}
+  .back-top svg{width:19px;height:19px}
 }
 </style>
 </head>
@@ -64,223 +225,54 @@ ul,ol{list-style:none}
     <div class="wrap">
       <p class="crumb"><a href="../">首页</a><span>/</span>作业</p>
       <h1>作业</h1>
-      <p class="sub">每日作业按日期从上到下排列，点击进入当天作业详情。</p>
+      <p class="sub">以日历形式查看每日作业，点击金色日期进入当天作业详情。</p>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
 
-      <div class="list-head">
-        <h2>作业记录</h2>
-        <div class="count">共 <b>16</b> 天</div>
-      </div>
+      <div class="calendar-card">
 
-      <div class="day-list">
+        <!-- 月份标题栏 -->
+        <div class="cal-header">
+          <button class="cal-nav" id="prevBtn" aria-label="上个月">‹</button>
+          <div class="cal-month" id="calMonth">2026 年 9 月</div>
+          <button class="cal-nav" id="nextBtn" aria-label="下个月">›</button>
+        </div>
 
-        <a class="day-card" href="20260921">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月21日</span>
-            <span class="w">周一</span>
+        <!-- 统计 + 图例 -->
+        <div class="cal-info">
+          <div class="cal-count">本月 <b id="count">0</b> 天有作业</div>
+          <div class="cal-legend">
+            <span><i class="gold"></i>有作业</span>
+            <span><i class="gray"></i>无作业</span>
           </div>
-          <div class="day-main">
-            <div class="day-title">
-              2026年9月21日 作业
-              <span class="badge-new">最新</span>
-            </div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
+        </div>
 
-        <a class="day-card" href="20260920">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月20日</span>
-            <span class="w">周日</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月20日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
+        <!-- 星期表头 -->
+        <div class="cal-weekdays">
+          <span>一</span><span>二</span><span>三</span><span>四</span>
+          <span>五</span><span>六</span><span>日</span>
+        </div>
 
-        <a class="day-card" href="20260918">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月18日</span>
-            <span class="w">周五</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月18日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260917">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月17日</span>
-            <span class="w">周四</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月17日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260916">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月16日</span>
-            <span class="w">周三</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月16日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260915">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月15日</span>
-            <span class="w">周二</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月15日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260914">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月14日</span>
-            <span class="w">周一</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月14日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260911">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月11日</span>
-            <span class="w">周五</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月11日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260910">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月10日</span>
-            <span class="w">周四</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月10日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260909">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月9日</span>
-            <span class="w">周三</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月9日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260908">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月8日</span>
-            <span class="w">周二</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月8日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260907">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月7日</span>
-            <span class="w">周一</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月7日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260904">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月4日</span>
-            <span class="w">周五</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月4日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260903">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月3日</span>
-            <span class="w">周四</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月3日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260902">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月2日</span>
-            <span class="w">周三</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月2日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
-
-        <a class="day-card" href="20260901">
-          <div class="day-date">
-            <span class="y">2026</span>
-            <span class="md">9月1日</span>
-            <span class="w">周二</span>
-          </div>
-          <div class="day-main">
-            <div class="day-title">2026年9月1日 作业</div>
-          </div>
-          <span class="day-arrow">→</span>
-        </a>
+        <!-- 日期网格 -->
+        <div class="cal-grid" id="calGrid"></div>
 
       </div>
-
-      <p class="list-end">已经到底啦 · 更早的作业记录会陆续整理上传</p>
 
     </div>
   </section>
 
 </main>
+
+<!-- 悬浮回到最新 -->
+<button class="back-top" id="backTop" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24">
+    <line x1="12" y1="19" x2="12" y2="5"/>
+    <polyline points="5 12 12 5 19 12"/>
+  </svg>
+</button>
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
@@ -297,9 +289,138 @@ ul,ol{list-style:none}
 </footer>
 
 <script>
-  if (location.pathname.endsWith('/index.html')) {
-    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+/* ============================================================
+   作业日历
+   ------------------------------------------------------------
+   以后新增作业时，只需要在下面 HOMEWORK 数组里加一行日期
+   （格式：'YYYY-MM-DD'），日历会自动识别月份并渲染。
+   ============================================================ */
+const HOMEWORK = [
+  '2026-09-01',
+  '2026-09-02',
+  '2026-09-03',
+  '2026-09-04',
+  '2026-09-07',
+  '2026-09-08',
+  '2026-09-09',
+  '2026-09-10',
+  '2026-09-11',
+  '2026-09-14',
+  '2026-09-15',
+  '2026-09-16',
+  '2026-09-17',
+  '2026-09-18',
+  '2026-09-20',
+  '2026-09-21'
+];
+
+/* ===== 基础工具 ===== */
+const hwSet = new Set(HOMEWORK);
+const sorted = [...HOMEWORK].sort();
+const minYM = sorted[0].slice(0, 7);
+const maxYM = sorted[sorted.length - 1].slice(0, 7);
+
+let currentYM = maxYM;   // 当前显示的月份（默认最新）
+
+function parseYM(ym){
+  const [y, m] = ym.split('-').map(Number);
+  return { y, m: m - 1 };
+}
+function formatYM(y, m){
+  return `${y}-${String(m + 1).padStart(2, '0')}`;
+}
+
+/* ===== 渲染 ===== */
+function render(){
+  const { y, m } = parseYM(currentYM);
+
+  document.getElementById('calMonth').textContent = `${y} 年 ${m + 1} 月`;
+
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+  // 该月 1 日是星期几（0=周一 …… 6=周日）
+  let firstWeekday = new Date(y, m, 1).getDay();
+  firstWeekday = (firstWeekday + 6) % 7;
+
+  // 前导空格
+  for (let i = 0; i < firstWeekday; i++){
+    const cell = document.createElement('div');
+    cell.className = 'cal-day empty';
+    grid.appendChild(cell);
   }
+
+  // 今天的日期字符串
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+  // 每日单元格
+  let count = 0;
+  for (let d = 1; d <= daysInMonth; d++){
+    const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const hasHw   = hwSet.has(dateStr);
+    const isToday = dateStr === todayStr;
+
+    let cls = 'cal-day';
+    if (hasHw)   cls += ' has-hw';
+    if (isToday) cls += ' today';
+
+    let cell;
+    if (hasHw){
+      cell = document.createElement('a');
+      cell.href = dateStr.replace(/-/g, '');   // 2026-09-21 → 20260921
+      count++;
+    } else {
+      cell = document.createElement('div');
+    }
+    cell.className = cls;
+    cell.innerHTML = `<span class="d">${d}</span>` + (hasHw ? '<span class="dot"></span>' : '');
+    grid.appendChild(cell);
+  }
+
+  document.getElementById('count').textContent = count;
+
+  // 上一月 / 下一月按钮状态
+  document.getElementById('prevBtn').disabled = currentYM <= minYM;
+  document.getElementById('nextBtn').disabled = currentYM >= maxYM;
+}
+
+/* ===== 月份切换 ===== */
+function shiftMonth(delta){
+  const { y, m } = parseYM(currentYM);
+  const next = new Date(y, m + delta, 1);
+  currentYM = formatYM(next.getFullYear(), next.getMonth());
+  render();
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => shiftMonth(-1));
+document.getElementById('nextBtn').addEventListener('click', () => shiftMonth(1));
+
+render();
+
+/* ===== 悬浮回到顶部 ===== */
+(function(){
+  const btn = document.getElementById('backTop');
+  const SHOW_AFTER = 320;
+
+  function update(){
+    if (window.scrollY > SHOW_AFTER) btn.classList.add('show');
+    else btn.classList.remove('show');
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
 </script>
 
 </body>
