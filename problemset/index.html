@@ -45,13 +45,62 @@ ul,ol{list-style:none}
 .crumb a:hover{color:var(--gold-light)}
 .crumb span{margin:0 7px;opacity:.6}
 
-.section{padding:40px 0 72px}
-.list-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
-.list-head h2{font-size:17px;letter-spacing:.5px;color:var(--navy);display:flex;align-items:center;gap:9px}
-.list-head h2::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18)}
+.section{padding:36px 0 72px}
+
+/* ============ 筛选区 ============ */
+.filters{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:22px 24px 18px;
+  margin-bottom:24px;
+  animation:rise .45s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.filter-group + .filter-group{
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px dashed var(--line);
+}
+.filter-label{
+  display:inline-block;
+  font-size:12.5px;font-weight:700;letter-spacing:1px;
+  color:#9aa6b8;
+  margin-bottom:10px;
+}
+.filter-btns{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid var(--line);background:#fff;color:var(--muted);
+  font-size:13px;font-weight:600;padding:7px 15px;border-radius:999px;
+  cursor:pointer;font-family:inherit;transition:all .22s ease;
+}
+.filter-btn:hover{border-color:rgba(201,162,39,.65);color:var(--navy)}
+.filter-btn.active{
+  color:#fff;border-color:transparent;
+  background:linear-gradient(135deg,var(--navy-2),var(--navy));
+  box-shadow:0 6px 16px rgba(15,37,71,.22);
+}
+
+/* 计数条 */
+.list-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;margin-bottom:20px;
+}
+.list-head h2{
+  font-size:17px;letter-spacing:.5px;color:var(--navy);
+  display:flex;align-items:center;gap:9px;
+}
+.list-head h2::before{
+  content:"";width:9px;height:9px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18);
+}
 .list-head .count{font-size:13.5px;color:var(--muted)}
 .list-head .count b{color:var(--navy)}
 
+/* ============ 题目卡片 ============ */
 .prob-list{display:flex;flex-direction:column;gap:20px}
 .prob-card{
   background:var(--card);border:1px solid var(--line);
@@ -61,10 +110,9 @@ ul,ol{list-style:none}
   animation:rise .45s ease both;
 }
 .prob-card:hover{box-shadow:var(--shadow-hover)}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 .prob-top{padding:22px 26px 18px}
-.prob-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.prob-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .prob-id{
   font-size:12.5px;font-weight:800;letter-spacing:.5px;
   color:var(--navy);background:linear-gradient(135deg,#eef3fb,#dde7f6);
@@ -80,7 +128,10 @@ ul,ol{list-style:none}
   color:var(--navy);letter-spacing:.5px;
 }
 
-.badge-access{
+/* 通用标签 */
+.badge-access,
+.badge-subject,
+.badge-type{
   display:inline-flex;align-items:center;gap:5px;
   font-size:11.5px;font-weight:700;letter-spacing:.5px;
   padding:3px 11px;border-radius:999px;
@@ -88,6 +139,12 @@ ul,ol{list-style:none}
 .badge-access .bi{font-size:12px;line-height:1}
 .badge-access.public{color:#218a55;background:#e7f6ee}
 .badge-access.locked{color:#a8791a;background:#fdf1e0}
+
+.badge-subject{color:#5b6b7f;background:#eef1f5}
+
+.badge-type.classroom{color:#2f6bc0;background:#e8f0fc}
+.badge-type.contest{color:#c2453c;background:#fdeaea}
+.badge-type.thinking{color:#6b4bc0;background:#f0ecfc}
 
 .acc{border-top:1px dashed var(--line);background:#fafbfe}
 .acc-head{
@@ -122,6 +179,16 @@ ul,ol{list-style:none}
 .acc-links .acc-head + .acc-head{border-top:1px dashed var(--line)}
 .acc-links .acc-head:hover .chev{color:var(--gold);transform:translateX(4px)}
 
+/* 空状态 */
+.empty{
+  display:none;text-align:center;padding:60px 30px;
+  background:var(--card);border:1px dashed var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.empty .big{font-size:48px;display:block;margin-bottom:16px;opacity:.6}
+.empty h2{font-size:18px;color:var(--navy);letter-spacing:1px;margin-bottom:8px}
+.empty p{font-size:14px;color:var(--muted)}
+
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
@@ -129,7 +196,9 @@ ul,ol{list-style:none}
 
 @media (max-width:640px){
   .page-hero{padding:44px 0 40px}
-  .section{padding:28px 0 52px}
+  .section{padding:26px 0 52px}
+  .filters{padding:18px 16px 14px}
+  .filter-btn{padding:6px 12px;font-size:12.5px}
   .prob-top{padding:18px 20px 16px}
   .acc-head{padding:14px 20px;font-size:13.5px}
   .acc-inner{padding:6px 16px 20px;font-size:14.5px}
@@ -152,23 +221,69 @@ ul,ol{list-style:none}
   <section class="section">
     <div class="wrap">
 
-      <div class="list-head">
-        <h2>题目列表</h2>
-        <div class="count">共 <b>7</b> 道</div>
+      <!-- ===== 筛选区 ===== -->
+      <div class="filters">
+
+        <div class="filter-group">
+          <span class="filter-label">访问</span>
+          <div class="filter-btns" data-group="access">
+            <button class="filter-btn active" data-value="all">全部</button>
+            <button class="filter-btn" data-value="public">🌐 公开</button>
+            <button class="filter-btn" data-value="locked">🔒 需邀请码查看</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">学科</span>
+          <div class="filter-btns" data-group="subject">
+            <button class="filter-btn active" data-value="all">全部</button>
+            <button class="filter-btn" data-value="chinese">语文</button>
+            <button class="filter-btn" data-value="math">数学</button>
+            <button class="filter-btn" data-value="english">英语</button>
+            <button class="filter-btn" data-value="physics">物理</button>
+            <button class="filter-btn" data-value="chemistry">化学</button>
+            <button class="filter-btn" data-value="biology">生物</button>
+            <button class="filter-btn" data-value="geography">地理</button>
+            <button class="filter-btn" data-value="politics">政治</button>
+            <button class="filter-btn" data-value="history">历史</button>
+            <button class="filter-btn" data-value="infomatics">信息学</button>
+            <button class="filter-btn" data-value="other">其他</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">类型</span>
+          <div class="filter-btns" data-group="type">
+            <button class="filter-btn active" data-value="all">全部</button>
+            <button class="filter-btn" data-value="classroom">📘 课内</button>
+            <button class="filter-btn" data-value="contest">🏆 竞赛</button>
+            <button class="filter-btn" data-value="thinking">🧠 思考题</button>
+          </div>
+        </div>
+
       </div>
 
-      <div class="prob-list">
+      <!-- ===== 计数条 ===== -->
+      <div class="list-head">
+        <h2>题目列表</h2>
+        <div class="count">共 <b id="count">7</b> 道</div>
+      </div>
 
-        <!-- ===== 2026 年 9 月 19 日 · CSP-S1 ===== -->
-        <article class="prob-card">
+      <!-- ===== 卡片列表 ===== -->
+      <div class="prob-list" id="list">
+
+        <!-- 9.19 CSP-S1 -->
+        <article class="prob-card" data-access="public" data-subject="infomatics" data-type="contest">
           <div class="prob-top">
             <div class="prob-meta">
               <span class="prob-id">2026 年 9 月 19 日</span>
               <span class="badge-access public"><span class="bi">🌐</span>公开</span>
+              <span class="badge-subject">信息学</span>
+              <span class="badge-type contest">🏆 竞赛</span>
               <span class="badge-new">最新</span>
             </div>
             <h3 class="prob-title">2026 CCF 非专业级别软件能力认证第一轮（CSP-S1）提高级 C++ 语言试题</h3>
-            <p class="prob-info">信息学 · 单项选择题 15 题 · 阅读程序 3 组 · 完善程序 2 组</p>
+            <p class="prob-info">单项选择题 15 题 · 阅读程序 3 组 · 完善程序 2 组</p>
           </div>
 
           <div class="acc-links">
@@ -185,12 +300,14 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- ===== 2026 年 9 月 17 日 · 数学竞赛讲义 ===== -->
-        <article class="prob-card">
+        <!-- 9.17 数学竞赛讲义 -->
+        <article class="prob-card" data-access="locked" data-subject="math" data-type="contest">
           <div class="prob-top">
             <div class="prob-meta">
               <span class="prob-id">2026 年 9 月 17 日</span>
               <span class="badge-access locked"><span class="bi">🔒</span>需邀请码查看</span>
+              <span class="badge-subject">数学</span>
+              <span class="badge-type contest">🏆 竞赛</span>
             </div>
             <h3 class="prob-title">数学竞赛讲义 · 不等式第 1 讲：不等式的基本证明方法</h3>
             <p class="prob-info">知识梳理 · 典型例题 11 组 · 精选习题 9 组</p>
@@ -210,15 +327,17 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- ===== 2026 年 9 月 15 日 · 随堂练习 ===== -->
-        <article class="prob-card">
+        <!-- 9.15 随堂练习 -->
+        <article class="prob-card" data-access="locked" data-subject="math" data-type="classroom">
           <div class="prob-top">
             <div class="prob-meta">
               <span class="prob-id">2026 年 9 月 15 日</span>
               <span class="badge-access locked"><span class="bi">🔒</span>需邀请码查看</span>
+              <span class="badge-subject">数学</span>
+              <span class="badge-type classroom">📘 课内</span>
             </div>
             <h3 class="prob-title">随堂练习 0915</h3>
-            <p class="prob-info">数学 · 单选题 8 道 · 多选题 3 道 · 填空题 3 道 · 解答题 3 道</p>
+            <p class="prob-info">单选题 8 道 · 多选题 3 道 · 填空题 3 道 · 解答题 3 道</p>
           </div>
 
           <div class="acc-links">
@@ -235,12 +354,14 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- ===== 2026 年 9 月 8 日 · 数学竞赛选拔 ===== -->
-        <article class="prob-card">
+        <!-- 9.8 数学竞赛选拔 -->
+        <article class="prob-card" data-access="locked" data-subject="math" data-type="contest">
           <div class="prob-top">
             <div class="prob-meta">
               <span class="prob-id">2026 年 9 月 8 日</span>
               <span class="badge-access locked"><span class="bi">🔒</span>需邀请码查看</span>
+              <span class="badge-subject">数学</span>
+              <span class="badge-type contest">🏆 竞赛</span>
             </div>
             <h3 class="prob-title">2026 数学竞赛选修课选拔测试</h3>
             <p class="prob-info">考试时间：<b>90 分钟</b> · 满分：<b>120 分</b></p>
@@ -260,12 +381,14 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- ===== 2026 年 9 月 3 日 ===== -->
-        <article class="prob-card">
+        <!-- 9.3 英国交通规则 -->
+        <article class="prob-card" data-access="public" data-subject="physics" data-type="thinking">
           <div class="prob-top">
             <div class="prob-meta">
               <span class="prob-id">2026 年 9 月 3 日</span>
               <span class="badge-access public"><span class="bi">🌐</span>公开</span>
+              <span class="badge-subject">物理</span>
+              <span class="badge-type thinking">🧠 思考题</span>
             </div>
             <h3 class="prob-title">如果英国的交通规则由原来的左侧通行改为右侧通行，那么一天的长度是增加了还是减少了还是不变？</h3>
           </div>
@@ -287,12 +410,14 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- ===== 2026 年 9 月 2 日 ===== -->
-        <article class="prob-card">
+        <!-- 9.2 环球行走 -->
+        <article class="prob-card" data-access="public" data-subject="physics" data-type="thinking">
           <div class="prob-top">
             <div class="prob-meta">
               <span class="prob-id">2026 年 9 月 2 日</span>
               <span class="badge-access public"><span class="bi">🌐</span>公开</span>
+              <span class="badge-subject">物理</span>
+              <span class="badge-type thinking">🧠 思考题</span>
             </div>
             <h3 class="prob-title">地球上的什么地方向北走一公里，然后向东走一公里，再向南走一公里，又会回到原来的位置？</h3>
           </div>
@@ -311,12 +436,14 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- ===== 2026 年 8 月 29 日 · 物竞测试 3 ===== -->
-        <article class="prob-card">
+        <!-- 8.29 物竞测试 3 -->
+        <article class="prob-card" data-access="locked" data-subject="physics" data-type="contest">
           <div class="prob-top">
             <div class="prob-meta">
               <span class="prob-id">2026 年 8 月 29 日</span>
               <span class="badge-access locked"><span class="bi">🔒</span>需邀请码查看</span>
+              <span class="badge-subject">物理</span>
+              <span class="badge-type contest">🏆 竞赛</span>
             </div>
             <h3 class="prob-title">物竞测试 3 —— 牛顿运动定律</h3>
             <p class="prob-info">物理竞赛课暑假选拔试卷（可下载 PDF）</p>
@@ -338,6 +465,13 @@ ul,ol{list-style:none}
 
       </div>
 
+      <!-- ===== 空状态 ===== -->
+      <div class="empty" id="empty">
+        <span class="big">🔍</span>
+        <h2>没有符合条件的题目</h2>
+        <p>试试调整或清除筛选条件</p>
+      </div>
+
     </div>
   </section>
 
@@ -357,19 +491,60 @@ ul,ol{list-style:none}
 </footer>
 
 <script>
-  document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const acc  = btn.parentElement;
-      const body = acc.querySelector('.acc-body');
-      const open = acc.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open);
-      body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+/* ============================================================
+   三维筛选：访问 × 学科 × 类型
+   ============================================================ */
+(function(){
+  const state = { access: 'all', subject: 'all', type: 'all' };
+
+  const cards = document.querySelectorAll('.prob-card');
+  const count = document.getElementById('count');
+  const empty = document.getElementById('empty');
+
+  function apply(){
+    let shown = 0;
+    cards.forEach(card => {
+      const okA = state.access  === 'all' || card.dataset.access  === state.access;
+      const okS = state.subject === 'all' || card.dataset.subject === state.subject;
+      const okT = state.type    === 'all' || card.dataset.type    === state.type;
+      const ok  = okA && okS && okT;
+      card.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    count.textContent = shown;
+    empty.style.display = shown === 0 ? 'block' : 'none';
+  }
+
+  document.querySelectorAll('.filter-btns').forEach(group => {
+    const key = group.dataset.group;
+    group.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state[key] = btn.dataset.value;
+        apply();
+      });
     });
   });
 
-  if (location.pathname.endsWith('/index.html')) {
-    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
-  }
+  apply();
+})();
+
+/* ===== 内联折叠面板 ===== */
+document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const acc  = btn.parentElement;
+    const body = acc.querySelector('.acc-body');
+    const open = acc.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  });
+});
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
 </script>
 
 </body>
