@@ -24,51 +24,18 @@ ul,ol{list-style:none}
 
 .section{padding:40px 0 80px}
 
-.calendar-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:28px 32px 32px;
-  animation:rise .5s ease both;
-}
+.calendar-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 32px 32px;animation:rise .5s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
-.cal-header{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;padding-bottom:18px;margin-bottom:20px;
-  border-bottom:1px solid #f0f3f9;
-}
-.cal-nav{
-  width:40px;height:40px;border-radius:50%;
-  border:1px solid var(--line);background:#fff;color:var(--navy);
-  font-size:20px;line-height:1;cursor:pointer;font-family:inherit;
-  display:grid;place-items:center;transition:all .22s ease;
-}
+.cal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid #f0f3f9}
+.cal-nav{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-size:20px;line-height:1;cursor:pointer;font-family:inherit;display:grid;place-items:center;transition:all .22s ease}
 .cal-nav:hover{border-color:rgba(201,162,39,.65);color:var(--gold);transform:scale(1.06)}
-.cal-month-wrap{
-  flex:1;text-align:center;
-  display:flex;align-items:center;justify-content:center;gap:12px;
-}
+.cal-month-wrap{flex:1;text-align:center;display:flex;align-items:center;justify-content:center;gap:12px}
 .cal-month{font-size:22px;font-weight:800;letter-spacing:1.5px;color:var(--navy)}
-.cal-today-btn{
-  font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.5px;
-  padding:4px 12px;border-radius:999px;
-  color:var(--gold);
-  border:1px solid rgba(201,162,39,.55);
-  background:linear-gradient(135deg,#fffaf0,#fdf1e0);
-  cursor:pointer;transition:all .2s ease;
-  white-space:nowrap;
-}
-.cal-today-btn:hover{
-  background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  color:var(--navy);border-color:transparent;
-}
+.cal-today-btn{font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.5px;padding:4px 12px;border-radius:999px;color:var(--gold);border:1px solid rgba(201,162,39,.55);background:linear-gradient(135deg,#fffaf0,#fdf1e0);cursor:pointer;transition:all .2s ease;white-space:nowrap}
+.cal-today-btn:hover{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--navy);border-color:transparent}
 
-.cal-info{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:14px;flex-wrap:wrap;margin-bottom:16px;
-}
+.cal-info{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
 .cal-count{font-size:13.5px;color:var(--muted)}
 .cal-count b{font-size:17px;font-weight:800;color:var(--navy);margin-right:3px}
 .cal-legend{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted)}
@@ -77,61 +44,22 @@ ul,ol{list-style:none}
 .cal-legend i.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold))}
 .cal-legend i.gray{background:#fff;border:1px solid var(--line)}
 
-.cal-weekdays{
-  display:grid;grid-template-columns:repeat(7,1fr);
-  gap:6px;margin-bottom:6px;
-}
-.cal-weekdays span{
-  text-align:center;font-size:13px;font-weight:700;letter-spacing:.5px;
-  color:#9aa6b8;padding:6px 0;
-}
+.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
+.cal-weekdays span{text-align:center;font-size:13px;font-weight:700;letter-spacing:.5px;color:#9aa6b8;padding:6px 0}
 .cal-weekdays span.wk{ color:#c2453c }
 
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 
-/* ============ 日期格 ============ */
-.cal-day{
-  aspect-ratio:1;
-  border-radius:12px;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:2px;
-  background:#fff;border:1px solid var(--line);
-  position:relative;
-  padding:4px 3px;
-  transition:all .24s ease;cursor:default;text-align:center;line-height:1.1;
-}
-.cal-day .d{
-  font-size:19px;                     /* 原 17px */
-  font-weight:700;color:#4b5563;
-  letter-spacing:.3px;line-height:1.1;
-}
+.cal-day{aspect-ratio:1;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:#fff;border:1px solid var(--line);position:relative;padding:4px 3px;transition:all .24s ease;cursor:default;text-align:center;line-height:1.1}
+.cal-day .d{font-size:19px;font-weight:700;color:#4b5563;letter-spacing:.3px;line-height:1.1}
 
-.cal-day .lunar{
-  font-size:12px;                     /* 原 10.5px */
-  color:#9aa6b6;
-  letter-spacing:0;
-  line-height:1.25;
-  width:100%;
-  padding:0 1px;
-  font-weight:500;
-  white-space:normal;
-  word-break:break-all;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
+.cal-day .lunar{font-size:12px;color:#9aa6b6;letter-spacing:0;line-height:1.25;width:100%;padding:0 1px;font-weight:500;white-space:normal;word-break:break-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 .cal-day .lunar.festival{    color:#c2453c; font-weight:700 }
 .cal-day .lunar.observance{  color:#6b7f9e; font-weight:600 }
 .cal-day .lunar.term{        color:#a8791a; font-weight:700 }
 
-.cal-day.has-hw{
-  background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  border-color:transparent;box-shadow:0 4px 12px rgba(201,162,39,.32);
-  cursor:pointer;
-}
+.cal-day.has-hw{background:linear-gradient(135deg,var(--gold-light),var(--gold));border-color:transparent;box-shadow:0 4px 12px rgba(201,162,39,.32);cursor:pointer}
 .cal-day.has-hw .d{ color:var(--navy); font-weight:800 }
 .cal-day.has-hw .lunar{ opacity:.96 }
 .cal-day.has-hw .lunar.festival{    color:#8a2a24 }
@@ -148,17 +76,7 @@ ul,ol{list-style:none}
 .cal-day .d.weekend{ color:#c2453c }
 .cal-day.has-hw .d.weekend{ color:var(--navy) }
 
-.back-top{
-  position:fixed;right:28px;bottom:28px;
-  width:54px;height:54px;border-radius:50%;
-  border:none;cursor:pointer;font-family:inherit;
-  display:grid;place-items:center;color:var(--navy);
-  background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  box-shadow:0 14px 32px rgba(201,162,39,.45);
-  opacity:0;visibility:hidden;
-  transform:translateY(14px) scale(.9);
-  transition:all .3s cubic-bezier(.4,0,.2,1);z-index:99;
-}
+.back-top{position:fixed;right:28px;bottom:28px;width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;font-family:inherit;display:grid;place-items:center;color:var(--navy);background:linear-gradient(135deg,var(--gold-light),var(--gold));box-shadow:0 14px 32px rgba(201,162,39,.45);opacity:0;visibility:hidden;transform:translateY(14px) scale(.9);transition:all .3s cubic-bezier(.4,0,.2,1);z-index:99}
 .back-top.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
 .back-top:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 20px 40px rgba(201,162,39,.55)}
 .back-top svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
@@ -180,8 +98,8 @@ ul,ol{list-style:none}
   .cal-weekdays span{font-size:11.5px;padding:3px 0}
   .cal-grid{gap:3px}
   .cal-day{border-radius:8px;padding:2px;gap:1px}
-  .cal-day .d{font-size:16px}                        /* 原 14px */
-  .cal-day .lunar{font-size:10px;line-height:1.2;padding:0}   /* 原 8.5px */
+  .cal-day .d{font-size:16px}
+  .cal-day .lunar{font-size:10px;line-height:1.2;padding:0}
   .cal-info{font-size:12px}
   .cal-legend{font-size:11px;gap:10px}
   .cal-legend i{width:10px;height:10px}
@@ -263,11 +181,9 @@ ul,ol{list-style:none}
 /* ============================================================
    作业日历
    ------------------------------------------------------------
-   颜色分层：
-     红（festival）   —— 极其重要的节日（中国 + 世界级知名节日）
-     蓝灰（observance）—— 一般节日 / 国际日 / 主题日
-     金（term）       —— 二十四节气
-     中灰（默认）     —— 普通农历
+   · 用户指定的节日名称优先显示
+   · 没有节日的日期自动用算法计算出农历
+   · 颜色：红（重要节日）/ 蓝灰（一般）/ 金（节气）/ 中灰（农历）
    ============================================================ */
 
 const HOMEWORK = [
@@ -277,40 +193,160 @@ const HOMEWORK = [
   '2026-09-20','2026-09-21'
 ];
 
+/* ============ 用户指定的节日 / 节气（会覆盖自动农历） ============ */
 const LUNAR = {
-  /* ================= 2026 年 7 月 ================= */
-  '2026-07-01':'建党节','2026-07-02':'五月十八','2026-07-03':'五月十九',
-  '2026-07-04':'美国独立日','2026-07-05':'五月廿一',
-  '2026-07-06':'国际合作节','2026-07-07':'七七事变纪念日',
-  '2026-07-08':'五月廿四','2026-07-09':'五月廿五','2026-07-10':'五月廿六',
-  '2026-07-11':'中国航海日','2026-07-12':'五月廿八','2026-07-13':'五月廿九',
-  '2026-07-14':'法国国庆日','2026-07-15':'六月初二','2026-07-16':'六月初三',
-  '2026-07-17':'六月初四','2026-07-18':'曼德拉国际日','2026-07-19':'六月初六',
-  '2026-07-20':'六月初七','2026-07-21':'六月初八','2026-07-22':'国际接吻日',
-  '2026-07-23':'大暑','2026-07-24':'六月十一','2026-07-25':'世界预防溺水日',
-  '2026-07-26':'六月十三','2026-07-27':'六月十四','2026-07-28':'世界肝炎日',
-  '2026-07-29':'六月十六','2026-07-30':'国际友谊日','2026-07-31':'六月十八',
+  /* ---------- 1 月 ---------- */
+  '2026-01-01':'元旦',
+  '2026-01-05':'小寒',
+  '2026-01-06':'主显节',
+  '2026-01-07':'东正教圣诞节',
+  '2026-01-08':'周恩来逝世纪念日',
+  '2026-01-10':'中国人民警察节',
+  '2026-01-14':'世界逻辑日',
+  '2026-01-16':'世界宗教和谐日',
+  '2026-01-18':'世界宗教日',
+  '2026-01-20':'大寒',
+  '2026-01-21':'国际拥抱日',
+  '2026-01-23':'世界自由日',
+  '2026-01-24':'国际教育日',
+  '2026-01-25':'国际麻风节',
+  '2026-01-26':'腊八节',
+  '2026-01-27':'国际大屠杀纪念日',
+  '2026-01-28':'国际数据隐私日',
 
-  /* ================= 2026 年 8 月 ================= */
-  '2026-08-01':'建军节','2026-08-02':'六月二十','2026-08-03':'六月廿一',
-  '2026-08-04':'六月廿二','2026-08-05':'六月廿三','2026-08-06':'火把节',
-  '2026-08-07':'立秋','2026-08-08':'全民健身日','2026-08-09':'世界土著人民国际日',
-  '2026-08-10':'六月廿八','2026-08-11':'六月廿九','2026-08-12':'国际青年节',
-  '2026-08-13':'七月初一','2026-08-14':'巴基斯坦独立日','2026-08-15':'全国生态日',
-  '2026-08-16':'七月初四','2026-08-17':'七月初五','2026-08-18':'七月初六',
-  '2026-08-19':'中国医师节','2026-08-20':'七月初八','2026-08-21':'七月初九',
-  '2026-08-22':'七月初十','2026-08-23':'处暑','2026-08-24':'七月十二',
-  '2026-08-25':'圣纪节','2026-08-26':'深圳经济特区','2026-08-27':'中元节',
-  '2026-08-28':'七月十六','2026-08-29':'禁止核试验国际日',
-  '2026-08-30':'土耳其胜利日','2026-08-31':'马来西亚国庆节',
+  /* ---------- 2 月 ---------- */
+  '2026-02-02':'世界湿地日',
+  '2026-02-03':'立春',
+  '2026-02-04':'世界癌症日',
+  '2026-02-11':'妇女和女童参与科学国际日',
+  '2026-02-13':'世界无线电日',
+  '2026-02-14':'情人节',
+  '2026-02-16':'除夕',
+  '2026-02-17':'春节',
+  '2026-02-18':'雨水',
+  '2026-02-21':'国际母语日',
+  '2026-02-24':'第三世界青年日',
+  '2026-02-28':'国际罕见病日',
 
-  /* ================= 2026 年 9 月（有作业） ================= */
+  /* ---------- 3 月 ---------- */
+  '2026-03-01':'龙抬头',
+  '2026-03-03':'元宵节',
+  '2026-03-05':'惊蛰',
+  '2026-03-06':'世界青光眼日',
+  '2026-03-07':'女生节',
+  '2026-03-08':'三八妇女节',
+  '2026-03-11':'国际尊严尊敬日',
+  '2026-03-12':'植树节',
+  '2026-03-14':'圆周率日',
+  '2026-03-15':'消费者权益日',
+  '2026-03-17':'国际航海日',
+  '2026-03-20':'春分',
+  '2026-03-21':'世界睡眠日',
+  '2026-03-22':'世界水日',
+  '2026-03-23':'世界气象日',
+  '2026-03-24':'世界防治结核病日',
+  '2026-03-31':'复活节',
+
+  /* ---------- 4 月 ---------- */
+  '2026-04-01':'愚人节',
+  '2026-04-02':'世界自闭症关注日',
+  '2026-04-03':'寒食节',
+  '2026-04-04':'清明节',
+  '2026-04-05':'复活节',
+  '2026-04-07':'世界卫生日',
+  '2026-04-10':'非洲环境保护日',
+  '2026-04-11':'世界帕金森病日',
+  '2026-04-15':'全民国家安全教育日',
+  '2026-04-17':'世界血友病日',
+  '2026-04-18':'国际古迹遗址日',
+  '2026-04-20':'谷雨',
+  '2026-04-22':'世界地球日',
+  '2026-04-23':'世界读书日',
+  '2026-04-24':'中国航天日',
+  '2026-04-25':'世界防治疟疾日',
+  '2026-04-26':'世界知识产权日',
+  '2026-04-28':'世界安全生产与健康日',
+  '2026-04-29':'化学战受害者纪念日',
+  '2026-04-30':'全国交通安全反思日',
+
+  /* ---------- 5 月 ---------- */
+  '2026-05-01':'国际劳动节',
+  '2026-05-02':'世界金枪鱼日',
+  '2026-05-03':'世界新闻自由日',
+  '2026-05-04':'五四青年节',
+  '2026-05-05':'立夏',
+  '2026-05-08':'世界微笑日',
+  '2026-05-09':'俄罗斯卫国战争胜利日',
+  '2026-05-10':'母亲节',
+  '2026-05-12':'国际护士节',
+  '2026-05-15':'国际家庭日',
+  '2026-05-17':'全国助残日',
+  '2026-05-18':'国际博物馆日',
+  '2026-05-21':'小满',
+  '2026-05-22':'国际生物多样性日',
+  '2026-05-25':'非洲日',
+  '2026-05-31':'世界无烟日',
+
+  /* ---------- 6 月 ---------- */
+  '2026-06-01':'国际儿童节',
+  '2026-06-02':'意大利共和国日',
+  '2026-06-03':'世界自行车日',
+  '2026-06-04':'受侵略戕害的无辜儿童国际日',
+  '2026-06-05':'世界环境日',
+  '2026-06-06':'芒种',
+  '2026-06-07':'世界食品安全日',
+  '2026-06-08':'世界海洋日',
+  '2026-06-10':'葡萄牙日',
+  '2026-06-12':'世界无童工日',
+  '2026-06-14':'世界捐血者日',
+  '2026-06-15':'世界老人虐待意识日',
+  '2026-06-16':'世界海龟日',
+  '2026-06-17':'防治沙漠化和干旱世界日',
+  '2026-06-18':'国际野餐日',
+  '2026-06-19':'端午节',
+  '2026-06-20':'世界难民日',
+  '2026-06-21':'父亲节',
+  '2026-06-23':'国际奥林匹克日',
+  '2026-06-26':'国际禁毒日',
+  '2026-06-29':'国际热带日',
+  '2026-06-30':'世界青年联欢节',
+
+  /* ---------- 7 月 ---------- */
+  '2026-07-01':'建党节',
+  '2026-07-04':'美国独立日',
+  '2026-07-06':'国际合作节',
+  '2026-07-07':'七七事变纪念日',
+  '2026-07-11':'中国航海日',
+  '2026-07-14':'法国国庆日',
+  '2026-07-18':'曼德拉国际日',
+  '2026-07-22':'国际接吻日',
+  '2026-07-23':'大暑',
+  '2026-07-25':'世界预防溺水日',
+  '2026-07-28':'世界肝炎日',
+  '2026-07-30':'国际友谊日',
+
+  /* ---------- 8 月 ---------- */
+  '2026-08-01':'建军节',
+  '2026-08-06':'火把节',
+  '2026-08-07':'立秋',
+  '2026-08-08':'全民健身日',
+  '2026-08-09':'世界土著人民国际日',
+  '2026-08-12':'国际青年节',
+  '2026-08-14':'巴基斯坦独立日',
+  '2026-08-15':'全国生态日',
+  '2026-08-19':'中国医师节',
+  '2026-08-23':'处暑',
+  '2026-08-25':'圣纪节',
+  '2026-08-26':'深圳经济特区',
+  '2026-08-27':'中元节',
+  '2026-08-29':'禁止核试验国际日',
+  '2026-08-30':'土耳其胜利日',
+  '2026-08-31':'马来西亚国庆节',
+
+  /* ---------- 9 月 ---------- */
   '2026-09-01':'台湾记者日',
-  '2026-09-02':'廿一',
   '2026-09-03':'抗日战争胜利纪念日',
-  '2026-09-04':'廿三',
   '2026-09-05':'中华慈善日',
-  '2026-09-06':'廿五',
   '2026-09-07':'白露',
   '2026-09-08':'国际扫盲日',
   '2026-09-09':'保护教育免受攻击国际日',
@@ -326,7 +362,6 @@ const LUNAR = {
   '2026-09-19':'全民国防教育日',
   '2026-09-20':'全国爱牙日',
   '2026-09-21':'国际和平日',
-  '2026-09-22':'十二',
   '2026-09-23':'秋分',
   '2026-09-24':'世界海事日',
   '2026-09-25':'中秋节',
@@ -336,14 +371,11 @@ const LUNAR = {
   '2026-09-29':'世界心脏日',
   '2026-09-30':'中国烈士纪念日',
 
-  /* ================= 2026 年 10 月 ================= */
+  /* ---------- 10 月 ---------- */
   '2026-10-01':'国庆节',
   '2026-10-02':'国际非暴力日',
-  '2026-10-03':'八月廿三',
   '2026-10-04':'世界动物日',
   '2026-10-05':'世界教师日',
-  '2026-10-06':'八月廿六',
-  '2026-10-07':'八月廿七',
   '2026-10-08':'寒露',
   '2026-10-09':'世界邮政日',
   '2026-10-10':'辛亥革命纪念日',
@@ -369,20 +401,16 @@ const LUNAR = {
   '2026-10-30':'世界城市日',
   '2026-10-31':'万圣夜',
 
-  /* ================= 2026 年 11 月 ================= */
+  /* ---------- 11 月 ---------- */
   '2026-11-01':'万圣节',
   '2026-11-02':'万灵节',
-  '2026-11-03':'九月廿五',
-  '2026-11-04':'九月廿六',
   '2026-11-05':'世界海啸日',
-  '2026-11-06':'九月廿八',
   '2026-11-07':'立冬',
   '2026-11-08':'记者节',
   '2026-11-09':'全国消防日',
   '2026-11-10':'世界青年节',
   '2026-11-11':'双十一',
   '2026-11-12':'孙中山诞辰纪念日',
-  '2026-11-13':'十月初五',
   '2026-11-14':'世界糖尿病日',
   '2026-11-15':'城市公共安全日',
   '2026-11-16':'国际宽容日',
@@ -392,65 +420,70 @@ const LUNAR = {
   '2026-11-20':'世界儿童日',
   '2026-11-21':'世界电视日',
   '2026-11-22':'小雪',
-  '2026-11-23':'十月十五',
-  '2026-11-24':'十月十六',
   '2026-11-25':'国际消除对妇女暴力日',
-  '2026-11-26':'十月十八',
   '2026-11-27':'国际消除童婚日',
-  '2026-11-28':'十月二十',
-  '2026-11-29':'十月廿一',
-  '2026-11-30':'十月廿二',
 
-  /* ================= 2026 年 12 月 ================= */
+  /* ---------- 12 月 ---------- */
   '2026-12-01':'世界艾滋病日',
   '2026-12-02':'废除奴隶制国际日',
   '2026-12-03':'国际残疾人日',
   '2026-12-04':'国际银行日',
   '2026-12-05':'国际志愿人员日',
-  '2026-12-06':'十月廿八',
   '2026-12-07':'大雪',
-  '2026-12-08':'十月三十',
   '2026-12-09':'国际反腐败日',
   '2026-12-10':'国际人权日',
   '2026-12-11':'国际山岳日',
   '2026-12-12':'双十二',
   '2026-12-13':'南京大屠杀死难者国家公祭日',
-  '2026-12-14':'十一月初六',
   '2026-12-15':'权利法案纪念日',
-  '2026-12-16':'十一月初八',
-  '2026-12-17':'十一月初九',
   '2026-12-18':'国际移民日',
-  '2026-12-19':'十一月十一',
   '2026-12-20':'国际人类团结日',
   '2026-12-21':'国际篮球日',
   '2026-12-22':'冬至',
-  '2026-12-23':'十一月十五',
   '2026-12-24':'平安夜',
   '2026-12-25':'圣诞节',
   '2026-12-26':'毛泽东诞辰纪念日',
-  '2026-12-27':'十一月十九',
-  '2026-12-28':'十一月二十',
-  '2026-12-29':'十一月廿一',
-  '2026-12-30':'十一月廿二',
   '2026-12-31':'跨年夜'
 };
 
+/* ============ 红色：中国重大节日 / 纪念日 / 世界级知名节日 ============ */
 const FESTIVALS = new Set([
-  '元旦','春节','除夕','元宵节','清明节','劳动节','端午节','中秋节','国庆节',
+  '元旦','春节','除夕','元宵节','清明节','劳动节','国际劳动节','端午节','中秋节','国庆节',
   '教师节','建党节','建军节',
+  '妇女节','三八妇女节','青年节','五四青年节','儿童节','国际儿童节','植树节',
   '抗日战争胜利纪念日','九一八事变纪念日','七七事变纪念日','中国烈士纪念日',
   '辛亥革命纪念日','抗美援朝纪念日','南京大屠杀死难者国家公祭日',
-  '孙中山诞辰纪念日','毛泽东诞辰纪念日',
-  '中元节','火把节','重阳节',
-  '万圣节','万圣夜','平安夜','圣诞节','跨年夜'
+  '孙中山诞辰纪念日','毛泽东诞辰纪念日','周恩来逝世纪念日',
+  '中元节','火把节','重阳节','腊八节','龙抬头','寒食节',
+  '万圣节','万圣夜','平安夜','圣诞节','跨年夜','情人节','愚人节',
+  '母亲节','父亲节','复活节'
 ]);
 
+/* ============ 蓝灰：一般节日 / 国际日 / 主题日 / 外国节日 ============ */
 const OBSERVANCES = new Set([
+  '世界盲文日','主显节','东正教圣诞节','中国人民警察节','世界逻辑日',
+  '世界宗教和谐日','世界宗教日','国际拥抱日','世界自由日','国际教育日',
+  '国际麻风节','国际大屠杀纪念日','国际数据隐私日',
+  '世界湿地日','世界癌症日','妇女和女童参与科学国际日','世界无线电日',
+  '国际母语日','第三世界青年日','国际罕见病日',
+  '世界野生动植物日','世界青光眼日','女生节','国际尊严尊敬日','圆周率日',
+  '消费者权益日','国际航海日','世界睡眠日','世界水日','世界气象日',
+  '世界防治结核病日','世界自闭症关注日','世界卫生日','非洲环境保护日',
+  '世界帕金森病日','全民国家安全教育日','世界血友病日','国际古迹遗址日',
+  '世界地球日','世界读书日','中国航天日','世界防治疟疾日','世界知识产权日',
+  '世界安全生产与健康日','化学战受害者纪念日','全国交通安全反思日',
+  '世界金枪鱼日','世界新闻自由日','世界微笑日','俄罗斯卫国战争胜利日',
+  '国际护士节','国际家庭日','全国助残日','国际博物馆日','国际生物多样性日',
+  '非洲日','世界无烟日','意大利共和国日','世界自行车日',
+  '受侵略戕害的无辜儿童国际日','世界环境日','世界食品安全日','世界海洋日',
+  '葡萄牙日','世界无童工日','世界捐血者日','世界老人虐待意识日',
+  '世界海龟日','防治沙漠化和干旱世界日','国际野餐日','世界难民日',
+  '国际奥林匹克日','国际禁毒日','国际热带日','世界青年联欢节',
   '美国独立日','国际合作节','中国航海日','法国国庆日','曼德拉国际日',
   '国际接吻日','世界预防溺水日','世界肝炎日','国际友谊日',
   '全民健身日','世界土著人民国际日','国际青年节','巴基斯坦独立日',
-  '全国生态日','中国医师节','圣纪节','深圳经济特区',
-  '禁止核试验国际日','土耳其胜利日','马来西亚国庆节',
+  '全国生态日','中国医师节','圣纪节','深圳经济特区','禁止核试验国际日',
+  '土耳其胜利日','马来西亚国庆节',
   '台湾记者日','中华慈善日','国际扫盲日','保护教育免受攻击国际日',
   '预防出生缺陷日','程序员节','中国网民节','国际民主日',
   '国际保护臭氧层日','世界患者安全日','全民国防教育日','全国爱牙日',
@@ -470,6 +503,7 @@ const OBSERVANCES = new Set([
   '权利法案纪念日','国际移民日','国际人类团结日','国际篮球日'
 ]);
 
+/* ============ 金色：二十四节气 ============ */
 const SOLAR_TERMS = new Set([
   '立春','雨水','惊蛰','春分','清明','谷雨',
   '立夏','小满','芒种','夏至','小暑','大暑',
@@ -477,6 +511,105 @@ const SOLAR_TERMS = new Set([
   '立冬','小雪','大雪','冬至','小寒','大寒'
 ]);
 
+/* ============================================================
+   农历算法（1900–2100）
+   ============================================================ */
+const lunarInfo = [
+  0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
+  0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,
+  0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,
+  0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,
+  0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557,
+  0x06ca0,0x0b550,0x15355,0x04da0,0x0a5b0,0x14573,0x052b0,0x0a9a8,0x0e950,0x06aa0,
+  0x0aea6,0x0ab50,0x04b60,0x0aae4,0x0a570,0x05260,0x0f263,0x0d950,0x05b57,0x056a0,
+  0x096d0,0x04dd5,0x04ad0,0x0a4d0,0x0d4d4,0x0d250,0x0d558,0x0b540,0x0b6a0,0x195a6,
+  0x095b0,0x049b0,0x0a974,0x0a4b0,0x0b27a,0x06a50,0x06d40,0x0af46,0x0ab60,0x09570,
+  0x04af5,0x04970,0x064b0,0x074a3,0x0ea50,0x06b58,0x055c0,0x0ab60,0x096d5,0x092e0,
+  0x0c960,0x0d954,0x0d4a0,0x0da50,0x07552,0x056a0,0x0abb7,0x025d0,0x092d0,0x0cab5,
+  0x0a950,0x0b4a0,0x0baa4,0x0ad50,0x055d9,0x04ba0,0x0a5b0,0x15176,0x052b0,0x0a930,
+  0x07954,0x06aa0,0x0ad50,0x05b52,0x04b60,0x0a6e6,0x0a4e0,0x0d260,0x0ea65,0x0d530,
+  0x05aa0,0x076a3,0x096d0,0x04afb,0x04ad0,0x0a4d0,0x1d0b6,0x0d250,0x0d520,0x0dd45,
+  0x0b5a0,0x056d0,0x055b2,0x049b0,0x0a577,0x0a4b0,0x0aa50,0x1b255,0x06d20,0x0ada0,
+  0x14b63,0x09370,0x049f8,0x04970,0x064b0,0x168a6,0x0ea50,0x06b20,0x1a6c4,0x0aae0,
+  0x0a2e0,0x0d2e3,0x0c960,0x0d557,0x0d4a0,0x0da50,0x05d55,0x056a0,0x0a6d0,0x055d4,
+  0x052d0,0x0a9b8,0x0a950,0x0b4a0,0x0b6a6,0x0ad50,0x055a0,0x0aba4,0x0a5b0,0x052b0,
+  0x0b273,0x06930,0x07337,0x06aa0,0x0ad50,0x14b55,0x04b60,0x0a570,0x054e4,0x0d160,
+  0x0e968,0x0d520,0x0daa0,0x16aa6,0x056d0,0x04ae0,0x0a9d4,0x0a2d0,0x0d150,0x0f252,
+  0x0d520
+];
+
+const LUNAR_BASE = new Date(1900, 0, 31);   // 1900-01-31 = 农历 1900 年正月初一
+
+function leapMonth(y){ return lunarInfo[y - 1900] & 0xf; }
+function leapDays(y){
+  if (leapMonth(y)) return (lunarInfo[y - 1900] & 0x10000) ? 30 : 29;
+  return 0;
+}
+function monthDays(y, m){
+  return (lunarInfo[y - 1900] & (0x10000 >> m)) ? 30 : 29;
+}
+function lYearDays(y){
+  let sum = 348;
+  for (let i = 0x8000; i > 0x8; i >>= 1) sum += (lunarInfo[y - 1900] & i) ? 1 : 0;
+  return sum + leapDays(y);
+}
+
+function solarToLunar(date){
+  let offset = Math.floor((date - LUNAR_BASE) / 86400000);
+  let y, temp = 0;
+  for (y = 1900; y < 2101 && offset > 0; y++){
+    temp = lYearDays(y);
+    offset -= temp;
+  }
+  if (offset < 0){ offset += temp; y--; }
+
+  const leap = leapMonth(y);
+  let isLeap = false;
+  let m;
+  for (m = 1; m < 13 && offset > 0; m++){
+    if (leap > 0 && m === leap + 1 && !isLeap){
+      --m; isLeap = true; temp = leapDays(y);
+    } else {
+      temp = monthDays(y, m);
+    }
+    if (isLeap && m === leap + 1) isLeap = false;
+    offset -= temp;
+  }
+  if (offset === 0 && leap > 0 && m === leap + 1){
+    if (isLeap){ isLeap = false; } else { isLeap = true; --m; }
+  }
+  if (offset < 0){ offset += temp; --m; }
+
+  return { year: y, month: m, day: offset + 1, isLeap };
+}
+
+const cnNums = ['','一','二','三','四','五','六','七','八','九','十'];
+const monthCn = ['','正','二','三','四','五','六','七','八','九','十','冬','腊'];
+
+function dayCn(d){
+  if (d === 10) return '初十';
+  if (d === 20) return '二十';
+  if (d === 30) return '三十';
+  if (d < 10)  return '初' + cnNums[d];
+  if (d < 20)  return '十' + cnNums[d - 10];
+  if (d < 30)  return '廿' + cnNums[d - 20];
+  return String(d);
+}
+
+function autoLunarText(date){
+  const l = solarToLunar(date);
+  if (l.day === 1) return (l.isLeap ? '闰' : '') + monthCn[l.month] + '月';
+  return dayCn(l.day);
+}
+
+/* ============ 组合：有用户数据用用户数据，否则用算法 ============ */
+function getTextForDate(dateStr){
+  if (LUNAR[dateStr]) return LUNAR[dateStr];
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return autoLunarText(new Date(y, m - 1, d));
+}
+
+/* ============ 工具 ============ */
 const hwSet = new Set(HOMEWORK);
 function pad2(n){ return String(n).padStart(2, '0'); }
 function ymd(y, m, d){ return `${y}-${pad2(m + 1)}-${pad2(d)}`; }
@@ -485,6 +618,7 @@ const latestDate = [...HOMEWORK].sort().pop() || ymd(new Date().getFullYear(), n
 let cursorY = Number(latestDate.slice(0, 4));
 let cursorM = Number(latestDate.slice(5, 7)) - 1;
 
+/* ============ 渲染 ============ */
 function render(){
   document.getElementById('calMonth').textContent = `${cursorY} 年 ${cursorM + 1} 月`;
 
@@ -514,7 +648,9 @@ function render(){
     const wIdx = (firstWeekday + d - 1) % 7;
     const isWeekend = wIdx >= 5;
 
-    const lunarText = LUNAR[dateStr] || '';
+    /* 关键：自动计算或使用用户数据 */
+    const lunarText = getTextForDate(dateStr);
+
     let lunarCls = 'lunar';
     if (lunarText){
       if (FESTIVALS.has(lunarText))        lunarCls += ' festival';
