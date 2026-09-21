@@ -521,26 +521,65 @@ ul{list-style:none}
     setInterval(tick, 1000);
   })();
 
-  /* ===== 「查看今日作业」直达当天作业页 ===== */
+  /* ===== 「查看今日作业」直达最近一次作业 ===== */
   (function(){
     const btn = document.getElementById('todayHomeworkBtn');
     if (!btn) return;
 
+    const MAX_BACK = 90;   // 最多向前回溯天数，覆盖周末、小长假、寒暑假
+    const BATCH    = 8;    // 每批并发探测数
+    const PROBE_MS = 3000; // 单个探测超时，避免网络慢时卡住
+    const TOTAL_MS = 9000; // 整体超时，超时就退回作业日历页
+    let busy = false;
+
     function ymd(d){
       return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+    }
+    function urlOf(base, back){
+      const d = new Date(base.getTime());
+      d.setDate(d.getDate() - back);
+      return 'homework/' + ymd(d) + '/';
+    }
+    function exists(url){
+      let timer = null, signal;
+      if (typeof AbortController === 'function') {
+        const ctl = new AbortController();
+        signal = ctl.signal;
+        timer = setTimeout(function(){ ctl.abort(); }, PROBE_MS);
+      }
+      return fetch(url, { method: 'HEAD', cache: 'no-store', signal: signal })
+        .then(function(r){ if (timer) clearTimeout(timer); return r.ok; })
+        .catch(function(){ if (timer) clearTimeout(timer); return false; });
+    }
+    // 由近及远分批探测，返回最近一天作业的偏移量；都没有（或整体超时）则返回 -1
+    function scan(base, from, deadline){
+      if (from > MAX_BACK || Date.now() > deadline) return Promise.resolve(-1);
+      const batch = [];
+      for (let b = from; b < from + BATCH && b <= MAX_BACK; b++) batch.push(b);
+      return Promise.all(batch.map(function(b){
+        return exists(urlOf(base, b)).then(function(ok){ return ok ? b : -1; });
+      })).then(function(rs){
+        const hits = rs.filter(function(x){ return x >= 0; });
+        return hits.length ? Math.min.apply(null, hits) : scan(base, from + BATCH, deadline);
+      });
     }
 
     btn.addEventListener('click', function(ev){
       // Ctrl / Cmd / Shift / 中键点击交回浏览器默认行为，保留“新标签打开”的习惯
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0) return;
+      if (busy) return;
+      busy = true;
 
-      const url = 'homework/' + ymd(new Date()) + '/';
       ev.preventDefault();
+      btn.style.opacity = '.6';
 
-      // 当天作业目录存在就直达，否则退回作业日历页
-      fetch(url, { method: 'HEAD', cache: 'no-store' })
-        .then(function(r){ location.href = r.ok ? url : 'homework/'; })
-        .catch(function(){ location.href = 'homework/'; });
+      // 今天有作业就直达今天；遇节假日则回退到最近一次有作业的那天
+      const base = new Date();
+      scan(base, 0, Date.now() + TOTAL_MS).then(function(back){
+        location.href = back >= 0 ? urlOf(base, back) : 'homework/';
+      }).catch(function(){
+        location.href = 'homework/';
+      });
     });
   })();
 
