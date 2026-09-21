@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>李泽茼 · 人物志 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班人物志：李泽茼。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(26px,4.2vw,38px);letter-spacing:2px;margin-bottom:12px;line-height:1.4}
+.page-hero .meta{color:#c3d2e6;font-size:13.5px;letter-spacing:1px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:44px 0 80px}
+.container{max-width:920px;margin:0 auto}
+
+.back-bar{margin-bottom:24px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+.article-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:52px 72px 56px;
+  animation:rise .5s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ====== 人物志头部：左标题+介绍，右照片 ====== */
+.article-head{
+  padding-bottom:22px;
+  margin-bottom:24px;
+  border-bottom:1px solid #eef1f6;
+}
+.bio-head-row{display:flex;align-items:flex-start;justify-content:space-between;gap:28px}
+.bio-head-text{flex:1 1 auto;min-width:0}
+
+.article-title{
+  font-size:clamp(22px,3.2vw,27px);
+  font-weight:800;
+  color:var(--navy);
+  letter-spacing:2px;
+  line-height:1.5;
+  margin-bottom:10px;
+}
+.bio-intro{
+  font-size:14px;
+  color:var(--muted);
+  letter-spacing:.3px;
+  line-height:1.7;
+}
+
+/* 右上角照片框 */
+.bio-photo-box{
+  flex:0 0 auto;
+  width:124px;height:156px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,#eef2f8,#e0e6f1);
+  display:grid;place-items:center;
+  color:#a3aec0;
+}
+.bio-photo-box img{width:100%;height:100%;object-fit:cover;display:block}
+.bio-photo-box .ph{display:grid;place-items:center;gap:7px;line-height:1}
+.bio-photo-box .ph svg{
+  width:34px;height:34px;display:block;
+  stroke:currentColor;fill:none;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+.bio-photo-box .ph span{font-size:11.5px;letter-spacing:.5px}
+
+/* ====== 正文前的红色小字提示 ====== */
+.bio-notice{
+  font-size:13px;
+  color:#c2453c;
+  letter-spacing:.3px;
+  line-height:1.7;
+  margin-bottom:24px;
+}
+
+/* ====== 正文 ====== */
+.article-body{
+  font-size:16.5px;
+  color:#2f3a48;
+  line-height:2.05;
+  letter-spacing:.3px;
+}
+.article-body p{
+  margin-bottom:20px;
+  text-indent:2em;
+  text-align:justify;
+}
+.article-body p:last-child{margin-bottom:0}
+
+/* 正文中的姓名链接 */
+.bio-link{
+  color:#a8791a;
+  font-weight:700;
+  border-bottom:1.5px solid rgba(201,162,39,.55);
+  padding-bottom:1px;
+  transition:color .2s ease, border-color .2s ease, background .2s ease;
+  border-radius:3px;
+}
+.bio-link:hover{
+  color:#8a6110;
+  border-bottom-color:var(--gold);
+  background:rgba(201,162,39,.12);
+}
+
+/* ====== 正文之后：该人的名言 ====== */
+.bio-quotes{
+  margin-top:44px;
+  padding-top:30px;
+  border-top:1px dashed var(--line);
+}
+.quotes-head{
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.quotes-head h3{
+  font-size:17px;letter-spacing:.5px;color:var(--navy);
+  display:flex;align-items:center;gap:9px;
+}
+.quotes-head h3::before{
+  content:"";width:9px;height:9px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18);
+}
+.quotes-head .quotes-sub{font-size:12.5px;color:var(--muted)}
+
+.sayings{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+.saying{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-left:5px solid var(--c,#94a3b8);
+  border-radius:14px;
+  padding:22px 24px 18px;
+  box-shadow:var(--shadow);
+  transition:transform .26s ease, box-shadow .26s ease;
+  animation:rise .4s ease both;
+}
+.saying:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.saying .quote-mark{
+  position:absolute;top:6px;right:18px;
+  font-size:64px;line-height:1;color:rgba(15,37,71,.05);
+  font-family:Georgia,serif;pointer-events:none;
+}
+.saying-text{
+  font-size:15.5px;line-height:1.8;color:#2c3644;
+  letter-spacing:.3px;margin-bottom:14px;position:relative;
+  word-break:break-word;
+}
+.saying-by{
+  display:inline-flex;align-items:center;
+  font-size:12.5px;font-weight:700;letter-spacing:.5px;
+  color:var(--c,#64748b);
+  padding:3px 11px;border-radius:7px;
+  background:rgba(15,37,71,.05);
+}
+.quotes-state{
+  font-size:13.5px;color:var(--muted);
+  padding:18px;border:1px dashed var(--line);border-radius:var(--radius);
+  background:rgba(255,255,255,.6);
+}
+
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:960px){
+  .article-card{padding:44px 48px 48px}
+}
+@media (max-width:640px){
+  .page-hero{padding:46px 0 42px}
+  .page-hero .meta{font-size:12.5px}
+  .section{padding:30px 0 56px}
+  .article-card{padding:32px 22px 36px}
+  .article-head{padding-bottom:18px;margin-bottom:20px}
+  .bio-head-row{gap:16px}
+  .article-title{font-size:20px}
+  .bio-photo-box{width:84px;height:106px}
+  .bio-photo-box .ph svg{width:24px;height:24px}
+  .bio-notice{font-size:12.5px;margin-bottom:20px}
+  .article-body{font-size:15.5px;line-height:1.95}
+  .article-body p{margin-bottom:16px}
+  .bio-quotes{margin-top:34px;padding-top:24px}
+  .sayings{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">人物志</a><span>/</span>李泽茼
+      </p>
+      <h1>李泽茼</h1>
+      <p class="meta">总是穿绿色上衣的神秘人</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="container">
+
+        <div class="back-bar">
+          <a class="back-btn" href="../">← 返回人物志</a>
+        </div>
+
+        <article class="article-card">
+
+          <header class="article-head">
+            <div class="bio-head-row">
+
+              <div class="bio-head-text">
+                <h2 class="article-title">李泽茼</h2>
+                <p class="bio-intro">总是穿绿色上衣的神秘人</p>
+              </div>
+
+              <!-- 照片：把下面的占位块整块换成 <img src="./photo.jpg" alt="李泽茼"> 即可 -->
+              <div class="bio-photo-box">
+                <span class="ph">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+                  </svg>
+                  <span>暂无照片</span>
+                </span>
+              </div>
+
+            </div>
+          </header>
+
+          <p class="bio-notice">如人物志传主不同意本文内容，将立即修改或删除。</p>
+
+          <div class="article-body" id="bioBody">
+
+            <p>高一（1）班35号，因其绿色上衣在一众橙白校服中十分显眼的神秘人，高一（1）班的生物课代表，galgame大神，最喜欢的角色是丛雨，也是音游大神。</p>
+
+            <p>由于给电教委员朱心桥的Class Panel提了过多的意见（一天二十多条），导致他的宿舍得到了免费拖地整理服务，9月21日晚自习时他的寻人启事被争相传阅，一时众宾欢也，齐齐哈尔。</p>
+
+            <p>尽管他在寻人启事中得到了某种意义上的永生，此人实际并未失踪（那不然呢？）。</p>
+
+          </div>
+
+          <section class="bio-quotes">
+            <div class="quotes-head">
+              <h3>名言</h3>
+              <span class="quotes-sub">与「名言」板块同源</span>
+            </div>
+            <div class="sayings" id="bioSayings"></div>
+          </section>
+
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../submit">投稿</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   人物志详情页
+   ------------------------------------------------------------
+   1. 正文中出现的「已收录人物」姓名自动变成可点击链接
+   2. 正文之后列出该人的名言（与「名言」板块同源）
+   ============================================================ */
+
+/* 已收录人物：新增人物志时，在这里补一行即可让全站正文自动互链 */
+const BIO_PEOPLE = {
+  '朱心桥': '/biography/zhuxinqiao/',
+  '李泽茼': '/biography/lizetong/'
+};
+
+const BIO_NAME = '李泽茼';
+
+/* 该人在「名言」板块中的署名与分类色（对应 saying/index.html 的「其他」） */
+const BIO_COLOR = '#64748b';
+
+/* 名言兜底：FamousSayings.txt 拉取失败时使用，需与 saying/FamousSayings.txt 保持一致 */
+const FALLBACK_QUOTES = [
+  'XX怎么这么坏啊。',
+  '你们怎么这~样啊。'
+];
+
+function escapeHtml(s){
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function parseSayings(text){
+  const out = [];
+  text.split(/\r?\n/).forEach(function(raw){
+    const line = raw.trim();
+    if (!line) return;
+
+    let quote = line, author = '';
+    const parts = line.split('——');
+    if (parts.length >= 2){
+      author = parts.pop().trim();
+      quote  = parts.join('——').trim();
+    }
+    if (!quote) return;
+
+    out.push({
+      text: quote,
+      author: String(author).replace(/[\u2010\u2011\u2012\u2013\u2014\u2015]/g, '-').trim()
+    });
+  });
+  return out;
+}
+
+/* ---------- 1. 正文姓名自动互链 ---------- */
+(function autolink(){
+  const body = document.getElementById('bioBody');
+  if (!body) return;
+
+  const names = Object.keys(BIO_PEOPLE);
+  if (!names.length) return;
+
+  // 按名字长度倒序，避免短名先命中长名的一部分
+  names.sort(function(a, b){ return b.length - a.length; });
+
+  const walker = document.createTreeWalker(
+    body,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode: function(n){
+        if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (n.parentNode && n.parentNode.nodeName === 'A') return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    }
+  );
+
+  const targets = [];
+  let node;
+  while ((node = walker.nextNode())){
+    if (names.some(function(n){ return node.nodeValue.indexOf(n) >= 0; })) targets.push(node);
+  }
+
+  targets.forEach(function(textNode){
+    const text = textNode.nodeValue;
+    const frag = document.createDocumentFragment();
+    let i = 0;
+
+    while (i < text.length){
+      let hit = -1, hitName = '';
+      for (const n of names){
+        const p = text.indexOf(n, i);
+        if (p < 0) continue;
+        if (hit < 0 || p < hit || (p === hit && n.length > hitName.length)){ hit = p; hitName = n; }
+      }
+      if (hit < 0){
+        frag.appendChild(document.createTextNode(text.slice(i)));
+        break;
+      }
+      if (hit > i) frag.appendChild(document.createTextNode(text.slice(i, hit)));
+
+      const url = BIO_PEOPLE[hitName];
+      // 不给自己加链接
+      if (hitName === BIO_NAME){
+        frag.appendChild(document.createTextNode(hitName));
+      } else {
+        const a = document.createElement('a');
+        a.className = 'bio-link';
+        a.href = url;
+        a.textContent = hitName;
+        a.title = hitName + ' · 人物志';
+        frag.appendChild(a);
+      }
+      i = hit + hitName.length;
+    }
+
+    textNode.parentNode.replaceChild(frag, textNode);
+  });
+})();
+
+/* ---------- 2. 该人的名言 ---------- */
+function renderQuotes(list){
+  const box = document.getElementById('bioSayings');
+  if (!box) return;
+
+  if (!list.length){
+    box.outerHTML = '<p class="quotes-state">暂时还没有收录 ' + escapeHtml(BIO_NAME) + ' 的名言。</p>';
+    return;
+  }
+
+  box.innerHTML = '';
+  list.forEach(function(q){
+    const d = document.createElement('div');
+    d.className = 'saying';
+    d.style.setProperty('--c', BIO_COLOR);
+    d.innerHTML =
+      '<span class="quote-mark">”</span>' +
+      '<div class="saying-text">' + escapeHtml(q) + '</div>' +
+      '<div class="saying-by">' + escapeHtml(BIO_NAME) + '</div>';
+    box.appendChild(d);
+  });
+}
+
+fetch('/saying/FamousSayings.txt', { cache: 'no-store' })
+  .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+  .then(function(text){
+    const mine = parseSayings(text)
+      .filter(function(s){ return s.author === BIO_NAME; })
+      .map(function(s){ return s.text; });
+    renderQuotes(mine.length ? mine : FALLBACK_QUOTES);
+  })
+  .catch(function(){
+    renderQuotes(FALLBACK_QUOTES);
+  });
+
+/* ---------- 地址栏不显示 index.html ---------- */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>
