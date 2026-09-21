@@ -28,7 +28,7 @@ ul,ol{list-style:none}
 
 .page-hero{
   position:relative;overflow:hidden;
-  padding:56px 0 52px;color:#fff;
+  padding:36px 0 32px;color:#fff;
   background:
     radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
     radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
@@ -39,20 +39,20 @@ ul,ol{list-style:none}
   background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
   background-size:24px 24px;opacity:.4;
 }
-.page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:4px;margin-bottom:0;line-height:1.4}
-.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.page-hero h1{font-size:clamp(24px,3.6vw,32px);letter-spacing:4px;margin-bottom:0;line-height:1.4}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:10px;letter-spacing:1px}
 .crumb a:hover{color:var(--gold-light)}
 .crumb span{margin:0 7px;opacity:.6}
 
-.section{padding:48px 0 80px}
+.section{padding:28px 0 60px}
 .container{max-width:820px;margin:0 auto}
 
-.back-bar{margin-bottom:24px}
+.back-bar{margin-bottom:18px}
 .back-btn{
   display:inline-flex;align-items:center;gap:8px;
   font-size:14px;font-weight:600;color:var(--navy);
   background:#fff;border:1px solid var(--line);border-radius:999px;
-  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+  padding:8px 18px;box-shadow:var(--shadow);transition:all .24s ease;
 }
 .back-btn:hover{
   transform:translateX(-3px);
@@ -65,27 +65,36 @@ ul,ol{list-style:none}
   border:1px solid var(--line);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:48px 48px 52px;
+  padding:28px 32px 32px;
   animation:rise .5s ease both;
 }
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
+/* ============ 图片区域（限制高度，保证图文同屏） ============ */
 .figure{
-  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border-radius:14px;
   overflow:hidden;
   background:linear-gradient(135deg,#eef3fb,#e3eaf6);
-  box-shadow:0 10px 28px rgba(15,37,71,.12);
-  margin-bottom:28px;
+  box-shadow:0 8px 22px rgba(15,37,71,.12);
+  margin-bottom:22px;
+  /* 关键：限制高度，让图片最多 52vh，留出文字空间 */
+  height:min(52vh, 520px);
 }
 .figure img{
-  width:100%;
+  max-width:100%;
+  max-height:100%;
+  width:auto;
   height:auto;
+  object-fit:contain;
   display:block;
   transition:transform .5s ease;
 }
 .figure:hover img{transform:scale(1.02)}
 
+/* ============ 文字 ============ */
 .caption{
   text-align:center;
   font-size:15px;
@@ -107,9 +116,8 @@ ul,ol{list-style:none}
   letter-spacing:.5px;
 }
 
-/* 称号 */
 .title-line{
-  margin-top:12px;
+  margin-top:10px;
   font-size:16px;
   font-weight:700;
   letter-spacing:4px;
@@ -118,20 +126,20 @@ ul,ol{list-style:none}
 
 .site-footer{
   background:var(--navy);color:#9fb3d1;
-  padding:34px 0;font-size:13.5px;
+  padding:30px 0;font-size:13.5px;
 }
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
 
 @media (max-width:640px){
-  .page-hero{padding:44px 0 40px}
-  .section{padding:30px 0 60px}
-  .card{padding:26px 20px 32px}
-  .figure{border-radius:12px;margin-bottom:22px}
+  .page-hero{padding:30px 0 26px}
+  .section{padding:20px 0 48px}
+  .card{padding:20px 18px 24px}
+  .figure{height:min(48vh, 440px);border-radius:12px;margin-bottom:18px}
   .caption{font-size:14px}
   .caption .name{font-size:15.5px;letter-spacing:1.5px}
-  .title-line{font-size:14.5px;letter-spacing:3px}
+  .title-line{font-size:14.5px;letter-spacing:3px;margin-top:8px}
 }
 </style>
 </head>
