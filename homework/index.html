@@ -89,27 +89,29 @@ ul,ol{list-style:none}
 
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 
+/* ============ 日期格 ============ */
 .cal-day{
   aspect-ratio:1;
   border-radius:12px;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  gap:1px;
+  gap:2px;
   background:#fff;border:1px solid var(--line);
   position:relative;
-  padding:4px 4px;
+  padding:4px 3px;
   transition:all .24s ease;cursor:default;text-align:center;line-height:1.1;
 }
 .cal-day .d{
-  font-size:17px;font-weight:700;color:#4b5563;
-  letter-spacing:.3px;line-height:1.15;
+  font-size:19px;                     /* 原 17px */
+  font-weight:700;color:#4b5563;
+  letter-spacing:.3px;line-height:1.1;
 }
 
 .cal-day .lunar{
-  font-size:10.5px;
+  font-size:12px;                     /* 原 10.5px */
   color:#9aa6b6;
   letter-spacing:0;
-  line-height:1.3;
+  line-height:1.25;
   width:100%;
   padding:0 1px;
   font-weight:500;
@@ -177,9 +179,9 @@ ul,ol{list-style:none}
   .cal-weekdays{gap:3px}
   .cal-weekdays span{font-size:11.5px;padding:3px 0}
   .cal-grid{gap:3px}
-  .cal-day{border-radius:8px;padding:2px}
-  .cal-day .d{font-size:14px}
-  .cal-day .lunar{font-size:8.5px;line-height:1.25;padding:0}
+  .cal-day{border-radius:8px;padding:2px;gap:1px}
+  .cal-day .d{font-size:16px}                        /* 原 14px */
+  .cal-day .lunar{font-size:10px;line-height:1.2;padding:0}   /* 原 8.5px */
   .cal-info{font-size:12px}
   .cal-legend{font-size:11px;gap:10px}
   .cal-legend i{width:10px;height:10px}
@@ -433,63 +435,41 @@ const LUNAR = {
   '2026-12-31':'跨年夜'
 };
 
-/* ============================================================
-   红色：极其重要的节日 / 纪念日
-   ------------------------------------------------------------
-   - 中国重大节日 / 纪念日 / 传统节日
-   - 世界级知名节日（万圣节、圣诞节等）
-   ============================================================ */
 const FESTIVALS = new Set([
-  /* 中国法定 / 重大节日 */
   '元旦','春节','除夕','元宵节','清明节','劳动节','端午节','中秋节','国庆节',
   '教师节','建党节','建军节',
-  /* 中国重要纪念日 */
   '抗日战争胜利纪念日','九一八事变纪念日','七七事变纪念日','中国烈士纪念日',
   '辛亥革命纪念日','抗美援朝纪念日','南京大屠杀死难者国家公祭日',
   '孙中山诞辰纪念日','毛泽东诞辰纪念日',
-  /* 中国传统节日 */
   '中元节','火把节','重阳节',
-  /* 世界级知名节日 */
   '万圣节','万圣夜','平安夜','圣诞节','跨年夜'
 ]);
 
-/* ============================================================
-   蓝灰：一般节日 / 国际日 / 主题日 / 外国区域性节日
-   ============================================================ */
 const OBSERVANCES = new Set([
-  /* 7 月 */
   '美国独立日','国际合作节','中国航海日','法国国庆日','曼德拉国际日',
   '国际接吻日','世界预防溺水日','世界肝炎日','国际友谊日',
-  /* 8 月 */
   '全民健身日','世界土著人民国际日','国际青年节','巴基斯坦独立日',
   '全国生态日','中国医师节','圣纪节','深圳经济特区',
   '禁止核试验国际日','土耳其胜利日','马来西亚国庆节',
-  /* 9 月 */
   '台湾记者日','中华慈善日','国际扫盲日','保护教育免受攻击国际日',
   '预防出生缺陷日','程序员节','中国网民节','国际民主日',
   '国际保护臭氧层日','世界患者安全日','全民国防教育日','全国爱牙日',
   '国际和平日','世界海事日','欧洲语言日','世界旅游日',
   '世界狂犬病日','世界心脏日','九一一事件纪念日',
-  /* 10 月 */
   '国际非暴力日','世界动物日','世界教师日','世界邮政日','国际女童日',
   '世界关节炎日','中国少年先锋队诞辰日','世界标准日','国际盲人节',
   '世界粮食日','国家扶贫日','世界骨质疏松日','世界厨师日','全球伦理日',
   '世界传统医药日','联合国日','环卫工人节','世界男性健康日',
   '世界卒中日','世界勤俭日','世界城市日',
-  /* 11 月 */
   '万灵节','世界海啸日','记者节','全国消防日','世界青年节',
   '双十一','世界糖尿病日','城市公共安全日','国际宽容日','国际大学生节',
   '世界慢阻肺日','世界厕所日','世界儿童日','世界电视日',
   '国际消除对妇女暴力日','国际消除童婚日',
-  /* 12 月 */
   '世界艾滋病日','废除奴隶制国际日','国际残疾人日','国际银行日',
   '国际志愿人员日','国际反腐败日','国际人权日','国际山岳日','双十二',
   '权利法案纪念日','国际移民日','国际人类团结日','国际篮球日'
 ]);
 
-/* ============================================================
-   金色：二十四节气
-   ============================================================ */
 const SOLAR_TERMS = new Set([
   '立春','雨水','惊蛰','春分','清明','谷雨',
   '立夏','小满','芒种','夏至','小暑','大暑',
@@ -497,7 +477,6 @@ const SOLAR_TERMS = new Set([
   '立冬','小雪','大雪','冬至','小寒','大寒'
 ]);
 
-/* ===== 工具 ===== */
 const hwSet = new Set(HOMEWORK);
 function pad2(n){ return String(n).padStart(2, '0'); }
 function ymd(y, m, d){ return `${y}-${pad2(m + 1)}-${pad2(d)}`; }
