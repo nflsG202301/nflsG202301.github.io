@@ -156,11 +156,29 @@ ul,ol{list-style:none}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
 
+/* ============ 回到顶部按钮 ============ */
+.back-top{
+  position:fixed;right:28px;bottom:28px;
+  width:54px;height:54px;border-radius:50%;
+  border:none;cursor:pointer;font-family:inherit;
+  display:grid;place-items:center;color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 14px 32px rgba(201,162,39,.45);
+  opacity:0;visibility:hidden;
+  transform:translateY(14px) scale(.9);
+  transition:all .3s cubic-bezier(.4,0,.2,1);z-index:99;
+}
+.back-top.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.back-top:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 20px 40px rgba(201,162,39,.55)}
+.back-top svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+
 @media (max-width:640px){
   .page-hero{padding:44px 0 40px}
   .section{padding:30px 0 48px}
   .notice-card{padding:24px 20px 22px}
   .notice-body{font-size:15px}
+  .back-top{right:18px;bottom:18px;width:48px;height:48px}
+  .back-top svg{width:19px;height:19px}
 }
 </style>
 </head>
@@ -366,6 +384,14 @@ ul,ol{list-style:none}
 
 </main>
 
+<!-- 悬浮回到顶部 -->
+<button class="back-top" id="backTop" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24">
+    <line x1="12" y1="19" x2="12" y2="5"/>
+    <polyline points="5 12 12 5 19 12"/>
+  </svg>
+</button>
+
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div>
@@ -380,9 +406,28 @@ ul,ol{list-style:none}
 </footer>
 
 <script>
-  if (location.pathname.endsWith('/index.html')) {
-    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+/* ===== 悬浮回到顶部 ===== */
+(function(){
+  const btn = document.getElementById('backTop');
+  const SHOW_AFTER = 320;
+
+  function update(){
+    if (window.scrollY > SHOW_AFTER) btn.classList.add('show');
+    else btn.classList.remove('show');
   }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
 </script>
 
 </body>

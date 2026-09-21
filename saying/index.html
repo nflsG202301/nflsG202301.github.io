@@ -47,7 +47,7 @@ ul,ol{list-style:none}
 
 .section{padding:40px 0 64px}
 
-/* 分类筛选 */
+/* 筛选 */
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
 .filter-btn{
   display:inline-flex;align-items:center;gap:7px;
@@ -80,8 +80,32 @@ ul,ol{list-style:none}
   content:"";width:9px;height:9px;border-radius:50%;
   background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18);
 }
+.bar-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .bar .num{font-size:13.5px;color:var(--muted)}
 .bar .num b{color:var(--navy)}
+
+/* 随机按钮 */
+.random-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  border:none;cursor:pointer;font-family:inherit;
+  font-size:13.5px;font-weight:700;letter-spacing:.5px;
+  padding:9px 20px;border-radius:999px;
+  color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 8px 20px rgba(201,162,39,.32);
+  transition:all .24s ease;
+}
+.random-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(201,162,39,.48);
+}
+.random-btn:active{transform:translateY(0)}
+.random-btn .dice{
+  font-size:16px;line-height:1;
+  display:inline-block;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.random-btn.spin .dice{transform:rotate(360deg)}
 
 /* 名言网格 */
 .sayings{
@@ -121,7 +145,7 @@ ul,ol{list-style:none}
   background:rgba(15,37,71,.05);
 }
 
-/* 空状态 / 加载 / 错误 */
+/* 空 / 加载 / 错误 */
 .state{
   text-align:center;padding:70px 30px;
   background:var(--card);border:1px dashed var(--line);
@@ -132,6 +156,103 @@ ul,ol{list-style:none}
 .state p{font-size:14px;color:var(--muted)}
 .state.error{color:#c2453c}
 .state.error h2{color:#c2453c}
+
+/* ============ 随机弹窗 ============ */
+.rand-mask{
+  position:fixed;inset:0;z-index:999;
+  display:none;place-items:center;
+  padding:20px;
+  background:rgba(8,18,32,.68);
+  backdrop-filter:blur(6px);
+  animation:fade .22s ease both;
+}
+.rand-mask.open{display:grid}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.rand-box{
+  position:relative;
+  width:100%;max-width:520px;
+  background:var(--card);
+  border-radius:22px;
+  box-shadow:0 30px 80px rgba(0,0,0,.4);
+  padding:48px 42px 36px;
+  text-align:center;
+  animation:pop .32s cubic-bezier(.34,1.56,.64,1) both;
+  overflow:hidden;
+}
+@keyframes pop{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:none}}
+
+.rand-box::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--gold-light),var(--gold),var(--gold-light));
+}
+
+.rand-close{
+  position:absolute;top:14px;right:16px;
+  width:34px;height:34px;border-radius:50%;
+  border:none;background:#f2f5fa;color:var(--muted);
+  font-size:18px;line-height:1;cursor:pointer;
+  font-family:inherit;transition:all .2s ease;
+}
+.rand-close:hover{background:#e6ebf4;color:var(--navy);transform:rotate(90deg)}
+
+/* 弹窗大引号 */
+.rand-mark{
+  font-family:Georgia,serif;
+  font-size:90px;line-height:.9;
+  color:rgba(201,162,39,.28);
+  margin-bottom:-16px;
+  display:block;
+}
+
+.rand-text{
+  font-size:19px;
+  line-height:1.9;
+  color:var(--navy);
+  letter-spacing:.5px;
+  margin-bottom:22px;
+  word-break:break-word;
+  font-weight:500;
+}
+
+.rand-by{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13.5px;font-weight:800;letter-spacing:.8px;
+  color:var(--c,#a8791a);
+  padding:5px 16px;border-radius:999px;
+  background:rgba(15,37,71,.05);
+  margin-bottom:28px;
+}
+.rand-by::before{
+  content:"—— ";
+  opacity:.65;
+}
+
+.rand-actions{display:flex;gap:10px;justify-content:center}
+.rand-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  border:none;cursor:pointer;font-family:inherit;
+  font-size:14px;font-weight:700;letter-spacing:.4px;
+  padding:11px 26px;border-radius:999px;
+  transition:all .24s ease;
+}
+.rand-btn.primary{
+  color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 10px 24px rgba(201,162,39,.35);
+}
+.rand-btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(201,162,39,.5)}
+.rand-btn.ghost{
+  color:var(--muted);
+  background:#f2f5fa;
+}
+.rand-btn.ghost:hover{color:var(--navy);background:#e6ebf4}
+.rand-btn .dice{
+  display:inline-block;
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1);
+}
+.rand-btn.spin .dice{transform:rotate(360deg)}
 
 .site-footer{
   background:var(--navy);color:#9fb3d1;
@@ -149,6 +270,13 @@ ul,ol{list-style:none}
   .saying-text{font-size:14.5px}
   .filters{gap:6px}
   .filter-btn{padding:7px 13px;font-size:13px}
+  .bar{align-items:flex-start}
+  .random-btn{padding:8px 16px;font-size:13px}
+  .rand-box{padding:38px 24px 28px;border-radius:18px}
+  .rand-mark{font-size:72px;margin-bottom:-12px}
+  .rand-text{font-size:16.5px;line-height:1.85}
+  .rand-by{font-size:12.5px;padding:4px 14px;margin-bottom:22px}
+  .rand-btn{padding:10px 20px;font-size:13.5px}
 }
 </style>
 </head>
@@ -156,39 +284,37 @@ ul,ol{list-style:none}
 
 <main>
 
-  <!-- 页面头部 -->
   <section class="page-hero">
     <div class="wrap">
       <p class="crumb"><a href="../">首页</a><span>/</span>名言</p>
       <h1>名言</h1>
-      <p class="sub">课堂上的金句合集，点击说话者分类即可查看。</p>
+      <p class="sub">课堂上的金句合集，点击说话者分类即可查看，也可以随机来一条。</p>
     </div>
   </section>
 
-  <!-- 名言列表 -->
   <section class="section">
     <div class="wrap">
 
-      <!-- 分类筛选（JS 动态生成） -->
       <div class="filters" id="filters"></div>
 
-      <!-- 统计条 -->
       <div class="bar">
         <div class="now" id="nowTitle">全部名言</div>
-        <div class="num">共 <b id="sayCount">—</b> 条</div>
+        <div class="bar-right">
+          <div class="num">共 <b id="sayCount">—</b> 条</div>
+          <button class="random-btn" id="randomBtn">
+            <span class="dice">🎲</span>随机一条
+          </button>
+        </div>
       </div>
 
-      <!-- 加载提示 -->
       <div class="state" id="loadingState">
         <span class="big">⏳</span>
         <h2>正在加载名言…</h2>
         <p>请稍等片刻</p>
       </div>
 
-      <!-- 名言网格 -->
       <div class="sayings" id="sayings" style="display:none"></div>
 
-      <!-- 空 / 错误状态 -->
       <div class="state" id="emptyState" style="display:none">
         <span class="big">💬</span>
         <h2>暂无收录</h2>
@@ -200,7 +326,24 @@ ul,ol{list-style:none}
 
 </main>
 
-<!-- 页脚 -->
+<!-- ===== 随机弹窗 ===== -->
+<div class="rand-mask" id="randMask">
+  <div class="rand-box" id="randBox">
+    <button class="rand-close" id="randClose" aria-label="关闭">✕</button>
+
+    <span class="rand-mark">“</span>
+    <div class="rand-text" id="randText">—</div>
+    <div class="rand-by" id="randBy">—</div>
+
+    <div class="rand-actions">
+      <button class="rand-btn ghost" id="randCloseBtn">关闭</button>
+      <button class="rand-btn primary" id="randAgain">
+        <span class="dice">🎲</span>再来一条
+      </button>
+    </div>
+  </div>
+</div>
+
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div>
@@ -216,14 +359,13 @@ ul,ol{list-style:none}
 
 <script>
 /* ============================================================
-   名言板块：从 ./FamousSayings.txt 读取并解析
+   名言板块
    ------------------------------------------------------------
-   文本格式：<名言内容>——<说话者>
-   - 允许 "——" 前后有多余空格
-   - 允许说话者含有全角连字符（如 "语文‑韦"）
+   1. 从 ./FamousSayings.txt 读取并解析
+   2. 分类筛选
+   3. 随机一条（弹窗展示）
    ============================================================ */
 
-/* ---------- 分类定义（顺序即筛选按钮顺序） ---------- */
 const CATEGORIES = [
   { key: 'all',       name: '全部',       color: '#0f2547' },
   { key: '语文-韦',   name: '语文-韦',   color: '#c2453c' },
@@ -239,7 +381,6 @@ const CATEGORIES = [
   { key: '其他',      name: '其他',      color: '#64748b' }
 ];
 
-/* 已知作者 → 分类映射；其余作者归入「其他」 */
 const AUTHOR_TO_CATEGORY = {
   '语文-韦':  '语文-韦',
   '数学-唐':  '数学-唐',
@@ -256,7 +397,6 @@ const AUTHOR_TO_CATEGORY = {
 const COLOR_MAP = {};
 CATEGORIES.forEach(c => COLOR_MAP[c.key] = c.color);
 
-/* ---------- 工具函数 ---------- */
 function escapeHtml(s){
   return String(s)
     .replace(/&/g, '&amp;')
@@ -266,12 +406,10 @@ function escapeHtml(s){
     .replace(/'/g, '&#39;');
 }
 
-/* 把各种连字符统一为半角 '-'，用于分类匹配 */
 function normalizeAuthor(s){
   return String(s).replace(/[\u2010\u2011\u2012\u2013\u2014\u2015]/g, '-').trim();
 }
 
-/* ---------- 解析文本 ---------- */
 function parseSayings(text){
   const lines = text.split(/\r?\n/);
   const result = [];
@@ -283,13 +421,11 @@ function parseSayings(text){
     let quote  = line;
     let author = '';
 
-    // 用 "——" 分割（可能多次出现，取最后一段为说话者）
     const parts = line.split('——');
     if (parts.length >= 2){
       author = parts.pop().trim();
       quote  = parts.join('——').trim();
     }
-
     if (!quote) return;
 
     const normAuthor = normalizeAuthor(author);
@@ -308,7 +444,7 @@ function parseSayings(text){
   return result;
 }
 
-/* ---------- 状态显示 ---------- */
+/* ---------- DOM ---------- */
 const elFilters  = document.getElementById('filters');
 const elSayings  = document.getElementById('sayings');
 const elCount    = document.getElementById('sayCount');
@@ -316,11 +452,22 @@ const elTitle    = document.getElementById('nowTitle');
 const elLoading  = document.getElementById('loadingState');
 const elEmpty    = document.getElementById('emptyState');
 
+const randMask   = document.getElementById('randMask');
+const randBox    = document.getElementById('randBox');
+const randText   = document.getElementById('randText');
+const randBy     = document.getElementById('randBy');
+const randClose  = document.getElementById('randClose');
+const randCloseBtn = document.getElementById('randCloseBtn');
+const randAgain  = document.getElementById('randAgain');
+const randomBtn  = document.getElementById('randomBtn');
+
+let ALL_SAYINGS = [];
+let CURRENT_FILTER = 'all';
+
 function showState(el, opts){
   elLoading.style.display = 'none';
   elEmpty.style.display   = 'none';
   elSayings.style.display = 'none';
-
   if (!el) return;
 
   if (opts && opts.error){
@@ -334,11 +481,9 @@ function showState(el, opts){
     el.querySelector('h2').textContent = '暂无收录';
     el.querySelector('p').textContent = '该分类下暂时还没有名言，欢迎投稿补充。';
   }
-
   el.style.display = 'block';
 }
 
-/* ---------- 渲染分类按钮 ---------- */
 function renderFilters(){
   elFilters.innerHTML = '';
   CATEGORIES.forEach(function(c){
@@ -351,10 +496,6 @@ function renderFilters(){
     elFilters.appendChild(btn);
   });
 }
-
-/* ---------- 渲染名言 ---------- */
-let ALL_SAYINGS = [];
-let CURRENT_FILTER = 'all';
 
 function renderSayings(){
   const list = (CURRENT_FILTER === 'all')
@@ -373,9 +514,9 @@ function renderSayings(){
 
   elLoading.style.display = 'none';
   elEmpty.style.display   = 'none';
-
   elSayings.style.display = 'grid';
   elSayings.innerHTML = '';
+
   list.forEach(function(s){
     const div = document.createElement('div');
     div.className = 'saying';
@@ -388,7 +529,38 @@ function renderSayings(){
   });
 }
 
-/* ---------- 绑定筛选交互 ---------- */
+/* ---------- 随机一条 ---------- */
+function spinDice(el){
+  el.classList.remove('spin');
+  void el.offsetWidth;   // 重置动画
+  el.classList.add('spin');
+  setTimeout(() => el.classList.remove('spin'), 600);
+}
+
+function showRandom(){
+  if (!ALL_SAYINGS.length) return;
+
+  // 优先在当前筛选结果里随机；若当前为「全部」，则在全集中随机
+  const pool = (CURRENT_FILTER === 'all')
+    ? ALL_SAYINGS
+    : ALL_SAYINGS.filter(s => s.category === CURRENT_FILTER);
+
+  const list = pool.length ? pool : ALL_SAYINGS;
+  const s = list[Math.floor(Math.random() * list.length)];
+
+  randText.textContent = s.text;
+  randBy.textContent   = s.author;
+  randBox.style.setProperty('--c', s.color);
+  randBy.style.setProperty('--c', s.color);
+
+  randMask.classList.add('open');
+}
+
+function closeRandom(){
+  randMask.classList.remove('open');
+}
+
+/* ---------- 绑定 ---------- */
 elFilters.addEventListener('click', function(e){
   const btn = e.target.closest('.filter-btn');
   if (!btn) return;
@@ -398,10 +570,29 @@ elFilters.addEventListener('click', function(e){
   renderSayings();
 });
 
+randomBtn.addEventListener('click', function(){
+  spinDice(randomBtn);
+  setTimeout(showRandom, 180);   // 让骰子动画先转一下
+});
+
+randAgain.addEventListener('click', function(){
+  spinDice(randAgain);
+  setTimeout(showRandom, 180);
+});
+
+randClose.addEventListener('click', closeRandom);
+randCloseBtn.addEventListener('click', closeRandom);
+randMask.addEventListener('click', function(e){
+  if (e.target === randMask) closeRandom();
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && randMask.classList.contains('open')) closeRandom();
+});
+
 /* ---------- 主流程 ---------- */
 async function init(){
   renderFilters();
-  showState(null); // 初始化时只显示 loading
+  showState(null);
 
   try{
     const res = await fetch('./FamousSayings.txt', { cache: 'no-store' });

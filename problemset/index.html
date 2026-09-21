@@ -84,7 +84,6 @@ ul,ol{list-style:none}
   box-shadow:0 6px 16px rgba(15,37,71,.22);
 }
 
-/* 计数条 */
 .list-head{
   display:flex;align-items:center;justify-content:space-between;
   gap:16px;flex-wrap:wrap;margin-bottom:20px;
@@ -128,7 +127,6 @@ ul,ol{list-style:none}
   color:var(--navy);letter-spacing:.5px;
 }
 
-/* 通用标签 */
 .badge-access,
 .badge-subject,
 .badge-type{
@@ -179,7 +177,6 @@ ul,ol{list-style:none}
 .acc-links .acc-head + .acc-head{border-top:1px dashed var(--line)}
 .acc-links .acc-head:hover .chev{color:var(--gold);transform:translateX(4px)}
 
-/* 空状态 */
 .empty{
   display:none;text-align:center;padding:60px 30px;
   background:var(--card);border:1px dashed var(--line);
@@ -194,6 +191,22 @@ ul,ol{list-style:none}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
 
+/* ============ 回到顶部按钮 ============ */
+.back-top{
+  position:fixed;right:28px;bottom:28px;
+  width:54px;height:54px;border-radius:50%;
+  border:none;cursor:pointer;font-family:inherit;
+  display:grid;place-items:center;color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 14px 32px rgba(201,162,39,.45);
+  opacity:0;visibility:hidden;
+  transform:translateY(14px) scale(.9);
+  transition:all .3s cubic-bezier(.4,0,.2,1);z-index:99;
+}
+.back-top.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.back-top:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 20px 40px rgba(201,162,39,.55)}
+.back-top svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+
 @media (max-width:640px){
   .page-hero{padding:44px 0 40px}
   .section{padding:26px 0 52px}
@@ -203,6 +216,8 @@ ul,ol{list-style:none}
   .acc-head{padding:14px 20px;font-size:13.5px}
   .acc-inner{padding:6px 16px 20px;font-size:14.5px}
   .prob-title{font-size:15.5px}
+  .back-top{right:18px;bottom:18px;width:48px;height:48px}
+  .back-top svg{width:19px;height:19px}
 }
 </style>
 </head>
@@ -263,13 +278,11 @@ ul,ol{list-style:none}
 
       </div>
 
-      <!-- ===== 计数条 ===== -->
       <div class="list-head">
         <h2>题目列表</h2>
         <div class="count">共 <b id="count">7</b> 道</div>
       </div>
 
-      <!-- ===== 卡片列表 ===== -->
       <div class="prob-list" id="list">
 
         <!-- 9.19 CSP-S1 -->
@@ -285,18 +298,9 @@ ul,ol{list-style:none}
             <h3 class="prob-title">2026 CCF 非专业级别软件能力认证第一轮（CSP-S1）提高级 C++ 语言试题</h3>
             <p class="prob-info">单项选择题 15 题 · 阅读程序 3 组 · 完善程序 2 组</p>
           </div>
-
           <div class="acc-links">
-            <a class="acc-head" href="2026csps1">
-              <span class="dot"></span>
-              <span class="label">查看试题</span>
-              <span class="chev">▼</span>
-            </a>
-            <a class="acc-head" href="2026csps1">
-              <span class="dot"></span>
-              <span class="label">答案与解析</span>
-              <span class="chev">▼</span>
-            </a>
+            <a class="acc-head" href="2026csps1"><span class="dot"></span><span class="label">查看试题</span><span class="chev">▼</span></a>
+            <a class="acc-head" href="2026csps1"><span class="dot"></span><span class="label">答案与解析</span><span class="chev">▼</span></a>
           </div>
         </article>
 
@@ -312,18 +316,9 @@ ul,ol{list-style:none}
             <h3 class="prob-title">数学竞赛讲义 · 不等式第 1 讲：不等式的基本证明方法</h3>
             <p class="prob-info">知识梳理 · 典型例题 11 组 · 精选习题 9 组</p>
           </div>
-
           <div class="acc-links">
-            <a class="acc-head" href="shujingjiangyi0917">
-              <span class="dot"></span>
-              <span class="label">查看试题</span>
-              <span class="chev">▼</span>
-            </a>
-            <a class="acc-head" href="shujingjiangyi0917">
-              <span class="dot"></span>
-              <span class="label">答案与解析</span>
-              <span class="chev">▼</span>
-            </a>
+            <a class="acc-head" href="shujingjiangyi0917"><span class="dot"></span><span class="label">查看试题</span><span class="chev">▼</span></a>
+            <a class="acc-head" href="shujingjiangyi0917"><span class="dot"></span><span class="label">答案与解析</span><span class="chev">▼</span></a>
           </div>
         </article>
 
@@ -339,18 +334,9 @@ ul,ol{list-style:none}
             <h3 class="prob-title">随堂练习 0915</h3>
             <p class="prob-info">单选题 8 道 · 多选题 3 道 · 填空题 3 道 · 解答题 3 道</p>
           </div>
-
           <div class="acc-links">
-            <a class="acc-head" href="suitanglianxi0915">
-              <span class="dot"></span>
-              <span class="label">查看试题</span>
-              <span class="chev">▼</span>
-            </a>
-            <a class="acc-head" href="suitanglianxi0915">
-              <span class="dot"></span>
-              <span class="label">答案与解析</span>
-              <span class="chev">▼</span>
-            </a>
+            <a class="acc-head" href="suitanglianxi0915"><span class="dot"></span><span class="label">查看试题</span><span class="chev">▼</span></a>
+            <a class="acc-head" href="suitanglianxi0915"><span class="dot"></span><span class="label">答案与解析</span><span class="chev">▼</span></a>
           </div>
         </article>
 
@@ -366,18 +352,9 @@ ul,ol{list-style:none}
             <h3 class="prob-title">2026 数学竞赛选修课选拔测试</h3>
             <p class="prob-info">考试时间：<b>90 分钟</b> · 满分：<b>120 分</b></p>
           </div>
-
           <div class="acc-links">
-            <a class="acc-head" href="2026shujingxuanba">
-              <span class="dot"></span>
-              <span class="label">查看试题</span>
-              <span class="chev">▼</span>
-            </a>
-            <a class="acc-head" href="2026shujingxuanba">
-              <span class="dot"></span>
-              <span class="label">答案与解析</span>
-              <span class="chev">▼</span>
-            </a>
+            <a class="acc-head" href="2026shujingxuanba"><span class="dot"></span><span class="label">查看试题</span><span class="chev">▼</span></a>
+            <a class="acc-head" href="2026shujingxuanba"><span class="dot"></span><span class="label">答案与解析</span><span class="chev">▼</span></a>
           </div>
         </article>
 
@@ -392,12 +369,9 @@ ul,ol{list-style:none}
             </div>
             <h3 class="prob-title">如果英国的交通规则由原来的左侧通行改为右侧通行，那么一天的长度是增加了还是减少了还是不变？</h3>
           </div>
-
           <div class="acc">
             <button class="acc-head" aria-expanded="false">
-              <span class="dot"></span>
-              <span class="label">答案与解析</span>
-              <span class="chev">▼</span>
+              <span class="dot"></span><span class="label">答案与解析</span><span class="chev">▼</span>
             </button>
             <div class="acc-body">
               <div class="acc-inner">
@@ -421,12 +395,9 @@ ul,ol{list-style:none}
             </div>
             <h3 class="prob-title">地球上的什么地方向北走一公里，然后向东走一公里，再向南走一公里，又会回到原来的位置？</h3>
           </div>
-
           <div class="acc">
             <button class="acc-head" aria-expanded="false">
-              <span class="dot"></span>
-              <span class="label">答案与解析</span>
-              <span class="chev">▼</span>
+              <span class="dot"></span><span class="label">答案与解析</span><span class="chev">▼</span>
             </button>
             <div class="acc-body">
               <div class="acc-inner">
@@ -448,24 +419,14 @@ ul,ol{list-style:none}
             <h3 class="prob-title">物竞测试 3 —— 牛顿运动定律</h3>
             <p class="prob-info">物理竞赛课暑假选拔试卷（可下载 PDF）</p>
           </div>
-
           <div class="acc-links">
-            <a class="acc-head" href="wujingceshi0829">
-              <span class="dot"></span>
-              <span class="label">查看试题</span>
-              <span class="chev">▼</span>
-            </a>
-            <a class="acc-head" href="wujingceshi0829">
-              <span class="dot"></span>
-              <span class="label">答案与解析</span>
-              <span class="chev">▼</span>
-            </a>
+            <a class="acc-head" href="wujingceshi0829"><span class="dot"></span><span class="label">查看试题</span><span class="chev">▼</span></a>
+            <a class="acc-head" href="wujingceshi0829"><span class="dot"></span><span class="label">答案与解析</span><span class="chev">▼</span></a>
           </div>
         </article>
 
       </div>
 
-      <!-- ===== 空状态 ===== -->
       <div class="empty" id="empty">
         <span class="big">🔍</span>
         <h2>没有符合条件的题目</h2>
@@ -476,6 +437,14 @@ ul,ol{list-style:none}
   </section>
 
 </main>
+
+<!-- 悬浮回到顶部 -->
+<button class="back-top" id="backTop" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24">
+    <line x1="12" y1="19" x2="12" y2="5"/>
+    <polyline points="5 12 12 5 19 12"/>
+  </svg>
+</button>
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
@@ -540,6 +509,24 @@ document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
     body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
   });
 });
+
+/* ===== 悬浮回到顶部 ===== */
+(function(){
+  const btn = document.getElementById('backTop');
+  const SHOW_AFTER = 320;
+
+  function update(){
+    if (window.scrollY > SHOW_AFTER) btn.classList.add('show');
+    else btn.classList.remove('show');
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
 
 /* ===== 地址栏不显示 index.html ===== */
 if (location.pathname.endsWith('/index.html')) {
