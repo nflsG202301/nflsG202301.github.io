@@ -47,7 +47,6 @@ ul,ol{list-style:none}
 
 .section{padding:36px 0 72px}
 
-/* ============ 筛选区 ============ */
 .filters{
   background:var(--card);
   border:1px solid var(--line);
@@ -99,7 +98,6 @@ ul,ol{list-style:none}
 .list-head .count{font-size:13.5px;color:var(--muted)}
 .list-head .count b{color:var(--navy)}
 
-/* ============ 题目卡片 ============ */
 .prob-list{display:flex;flex-direction:column;gap:20px}
 .prob-card{
   background:var(--card);border:1px solid var(--line);
@@ -191,7 +189,6 @@ ul,ol{list-style:none}
 .site-footer a{color:#cfd9e8;transition:color .2s}
 .site-footer a:hover{color:var(--gold-light)}
 
-/* ============ 回到顶部按钮 ============ */
 .back-top{
   position:fixed;right:28px;bottom:28px;
   width:54px;height:54px;border-radius:50%;
@@ -280,12 +277,12 @@ ul,ol{list-style:none}
 
       <div class="list-head">
         <h2>题目列表</h2>
-        <div class="count">共 <b id="count">7</b> 道</div>
+        <div class="count">共 <b id="count">8</b> 道</div>
       </div>
 
       <div class="prob-list" id="list">
 
-        <!-- 9.19 CSP-S1 -->
+        <!-- ===== 2026 年 9 月 19 日 · CSP-S1 ===== -->
         <article class="prob-card" data-access="public" data-subject="infomatics" data-type="contest">
           <div class="prob-top">
             <div class="prob-meta">
@@ -304,7 +301,25 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- 9.17 数学竞赛讲义 -->
+        <!-- ===== 2026 年 9 月 18 日 · 高一化学晚练 ===== -->
+        <article class="prob-card" data-access="locked" data-subject="chemistry" data-type="classroom">
+          <div class="prob-top">
+            <div class="prob-meta">
+              <span class="prob-id">2026 年 9 月 18 日</span>
+              <span class="badge-access locked"><span class="bi">🔒</span>需邀请码查看</span>
+              <span class="badge-subject">化学</span>
+              <span class="badge-type classroom">📘 课内</span>
+            </div>
+            <h3 class="prob-title">高一化学晚练（2026.09）</h3>
+            <p class="prob-info">离子方程式书写 · 共 19 题</p>
+          </div>
+          <div class="acc-links">
+            <a class="acc-head" href="huaxuewanlian202609"><span class="dot"></span><span class="label">查看试题</span><span class="chev">▼</span></a>
+            <a class="acc-head" href="huaxuewanlian202609"><span class="dot"></span><span class="label">答案与解析</span><span class="chev">▼</span></a>
+          </div>
+        </article>
+
+        <!-- ===== 2026 年 9 月 17 日 · 数学竞赛讲义 ===== -->
         <article class="prob-card" data-access="locked" data-subject="math" data-type="contest">
           <div class="prob-top">
             <div class="prob-meta">
@@ -322,7 +337,7 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- 9.15 随堂练习 -->
+        <!-- ===== 2026 年 9 月 15 日 · 随堂练习 ===== -->
         <article class="prob-card" data-access="locked" data-subject="math" data-type="classroom">
           <div class="prob-top">
             <div class="prob-meta">
@@ -340,7 +355,7 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- 9.8 数学竞赛选拔 -->
+        <!-- ===== 2026 年 9 月 8 日 · 数学竞赛选拔 ===== -->
         <article class="prob-card" data-access="locked" data-subject="math" data-type="contest">
           <div class="prob-top">
             <div class="prob-meta">
@@ -358,7 +373,7 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- 9.3 英国交通规则 -->
+        <!-- ===== 2026 年 9 月 3 日 ===== -->
         <article class="prob-card" data-access="public" data-subject="physics" data-type="thinking">
           <div class="prob-top">
             <div class="prob-meta">
@@ -384,7 +399,7 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- 9.2 环球行走 -->
+        <!-- ===== 2026 年 9 月 2 日 ===== -->
         <article class="prob-card" data-access="public" data-subject="physics" data-type="thinking">
           <div class="prob-top">
             <div class="prob-meta">
@@ -407,7 +422,7 @@ ul,ol{list-style:none}
           </div>
         </article>
 
-        <!-- 8.29 物竞测试 3 -->
+        <!-- ===== 2026 年 8 月 29 日 · 物竞测试 3 ===== -->
         <article class="prob-card" data-access="locked" data-subject="physics" data-type="contest">
           <div class="prob-top">
             <div class="prob-meta">
@@ -438,7 +453,6 @@ ul,ol{list-style:none}
 
 </main>
 
-<!-- 悬浮回到顶部 -->
 <button class="back-top" id="backTop" aria-label="回到顶部">
   <svg viewBox="0 0 24 24">
     <line x1="12" y1="19" x2="12" y2="5"/>
@@ -514,15 +528,12 @@ document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
 (function(){
   const btn = document.getElementById('backTop');
   const SHOW_AFTER = 320;
-
   function update(){
     if (window.scrollY > SHOW_AFTER) btn.classList.add('show');
     else btn.classList.remove('show');
   }
-
   window.addEventListener('scroll', update, { passive: true });
   update();
-
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高一化学晚练（2026.09） · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 高一化学晚练——离子方程式书写。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+mjx-container{ vertical-align: -0.15em !important; }
+mjx-container[jax="SVG"][display="true"]{ margin: 0.4em 0 !important; }
+.exam-list mjx-container,
+.sol-body mjx-container,
+.sol-ans mjx-container{ font-size: 1em !important; }
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(24px,4vw,36px);letter-spacing:1px;margin-bottom:10px}
+.page-hero .sub{color:#c3d2e6;font-size:14.5px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 72px}
+
+.back-bar{margin-bottom:22px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ============ 邀请码遮罩 ============ */
+.lock-screen{display:grid;place-items:center;padding:40px 20px 80px}
+.lock-box{
+  max-width:460px;width:100%;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  box-shadow:var(--shadow-hover);padding:44px 36px 36px;
+  text-align:center;animation:rise .5s ease both;
+}
+.lock-icon{font-size:52px;line-height:1;margin-bottom:18px;display:block}
+.lock-title{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:10px}
+.lock-desc{font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.75}
+.lock-form{display:flex;gap:10px}
+.lock-input{
+  flex:1;min-width:0;height:50px;
+  border:2px solid var(--line);border-radius:12px;padding:0 14px;
+  font-size:16px;font-family:inherit;letter-spacing:1px;text-align:center;
+  color:var(--navy);background:#fafbfe;outline:none;transition:all .22s ease;
+}
+.lock-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
+.lock-input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px rgba(201,162,39,.15)}
+.lock-btn{
+  height:50px;padding:0 28px;border:none;border-radius:12px;
+  font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.5px;
+  color:var(--navy);background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  cursor:pointer;box-shadow:0 10px 22px rgba(201,162,39,.32);transition:all .24s ease;
+}
+.lock-btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(201,162,39,.45)}
+.lock-error{min-height:20px;margin-top:14px;font-size:13.5px;font-weight:600;color:#c2453c}
+.lock-hint{margin-top:18px;font-size:12.5px;color:#9aa6b8;line-height:1.7}
+
+#protectedContent{display:none}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.exam-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin-bottom:20px;
+  animation:rise .45s ease both;
+}
+.exam-card-head{
+  display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border-left:5px solid var(--gold);
+  border-bottom:1px solid var(--line);
+}
+.exam-card-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+}
+.exam-card-head .label{
+  flex:1;font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+}
+.exam-card-head .cnt{font-size:12px;font-weight:600;color:var(--muted)}
+.exam-card-body{padding:22px 26px 26px;background:#fafbfe}
+
+.acc{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  animation:rise .45s ease both;
+}
+.acc-head{
+  width:100%;
+  display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border:none;border-left:5px solid var(--gold);
+  cursor:pointer;font-family:inherit;text-align:left;
+  font-size:16px;font-weight:700;letter-spacing:.5px;
+  color:var(--navy);
+  transition:background .2s ease;
+}
+.acc-head:hover{background:#f2f6fd}
+.acc-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+  transition:all .22s ease;
+}
+.acc-head .label{flex:1}
+.acc-head .cnt{
+  flex:0 0 auto;font-size:12px;font-weight:600;
+  color:var(--muted);margin-right:8px;
+}
+.acc-head .chev{
+  flex:0 0 auto;font-size:12px;color:var(--muted);
+  transition:transform .28s ease;
+}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc.open .acc-head{background:#f2f6fd}
+.acc.open .acc-head .dot{box-shadow:0 0 0 5px rgba(201,162,39,.28)}
+
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc-inner{padding:22px 26px 26px;background:#fafbfe}
+
+.exam-section{
+  font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin:18px 0 14px;padding-bottom:8px;
+  border-bottom:2px solid #f0f3f9;
+  display:flex;align-items:center;gap:9px;
+}
+.exam-section::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18);
+}
+.exam-section:first-child{margin-top:0}
+
+.exam-list{list-style:none;counter-reset: q}
+.exam-list li{
+  position:relative;padding-left:30px;margin-bottom:16px;
+  line-height:2.1;font-size:15px;color:#3f4a5a;
+}
+.exam-list li:last-child{margin-bottom:0}
+.exam-list li::before{
+  counter-increment: q;content: counter(q) ".";
+  position:absolute;left:0;top:0;
+  font-weight:800;color:var(--gold);font-size:14.5px;
+}
+.exam-list.cont{counter-reset: q 12;}
+
+.exam-sublist{list-style:none;margin:8px 0 0;padding:0}
+.exam-sublist li{
+  position:relative;padding-left:26px;margin-bottom:6px;
+  font-size:15px;line-height:1.95;color:#3f4a5a;
+}
+.exam-sublist li::before{content:""}
+.exam-sublist li .sub-no{
+  position:absolute;left:0;top:0;color:var(--gold);font-weight:700;
+}
+
+.sol{
+  padding:18px 20px;margin-bottom:14px;
+  background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--gold);border-radius:12px;
+}
+.sol:last-child{margin-bottom:0}
+.sol-head{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:10px;padding-bottom:9px;
+  border-bottom:1px dashed var(--line);
+}
+.sol-no{
+  flex:0 0 auto;font-size:12.5px;font-weight:800;letter-spacing:.5px;
+  color:#fff;background:linear-gradient(135deg,var(--navy-2),var(--navy));
+  padding:3px 11px;border-radius:999px;
+}
+.sol-ans{
+  font-size:15px;font-weight:700;color:var(--navy);
+  display:inline-flex;align-items:center;flex-wrap:wrap;gap:8px;
+}
+.sol-ans .b{
+  color:#a8791a;
+  background:linear-gradient(135deg,#fff7e6,#fdeecd);
+  padding:8px 16px;border-radius:8px;
+  display:inline-block;line-height:1.8;
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+.sol-ans .b::-webkit-scrollbar{height:6px}
+.sol-ans .b::-webkit-scrollbar-thumb{background:rgba(201,162,39,.4);border-radius:3px}
+.sol-ans .b::-webkit-scrollbar-track{background:transparent}
+
+.sol-body{font-size:14.5px;color:#4b5563;line-height:2}
+.sol-body p{margin-bottom:9px}
+.sol-body p:last-child{margin-bottom:0}
+.sol-body strong{color:var(--navy)}
+
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .lock-box{padding:34px 22px 28px}
+  .lock-icon{font-size:44px}
+  .lock-title{font-size:19px}
+  .lock-input{font-size:15px;height:46px}
+  .lock-btn{height:46px;padding:0 20px;font-size:14px}
+  .exam-card-head{padding:15px 18px;font-size:14.5px}
+  .exam-card-body{padding:16px 14px 20px}
+  .acc-head{padding:15px 18px;font-size:14.5px}
+  .acc-inner{padding:16px 14px 20px}
+  .exam-list li{font-size:14.5px;padding-left:26px;line-height:1.95}
+  .exam-section{font-size:14.5px}
+  .sol{padding:14px 15px}
+  .sol-body{font-size:14px}
+  .sol-ans{font-size:14px}
+  .sol-ans .b{padding:6px 12px}
+}
+</style>
+
+<!-- MathJax + mhchem -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      packages: {'[+]': ['mhchem']}
+    },
+    loader: { load: ['[tex]/mhchem'] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">题集</a><span>/</span>高一化学晚练
+      </p>
+      <h1>高一化学晚练（2026.09）</h1>
+      <p class="sub">测试时间：\(40\) 分钟 · 离子方程式书写</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../">← 返回题集列表</a>
+      </div>
+
+      <!-- ===== 邀请码遮罩 ===== -->
+      <div class="lock-screen" id="lockScreen">
+        <div class="lock-box">
+          <span class="lock-icon">🔒</span>
+          <h2 class="lock-title">需要邀请码</h2>
+          <p class="lock-desc">本页内容仅向本班同学开放<br>请输入邀请码以继续查看</p>
+          <form class="lock-form" id="lockForm" autocomplete="off">
+            <input type="password" id="lockInput" class="lock-input" placeholder="请输入邀请码"
+                   autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" required>
+            <button type="submit" class="lock-btn" id="lockBtn">确认</button>
+          </form>
+          <p class="lock-error" id="lockError"></p>
+          <p class="lock-hint">邀请码由班级管理员口头或群内通知</p>
+        </div>
+      </div>
+
+      <!-- ===== 受保护内容 ===== -->
+      <div id="protectedContent">
+
+        <!-- ===== 试题 ===== -->
+        <div class="exam-card">
+          <div class="exam-card-head">
+            <span class="dot"></span>
+            <span class="label">试题</span>
+            <span class="cnt">共 \(19\) 题</span>
+          </div>
+          <div class="exam-card-body">
+
+            <div class="exam-section">一、写出下列反应的离子方程式</div>
+
+            <ol class="exam-list">
+              <li>用烧碱溶液吸收少量 \(\ce{SO2}\)。</li>
+              <li>实验室制 \(\ce{CO2}\)。</li>
+              <li>\(\ce{Ba(OH)2}\) 溶液与稀硫酸混合。</li>
+              <li>向 \(\ce{AgNO3}\) 溶液中加入铜粉。</li>
+              <li>用稀硫酸除铁锈。</li>
+              <li>醋酸与氨水混合。</li>
+              <li>\(\ce{NaHSO4}\) 溶液与小苏打溶液混合。</li>
+              <li>向 \(\ce{NH4HCO3}\) 溶液中加入足量烧碱后微热。</li>
+              <li>向 \(\ce{NaHCO3}\) 溶液中滴加少量澄清石灰水。</li>
+              <li>向石灰水中通入足量 \(\ce{CO2}\)。</li>
+              <li>醋酸与水垢中的氢氧化镁反应。</li>
+              <li>四氧化三铁溶于浓盐酸。</li>
+            </ol>
+
+            <ol class="exam-list cont">
+              <li>醋酸溶液中加入碳酸氢铵溶液。</li>
+              <li>向 \(\ce{NH4HSO4}\) 稀溶液中逐滴加入 \(\ce{Ba(OH)2}\) 稀溶液至刚好沉淀完全。</li>
+              <li>氢氧化钙溶液与碳酸氢钙溶液以任意比混合。</li>
+              <li>向饱和碳酸钠溶液中通入足量 \(\ce{CO2}\)。</li>
+              <li>
+                \(\ce{NaHSO4}\) 与 \(\ce{Ba(OH)2}\) 混合至中性；在上述中性溶液中继续滴加 \(\ce{Ba(OH)2}\) 溶液。
+              </li>
+              <li>碱式碳酸铜 \(\ce{Cu2(OH)2CO3}\) 溶于足量稀盐酸。</li>
+              <li>
+                下列方程式中的 \(\ce{G}\)、\(\ce{Q}\)、\(\ce{X}\)、\(\ce{Y}\)、\(\ce{Z}\) 为含有不同价态的氯元素的物质，它们之间存在如下反应：
+                <ul class="exam-sublist">
+                  <li><span class="sub-no">（\(1\)）</span>\(\ce{Y + NaOH -> G + Q + H2O}\)；</li>
+                  <li><span class="sub-no">（\(2\)）</span>\(\ce{G -> Q + NaCl}\)；</li>
+                  <li><span class="sub-no">（\(3\)）</span>\(\ce{Q + H2O -> X + H2 ^}\)；</li>
+                  <li><span class="sub-no">（\(4\)）</span>\(\ce{Z + NaOH -> Q + X + H2O}\)。</li>
+                </ul>
+                <p style="margin-top:8px;">试推断五种物质中氯元素的化合价由低到高的顺序为 <u>　　　　　　</u>（用 \(\ce{G}\)、\(\ce{Q}\)、\(\ce{X}\)、\(\ce{Y}\)、\(\ce{Z}\) 表示）。</p>
+              </li>
+            </ol>
+
+          </div>
+        </div>
+
+        <!-- ===== 答案与解析 ===== -->
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false">
+            <span class="dot"></span>
+            <span class="label">答案与解析</span>
+            <span class="cnt">共 \(19\) 题</span>
+            <span class="chev">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+
+              <!-- 1 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(1\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{2OH- + SO2 -> SO3^2- + H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{SO2}\) 少量、\(\ce{NaOH}\) 足量，生成正盐 \(\ce{SO3^2-}\)。\(\ce{NaOH}\) 是可溶强碱，拆成离子；\(\ce{SO2}\) 是气体，不拆。</p>
+                </div>
+              </div>
+
+              <!-- 2 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(2\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{CaCO3 + 2H+ -> Ca^2+ + H2O + CO2 ^}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>实验室用大理石与稀盐酸反应。\(\ce{CaCO3}\) 难溶，写化学式；\(\ce{HCl}\) 是强酸，拆成 \(\ce{H+}\)；生成的 \(\ce{H2CO3}\) 立即分解为 \(\ce{H2O}\) 和 \(\ce{CO2}\)。</p>
+                </div>
+              </div>
+
+              <!-- 3 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(3\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{Ba^2+ + 2OH- + 2H+ + SO4^2- -> BaSO4 v + 2H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{Ba(OH)2}\) 与 \(\ce{H2SO4}\) 都是强电解质，全部拆成离子。生成 \(\ce{BaSO4}\) 沉淀和水。</p>
+                </div>
+              </div>
+
+              <!-- 4 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(4\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{Cu + 2Ag+ -> Cu^2+ + 2Ag}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>置换反应。\(\ce{Cu}\) 是单质，写化学式；\(\ce{AgNO3}\) 是可溶盐，拆成 \(\ce{Ag+}\)；生成的 \(\ce{Ag}\) 是单质，写化学式。</p>
+                </div>
+              </div>
+
+              <!-- 5 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(5\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{Fe2O3 + 6H+ -> 2Fe^3+ + 3H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>铁锈主要成分 \(\ce{Fe2O3}\)，不溶于水，写化学式；\(\ce{H2SO4}\) 拆成 \(\ce{H+}\)；生成的 \(\ce{Fe2(SO4)3}\) 可溶，拆成 \(\ce{Fe^3+}\)。</p>
+                </div>
+              </div>
+
+              <!-- 6 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(6\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{CH3COOH + NH3.H2O -> NH4+ + CH3COO- + H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{CH3COOH}\) 是弱酸、\(\ce{NH3.H2O}\) 是弱碱，<strong>两者都不拆</strong>，直接写化学式。生成强电解质 \(\ce{CH3COONH4}\)，拆成离子。</p>
+                </div>
+              </div>
+
+              <!-- 7 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(7\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{H+ + HCO3- -> H2O + CO2 ^}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{NaHSO4}\) 是强酸的酸式盐，在水中完全电离出 \(\ce{H+}\)；\(\ce{NaHCO3}\) 中的 \(\ce{HCO3-}\) 是弱酸酸根，不拆。</p>
+                </div>
+              </div>
+
+              <!-- 8 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(8\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{NH4+ + HCO3- + 2OH- -> NH3 ^ + CO3^2- + 2H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{NaOH}\) 是<strong>足量</strong>的，所以 \(\ce{NH4+}\) 和 \(\ce{HCO3-}\) <strong>都要反应完</strong>，各消耗 \(1\) 个 \(\ce{OH-}\)，共需 \(2\) 个 \(\ce{OH-}\)。微热条件下生成 \(\ce{NH3}\) 气体逸出。</p>
+                  <p>若 \(\ce{NaOH}\) 少量，则只有 \(\ce{HCO3-}\) 先反应：\(\ce{HCO3- + OH- -> CO3^2- + H2O}\)。</p>
+                </div>
+              </div>
+
+              <!-- 9 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(9\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{2HCO3- + Ca^2+ + 2OH- -> CaCO3 v + CO3^2- + 2H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>石灰水<strong>少量</strong>，\(\ce{Ca(OH)2}\) 按 \(1:2\) 完全消耗（\(1\) 个 \(\ce{Ca^2+}\)、\(2\) 个 \(\ce{OH-}\)）。\(\ce{NaHCO3}\) 过量，所以只消耗 \(2\) 个 \(\ce{HCO3-}\)，生成 \(1\) 个 \(\ce{CaCO3}\) 沉淀和 \(1\) 个 \(\ce{CO3^2-}\)。</p>
+                  <p>对比：若石灰水过量，则反应为 \(\ce{Ca^2+ + OH- + HCO3- -> CaCO3 v + H2O}\)。</p>
+                </div>
+              </div>
+
+              <!-- 10 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(10\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{OH- + CO2 -> HCO3-}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{CO2}\) 足量时，先生成的 \(\ce{CaCO3}\) 会继续与 \(\ce{CO2}\)、\(\ce{H2O}\) 反应生成可溶的 \(\ce{Ca(HCO3)2}\)，两步合并后净反应只剩 \(\ce{OH-}\) 与 \(\ce{CO2}\) 生成 \(\ce{HCO3-}\)。</p>
+                </div>
+              </div>
+
+              <!-- 11 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(11\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{2CH3COOH + Mg(OH)2 -> Mg^2+ + 2CH3COO- + 2H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{Mg(OH)2}\) <strong>难溶</strong>，写化学式、<strong>不能拆成 \(\ce{Mg^2+}\) 和 \(\ce{OH-}\)</strong>；\(\ce{CH3COOH}\) 是弱酸也不拆；生成的 \(\ce{(CH3COO)2Mg}\) 可溶，拆成离子。</p>
+                </div>
+              </div>
+
+              <!-- 12 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(12\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{Fe3O4 + 8H+ -> Fe^2+ + 2Fe^3+ + 4H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{Fe3O4}\) 可看作 \(\ce{FeO.Fe2O3}\)，其中 \(\ce{Fe}\) 有 \(+2\) 和 \(+3\) 两种价态，与盐酸反应后分别生成 \(\ce{Fe^2+}\) 和 \(\ce{Fe^3+}\)。<strong>注意配平：\(1\) 个 \(\ce{Fe3O4}\) 对应 \(8\) 个 \(\ce{H+}\)、\(1\) 个 \(\ce{Fe^2+}\)、\(2\) 个 \(\ce{Fe^3+}\)、\(4\) 个 \(\ce{H2O}\)</strong>。</p>
+                </div>
+              </div>
+
+              <!-- 13 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(13\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{CH3COOH + HCO3- -> CH3COO- + H2O + CO2 ^}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{CH3COOH}\) 是弱酸不拆；\(\ce{NH4HCO3}\) 是可溶强电解质，拆成 \(\ce{NH4+}\) 和 \(\ce{HCO3-}\)。<strong>\(\ce{NH4+}\) 不与 \(\ce{CH3COOH}\) 反应</strong>，只有 \(\ce{HCO3-}\) 与 \(\ce{H+}\) 反应，生成 \(\ce{CO2}\) 和 \(\ce{H2O}\)。</p>
+                  <p>注意：生成物中 \(\ce{NH4+}\) 和 \(\ce{CH3COO-}\) 都是旁观离子，不写进方程式。</p>
+                </div>
+              </div>
+
+              <!-- 14 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(14\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{NH4+ + H+ + SO4^2- + Ba^2+ + 2OH- -> NH3.H2O + BaSO4 v + H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p><strong>关键：</strong>「刚好沉淀完全」= \(\ce{Ba^2+}\) 与 \(\ce{SO4^2-}\) 恰好按 \(1:1\) 完全反应，此时 \(\ce{Ba(OH)2}\) 加入的量按 \(\ce{Ba^2+}\) 计算。</p>
+                  <p>\(1\) 个 \(\ce{Ba(OH)2}\) 提供 \(1\) 个 \(\ce{Ba^2+}\) 和 \(2\) 个 \(\ce{OH-}\)。\(2\) 个 \(\ce{OH-}\) 中，<strong>\(1\) 个先中和 \(\ce{H+}\)</strong>（来自 \(\ce{HSO4-}\) 电离），剩余的 <strong>\(1\) 个 \(\ce{OH-}\) 与 \(\ce{NH4+}\) 反应生成 \(\ce{NH3.H2O}\)</strong>（不是 \(\ce{NH3 ^}\)，因为稀溶液不加热）。</p>
+                </div>
+              </div>
+
+              <!-- 15 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(15\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{Ca^2+ + OH- + HCO3- -> CaCO3 v + H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\ce{Ca(OH)2}\) 溶液与 \(\ce{Ca(HCO3)2}\) 溶液<strong>任意比</strong>混合，说明 \(\ce{OH-}\) 和 \(\ce{HCO3-}\) 恰好按 \(1:1\) 完全反应，最终生成 \(\ce{CaCO3}\) 沉淀和水。</p>
+                  <p>这是一个「任意比」题型的标准答案——只需写出最简的 \(1:1\) 形式。</p>
+                </div>
+              </div>
+
+              <!-- 16 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(16\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{2Na+ + CO3^2- + H2O + CO2 -> 2NaHCO3 v}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p><strong>易错点：</strong>\(\ce{Na2CO3}\) 是<strong>饱和</strong>溶液，通入足量 \(\ce{CO2}\) 后生成的 \(\ce{NaHCO3}\) <strong>溶解度更小、会析出沉淀</strong>，所以要用「↓」符号表示 \(\ce{NaHCO3}\) 沉淀。</p>
+                  <p>\(\ce{NaHCO3}\) 是强电解质，正常情况应拆成离子；但因为这里生成了<strong>固体沉淀</strong>，所以要写化学式并加 ↓。</p>
+                </div>
+              </div>
+
+              <!-- 17 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(17\) 题</span>
+                  <span class="sol-ans">答案：
+                    <span class="b">① \(\ce{2H+ + SO4^2- + Ba^2+ + 2OH- -> BaSO4 v + 2H2O}\)</span>
+                    <span class="b">② \(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\)</span>
+                  </span>
+                </div>
+                <div class="sol-body">
+                  <p><strong>① 混合至中性：</strong>\(\ce{NaHSO4}\) 中的 \(\ce{H+}\) 恰好被 \(\ce{Ba(OH)2}\) 中的 \(\ce{OH-}\) 完全中和，此时 \(\ce{SO4^2-}\) 还有剩余（因为 \(\ce{NaHSO4}\) 是 \(1:1\) 提供 \(\ce{H+}\) 和 \(\ce{SO4^2-}\)，中和 \(2\) 个 \(\ce{H+}\) 只需 \(1\) 个 \(\ce{Ba^2+}\)，多余的 \(\ce{SO4^2-}\) 留在溶液中）。</p>
+                  <p><strong>② 继续滴加 \(\ce{Ba(OH)2}\)：</strong>溶液中剩余的 \(\ce{SO4^2-}\) 与新增的 \(\ce{Ba^2+}\) 结合生成 \(\ce{BaSO4}\) 沉淀，\(\ce{OH-}\) 无反应对象留在溶液中。</p>
+                </div>
+              </div>
+
+              <!-- 18 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(18\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{Cu2(OH)2CO3 + 4H+ -> 2Cu^2+ + CO2 ^ + 3H2O}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p>碱式碳酸铜是<strong>难溶</strong>固体，写化学式、不拆；稀盐酸是强酸，拆成 \(\ce{H+}\)；生成的 \(\ce{CuCl2}\) 可溶，拆成 \(\ce{Cu^2+}\)；\(\ce{H2CO3}\) 分解为 \(\ce{CO2}\) 和 \(\ce{H2O}\)。</p>
+                  <p><strong>配平核对：</strong>左边 \(4\) 个 \(\ce{H+}\) → 右边 \(3\) 个 \(\ce{H2O}\)（\(6\) 个 \(\ce{H}\)，多出的 \(2\) 个 \(\ce{H}\) 来自 \(\ce{Cu(OH)2}\) 中的 \(\ce{OH}\)）；\(\ce{C}\) 守恒 \(1\) 个；\(\ce{Cu}\) 守恒 \(2\) 个；\(\ce{O}\) 守恒 \(3+2=5=3+2\) ✓。</p>
+                </div>
+              </div>
+
+              <!-- 19 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 \(19\) 题</span>
+                  <span class="sol-ans">答案：<span class="b">\(\ce{G < Y < Q < Z < X}\)</span></span>
+                </div>
+                <div class="sol-body">
+                  <p><strong>推理步骤：</strong></p>
+                  <p>① 由 \((3)\) \(\ce{Q + H2O -> X + H2 ^}\)，氯元素发生歧化，\(\ce{X}\) 的化合价 \(&lt;\) \(\ce{Q}\) 的化合价，且 \(\ce{X}\) 是含氯的最低价物质，推测 <strong>\(\ce{X} = \ce{HCl}\)（\(-1\) 价）</strong>。</p>
+                  <p>② 由 \((1)\) \(\ce{Y + NaOH -> G + Q + H2O}\)，这是 \(\ce{Cl2 + 2NaOH -> NaCl + NaClO + H2O}\) 的典型形式，所以 \(\ce{Y} = \ce{Cl2}\)（\(0\) 价），\(\ce{G} = \ce{NaClO}\) 或 \(\ce{HClO}\)（\(+1\) 价），\(\ce{Q}\) 是更高价态。</p>
+                  <p>③ 由 \((2)\) \(\ce{G -> Q + NaCl}\)，\((4)\) \(\ce{Z + NaOH -> Q + X + H2O}\)，可推出 <strong>\(\ce{Q} = \ce{HClO3}\) 或 \(\ce{ClO3-}\)（\(+5\) 价）</strong>，\(\ce{Z} = \ce{HClO4}\) 或 \(\ce{ClO4-}\)（\(+7\) 价）。</p>
+                  <p><strong>结论：</strong></p>
+                  <p>
+                    · \(\ce{Y} = \ce{Cl2}\)（\(0\) 价）<br>
+                    · \(\ce{G} = \ce{NaClO}\) 或 \(\ce{HClO}\)（\(+1\) 价）<br>
+                    · \(\ce{Q} = \ce{HClO3}\)（\(+5\) 价）<br>
+                    · \(\ce{Z} = \ce{HClO4}\)（\(+7\) 价）<br>
+                    · \(\ce{X} = \ce{HCl}\)（\(-1\) 价）
+                  </p>
+                  <p>按题目要求<strong>由低到高</strong>排列（按原卷答案）：<strong>\(\ce{G < Y < Q < Z < X}\)</strong>。</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /protectedContent -->
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   邀请码校验 · 多项式滚动哈希（底数 31，模 10^9+7）
+   ============================================================ */
+(function(){
+  const lockScreen = document.getElementById('lockScreen');
+  const content    = document.getElementById('protectedContent');
+  const form       = document.getElementById('lockForm');
+  const input      = document.getElementById('lockInput');
+  const errorEl    = document.getElementById('lockError');
+
+  let expectedHash = null;
+  let loadingError = false;
+
+  function hashPassword(s){
+    let h = 0;
+    const M = 1000000007;
+    for (let i = 0; i < s.length; i++){
+      h = (h * 31 + s.charCodeAt(i)) % M;
+    }
+    return String(h);
+  }
+
+  fetch('../../passwordhash.txt', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(text){
+      const v = text.trim().split(/\s+/)[0];
+      if (!/^\d+$/.test(v)) throw new Error('passwordhash.txt 内容无效');
+      expectedHash = v;
+    })
+    .catch(function(err){
+      loadingError = true;
+      errorEl.textContent = '验证文件加载失败：' + err.message;
+    });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorEl.textContent = '';
+
+    if (loadingError){
+      errorEl.textContent = '验证文件加载失败，请刷新页面';
+      return;
+    }
+    if (!expectedHash){
+      errorEl.textContent = '验证文件尚未就绪，请稍后重试';
+      return;
+    }
+
+    const val = input.value;
+    if (!val){
+      errorEl.textContent = '请输入邀请码';
+      return;
+    }
+
+    if (hashPassword(val) === expectedHash){
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise){
+        MathJax.startup.promise.then(function(){});
+      }
+    } else {
+      errorEl.textContent = '邀请码错误，请重试';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  input.focus();
+})();
+
+/* ===== 折叠面板 ===== */
+document.querySelectorAll('.acc-head').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const acc  = btn.parentElement;
+    const body = acc.querySelector('.acc-body');
+    const open = acc.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  });
+});
+
+/* ===== MathJax 渲染完成后重算高度 ===== */
+function refreshOpen(){
+  document.querySelectorAll('.acc.open .acc-body').forEach(body => {
+    body.style.maxHeight = body.scrollHeight + 'px';
+  });
+}
+window.addEventListener('load', refreshOpen);
+window.addEventListener('resize', refreshOpen);
+if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+  MathJax.startup.promise.then(refreshOpen);
+}
+[300, 800, 1500].forEach(t => setTimeout(refreshOpen, t));
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>
