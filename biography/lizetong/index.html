@@ -272,15 +272,9 @@ ul,ol{list-style:none}
                 <p class="bio-intro">总是穿绿色上衣的神秘人</p>
               </div>
 
-              <!-- 照片：把下面的占位块整块换成 <img src="./photo.jpg" alt="李泽茼"> 即可 -->
+              <!-- 照片：lizetong.jpg -->
               <div class="bio-photo-box">
-                <span class="ph">
-                  <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="8" r="4"/>
-                    <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
-                  </svg>
-                  <span>暂无照片</span>
-                </span>
+                <img src="./lizetong.jpg" alt="李泽茼">
               </div>
 
             </div>
@@ -330,23 +324,16 @@ ul,ol{list-style:none}
 <script>
 /* ============================================================
    人物志详情页
-   ------------------------------------------------------------
-   1. 正文中出现的「已收录人物」姓名自动变成可点击链接
-   2. 正文之后列出该人的名言（与「名言」板块同源）
    ============================================================ */
 
-/* 已收录人物：新增人物志时，在这里补一行即可让全站正文自动互链 */
 const BIO_PEOPLE = {
   '朱心桥': '/biography/zhuxinqiao/',
   '李泽茼': '/biography/lizetong/'
 };
 
 const BIO_NAME = '李泽茼';
-
-/* 该人在「名言」板块中的署名与分类色（对应 saying/index.html 的「其他」） */
 const BIO_COLOR = '#64748b';
 
-/* 名言兜底：FamousSayings.txt 拉取失败时使用，需与 saying/FamousSayings.txt 保持一致 */
 const FALLBACK_QUOTES = [
   'XX怎么这么坏啊。',
   '你们怎么这~样啊。'
@@ -391,7 +378,6 @@ function parseSayings(text){
   const names = Object.keys(BIO_PEOPLE);
   if (!names.length) return;
 
-  // 按名字长度倒序，避免短名先命中长名的一部分
   names.sort(function(a, b){ return b.length - a.length; });
 
   const walker = document.createTreeWalker(
@@ -431,7 +417,6 @@ function parseSayings(text){
       if (hit > i) frag.appendChild(document.createTextNode(text.slice(i, hit)));
 
       const url = BIO_PEOPLE[hitName];
-      // 不给自己加链接
       if (hitName === BIO_NAME){
         frag.appendChild(document.createTextNode(hitName));
       } else {
