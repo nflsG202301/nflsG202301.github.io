@@ -95,6 +95,19 @@ ul,ol{list-style:none}
   line-height:1.7;
 }
 
+/* ====== 卡片内的编撰者署名 ====== */
+.bio-head-text .author{
+  display:inline-block;
+  margin-top:12px;
+  font-size:12.5px;
+  letter-spacing:1.5px;
+  color:#a8791a;
+  padding:4px 15px;
+  border-radius:999px;
+  background:rgba(201,162,39,.12);
+  border:1px solid rgba(201,162,39,.35);
+}
+
 /* 右上角照片框 */
 .bio-photo-box{
   flex:0 0 auto;
@@ -103,17 +116,12 @@ ul,ol{list-style:none}
   overflow:hidden;
   border:1px solid var(--line);
   background:linear-gradient(135deg,#eef2f8,#e0e6f1);
-  display:grid;place-items:center;
-  color:#a3aec0;
 }
-.bio-photo-box img{width:100%;height:100%;object-fit:cover;display:block}
-.bio-photo-box .ph{display:grid;place-items:center;gap:7px;line-height:1}
-.bio-photo-box .ph svg{
-  width:34px;height:34px;display:block;
-  stroke:currentColor;fill:none;
-  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+.bio-photo-box img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
 }
-.bio-photo-box .ph span{font-size:11.5px;letter-spacing:.5px}
 
 /* ====== 正文前的红色小字提示 ====== */
 .bio-notice{
@@ -229,8 +237,8 @@ ul,ol{list-style:none}
   .article-head{padding-bottom:18px;margin-bottom:20px}
   .bio-head-row{gap:16px}
   .article-title{font-size:20px}
+  .bio-head-text .author{font-size:11.5px;padding:3px 12px;margin-top:10px}
   .bio-photo-box{width:84px;height:106px}
-  .bio-photo-box .ph svg{width:24px;height:24px}
   .bio-notice{font-size:12.5px;margin-bottom:20px}
   .article-body{font-size:15.5px;line-height:1.95}
   .article-body p{margin-bottom:16px}
@@ -270,9 +278,10 @@ ul,ol{list-style:none}
               <div class="bio-head-text">
                 <h2 class="article-title">李泽茼</h2>
                 <p class="bio-intro">总是穿绿色上衣的神秘人</p>
+                <p class="author">编撰者：陈梓硕</p>
               </div>
 
-              <!-- 照片：lizetong.jpg -->
+              <!-- 照片：与本文件同目录的 lizetong.jpg -->
               <div class="bio-photo-box">
                 <img src="./lizetong.jpg" alt="李泽茼">
               </div>
@@ -324,16 +333,23 @@ ul,ol{list-style:none}
 <script>
 /* ============================================================
    人物志详情页
+   ------------------------------------------------------------
+   1. 正文中出现的「已收录人物」姓名自动变成可点击链接
+   2. 正文之后列出该人的名言（与「名言」板块同源）
    ============================================================ */
 
+/* 已收录人物：新增人物志时，在这里补一行即可让全站正文自动互链 */
 const BIO_PEOPLE = {
   '朱心桥': '/biography/zhuxinqiao/',
   '李泽茼': '/biography/lizetong/'
 };
 
 const BIO_NAME = '李泽茼';
+
+/* 该人在「名言」板块中的署名与分类色（对应 saying/index.html 的「其他」） */
 const BIO_COLOR = '#64748b';
 
+/* 名言兜底：FamousSayings.txt 拉取失败时使用，需与 saying/FamousSayings.txt 保持一致 */
 const FALLBACK_QUOTES = [
   'XX怎么这么坏啊。',
   '你们怎么这~样啊。'
@@ -378,6 +394,7 @@ function parseSayings(text){
   const names = Object.keys(BIO_PEOPLE);
   if (!names.length) return;
 
+  // 按名字长度倒序，避免短名先命中长名的一部分
   names.sort(function(a, b){ return b.length - a.length; });
 
   const walker = document.createTreeWalker(
@@ -417,6 +434,7 @@ function parseSayings(text){
       if (hit > i) frag.appendChild(document.createTextNode(text.slice(i, hit)));
 
       const url = BIO_PEOPLE[hitName];
+      // 不给自己加链接
       if (hitName === BIO_NAME){
         frag.appendChild(document.createTextNode(hitName));
       } else {

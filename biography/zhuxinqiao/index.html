@@ -95,6 +95,19 @@ ul,ol{list-style:none}
   line-height:1.7;
 }
 
+/* ====== 卡片内的编撰者署名 ====== */
+.bio-head-text .author{
+  display:inline-block;
+  margin-top:12px;
+  font-size:12.5px;
+  letter-spacing:1.5px;
+  color:#a8791a;
+  padding:4px 15px;
+  border-radius:999px;
+  background:rgba(201,162,39,.12);
+  border:1px solid rgba(201,162,39,.35);
+}
+
 /* 右上角照片框 */
 .bio-photo-box{
   flex:0 0 auto;
@@ -229,6 +242,7 @@ ul,ol{list-style:none}
   .article-head{padding-bottom:18px;margin-bottom:20px}
   .bio-head-row{gap:16px}
   .article-title{font-size:20px}
+  .bio-head-text .author{font-size:11.5px;padding:3px 12px;margin-top:10px}
   .bio-photo-box{width:84px;height:106px}
   .bio-photo-box .ph svg{width:24px;height:24px}
   .bio-notice{font-size:12.5px;margin-bottom:20px}
@@ -270,9 +284,10 @@ ul,ol{list-style:none}
               <div class="bio-head-text">
                 <h2 class="article-title">朱心桥</h2>
                 <p class="bio-intro">本网站的开发者，伟大的电教委员</p>
+                <p class="author">编撰者：陈梓硕</p>
               </div>
 
-              <!-- 照片：把下面的占位块整块换成 <img src="./photo.jpg" alt="朱心桥"> 即可 -->
+              <!-- 照片：把下面的占位块整块换成 <img src="./zhuxinqiao.jpg" alt="朱心桥"> 即可 -->
               <div class="bio-photo-box">
                 <span class="ph">
                   <svg viewBox="0 0 24 24">
