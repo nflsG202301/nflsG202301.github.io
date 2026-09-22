@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>南京外国语学校 G202301 · 官网</title>
-<meta name="description" content="南京外国语学校 G202301 班官方网站：通知、作业、新闻、文章、名言、题集、资源与投稿。">
+<meta name="description" content="南京外国语学校 G202301 班官方网站：通知、作业、新闻、文章、名言、人物志、题集、资源与投稿。">
 <style>
 :root{
   --navy:#0f2547; --navy-2:#1b3a63;
@@ -243,9 +243,11 @@ ul{list-style:none}
 }
 .soft-card:hover .soft-arrow{color:var(--gold);transform:translateX(5px)}
 
-/* 卡片网格 */
+/* ============ 九宫格板块卡片 ============ */
 .grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:20px;
 }
 .card{
   background:var(--card);border:1px solid var(--line);
@@ -303,6 +305,7 @@ ul{list-style:none}
   .hero-inner{gap:30px}
   .hero-img{width:180px;height:180px;border-radius:22px}
   .quote-card{padding:36px 24px 30px}
+  .grid{grid-template-columns:repeat(2, 1fr)}
 }
 @media (max-width:640px){
   .header-inner{justify-content:center}
@@ -310,11 +313,11 @@ ul{list-style:none}
   .nav a{padding:7px 11px;font-size:13.5px}
   .section{padding:44px 0}
   .feature-row{grid-template-columns:1fr;gap:14px}
-  .grid{grid-template-columns:1fr 1fr;gap:14px}
+  .grid{grid-template-columns:repeat(2, 1fr);gap:12px}
   .card{padding:20px 16px}
   .nav-card .icon{width:44px;height:44px;font-size:21px}
-  .nav-card h3{font-size:16px}
-  .nav-card p{font-size:13px}
+  .nav-card h3{font-size:15.5px}
+  .nav-card p{font-size:12.5px}
   .countdown{padding:24px 20px 22px}
   .soft-card{padding:20px 18px}
   .hero-actions{gap:10px}
@@ -413,7 +416,7 @@ ul{list-style:none}
     </div>
   </section>
 
-  <!-- 板块卡片 -->
+  <!-- ===== 九宫格板块卡片 ===== -->
   <section class="section">
     <div class="wrap">
       <div class="grid">
@@ -479,7 +482,7 @@ ul{list-style:none}
 
   /* ===== 相遇正计时：2026 年 8 月 14 日 08:00 ===== */
   (function(){
-    const start   = new Date(2026, 7, 14, 8, 0, 0);  // 月份从 0 开始，7 = 8月
+    const start   = new Date(2026, 7, 14, 8, 0, 0);
     const elDays  = document.getElementById('meetDays');
     const elTime  = document.getElementById('meetTime');
 
@@ -503,7 +506,7 @@ ul{list-style:none}
 
   /* ===== 高考倒计时：2029 年 6 月 7 日 09:00 ===== */
   (function(){
-    const target  = new Date(2029, 5, 7, 9, 0, 0);  // 月份从 0 开始，5 = 6月
+    const target  = new Date(2029, 5, 7, 9, 0, 0);
     const elDays  = document.getElementById('cdDays');
     const elTime  = document.getElementById('cdTime');
 
@@ -530,10 +533,10 @@ ul{list-style:none}
     const btn = document.getElementById('todayHomeworkBtn');
     if (!btn) return;
 
-    const MAX_BACK = 90;   // 最多向前回溯天数，覆盖周末、小长假、寒暑假
-    const BATCH    = 8;    // 每批并发探测数
-    const PROBE_MS = 3000; // 单个探测超时，避免网络慢时卡住
-    const TOTAL_MS = 9000; // 整体超时，超时就退回作业日历页
+    const MAX_BACK = 90;
+    const BATCH    = 8;
+    const PROBE_MS = 3000;
+    const TOTAL_MS = 9000;
     let busy = false;
 
     function ymd(d){
@@ -555,7 +558,6 @@ ul{list-style:none}
         .then(function(r){ if (timer) clearTimeout(timer); return r.ok; })
         .catch(function(){ if (timer) clearTimeout(timer); return false; });
     }
-    // 由近及远分批探测，返回最近一天作业的偏移量；都没有（或整体超时）则返回 -1
     function scan(base, from, deadline){
       if (from > MAX_BACK || Date.now() > deadline) return Promise.resolve(-1);
       const batch = [];
@@ -569,7 +571,6 @@ ul{list-style:none}
     }
 
     btn.addEventListener('click', function(ev){
-      // Ctrl / Cmd / Shift / 中键点击交回浏览器默认行为，保留“新标签打开”的习惯
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0) return;
       if (busy) return;
       busy = true;
@@ -577,7 +578,6 @@ ul{list-style:none}
       ev.preventDefault();
       btn.style.opacity = '.6';
 
-      // 今天有作业就直达今天；遇节假日则回退到最近一次有作业的那天
       const base = new Date();
       scan(base, 0, Date.now() + TOTAL_MS).then(function(back){
         location.href = back >= 0 ? urlOf(base, back) : 'homework/';
