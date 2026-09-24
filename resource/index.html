@@ -51,16 +51,19 @@ ul,ol{list-style:none}
 }
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-/* 文件图标 */
+/* 文件图标：每种类型一个独立颜色 */
 .res-icon{
   flex:0 0 48px;height:48px;border-radius:13px;
   display:grid;place-items:center;
   font-size:13px;font-weight:800;letter-spacing:.5px;
   color:#fff;
 }
-.res-icon.jpg{background:linear-gradient(135deg,#4f8fe0,#2f6bc0);box-shadow:0 6px 16px rgba(47,107,192,.3)}
-.res-icon.mp3{background:linear-gradient(135deg,#4fc08d,#218a55);box-shadow:0 6px 16px rgba(33,138,85,.3)}
-.res-icon.pdf{background:linear-gradient(135deg,#e05050,#b8332f);box-shadow:0 6px 16px rgba(184,51,47,.3)}
+.res-icon.docx{background:linear-gradient(135deg,#3b7ddd,#2b579a);box-shadow:0 6px 16px rgba(43,87,154,.32)}   /* 蓝 */
+.res-icon.pdf {background:linear-gradient(135deg,#e85a4f,#c0392b);box-shadow:0 6px 16px rgba(192,57,43,.32)}    /* 红 */
+.res-icon.pptx{background:linear-gradient(135deg,#e8763a,#c9541a);box-shadow:0 6px 16px rgba(201,84,26,.32)}    /* 橙 */
+.res-icon.mp3 {background:linear-gradient(135deg,#3fb87a,#1e8e5a);box-shadow:0 6px 16px rgba(30,142,90,.32)}    /* 绿 */
+.res-icon.mp4 {background:linear-gradient(135deg,#2bb3bf,#0e8f9e);box-shadow:0 6px 16px rgba(14,143,158,.32)}   /* 青 */
+.res-icon.jpg {background:linear-gradient(135deg,#9a6fe0,#7c4dbe);box-shadow:0 6px 16px rgba(124,77,190,.32)}   /* 紫 */
 
 /* 文件信息 */
 .res-info{flex:1;min-width:0}
@@ -194,10 +197,70 @@ ul,ol{list-style:none}
 
       <div class="list-head">
         <h2>资源列表</h2>
-        <div class="count">共 <b>4</b> 项</div>
+        <div class="count">共 <b>9</b> 项</div>
       </div>
 
       <div class="res-list">
+
+        <div class="res-item">
+          <span class="res-icon pdf">PDF</span>
+          <div class="res-info">
+            <div class="res-title">Tuesdays with Morrie.pdf</div>
+          </div>
+          <button class="res-dl"
+                  data-href="./Tuesdays with Morrie.pdf"
+                  data-name="Tuesdays with Morrie.pdf">
+            ⬇ 下载
+          </button>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon docx">DOCX</span>
+          <div class="res-info">
+            <div class="res-title">微专题竖直上抛运动练习答案.docx</div>
+          </div>
+          <button class="res-dl"
+                  data-href="./微专题竖直上抛运动练习答案.docx"
+                  data-name="微专题竖直上抛运动练习答案.docx">
+            ⬇ 下载
+          </button>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon mp4">MP4</span>
+          <div class="res-info">
+            <div class="res-title">写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4</div>
+          </div>
+          <button class="res-dl"
+                  data-href="./写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4"
+                  data-name="写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4">
+            ⬇ 下载
+          </button>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon mp3">MP3</span>
+          <div class="res-info">
+            <div class="res-title">听力2-A(一遍).mp3</div>
+          </div>
+          <button class="res-dl"
+                  data-href="./听力2-A(一遍).mp3"
+                  data-name="听力2-A(一遍).mp3">
+            ⬇ 下载
+          </button>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon pptx">PPTX</span>
+          <div class="res-info">
+            <div class="res-title">智学网答题要求.pptx</div>
+          </div>
+          <button class="res-dl"
+                  data-href="./智学网答题要求.pptx"
+                  data-name="智学网答题要求.pptx">
+            ⬇ 下载
+          </button>
+        </div>
 
         <div class="res-item">
           <span class="res-icon jpg">JPG</span>
