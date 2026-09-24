@@ -551,7 +551,14 @@ ul,ol{list-style:none}
 
 <script>
 /* ============================================================
-   邀请码校验 · 多项式滚动哈希（底数 31，模 10^9+7）
+   邀请码校验
+   ------------------------------------------------------------
+   三哈希：同一个邀请码连续哈希 3 轮，每轮底数与模数都不同
+     · 轮1：base = 2147483647           mod = 2305843009213693951
+     · 轮2：base = 2305843009213693951  mod = 9223372036854775783
+     · 轮3：base = 9223372036854775783  mod = 18446744073709551557
+   passwordhash.txt 中存放第 3 轮的最终结果（一行）
+   文件位置：网站根目录（本页通过 ../../passwordhash.txt 访问）
    ============================================================ */
 (function(){
   const lockScreen = document.getElementById('lockScreen');
@@ -560,27 +567,46 @@ ul,ol{list-style:none}
   const input      = document.getElementById('lockInput');
   const errorEl    = document.getElementById('lockError');
 
-  let expectedHash = null;
-  let loadingError = false;
+  let expectedHashes = [];   // 从 passwordhash.txt 读到的哈希（可多行）
+  let loadingError   = false;
 
+  /* ====== 3 轮哈希参数（每轮底数与模数都不同，且都是大质数） ====== */
+  const HASH_ROUNDS = [
+    { base: 2147483647n,          mod: 2305843009213693951n  },  // 2^31-1, 2^61-1
+    { base: 2305843009213693951n, mod: 9223372036854775783n  },  // 2^61-1, <2^63 最大质数
+    { base: 9223372036854775783n, mod: 18446744073709551557n }   // <2^63 最大质数, <2^64 最大质数
+  ];
+
+  /* ====== 三哈希函数：返回第 3 轮的最终结果 ====== */
   function hashPassword(s){
-    let h = 0;
-    const M = 1000000007;
-    for (let i = 0; i < s.length; i++){
-      h = (h * 31 + s.charCodeAt(i)) % M;
+    let data = s;
+    for (let r = 0; r < HASH_ROUNDS.length; r++){
+      const base = HASH_ROUNDS[r].base;
+      const mod  = HASH_ROUNDS[r].mod;
+      let h = 0n;
+      for (let i = 0; i < data.length; i++){
+        h = (h * base + BigInt(data.charCodeAt(i))) % mod;
+      }
+      data = h.toString();
     }
-    return String(h);
+    return data;
   }
 
+  /* ====== 读取 passwordhash.txt（按行解析，空行与注释自动忽略） ====== */
   fetch('../../passwordhash.txt', { cache: 'no-store' })
     .then(function(r){
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.text();
     })
     .then(function(text){
-      const v = text.trim().split(/\s+/)[0];
-      if (!/^\d+$/.test(v)) throw new Error('passwordhash.txt 内容无效');
-      expectedHash = v;
+      expectedHashes = text
+        .split(/\r?\n/)
+        .map(function(line){ return line.trim(); })
+        .filter(function(line){ return /^\d+$/.test(line); });
+
+      if (expectedHashes.length === 0){
+        throw new Error('passwordhash.txt 中没有有效的哈希行');
+      }
     })
     .catch(function(err){
       loadingError = true;
@@ -595,7 +621,7 @@ ul,ol{list-style:none}
       errorEl.textContent = '验证文件加载失败，请刷新页面';
       return;
     }
-    if (!expectedHash){
+    if (!expectedHashes.length){
       errorEl.textContent = '验证文件尚未就绪，请稍后重试';
       return;
     }
@@ -606,7 +632,8 @@ ul,ol{list-style:none}
       return;
     }
 
-    if (hashPassword(val) === expectedHash){
+    const h = hashPassword(val);
+    if (expectedHashes.indexOf(h) !== -1){
       lockScreen.style.display = 'none';
       content.style.display = 'block';
       if (window.MathJax && MathJax.startup && MathJax.startup.promise){
@@ -620,14 +647,6 @@ ul,ol{list-style:none}
   });
 
   input.focus();
-
-  window.hashPassword = function(pw){
-    const h = hashPassword(String(pw));
-    console.log('%c哈希值：', 'color:#c9a227;font-weight:700', h);
-    return h;
-  };
-  console.log('%c提示：运行 hashPassword(\'你的邀请码\') 可获取哈希值',
-              'color:#0f2547;font-weight:700');
 })();
 
 document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
