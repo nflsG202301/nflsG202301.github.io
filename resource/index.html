@@ -73,9 +73,36 @@ ul,ol{list-style:none}
   word-break:break-word;
 }
 
+/* 按钮组 */
+.res-actions{
+  flex:0 0 auto;
+  display:flex;align-items:center;gap:10px;
+  white-space:nowrap;
+}
+
+/* 预览按钮（描边样式） */
+.res-preview{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13.5px;font-weight:700;
+  padding:10px 20px;border-radius:999px;
+  color:#a8791a;
+  background:#fff;
+  border:1.5px solid rgba(201,162,39,.55);
+  box-shadow:0 4px 12px rgba(201,162,39,.12);
+  transition:all .24s ease;
+  white-space:nowrap;
+  cursor:pointer;font-family:inherit;
+}
+.res-preview:hover{
+  background:linear-gradient(135deg,#fff7e6,#fdeecd);
+  border-color:var(--gold);
+  color:#8a6110;
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(201,162,39,.28);
+}
+
 /* 下载按钮 */
 .res-dl{
-  flex:0 0 auto;
   display:inline-flex;align-items:center;gap:6px;
   font-size:13.5px;font-weight:700;
   padding:10px 22px;border-radius:999px;
@@ -173,7 +200,8 @@ ul,ol{list-style:none}
   .res-item{flex-wrap:wrap;gap:14px;padding:18px}
   .res-icon{flex:0 0 42px;height:42px;font-size:12px;border-radius:11px}
   .res-info{flex:1 1 100%;order:2}
-  .res-dl{order:3;width:100%;justify-content:center}
+  .res-actions{order:3;width:100%;gap:8px}
+  .res-preview,.res-dl{flex:1;justify-content:center}
   .modal-box{padding:30px 22px 24px}
   .modal-icon{font-size:38px}
   .modal-title{font-size:17px}
@@ -188,7 +216,7 @@ ul,ol{list-style:none}
     <div class="wrap">
       <p class="crumb"><a href="../">首页</a><span>/</span>资源</p>
       <h1>资源</h1>
-      <p class="sub">学习资料与实用文件，点击右侧按钮即可下载（需输入邀请码）。</p>
+      <p class="sub">学习资料与实用文件，可在线预览或下载（需输入邀请码）。</p>
     </div>
   </section>
 
@@ -207,11 +235,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">Tuesdays with Morrie.pdf</div>
           </div>
-          <button class="res-dl"
-                  data-href="./Tuesdays with Morrie.pdf"
-                  data-name="Tuesdays with Morrie.pdf">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./Tuesdays with Morrie.pdf">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./Tuesdays with Morrie.pdf"
+                    data-name="Tuesdays with Morrie.pdf">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
         <div class="res-item">
@@ -219,11 +253,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">微专题竖直上抛运动练习答案.docx</div>
           </div>
-          <button class="res-dl"
-                  data-href="./微专题竖直上抛运动练习答案.docx"
-                  data-name="微专题竖直上抛运动练习答案.docx">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./微专题竖直上抛运动练习答案.docx">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./微专题竖直上抛运动练习答案.docx"
+                    data-name="微专题竖直上抛运动练习答案.docx">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
         <div class="res-item">
@@ -231,11 +271,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4</div>
           </div>
-          <button class="res-dl"
-                  data-href="./写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4"
-                  data-name="写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4"
+                    data-name="写作-标点符号Using Speech Marks _ Punctuating Direct Speech.mp4">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
         <div class="res-item">
@@ -243,11 +289,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">听力2-A(一遍).mp3</div>
           </div>
-          <button class="res-dl"
-                  data-href="./听力2-A(一遍).mp3"
-                  data-name="听力2-A(一遍).mp3">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./听力2-A(一遍).mp3">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./听力2-A(一遍).mp3"
+                    data-name="听力2-A(一遍).mp3">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
         <div class="res-item">
@@ -255,11 +307,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">智学网答题要求.pptx</div>
           </div>
-          <button class="res-dl"
-                  data-href="./智学网答题要求.pptx"
-                  data-name="智学网答题要求.pptx">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./智学网答题要求.pptx">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./智学网答题要求.pptx"
+                    data-name="智学网答题要求.pptx">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
         <div class="res-item">
@@ -267,11 +325,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg</div>
           </div>
-          <button class="res-dl"
-                  data-href="./南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg"
-                  data-name="南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg"
+                    data-name="南京外国语学校 2026-2027 学年班车服务运行时刻表（从 9 月 20 日起运行）.jpg">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
         <div class="res-item">
@@ -279,11 +343,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">听力练习A  音频共3遍.mp3</div>
           </div>
-          <button class="res-dl"
-                  data-href="./听力练习A  音频共3遍.mp3"
-                  data-name="听力练习A  音频共3遍.mp3">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./听力练习A  音频共3遍.mp3">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./听力练习A  音频共3遍.mp3"
+                    data-name="听力练习A  音频共3遍.mp3">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
         <div class="res-item">
@@ -291,11 +361,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">U2Reading.mp3</div>
           </div>
-          <button class="res-dl"
-                  data-href="./U2Reading.mp3"
-                  data-name="U2Reading.mp3">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./U2Reading.mp3">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./U2Reading.mp3"
+                    data-name="U2Reading.mp3">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
         <div class="res-item">
@@ -303,11 +379,17 @@ ul,ol{list-style:none}
           <div class="res-info">
             <div class="res-title">物竞测试3.pdf</div>
           </div>
-          <button class="res-dl"
-                  data-href="./物竞测试3.pdf"
-                  data-name="物竞测试3.pdf">
-            ⬇ 下载
-          </button>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./物竞测试3.pdf">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./物竞测试3.pdf"
+                    data-name="物竞测试3.pdf">
+              ⬇ 下载
+            </button>
+          </div>
         </div>
 
       </div>
@@ -336,7 +418,7 @@ ul,ol{list-style:none}
     <button class="modal-close" id="modalClose" aria-label="关闭">✕</button>
     <span class="modal-icon">🔒</span>
     <h3 class="modal-title">需要邀请码</h3>
-    <p class="modal-desc">下载资源需要验证身份<br>请输入邀请码以继续</p>
+    <p class="modal-desc">预览 / 下载资源需要验证身份<br>请输入邀请码以继续</p>
     <form class="modal-form" id="modalForm" autocomplete="off">
       <input
         type="password"
@@ -357,7 +439,7 @@ ul,ol{list-style:none}
 
 <script>
 /* ============================================================
-   资源下载 · 邀请码校验
+   资源预览 / 下载 · 邀请码校验
    ------------------------------------------------------------
    三哈希：同一个邀请码连续哈希 3 轮，每轮底数与模数都不同
      · 轮1：base = 2147483647           mod = 2305843009213693951
@@ -376,6 +458,7 @@ ul,ol{list-style:none}
   let loadingError   = false;
   let pendingUrl     = null;
   let pendingName    = null;
+  let pendingAction  = null;   // 'preview' 或 'download'
 
   const SESSION_KEY = 'g202301_resource_verified';
 
@@ -422,9 +505,10 @@ ul,ol{list-style:none}
       console.warn('无法加载 passwordhash.txt：', err);
     });
 
-  function openModal(url, name){
-    pendingUrl  = url;
-    pendingName = name;
+  function openModal(url, name, action){
+    pendingUrl    = url;
+    pendingName   = name;
+    pendingAction = action;
     modalError.textContent = '';
     modalInput.value = '';
     modal.classList.add('open');
@@ -433,8 +517,9 @@ ul,ol{list-style:none}
 
   function closeModal(){
     modal.classList.remove('open');
-    pendingUrl  = null;
-    pendingName = null;
+    pendingUrl    = null;
+    pendingName   = null;
+    pendingAction = null;
   }
 
   function triggerDownload(url, name){
@@ -446,6 +531,25 @@ ul,ol{list-style:none}
     document.body.removeChild(a);
   }
 
+  function triggerPreview(url){
+    // 新标签页打开，浏览器能直接显示 PDF / 图片 / 音视频等
+    window.open(url, '_blank', 'noopener');
+  }
+
+  /* ====== 预览按钮 ====== */
+  document.querySelectorAll('.res-preview').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const url = btn.dataset.href;
+
+      if (sessionStorage.getItem(SESSION_KEY) === '1'){
+        triggerPreview(url);
+        return;
+      }
+      openModal(url, null, 'preview');
+    });
+  });
+
+  /* ====== 下载按钮 ====== */
   document.querySelectorAll('.res-dl').forEach(function(btn){
     btn.addEventListener('click', function(){
       const url  = btn.dataset.href;
@@ -455,7 +559,7 @@ ul,ol{list-style:none}
         triggerDownload(url, name);
         return;
       }
-      openModal(url, name);
+      openModal(url, name, 'download');
     });
   });
 
@@ -490,10 +594,16 @@ ul,ol{list-style:none}
     if (expectedHashes.indexOf(h) !== -1){
       try{ sessionStorage.setItem(SESSION_KEY, '1'); }catch(e){}
 
-      const url  = pendingUrl;
-      const name = pendingName;
+      const url    = pendingUrl;
+      const name   = pendingName;
+      const action = pendingAction;
       closeModal();
-      triggerDownload(url, name);
+
+      if (action === 'preview'){
+        triggerPreview(url);
+      } else {
+        triggerDownload(url, name);
+      }
     } else {
       modalError.textContent = '邀请码错误，请重试';
       modalInput.value = '';
