@@ -101,6 +101,25 @@ ul,ol{list-style:none}
   box-shadow:0 10px 22px rgba(201,162,39,.28);
 }
 
+/* 预览按钮：不支持预览（禁用态） */
+.res-preview:disabled,
+.res-preview.is-disabled{
+  color:#b8c0cc;
+  background:#f3f5f9;
+  border-color:#e5e9f2;
+  box-shadow:none;
+  cursor:not-allowed;
+  opacity:.85;
+}
+.res-preview:disabled:hover,
+.res-preview.is-disabled:hover{
+  transform:none;
+  background:#f3f5f9;
+  border-color:#e5e9f2;
+  color:#b8c0cc;
+  box-shadow:none;
+}
+
 /* 下载按钮 */
 .res-dl{
   display:inline-flex;align-items:center;gap:6px;
@@ -254,9 +273,9 @@ ul,ol{list-style:none}
             <div class="res-title">微专题竖直上抛运动练习答案.docx</div>
           </div>
           <div class="res-actions">
-            <button class="res-preview"
-                    data-href="./微专题竖直上抛运动练习答案.docx">
-              👁 预览
+            <button class="res-preview is-disabled" disabled
+                    title="该格式不支持在线预览，请下载后查看">
+              🚫 不支持预览
             </button>
             <button class="res-dl"
                     data-href="./微专题竖直上抛运动练习答案.docx"
@@ -308,9 +327,9 @@ ul,ol{list-style:none}
             <div class="res-title">智学网答题要求.pptx</div>
           </div>
           <div class="res-actions">
-            <button class="res-preview"
-                    data-href="./智学网答题要求.pptx">
-              👁 预览
+            <button class="res-preview is-disabled" disabled
+                    title="该格式不支持在线预览，请下载后查看">
+              🚫 不支持预览
             </button>
             <button class="res-dl"
                     data-href="./智学网答题要求.pptx"
@@ -446,6 +465,9 @@ ul,ol{list-style:none}
      · 轮2：base = 2305843009213693951  mod = 9223372036854775783
      · 轮3：base = 9223372036854775783  mod = 18446744073709551557
    passwordhash.txt 中存放第 3 轮的最终结果（一行）
+   ------------------------------------------------------------
+   预览支持：PDF / 图片 / 音频 / 视频（浏览器可直接渲染）
+   不支持：DOCX / PPTX（按钮已禁用）
    ============================================================ */
 (function(){
   const modal       = document.getElementById('modalMask');
@@ -536,8 +558,10 @@ ul,ol{list-style:none}
     window.open(url, '_blank', 'noopener');
   }
 
-  /* ====== 预览按钮 ====== */
+  /* ====== 预览按钮（跳过已禁用的） ====== */
   document.querySelectorAll('.res-preview').forEach(function(btn){
+    if (btn.disabled) return;          // 禁用按钮不绑定事件
+
     btn.addEventListener('click', function(){
       const url = btn.dataset.href;
 
