@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Wordle · 猜词游戏</title>
+<style>
+  :root {
+    --bg: #121213;
+    --text: #ffffff;
+    --tile-border: #3a3a3c;
+    --tile-border-filled: #6a6a6d;
+    --correct: #538d4e;
+    --present: #b59f3b;
+    --absent: #3a3a3c;
+    --key-bg: #818384;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background: radial-gradient(1000px 600px at 50% -20%, #1b1b1f 0%, var(--bg) 60%);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 8px 14px;
+    gap: 8px;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    overflow: hidden;
+  }
+
+  /* ============ 顶栏 ============ */
+  .topbar {
+    text-align: center;
+    flex: 0 0 auto;
+  }
+  .topbar h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 6px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .topbar p {
+    margin: 3px 0 0;
+    font-size: 11.5px;
+    color: #8b8b95;
+    letter-spacing: .5px;
+  }
+
+  /* ============ 棋盘 ============ */
+  .board {
+    flex: 0 1 auto;
+    width: min(92vw, 330px, 48vh);
+    display: grid;
+    gap: 6px;
+    perspective: 900px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    perspective: 600px;
+  }
+
+  .tile {
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--tile-border);
+    border-radius: 6px;
+    font-size: clamp(18px, 6.6vw, 30px);
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #fff;
+    background: transparent;
+    transition: border-color .12s ease, background-color .12s ease;
+    backface-visibility: hidden;
+  }
+  .tile.filled { border-color: var(--tile-border-filled); }
+  .tile.correct { background: var(--correct); border-color: var(--correct); }
+  .tile.present { background: var(--present); border-color: var(--present); }
+  .tile.absent  { background: var(--absent);  border-color: var(--absent); color: #8a8a8f; }
+
+  @keyframes flip {
+    0%   { transform: rotateX(0deg); }
+    50%  { transform: rotateX(90deg); }
+    100% { transform: rotateX(0deg); }
+  }
+  .tile.flip { animation: flip .4s ease forwards; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    15% { transform: translateX(-7px); }
+    30% { transform: translateX(7px); }
+    45% { transform: translateX(-5px); }
+    60% { transform: translateX(5px); }
+    80% { transform: translateX(-2px); }
+  }
+  .row.shake { animation: shake .42s ease; }
+
+  /* ============ 键盘 ============ */
+  .keyboard {
+    flex: 0 0 auto;
+    width: min(96vw, 500px);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .krow {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+  .key {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 52px;
+    border: none;
+    border-radius: 6px;
+    background: var(--key-bg);
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background-color .2s ease, color .2s ease, transform .06s ease;
+  }
+  .key.wide { flex: 1.6 1 0; font-size: 12px; letter-spacing: .5px; }
+  .key:active { transform: scale(.94); }
+  .key[data-state="correct"] { background: var(--correct); color: #fff; }
+  .key[data-state="present"] { background: var(--present); color: #fff; }
+  .key[data-state="absent"]  { background: #2b2b2e; color: #6b6b72; }
+
+  /* ============ 底部按钮 ============ */
+  .footer { flex: 0 0 auto; }
+  #newGame {
+    padding: 9px 24px;
+    border-radius: 22px;
+    border: 1px solid #3d3d44;
+    background: #1e1e22;
+    color: #cfcfd8;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  #newGame:hover { background: #2a2a30; color: #fff; border-color: #55555e; }
+  #newGame:active { transform: scale(.96); }
+
+  /* ============ 提示条 ============ */
+  .toast {
+    position: fixed;
+    top: 66px;
+    left: 50%;
+    z-index: 60;
+    padding: 11px 18px;
+    border-radius: 8px;
+    background: #f4f4f6;
+    color: #16161a;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -12px);
+    transition: opacity .22s ease, transform .22s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-height: 640px) {
+    .key { height: 44px; font-size: 13px; }
+    .topbar h1 { font-size: 17px; letter-spacing: 4px; }
+    .topbar p { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <h1>Wordle</h1>
+    <p>猜一个 5 字母单词 · 共 6 次机会</p>
+  </header>
+
+  <main class="board" id="board" aria-label="猜词棋盘"></main>
+
+  <div class="keyboard" id="keyboard" aria-label="虚拟键盘"></div>
+
+  <div class="footer">
+    <button id="newGame" type="button">重新开始</button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     一、答案词库（常见 5 字母单词）
+     ============================================================ */
+  const ANSWERS_RAW = `
+    about above actor adapt admit adopt adult after again agent agree ahead alarm album alive allow
+    alone along alter among anger angle angry ankle apart apple apply argue arise aside avoid awake
+    award aware awful
+    basic basin beach beard beast begin being below bench birth black blame blank blind block blood
+    board boost bound brain brand brave bread break breed brick bride brief bring broad brown brush
+    build bunch burst
+    cabin cable candy canal carry carve catch cause chain chair chalk charm chart chase cheap cheat
+    check cheek cheer chess chest chief child chose civil claim class clean clear clerk click cliff
+    climb clock close cloth cloud coach coast count court cover crack craft crash crazy cream crime
+    cross crowd crown cruel curve cycle
+    daily dance death delay depth diary dirty doubt dozen draft drain drama dream dress drift drill
+    drink drive drown
+    eager eagle early earth eight elder empty enemy enjoy enter entry equal error essay event every
+    exact exist extra
+    faith false fancy fault favor feast fever fiber field fifth fight final first flame flash fleet
+    flesh float flood floor flour fluid focus force forth forty forum found frame fresh front frost
+    fruit fully funny
+    giant given glass globe glory glove grace grade grain grand grant grape graph grasp grass grave
+    great green greet grief grind group guard guess guest guide
+    habit happy harsh haste heart heavy hello hence hobby honey honor horse hotel house human humor
+    hurry
+    ideal image imply index inner input issue
+    jacket judge juice
+    knife knock known
+    label labor large laser later laugh layer learn least leave legal lemon level lever light limit
+    liver lobby local logic loose lover lower loyal lucky lunch
+    magic major maker march match maybe mayor medal media mercy merge merit metal meter might minor
+    mixed model moist money month moral motor mount mouse mouth movie music
+    naked nasty naval nerve never newly night noble noise north novel nurse
+    occur ocean offer often olive onion opera orbit order organ other ought ounce outer owner
+    paint panel paper party paste patch pause peace peach pearl penny phase phone photo piano piece
+    pilot pinch pitch place plain plane plant plate plead point polar porch pound power press price
+    pride prime print prior prize probe proof proud prove pulse punch pupil purse
+    queen query quest queue quick quiet quite quote
+    radio raise range rapid ratio reach react ready realm rebel refer relax relay renew reply rider
+    ridge rifle right rigid risky rival river roast robot rocky rough round route royal rural
+    salad sales salmon salty sandy sauce scale scarf scene scent scope score scout screw sense serve
+    seven shade shake shall shame shape share shark sharp shave sheep sheet shelf shell shift shine
+    shirt shock shoot shore short shout sight since sixth skill skirt slave sleep slice slide slope
+    small smart smile smoke snake solid solve sorry sound south space spare speak speed spend spent
+    spice spike spill spine split spoke spoon sport spray squad staff stage stake stand stare start
+    state steak steal steam steel stick still stock stone store storm story stove strip stuck study
+    stuff style sugar suite sunny super sweet swift swing sword
+    table taken talent taste teach teeth tense tenth thank theft their theme there these thick thief
+    think third those three threw throw thumb tight timer tired title today token topic total touch
+    tough tower toxic trace track trade trail train trait trash treat trend trial tribe trick tried
+    truck truly trunk trust truth twice twist
+    uncle under union unite unity until upper upset urban usage usual
+    vague valid value valve vapor vault venue verse video vigor villa virus visit vital vivid vocal
+    voice voter
+    wagon waist waste watch water weary weigh weird wheat wheel where which while white whole whose
+    widow width woman world worry worse worst worth would wound wrist write wrong
+    yield young youth
+  `;
+
+  /* ============================================================
+     二、额外可猜词（包含 crane 等常见 5 字母单词）
+     ============================================================ */
+  const EXTRA_RAW = `
+    abide acute aisle alien align alloy ample angel annoy array arrow asset audit avail avert
+    badge batch blaze bleak blend bless blink blunt blush boast bonus brake brass bribe brisk brute
+    cargo cater cease chunk civic clamp clasp cloak clone clown cling comma coral couch cough crawl
+    crane crept crisp crush crust cubic curly curse
+    datum debut decay decor deity delta dense depot devil diner disco ditch diver dizzy dodge donor
+    dough drape dwell
+    eerie elbow elite enact ensue epoch equip erase erode erupt ethic evade evoke exile expel
+    fable facet faint fatal feign ferry fetch fiend filth flare fling flint flock flute fraud freak
+    frown fuzzy
+    gauge genre ghost gland glare gleam glide gloom gloss gorge graze groan groom grope growl grunt
+    guild guilt
+    haunt havoc hinge hoist hound hover humid
+    impel infer inlet
+    jelly jewel jolly
+    kneel
+    latch leafy leaky ledge legit liken litre lofty lucid lyric
+    manor mason mimic mirth miser motto mould mound mourn muddy
+    naive needy niche niece notch
+    oasis obese onset opium optic ozone
+    panic patio perch peril petal petty piety pious pivot plank pluck plumb plump plush poise pouch
+    prawn prism prone prowl puppy purge
+    qualm quart quell quilt quirk quota
+    radar relic remit renal repel resin revel rhyme rigor rinse ripen rogue rouge rouse rover rowdy
+    ruddy rumor
+    savor scant scoff scold scoop scorn scowl scrub serum sever sheer shove shrew shrug siege siren
+    skate skull slack slant slate sleek sleet sling slump smack smash smear snare sneak sniff snout
+    sober solar sonar spade spark spawn spear speck spell spite spoil spool spout squat stack stall
+    stark stead steep stern stiff sting stint stoop strap straw stray stunt surge swarm swear sweat
+    swell swept swirl
+    talon taper tease tempt tenor tepid thorn thump tidal tiger toast tramp tread truce trump tutor
+    twirl
+    ulcer undue unfit unify untie usher
+    verge verve vigil viola viral vogue vouch
+    waive waver wharf whirl wield witty wrath wreck wring
+    yearn yeast
+  `;
+
+  /* ============================================================
+     三、词库构建与校验
+     ============================================================ */
+  const WORD_LEN = 5;
+  const MAX_TRIES = 6;
+  const VALID = /^[a-z]{5}$/;
+
+  function parse(raw) {
+    return raw.trim().split(/\s+/).map(w => w.toLowerCase()).filter(w => VALID.test(w));
+  }
+
+  const ANSWER_POOL = Array.from(new Set(parse(ANSWERS_RAW)));
+  const EXTRA_POOL  = parse(EXTRA_RAW);
+
+  // 可猜词 = 全部答案 + 额外扩展词
+  const GUESS_SET = new Set([...ANSWER_POOL, ...EXTRA_POOL]);
+
+  if (ANSWER_POOL.length === 0) {
+    console.error('答案词库为空，请检查 ANSWERS_RAW');
+  }
+
+  /* ============================================================
+     四、DOM 与状态
+     ============================================================ */
+  const boardEl    = document.getElementById('board');
+  const keyboardEl = document.getElementById('keyboard');
+  const toastEl    = document.getElementById('toast');
+  const newGameBtn = document.getElementById('newGame');
+
+  const keyEls = {};          // 字母 -> 键盘按钮
+  let answer   = '';
+  let guesses  = [];          // 已提交的猜测
+  let current  = '';          // 正在输入的字母
+  let locked   = false;       // 动画 / 结束期间锁输入
+  let finished = false;
+
+  /* ============================================================
+     五、工具函数
+     ============================================================ */
+  let toastTimer = null;
+  function toast(msg, duration) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), duration || 1700);
+  }
+
+  function shakeRow(index) {
+    const row = boardEl.children[index];
+    if (!row) return;
+    row.classList.remove('shake');
+    void row.offsetWidth;   // 强制重排以重启动画
+    row.classList.add('shake');
+  }
+
+  function currentRow() {
+    return boardEl.children[guesses.length] || null;
+  }
+
+  /**
+   * 判定猜测结果（正确处理重复字母）
+   * @returns {string[]} 'correct' | 'present' | 'absent'
+   */
+  function evaluate(guess, target) {
+    const result = new Array(WORD_LEN).fill('absent');
+    const remain = {};   // 目标词中未被匹配的字母计数
+
+    for (let i = 0; i < WORD_LEN; i++) {
+      if (guess[i] === target[i]) {
+        result[i] = 'correct';
+      } else {
+        remain[target[i]] = (remain[target[i]] || 0) + 1;
+      }
+    }
+
+    for (let i = 0; i < WORD_LEN; i++) {
+      if (result[i] === 'correct') continue;
+      const ch = guess[i];
+      if (remain[ch] > 0) {
+        result[i] = 'present';
+        remain[ch]--;
+      }
+    }
+    return result;
+  }
+
+  const KEY_RANK = { absent: 1, present: 2, correct: 3 };
+  function updateKeyState(letter, state) {
+    const el = keyEls[letter];
+    if (!el) return;
+    const prev = el.dataset.state;
+    if (!prev || KEY_RANK[state] > KEY_RANK[prev]) {
+      el.dataset.state = state;
+    }
+  }
+
+  /* ============================================================
+     六、棋盘 / 键盘渲染
+     ============================================================ */
+  function buildBoard() {
+    boardEl.innerHTML = '';
+    for (let r = 0; r < MAX_TRIES; r++) {
+      const row = document.createElement('div');
+      row.className = 'row';
+      for (let c = 0; c < WORD_LEN; c++) {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        row.appendChild(tile);
+      }
+      boardEl.appendChild(row);
+    }
+  }
+
+  function buildKeyboard() {
+    const layout = [
+      ['q','w','e','r','t','y','u','i','o','p'],
+      ['a','s','d','f','g','h','j','k','l'],
+      ['Enter','z','x','c','v','b','n','m','Backspace']
+    ];
+
+    keyboardEl.innerHTML = '';
+    for (const keys of layout) {
+      const row = document.createElement('div');
+      row.className = 'krow';
+
+      for (const k of keys) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'key' + (k.length > 1 ? ' wide' : '');
+        btn.textContent = k === 'Backspace' ? '⌫ 删除' : k;
+        btn.dataset.key = k;
+        btn.addEventListener('click', () => handleKey(k));
+        row.appendChild(btn);
+        if (k.length === 1) keyEls[k] = btn;
+      }
+      keyboardEl.appendChild(row);
+    }
+  }
+
+  function resetKeyboard() {
+    for (const k in keyEls) {
+      delete keyEls[k].dataset.state;
+    }
+  }
+
+  /* ============================================================
+     七、核心玩法
+     ============================================================ */
+  function newGame() {
+    answer   = ANSWER_POOL[Math.floor(Math.random() * ANSWER_POOL.length)];
+    guesses  = [];
+    current  = '';
+    locked   = false;
+    finished = false;
+
+    buildBoard();
+    resetKeyboard();
+    toastEl.classList.remove('show');
+
+    // 调试时可打开下一行查看答案
+    // console.log('%c答案：' + answer, 'color:#538d4e;font-weight:700');
+  }
+
+  function typeLetter(ch) {
+    if (current.length >= WORD_LEN) return;
+    current += ch;
+
+    const row = currentRow();
+    if (!row) return;
+
+    const tile = row.children[current.length - 1];
+    tile.textContent = ch;
+    tile.classList.add('filled');
+
+    // 轻微弹跳
+    if (tile.animate) {
+      tile.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(1.09)' }, { transform: 'scale(1)' }],
+        { duration: 130, easing: 'ease-out' }
+      );
+    }
+  }
+
+  function deleteLetter() {
+    if (current.length === 0) return;
+    const row = currentRow();
+    if (!row) return;
+
+    const tile = row.children[current.length - 1];
+    tile.textContent = '';
+    tile.classList.remove('filled');
+    current = current.slice(0, -1);
+  }
+
+  function submitGuess() {
+    if (current.length < WORD_LEN) {
+      toast('字母不够，需要 ' + WORD_LEN + ' 个');
+      shakeRow(guesses.length);
+      return;
+    }
+
+    if (!GUESS_SET.has(current)) {
+      toast('「' + current.toUpperCase() + '」不在词库中');
+      shakeRow(guesses.length);
+      return;
+    }
+
+    const guess    = current;
+    const rowIndex = guesses.length;
+    const row      = boardEl.children[rowIndex];
+    const states   = evaluate(guess, answer);
+
+    guesses.push(guess);
+    current = '';
+    locked  = true;   // 动画期间禁止输入
+
+    const STEP = 190;      // 每个格子错开时间
+    const HALF = 200;      // 翻到 90° 的时间点
+
+    for (let i = 0; i < WORD_LEN; i++) {
+      const tile = row.children[i];
+      tile.textContent = guess[i];
+      tile.classList.remove('filled');
+      tile.style.animationDelay = (i * STEP) + 'ms';
+      tile.classList.add('flip');
+
+      // 翻到背面时切换颜色
+      setTimeout(() => {
+        tile.classList.add(states[i]);
+        updateKeyState(guess[i], states[i]);
+      }, i * STEP + HALF);
+
+      // 动画结束后清理
+      setTimeout(() => {
+        tile.classList.remove('flip');
+        tile.style.animationDelay = '';
+      }, i * STEP + HALF * 2);
+    }
+
+    const totalTime = (WORD_LEN - 1) * STEP + HALF * 2 + 60;
+
+    setTimeout(() => {
+      locked = false;
+
+      if (guess === answer) {
+        finished = true;
+        const praise = ['太棒了！', '完美！', '厉害！', '漂亮！', '一击命中！'];
+        const text = guesses.length === 1
+          ? '🎯 一击命中！'
+          : '🎉 ' + praise[Math.floor(Math.random() * praise.length)] +
+            ' 用了 ' + guesses.length + ' 次';
+        toast(text, 3000);
+      } else if (guesses.length >= MAX_TRIES) {
+        finished = true;
+        toast('😢 机会用完，答案是 ' + answer.toUpperCase(), 4200);
+      }
+    }, totalTime);
+  }
+
+  function handleKey(k) {
+    if (finished || locked) return;
+
+    if (k === 'Enter') {
+      submitGuess();
+    } else if (k === 'Backspace') {
+      deleteLetter();
+    } else if (/^[a-z]$/.test(k)) {
+      typeLetter(k);
+    }
+  }
+
+  /* ============================================================
+     八、事件绑定
+     ============================================================ */
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+    const k = e.key;
+
+    if (k === 'Enter') {
+      e.preventDefault();
+      handleKey('Enter');
+    } else if (k === 'Backspace') {
+      e.preventDefault();
+      handleKey('Backspace');
+    } else if (/^[a-zA-Z]$/.test(k)) {
+      handleKey(k.toLowerCase());
+    }
+  });
+
+  newGameBtn.addEventListener('click', newGame);
+
+  /* ============================================================
+     九、启动
+     ============================================================ */
+  buildKeyboard();
+  newGame();
+
+})();
+</script>
+</body>
+</html>
