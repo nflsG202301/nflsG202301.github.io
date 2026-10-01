@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《必修二》Unit2 Let's talk teens Exercise · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 英语《必修二》Unit2 练习。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(22px,3.6vw,32px);letter-spacing:1px;margin-bottom:10px;line-height:1.4}
+.page-hero .sub{color:#c3d2e6;font-size:14.5px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 72px}
+.back-bar{margin-bottom:22px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ============ 邀请码遮罩 ============ */
+.lock-screen{display:grid;place-items:center;padding:40px 20px 80px}
+.lock-box{
+  max-width:460px;width:100%;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  box-shadow:var(--shadow-hover);padding:44px 36px 36px;
+  text-align:center;animation:rise .5s ease both;
+}
+.lock-icon{font-size:52px;line-height:1;margin-bottom:18px;display:block}
+.lock-title{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:10px}
+.lock-desc{font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.75}
+.lock-form{display:flex;gap:10px}
+.lock-input{
+  flex:1;min-width:0;height:50px;
+  border:2px solid var(--line);border-radius:12px;padding:0 14px;
+  font-size:16px;font-family:inherit;letter-spacing:1px;text-align:center;
+  color:var(--navy);background:#fafbfe;outline:none;transition:all .22s ease;
+}
+.lock-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
+.lock-input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px rgba(201,162,39,.15)}
+.lock-btn{
+  height:50px;padding:0 28px;border:none;border-radius:12px;
+  font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.5px;
+  color:var(--navy);background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  cursor:pointer;box-shadow:0 10px 22px rgba(201,162,39,.32);transition:all .24s ease;
+}
+.lock-btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(201,162,39,.45)}
+.lock-error{min-height:20px;margin-top:14px;font-size:13.5px;font-weight:600;color:#c2453c}
+.lock-hint{margin-top:18px;font-size:12.5px;color:#9aa6b8;line-height:1.7}
+
+#protectedContent{display:none}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============ 内容区 ============ */
+.acc{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin-bottom:20px;animation:rise .45s ease both;
+}
+.exam-card-head{
+  display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border-left:5px solid var(--gold);
+  border-bottom:1px solid var(--line);
+}
+.exam-card-head .dot{flex:0 0 8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2)}
+.exam-card-head .label{flex:1;font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy)}
+.exam-card-head .cnt{font-size:12px;font-weight:600;color:var(--muted)}
+.exam-card-body{padding:22px 26px 26px;background:#fafbfe}
+
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border:none;border-left:5px solid var(--gold);
+  cursor:pointer;font-family:inherit;text-align:left;
+  font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  transition:background .2s ease;
+}
+.acc-head:hover{background:#f2f6fd}
+.acc-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+  transition:all .22s ease;
+}
+.acc-head .label{flex:1}
+.acc-head .cnt{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--muted);margin-right:8px}
+.acc-head .chev{flex:0 0 auto;font-size:12px;color:var(--muted);transition:transform .28s ease}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc.open .acc-head{background:#f2f6fd}
+.acc.open .acc-head .dot{box-shadow:0 0 0 5px rgba(201,162,39,.28)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc-inner{padding:22px 26px 26px;background:#fafbfe}
+
+.exam-section{
+  font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin:22px 0 14px;padding-bottom:8px;
+  border-bottom:2px solid #f0f3f9;
+  display:flex;align-items:center;gap:9px;
+}
+.exam-section::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18)}
+.exam-section:first-child{margin-top:0}
+
+.exam-subsection{
+  font-size:14.5px;font-weight:700;letter-spacing:.4px;color:var(--navy);
+  margin:20px 0 12px;display:flex;align-items:center;gap:8px;
+}
+.exam-subsection::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+.exam-list{list-style:none;counter-reset: q}
+.exam-list li{
+  position:relative;padding-left:30px;margin-bottom:16px;
+  line-height:1.95;font-size:15px;color:#3f4a5a;
+}
+.exam-list li:last-child{margin-bottom:0}
+.exam-list li::before{
+  counter-increment: q;content: counter(q) ".";
+  position:absolute;left:0;top:0;
+  font-weight:800;color:var(--gold);font-size:14.5px;
+}
+
+/* 词汇题的空格 */
+.blank{
+  display:inline-block;
+  min-width:70px;
+  padding:0 6px;
+  border-bottom:1.5px solid var(--gold);
+  font-weight:700;color:#a8791a;
+  text-align:center;
+}
+
+/* 阅读文章 */
+.reading{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:22px 26px;
+  margin-bottom:20px;
+  line-height:1.9;
+  font-size:15px;
+  color:#3f4a5a;
+}
+.reading p{margin-bottom:12px}
+.reading p:last-child{margin-bottom:0}
+.reading .title{
+  font-size:16px;font-weight:800;letter-spacing:.5px;
+  color:var(--navy);margin-bottom:14px;
+  text-align:center;
+}
+.reading .qnum{
+  display:inline-block;
+  min-width:22px;height:22px;line-height:22px;
+  text-align:center;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  color:var(--navy);font-weight:800;
+  border-radius:50%;
+  margin:0 4px;
+  font-size:12px;
+  vertical-align:1px;
+}
+
+/* 选项列表 */
+.opts{list-style:none;margin:10px 0 0;display:flex;flex-direction:column;gap:6px}
+.opts li{padding-left:0;font-size:15px;color:#3f4a5a;line-height:1.85}
+.opts li b{color:var(--navy);font-weight:700;margin-right:6px}
+
+/* 词库 */
+.wordbox{
+  background:#fff;
+  border:1px dashed rgba(201,162,39,.55);
+  border-radius:12px;
+  padding:16px 22px;
+  margin-bottom:20px;
+}
+.wordbox .wt{
+  font-size:13.5px;font-weight:800;letter-spacing:.5px;
+  color:#a8791a;margin-bottom:10px;
+}
+.wordbox .wl{
+  display:flex;gap:10px 20px;flex-wrap:wrap;
+  font-size:15px;color:#3f4a5a;
+}
+.wordbox .wl span{font-weight:600}
+
+/* 答案解析 */
+.sol{
+  padding:18px 20px;margin-bottom:14px;
+  background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--gold);border-radius:12px;
+}
+.sol:last-child{margin-bottom:0}
+.sol-head{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:10px;padding-bottom:9px;
+  border-bottom:1px dashed var(--line);
+}
+.sol-no{
+  flex:0 0 auto;font-size:12.5px;font-weight:800;letter-spacing:.5px;
+  color:#fff;background:linear-gradient(135deg,var(--navy-2),var(--navy));
+  padding:3px 11px;border-radius:999px;
+}
+.sol-ans{font-size:14px;font-weight:700;color:var(--navy)}
+.sol-ans b{
+  color:#a8791a;background:linear-gradient(135deg,#fff7e6,#fdeecd);
+  padding:2px 10px;border-radius:6px;margin-left:4px;
+}
+.sol-body{font-size:14.5px;color:#4b5563;line-height:1.95}
+.sol-body p{margin-bottom:9px}
+.sol-body p:last-child{margin-bottom:0}
+.sol-body strong{color:var(--navy)}
+.sol-body .case{
+  margin:8px 0;padding:10px 14px;
+  background:#f7f9fc;border-radius:10px;
+  border-left:3px solid rgba(201,162,39,.5);
+  font-size:14px;line-height:1.9;
+}
+.sol-body .case p{margin-bottom:5px}
+.sol-body .case p:last-child{margin-bottom:0}
+
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .lock-box{padding:34px 22px 28px}
+  .lock-icon{font-size:44px}
+  .lock-title{font-size:19px}
+  .lock-input{font-size:15px;height:46px}
+  .lock-btn{height:46px;padding:0 20px;font-size:14px}
+  .exam-card-head{padding:15px 18px;font-size:14.5px}
+  .exam-card-body{padding:16px 14px 20px}
+  .acc-head{padding:15px 18px;font-size:14.5px}
+  .acc-inner{padding:16px 14px 20px}
+  .exam-list li{font-size:14.5px;padding-left:26px}
+  .exam-section{font-size:14.5px}
+  .reading{padding:16px 16px;font-size:14.5px}
+  .sol{padding:14px 15px}
+  .sol-body{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">题集</a><span>/</span>《必修二》Unit2 Exercise
+      </p>
+      <h1>《必修二》Unit2 Let's talk teens Exercise</h1>
+      <p class="sub">2026 年 9 月 23 日 · 词汇复习 14 题 · 拓展阅读 2 篇 · 阅读理解 4 题</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../">← 返回题集列表</a>
+      </div>
+
+      <!-- ===== 邀请码遮罩 ===== -->
+      <div class="lock-screen" id="lockScreen">
+        <div class="lock-box">
+          <span class="lock-icon">🔒</span>
+          <h2 class="lock-title">需要邀请码</h2>
+          <p class="lock-desc">本页内容仅向本班同学开放<br>请输入邀请码以继续查看</p>
+          <form class="lock-form" id="lockForm" autocomplete="off">
+            <input
+              type="password"
+              id="lockInput"
+              class="lock-input"
+              placeholder="请输入邀请码"
+              autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
+              required>
+            <button type="submit" class="lock-btn" id="lockBtn">确认</button>
+          </form>
+          <p class="lock-error" id="lockError"></p>
+          <p class="lock-hint">邀请码由班级管理员口头或群内通知</p>
+        </div>
+      </div>
+
+      <!-- ===== 受保护内容 ===== -->
+      <div id="protectedContent">
+
+        <!-- 试题 -->
+        <div class="acc">
+          <div class="exam-card-head">
+            <span class="dot"></span>
+            <span class="label">试题</span>
+            <span class="cnt">词汇 14 题 · 阅读 2 篇 · 理解 4 题</span>
+          </div>
+          <div class="exam-card-body">
+
+            <!-- I. Vocabulary Review -->
+            <div class="exam-section">I. Vocabulary Review</div>
+
+            <ol class="exam-list">
+              <li>A morning roll-call was introduced recently to <span class="blank">address</span> the rising number of late arrivals.</li>
+
+              <li><span class="blank">Concerns</span> about heavy homework loads are often discussed among parents and teachers.</li>
+
+              <li>The number of reported crimes is increasing at an alarming <span class="blank">rate</span>.</li>
+
+              <li>The students lined up at the gate, <span class="blank">anxious</span> for the selection results.</li>
+
+              <li>The <span class="blank">guarded</span> reply from her left most of us unsure whether the plan would actually go ahead.</li>
+
+              <li><span class="blank">Tension</span> was still hanging in the air long after the debate contest between classes.</li>
+
+              <li>Driven by a <span class="blank">desire</span> to stand out in the presentation, he rehearsed his speech in front of the mirror for days.</li>
+
+              <li>Students' primary <span class="blank">target</span> is to improve their overall academic performance.</li>
+
+              <li>The new evening-study rule <span class="blank">turned out to be</span> a total success once the whole grade actually tried to follow it.</li>
+
+              <li>Skipping breakfast for three weeks and living on instant noodles <span class="blank">resulted in</span> a sharp drop in his energy levels.</li>
+
+              <li>Told to rewrite the letter of advice by Friday, he sat back and <span class="blank">thought through</span> the whole structure carefully before touching a single word.</li>
+
+              <li>My younger brother <span class="blank">has shot up</span> taller fast over the past year.</li>
+
+              <li>She stood her ground at first, but finally <span class="blank">backed down</span> when she saw the evidence.</li>
+
+              <li>Though the two scientists rarely <span class="blank">saw eye to eye on</span> the same views with each other about the research methods, they eventually reached a workable plan.</li>
+            </ol>
+
+            <!-- II. Extended Reading -->
+            <div class="exam-section">II. Extended Reading</div>
+
+            <div class="exam-subsection">A. Peer Pressure</div>
+
+            <div class="reading">
+              <p>Peer pressure is a part of life. <span class="qnum">1</span> This peer group may be of similar age but can also be defined by other commonalities (共同点), including motherhood, professional affiliations, and your local neighborhood.</p>
+
+              <p>Peer pressure is not always negative. Trying to fit into a healthy social group, for example, of peers getting good grades, joining sports teams, and making plans for their futures, is positive. <span class="qnum">2</span> Peer influence can show you there is support, encouragement, and community available to you. By seeing someone else do something positive, you may reflect on your own life choices, goals, and where you spend your time.</p>
+
+              <p><span class="qnum">3</span> Being pressured by peer, whether it happens in person or online, may shake your sense of identity and self-confidence. For example, you may feel pressure to do unsafe things that have risks you may not fully know.</p>
+
+              <p><span class="qnum">4</span> You can also work on surrounding yourself with more positive influences. Some ways of coping with peer pressure include:</p>
+
+              <ul style="padding-left:22px;margin:8px 0;color:#3f4a5a;">
+                <li style="margin-bottom:6px;">Not spending time with people who pressure you to do things that feel wrong or dangerous.</li>
+                <li style="margin-bottom:6px;">Learning to say "no" and practicing leaving situations that feel unsafe or uncomfortable.</li>
+                <li style="margin-bottom:6px;">Talking to a trusted peer or professional (teacher, counselor) if you have problems saying "no" or are feeling pressured to change something about yourself.</li>
+                <li>● <span class="qnum">5</span></li>
+              </ul>
+
+              <p>In the journey of life, peers influence our steps. If you embrace positive guidance and stand firm against negativity, you can become the architects of your own story.</p>
+            </div>
+
+            <div class="wordbox">
+              <div class="wt">选句填空（从 A–G 中选出 5 句填入 1–5）</div>
+              <div class="wl">
+                <span>A. Some refer to this type of peer "pressure" as peer "influence."</span>
+                <span>B. It can be direct or indirect, positive or negative.</span>
+                <span>C. It is any type of influence that comes from a peer group.</span>
+                <span>D. Getting over peer pressure means not accepting the negative influence of others.</span>
+                <span>E. While peer influence can improve your life, peer pressure can cause problems.</span>
+                <span>F. Feeling pressured to do things that may make you feel bad about yourself is unhealthy.</span>
+                <span>G. Befriending people who have a positive influence.</span>
+              </div>
+            </div>
+
+            <div class="exam-subsection">B. Speech</div>
+
+            <div class="reading">
+              <p>Thank you. Thank you all. I'm here to plant a seed today. A seed that will inspire you to move forward in life with enthusiastic hearts and a clear sense of wholeness.</p>
+
+              <p>You are the vanguard (先锋) of knowledge and consciousness, a new wave in a vast ocean of possibilities. On the other side of that door, there's a world starving for new ideas, new leadership. <u>She's a wild cat! She'll rub up against your leg and purr until you pick her up and start petting her. And then out of nowhere, she'll swat (猛击) you in the face.</u> Sure it's rough sometimes but that's OK.</p>
+
+              <p>Now fear is going to be a player in your life, but you get to decide how much. You can spend your whole life imagining ghosts, worrying about the pathway to the future, but all there will ever be is what's happening here, and the decisions we make in this moment, which are based in either love or fear. Many of us choose our path out of fear disguised as practicality. What we really want seems impossibly out of reach and ridiculous to expect from ourselves. So we never dare to ask the universe for it. I'm saying, I'm the proof that you can ask the universe for it. Please!</p>
+
+              <p>My father could have been a great comedian, but he didn't believe that was possible for him. So, he made a conservative choice. Instead, he got a safe job as an accountant. When I was 12 years old, he was let go from that job and our family had to do whatever we could to survive. I learned many great lessons from my father, not the least of which was that you can fail at what you don't want so you might as well take a chance doing what you love.</p>
+
+              <p>Your job is not to figure out how it's going to happen for you, but to open the door in your head. When the door opens in real life, just walk through it. Don't worry if you miss your cue (暗示) because there are always different doors that will open for you. And they'll keep opening. I make a conscious choice to see challenges as something beneficial so that I can deal with them in the most productive way. You'll come up with your own style. That's part of the fun.</p>
+
+              <p><u>Oh, and why not take a chance on faith as well? Take a chance on faith. Not religion, but faith. Not hope, but faith. I don't believe in hope. Hope is a beggar. Hope walks through the fire and faith leaps over it.</u> You are ready and able to do beautiful things in this world. And after you walk through those doors today, you will only ever have two choices, love or fear. Choose love, and don't ever let fear turn you against your playful heart.</p>
+
+              <p>Thank you so much. I'm so honored. Thank you.</p>
+            </div>
+
+            <ol class="exam-list">
+              <li>
+                The target audience for this speech are probably ______.
+                <ul class="opts">
+                  <li><b>A.</b> brave soldiers</li>
+                  <li><b>B.</b> young graduates</li>
+                  <li><b>C.</b> potential customers</li>
+                  <li><b>D.</b> successful businessmen</li>
+                </ul>
+              </li>
+
+              <li>
+                Why does the speaker compare the outside world to a wild cat in paragraph 2?
+                <ul class="opts">
+                  <li><b>A.</b> To show that the outside world thirsts for new ideas and leadership.</li>
+                  <li><b>B.</b> To show that the outside world is filled with dangers and difficulties.</li>
+                  <li><b>C.</b> To show that the outside world is ever-changing and unpredictable.</li>
+                  <li><b>D.</b> To show that the outside world rewards people who answer its needs.</li>
+                </ul>
+              </li>
+
+              <li>
+                The speaker's intention in sharing the story of his father is to ______.
+                <ul class="opts">
+                  <li><b>A.</b> criticize his father for not being able to provide a good life for the family</li>
+                  <li><b>B.</b> encourage the audience to take chances and pursue what they love</li>
+                  <li><b>C.</b> suggest passions matter more than practicality in building successful careers</li>
+                  <li><b>D.</b> advise the audience to give up safe careers in favor of riskier pursuits</li>
+                </ul>
+              </li>
+
+              <li>
+                The rhetorical devices used in the underlined sentences in paragraph 6 include ______.
+                <ul class="opts">
+                  <li><b>①</b> simile　　<b>②</b> metaphor　　<b>③</b> repetition</li>
+                  <li><b>④</b> rhetorical question　　<b>⑤</b> personification　　<b>⑥</b> oxymoron</li>
+                  <li><b>A.</b> ①②③④　　<b>B.</b> ①③⑤⑥</li>
+                  <li><b>C.</b> ②③④⑤　　<b>D.</b> ②④⑤⑥</li>
+                </ul>
+              </li>
+            </ol>
+
+          </div>
+        </div>
+
+        <!-- 答案与解析 -->
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false">
+            <span class="dot"></span>
+            <span class="label">答案与解析</span>
+            <span class="cnt">共 23 题</span>
+            <span class="chev">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+
+              <!-- I. Vocabulary Review -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">I. 词汇</span>
+                  <span class="sol-ans">答案：<b>见下方逐题对照</b></span>
+                </div>
+                <div class="sol-body">
+                  <div class="case">
+                    <p><strong>1.</strong> address　　<strong>2.</strong> Concerns　　<strong>3.</strong> rate　　<strong>4.</strong> anxious　　<strong>5.</strong> guarded</p>
+                    <p><strong>6.</strong> Tension　　<strong>7.</strong> desire　　<strong>8.</strong> target　　<strong>9.</strong> turned out to be</p>
+                    <p><strong>10.</strong> resulted in　　<strong>11.</strong> thought through　　<strong>12.</strong> has shot up</p>
+                    <p><strong>13.</strong> backed down　　<strong>14.</strong> saw eye to eye on</p>
+                  </div>
+                  <p><strong>易错点：</strong></p>
+                  <p>· <strong>第 6 题</strong>：应为名词 <em>Tension</em>（紧张气氛），学生写成了形容词 tense。</p>
+                  <p>· <strong>第 10 题</strong>：应为 <em>resulted in</em>（导致），学生写成 resulted as of，搭配错误。</p>
+                  <p>· <strong>第 14 题</strong>：应为 <em>saw eye to eye on</em>（在某事上看法一致），其中 with each other 多余，介词用 on 而非 about。</p>
+                </div>
+              </div>
+
+              <!-- II. A -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">II. A 选句填空</span>
+                  <span class="sol-ans">答案：<b>1. C　2. A　3. E　4. D　5. G</b></span>
+                </div>
+                <div class="sol-body">
+                  <div class="case">
+                    <p><strong>1. C</strong>　前句说 "Peer pressure is a part of life"，C 项给出定义（来自同伴群体的任何影响），承上启下最自然。</p>
+                    <p><strong>2. A</strong>　上文在讲"不是所有同伴压力都是负面的"，A 项 "Some refer to this type of peer 'pressure' as peer 'influence'" 引出 peer influence 概念，后句接着解释 influence 的积极作用。</p>
+                    <p><strong>3. E</strong>　后面讲同伴压力会动摇自我认同和自信（负面），E 项 "While peer influence can improve your life, peer pressure can cause problems" 用转折过渡到负面。</p>
+                    <p><strong>4. D</strong>　后句 "You can also work on surrounding yourself with more positive influences" 中的 also 表示前面已有一种应对方式，D 项给出第一种应对，衔接顺畅。</p>
+                    <p><strong>5. G</strong>　在列举应对方式的最后一条，G 项 "Befriending people who have a positive influence" 与前三条并列，作第四条应对方式。</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- II. B 1 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">II. B 第 1 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>演讲者称听众为 "the vanguard of knowledge and consciousness, a new wave in a vast ocean of possibilities"，且提到 "you will only ever have two choices, love or fear. Choose love..."，语气是面向即将走出校门、开始人生新阶段的年轻人，故选 <strong>B. young graduates</strong>。</p>
+                </div>
+              </div>
+
+              <!-- II. B 2 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">II. B 第 2 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>wild cat 的比喻先写 "rub up against your leg and purr"（亲近），紧接着 "out of nowhere, she'll swat you in the face"（突然打击），强调外部世界的不可预测和潜在危险。后文也说 "Sure it's rough sometimes"，故 <strong>B. To show that the outside world is filled with dangers and difficulties</strong> 最贴合。</p>
+                </div>
+              </div>
+
+              <!-- II. B 3 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">II. B 第 3 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>作者讲父亲的故事，落脚点是 "you can fail at what you don't want so you might as well take a chance doing what you love"（与其在不喜欢的事上失败，不如冒险去做自己热爱的事）。目的是 <strong>B. encourage the audience to take chances and pursue what they love</strong>。</p>
+                </div>
+              </div>
+
+              <!-- II. B 4 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">II. B 第 4 题</span>
+                  <span class="sol-ans">答案：<b>C</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>第 6 段划线句 "Oh, and why not take a chance on faith as well? Take a chance on faith. Not religion, but faith. Not hope, but faith. I don't believe in hope. Hope is a beggar. Hope walks through the fire and faith leaps over it." 中的修辞：</p>
+                  <div class="case">
+                    <p><strong>② metaphor</strong>：Hope is a beggar（把 hope 比作乞丐，用 be 动词直接连接，为隐喻）。</p>
+                    <p><strong>③ repetition</strong>：Take a chance on faith 反复出现；Not... but faith 结构重复。</p>
+                    <p><strong>④ rhetorical question</strong>：why not take a chance on faith as well?（反问，无需回答）。</p>
+                    <p><strong>⑤ personification</strong>：Hope walks through the fire / faith leaps over it（把 hope 和 faith 拟人化，赋予动作）。</p>
+                  </div>
+                  <p>故为 <strong>C. ②③④⑤</strong>。</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /protectedContent -->
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   邀请码校验 · 三哈希
+   passwordhash.txt 位于网站根目录（本页通过 ../../passwordhash.txt 访问）
+   ============================================================ */
+(function(){
+  const lockScreen = document.getElementById('lockScreen');
+  const content    = document.getElementById('protectedContent');
+  const form       = document.getElementById('lockForm');
+  const input      = document.getElementById('lockInput');
+  const errorEl    = document.getElementById('lockError');
+
+  let expectedHashes = [];
+  let loadingError   = false;
+
+  const HASH_ROUNDS = [
+    { base: 2147483647n,          mod: 2305843009213693951n  },
+    { base: 2305843009213693951n, mod: 9223372036854775783n  },
+    { base: 9223372036854775783n, mod: 18446744073709551557n }
+  ];
+
+  function hashPassword(s){
+    let data = s;
+    for (let r = 0; r < HASH_ROUNDS.length; r++){
+      const base = HASH_ROUNDS[r].base;
+      const mod  = HASH_ROUNDS[r].mod;
+      let h = 0n;
+      for (let i = 0; i < data.length; i++){
+        h = (h * base + BigInt(data.charCodeAt(i))) % mod;
+      }
+      data = h.toString();
+    }
+    return data;
+  }
+
+  fetch('../../passwordhash.txt', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(text){
+      expectedHashes = text
+        .split(/\r?\n/)
+        .map(function(line){ return line.trim(); })
+        .filter(function(line){ return /^\d+$/.test(line); });
+
+      if (expectedHashes.length === 0){
+        throw new Error('passwordhash.txt 中没有有效的哈希行');
+      }
+    })
+    .catch(function(err){
+      loadingError = true;
+      errorEl.textContent = '验证文件加载失败：' + err.message;
+    });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorEl.textContent = '';
+
+    if (loadingError){
+      errorEl.textContent = '验证文件加载失败，请刷新页面';
+      return;
+    }
+    if (!expectedHashes.length){
+      errorEl.textContent = '验证文件尚未就绪，请稍后重试';
+      return;
+    }
+
+    const val = input.value;
+    if (!val){
+      errorEl.textContent = '请输入邀请码';
+      return;
+    }
+
+    const h = hashPassword(val);
+    if (expectedHashes.indexOf(h) !== -1){
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+    } else {
+      errorEl.textContent = '邀请码错误，请重试';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  input.focus();
+})();
+
+/* ===== 折叠面板 ===== */
+document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const acc  = btn.parentElement;
+    const body = acc.querySelector('.acc-body');
+    const open = acc.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  });
+});
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>
