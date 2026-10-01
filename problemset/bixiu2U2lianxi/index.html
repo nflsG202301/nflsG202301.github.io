@@ -156,7 +156,18 @@ ul,ol{list-style:none}
   font-weight:800;color:var(--gold);font-size:14.5px;
 }
 
-/* 词汇题：空白下划线 */
+/* 首字母填空：显示首字母 + 下划线空白 */
+.blank-first{
+  display:inline-block;
+  min-width:7em;
+  border-bottom:1.5px solid var(--gold);
+  padding-left:3px;
+  font-weight:700;
+  color:#a8791a;
+  vertical-align:baseline;
+  line-height:1.2;
+}
+/* 整词填空：纯下划线空白 */
 .blank{
   display:inline-block;
   min-width:6em;
@@ -262,13 +273,14 @@ ul,ol{list-style:none}
 .sol-body p{margin-bottom:9px}
 .sol-body p:last-child{margin-bottom:0}
 .sol-body strong{color:var(--navy)}
+.sol-body em{font-style:normal;color:#a8791a;font-weight:700}
 .sol-body .case{
   margin:8px 0;padding:10px 14px;
   background:#f7f9fc;border-radius:10px;
   border-left:3px solid rgba(201,162,39,.5);
   font-size:14px;line-height:1.9;
 }
-.sol-body .case p{margin-bottom:5px}
+.sol-body .case p{margin-bottom:7px}
 .sol-body .case p:last-child{margin-bottom:0}
 
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
@@ -291,6 +303,9 @@ ul,ol{list-style:none}
   .exam-list > li{font-size:14.5px;padding-left:26px}
   .exam-section{font-size:14.5px}
   .reading{padding:16px 16px;font-size:14.5px}
+  .blank-first{min-width:5em}
+  .blank{min-width:5em}
+  .blank.wide{min-width:8em}
   .sol{padding:14px 15px}
   .sol-body{font-size:14px}
 }
@@ -358,21 +373,21 @@ ul,ol{list-style:none}
             <div class="exam-section">I. Vocabulary Review</div>
 
             <ol class="exam-list">
-              <li>A morning roll-call was introduced recently to <span class="blank"></span> the rising number of late arrivals.</li>
+              <li>A morning roll-call was introduced recently to <span class="blank-first">a</span> the rising number of late arrivals.</li>
 
-              <li><span class="blank"></span> about heavy homework loads are often discussed among parents and teachers.</li>
+              <li><span class="blank-first">C</span> about heavy homework loads are often discussed among parents and teachers.</li>
 
-              <li>The number of reported crimes is increasing at an alarming <span class="blank"></span>.</li>
+              <li>The number of reported crimes is increasing at an alarming <span class="blank-first">r</span>.</li>
 
-              <li>The students lined up at the gate, <span class="blank"></span> for the selection results.</li>
+              <li>The students lined up at the gate, <span class="blank-first">a</span> for the selection results.</li>
 
-              <li>The <span class="blank"></span> reply from her left most of us unsure whether the plan would actually go ahead.</li>
+              <li>The <span class="blank-first">g</span> reply from her left most of us unsure whether the plan would actually go ahead.</li>
 
-              <li><span class="blank"></span> was still hanging in the air long after the debate contest between classes.</li>
+              <li><span class="blank-first">T</span> was still hanging in the air long after the debate contest between classes.</li>
 
-              <li>Driven by a <span class="blank"></span> to stand out in the presentation, he rehearsed his speech in front of the mirror for days.</li>
+              <li>Driven by a <span class="blank-first">d</span> to stand out in the presentation, he rehearsed his speech in front of the mirror for days.</li>
 
-              <li>Students' primary <span class="blank"></span> is to improve their overall academic performance.</li>
+              <li>Students' primary <span class="blank-first">t</span> is to improve their overall academic performance.</li>
 
               <li>The new evening-study rule <span class="blank wide"></span> a total success once the whole grade actually tried to follow it.</li>
 
@@ -503,19 +518,38 @@ ul,ol{list-style:none}
               <div class="sol">
                 <div class="sol-head">
                   <span class="sol-no">I. 词汇</span>
-                  <span class="sol-ans">答案：<b>见下方逐题对照</b></span>
+                  <span class="sol-ans">答案：<b>逐题解析见下</b></span>
                 </div>
                 <div class="sol-body">
                   <div class="case">
-                    <p><strong>1.</strong> address　　<strong>2.</strong> Concerns　　<strong>3.</strong> rate　　<strong>4.</strong> anxious　　<strong>5.</strong> guarded</p>
-                    <p><strong>6.</strong> Tension　　<strong>7.</strong> desire　　<strong>8.</strong> target　　<strong>9.</strong> turned out to be</p>
-                    <p><strong>10.</strong> resulted in　　<strong>11.</strong> thought through　　<strong>12.</strong> has shot up</p>
-                    <p><strong>13.</strong> backed down　　<strong>14.</strong> saw eye to eye on</p>
+                    <p><strong>1.</strong> <em>address</em>　　address 作动词，意为“处理、应对”，address the rising number of late arrivals 即“应对日益增多的迟到现象”。</p>
+
+                    <p><strong>2.</strong> <em>Concerns</em>　　concern 作名词，意为“担忧”，常用复数形式，concerns about sth. 表示“对某事的担忧”。</p>
+
+                    <p><strong>3.</strong> <em>rate</em>　　at an alarming rate 是固定搭配，意为“以惊人的速度”。</p>
+
+                    <p><strong>4.</strong> <em>anxious</em>　　anxious for sth. 表示“急切盼望某事”，此处修饰学生排队等待选拔结果的状态。</p>
+
+                    <p><strong>5.</strong> <em>guarded</em>　　guarded 作形容词，意为“谨慎的、有保留的”，a guarded reply 即“有保留的回答”。</p>
+
+                    <p><strong>6.</strong> <em>Tension</em>　　tension 作名词，意为“紧张气氛”。此处作主语，需用名词形式，不能写成形容词 tense。</p>
+
+                    <p><strong>7.</strong> <em>desire</em>　　desire 作名词，意为“渴望”，driven by a desire to do sth. 表示“被做某事的渴望所驱使”。</p>
+
+                    <p><strong>8.</strong> <em>target</em>　　target 作名词，意为“目标”，primary target 即“首要目标”。</p>
+
+                    <p><strong>9.</strong> <em>turned out to be</em>　　turn out to be 意为“结果是、最终成为”，用来替换原句的 proved to be，语气更自然、更口语化。</p>
+
+                    <p><strong>10.</strong> <em>resulted in</em>　　result in 意为“导致”，是固定搭配，介词只能用 in。注意不能写成 result as of 之类的错误组合。</p>
+
+                    <p><strong>11.</strong> <em>thought through</em>　　think through 意为“仔细考虑、全面思考”。相比单独用 thought，think through 更强调“把事情从头到尾想清楚”。</p>
+
+                    <p><strong>12.</strong> <em>has shot up</em>　　shoot up 意为“猛长、迅速上升”，常用来形容身高、价格等的快速增长，此处替换原句的 has grown taller fast。</p>
+
+                    <p><strong>13.</strong> <em>backed down</em>　　back down 意为“让步、退缩”，与 retreated 意思相近。</p>
+
+                    <p><strong>14.</strong> <em>saw eye to eye with each other on</em>　　see eye to eye with sb. on sth. 意为“与某人在某事上看法一致”。with each other 表示“彼此”，on 引出具体讨论的话题，两个介词都不能省略。</p>
                   </div>
-                  <p><strong>易错点：</strong></p>
-                  <p>· <strong>第 6 题</strong>：应为名词 <em>Tension</em>（紧张气氛），不要写成形容词 tense。</p>
-                  <p>· <strong>第 10 题</strong>：应为 <em>resulted in</em>（导致），搭配是 result in，不是 result as of。</p>
-                  <p>· <strong>第 14 题</strong>：应为 <em>saw eye to eye on</em>（在某事上看法一致），其中 with each other 多余，介词用 on 而非 about。</p>
                 </div>
               </div>
 
@@ -528,7 +562,7 @@ ul,ol{list-style:none}
                 <div class="sol-body">
                   <div class="case">
                     <p><strong>1. C</strong>　前句说 "Peer pressure is a part of life"，C 项给出定义（来自同伴群体的任何影响），承上启下最自然。</p>
-                    <p><strong>2. A</strong>　上文在讲"不是所有同伴压力都是负面的"，A 项 "Some refer to this type of peer 'pressure' as peer 'influence'" 引出 peer influence 概念，后句接着解释 influence 的积极作用。</p>
+                    <p><strong>2. A</strong>　上文在讲“不是所有同伴压力都是负面的”，A 项 "Some refer to this type of peer 'pressure' as peer 'influence'" 引出 peer influence 概念，后句接着解释 influence 的积极作用。</p>
                     <p><strong>3. E</strong>　后面讲同伴压力会动摇自我认同和自信（负面），E 项 "While peer influence can improve your life, peer pressure can cause problems" 用转折过渡到负面。</p>
                     <p><strong>4. D</strong>　后句 "You can also work on surrounding yourself with more positive influences" 中的 also 表示前面已有一种应对方式，D 项给出第一种应对，衔接顺畅。</p>
                     <p><strong>5. G</strong>　在列举应对方式的最后一条，G 项 "Befriending people who have a positive influence" 与前三条并列，作第四条应对方式。</p>
