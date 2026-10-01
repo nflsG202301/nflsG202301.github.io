@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高一数学练习 20260928 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 高一数学练习 20260928。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(24px,4vw,36px);letter-spacing:1px;margin-bottom:10px}
+.page-hero .sub{color:#c3d2e6;font-size:14.5px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 72px}
+.back-bar{margin-bottom:22px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ============ 邀请码遮罩 ============ */
+.lock-screen{
+  display:grid;place-items:center;
+  padding:40px 20px 80px;
+}
+.lock-box{
+  max-width:460px;width:100%;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow-hover);
+  padding:44px 36px 36px;
+  text-align:center;
+  animation:rise .5s ease both;
+}
+.lock-icon{font-size:52px;line-height:1;margin-bottom:18px;display:block;}
+.lock-title{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:10px;}
+.lock-desc{font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.75;}
+.lock-form{display:flex;gap:10px}
+.lock-input{
+  flex:1;min-width:0;height:50px;
+  border:2px solid var(--line);border-radius:12px;
+  padding:0 14px;
+  font-size:16px;font-family:inherit;
+  letter-spacing:1px;text-align:center;
+  color:var(--navy);background:#fafbfe;
+  outline:none;transition:all .22s ease;
+}
+.lock-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
+.lock-input:focus{
+  border-color:var(--gold);background:#fff;
+  box-shadow:0 0 0 4px rgba(201,162,39,.15);
+}
+.lock-btn{
+  height:50px;padding:0 28px;
+  border:none;border-radius:12px;
+  font-family:inherit;font-size:15px;font-weight:700;
+  letter-spacing:.5px;color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(201,162,39,.32);
+  transition:all .24s ease;
+}
+.lock-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(201,162,39,.45);
+}
+.lock-error{
+  min-height:20px;margin-top:14px;
+  font-size:13.5px;font-weight:600;letter-spacing:.2px;
+  color:#c2453c;
+}
+.lock-hint{margin-top:18px;font-size:12.5px;color:#9aa6b8;line-height:1.7;}
+
+#protectedContent{display:none}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============ 内容区 ============ */
+.acc{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin-bottom:20px;
+  animation:rise .45s ease both;
+}
+
+.exam-card-head{
+  display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border-left:5px solid var(--gold);
+  border-bottom:1px solid var(--line);
+}
+.exam-card-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+}
+.exam-card-head .label{flex:1;font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy)}
+.exam-card-head .cnt{font-size:12px;font-weight:600;color:var(--muted)}
+.exam-card-body{padding:22px 26px 26px;background:#fafbfe}
+
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border:none;border-left:5px solid var(--gold);
+  cursor:pointer;font-family:inherit;text-align:left;
+  font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  transition:background .2s ease;
+}
+.acc-head:hover{background:#f2f6fd}
+.acc-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+  transition:all .22s ease;
+}
+.acc-head .label{flex:1}
+.acc-head .cnt{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--muted);margin-right:8px}
+.acc-head .chev{flex:0 0 auto;font-size:12px;color:var(--muted);transition:transform .28s ease}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc.open .acc-head{background:#f2f6fd}
+.acc.open .acc-head .dot{box-shadow:0 0 0 5px rgba(201,162,39,.28)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc-inner{padding:22px 26px 26px;background:#fafbfe}
+
+.exam-section{
+  font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin:18px 0 14px;padding-bottom:8px;
+  border-bottom:2px solid #f0f3f9;
+  display:flex;align-items:center;gap:9px;
+}
+.exam-section::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18);
+}
+.exam-section:first-child{margin-top:0}
+
+.exam-list{list-style:none;counter-reset: q}
+.exam-list li{
+  position:relative;padding-left:30px;margin-bottom:16px;
+  line-height:2;font-size:15px;color:#3f4a5a;
+}
+.exam-list li:last-child{margin-bottom:0}
+.exam-list li::before{
+  counter-increment: q;content: counter(q) ".";
+  position:absolute;left:0;top:0;
+  font-weight:800;color:var(--gold);font-size:14.5px;
+}
+.exam-list.cont6{counter-reset: q 6;}
+.exam-list.cont10{counter-reset: q 10;}
+.exam-list.cont14{counter-reset: q 14;}
+
+.sol{
+  padding:18px 20px;margin-bottom:14px;
+  background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--gold);border-radius:12px;
+}
+.sol:last-child{margin-bottom:0}
+.sol-head{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:10px;padding-bottom:9px;
+  border-bottom:1px dashed var(--line);
+}
+.sol-no{
+  flex:0 0 auto;font-size:12.5px;font-weight:800;letter-spacing:.5px;
+  color:#fff;background:linear-gradient(135deg,var(--navy-2),var(--navy));
+  padding:3px 11px;border-radius:999px;
+}
+.sol-ans{font-size:14px;font-weight:700;color:var(--navy)}
+.sol-ans b{
+  color:#a8791a;
+  background:linear-gradient(135deg,#fff7e6,#fdeecd);
+  padding:2px 10px;border-radius:6px;margin-left:4px;
+}
+.sol-body{font-size:14.5px;color:#4b5563;line-height:1.95}
+.sol-body p{margin-bottom:9px}
+.sol-body p:last-child{margin-bottom:0}
+.sol-body .case{
+  margin:8px 0;padding:10px 14px;
+  background:#f7f9fc;border-radius:10px;
+  border-left:3px solid rgba(201,162,39,.5);
+  font-size:14px;line-height:1.9;
+}
+.sol-body .case p{margin-bottom:5px}
+.sol-body .case p:last-child{margin-bottom:0}
+
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .lock-box{padding:34px 22px 28px}
+  .lock-icon{font-size:44px}
+  .lock-title{font-size:19px}
+  .lock-input{font-size:15px;height:46px}
+  .lock-btn{height:46px;padding:0 20px;font-size:14px}
+  .exam-card-head{padding:15px 18px;font-size:14.5px}
+  .exam-card-body{padding:16px 14px 20px}
+  .acc-head{padding:15px 18px;font-size:14.5px}
+  .acc-inner{padding:16px 14px 20px}
+  .exam-list li{font-size:14.5px;padding-left:26px;line-height:1.95}
+  .exam-section{font-size:14.5px}
+  .sol{padding:14px 15px}
+  .sol-body{font-size:14px}
+}
+</style>
+
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">题集</a><span>/</span>高一数学练习 20260928
+      </p>
+      <h1>高一数学练习 20260928</h1>
+      <p class="sub">2026 年 9 月 28 日 · 单项选择 6 题 · 多项选择 4 题 · 填空 4 题 · 解答 2 题</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../">← 返回题集列表</a>
+      </div>
+
+      <!-- ===== 邀请码遮罩 ===== -->
+      <div class="lock-screen" id="lockScreen">
+        <div class="lock-box">
+          <span class="lock-icon">🔒</span>
+          <h2 class="lock-title">需要邀请码</h2>
+          <p class="lock-desc">本页内容仅向本班同学开放<br>请输入邀请码以继续查看</p>
+          <form class="lock-form" id="lockForm" autocomplete="off">
+            <input
+              type="password"
+              id="lockInput"
+              class="lock-input"
+              placeholder="请输入邀请码"
+              autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
+              required>
+            <button type="submit" class="lock-btn" id="lockBtn">确认</button>
+          </form>
+          <p class="lock-error" id="lockError"></p>
+          <p class="lock-hint">邀请码由班级管理员口头或群内通知</p>
+        </div>
+      </div>
+
+      <!-- ===== 受保护内容 ===== -->
+      <div id="protectedContent">
+
+        <!-- 试题 -->
+        <div class="acc">
+          <div class="exam-card-head">
+            <span class="dot"></span>
+            <span class="label">试题</span>
+            <span class="cnt">共 16 题</span>
+          </div>
+          <div class="exam-card-body">
+
+            <div class="exam-section">一、单选题（每小题 5 分，共 30 分）</div>
+            <ol class="exam-list">
+              <li>命题「\(\exists n \in N^*\)，使得 \(n > 2n^2 + 1\)」的否定形式是（　　）<br>
+                A. \(\exists n \in N^*\)，使得 \(n < 2n^2 + 1\)　　B. \(\forall n \in N^*\)，都有 \(n < 2n^2 + 1\)<br>
+                C. \(\exists n \in N^*\)，使得 \(n \le 2n^2 + 1\)　　D. \(\forall n \in N^*\)，都有 \(n \le 2n^2 + 1\)</li>
+
+              <li>设 \(x \in R\)，则「\(|x - 2| < 1\)」是「\(x^2 + 2x - 3 > 0\)」的（　　）<br>
+                A. 充分不必要条件　　B. 必要不充分条件<br>
+                C. 充要条件　　D. 既不充分也不必要条件</li>
+
+              <li>已知集合 \(A = \{x \mid x < -1 \text{ 或 } x > 2\}\)，集合 \(B = \{x \mid a - 1 \le x \le a + 1\}\)，且 \(A \cap B = B\)，则实数 \(a\) 的取值范围是（　　）<br>
+                A. \(a > 3\)　　B. \(a < -2\)　　C. \(-2 < a < 3\)　　D. \(a < -2 \text{ 或 } a > 3\)</li>
+
+              <li>若实数 \(x, y\) 满足 \(x^2 - xy + 1 = 0\)，则（　　）<br>
+                A. \(x^2 + y^2 \ge 5\)　　B. \(x^2 + y^2 \le 4\)<br>
+                C. \(|x + y| \le 3\)　　D. \(|x + y| \ge 2\sqrt{2}\)</li>
+
+              <li>关于 \(x\) 的不等式 \(|x + a| + |x + 3| > a\) 恒成立，则实数 \(a\) 的取值范围是（　　）<br>
+                A. \(\left\{a \mid a < 0 \text{ 或 } a > \dfrac{3}{2}\right\}\)　　B. \(\{a \mid a > 2\}\)<br>
+                C. \(\left\{a \mid a < \dfrac{3}{2}\right\}\)　　D. \(\{a \mid a < 2\}\)</li>
+
+              <li>若关于 \(x\) 的不等式 \(2ax^2 - 4x < ax - 2\) 有且只有一个整数解，则实数 \(a\) 的取值范围是（　　）<br>
+                A. \((1, 2]\)　　B. \([1, 2)\)　　C. \((0, 2)\)　　D. \((0, 2]\)</li>
+            </ol>
+
+            <div class="exam-section">二、多选题（每小题 6 分，共 24 分）</div>
+            <ol class="exam-list cont6">
+              <li>下列说法正确的是（　　）<br>
+                A. 实数集可写为 \(\{所有实数\}\)<br>
+                B. 已知全集为 \(U\)，则 \(A \subseteq B\) 和 \(A \cap (\complement_U B) = \varnothing\) 等价<br>
+                C. 集合 \(\{x \mid y = x^2 - 1\}\) 与集合 \(\{y \mid y = x^2 - 1\}\) 是同一个集合<br>
+                D. 已知命题 \(p: \forall x \in R, |x + 1| > 1\)；命题 \(q: \exists x > 0, x^3 = x\)，则 \(\neg p\) 和 \(q\) 都是真命题</li>
+
+              <li>已知集合 \(A = \left\{x \mid \dfrac{x - 2}{x^2 - a} = 1\right\}\) 恰有两个子集，则 \(a\) 的值可能为（　　）<br>
+                A. \(\dfrac{7}{4}\)　　B. \(-\dfrac{7}{4}\)　　C. \(4\)　　D. \(-4\)</li>
+
+              <li>对任意集合 \(A, B \subseteq U\)，记 \(A * B = \{x \mid x \in A \cup B, 且 x \notin A \cap B\}\)，并称 \(A * B\) 为集合 \(A, B\) 的相异集，则（　　）<br>
+                A. \(A * B = B * A\)<br>
+                B. 若 \(A \subseteq A * B\)，则 \(A \cap B \ne \varnothing\)<br>
+                C. 命题「若 \(A * B = A\)，则 \(B = \varnothing\)」为假命题<br>
+                D. 若 \(p: A * B \subseteq A\)，\(q: B \subseteq A\)，则 \(p\) 是 \(q\) 成立的充分必要条件</li>
+
+              <li>已知 \(a, b, c\) 为正实数，且 \(ab = 14 - 2a - b\)，则（　　）<br>
+                A. \(ab\) 的最大值为 \(18 - 8\sqrt{2}\)　　B. \(2a + b\) 的最小值为 \(8\sqrt{2} - 4\)<br>
+                C. \(a + b\) 的最小值为 \(4\)　　D. \(\dfrac{(a+2)c}{a+1} + \dfrac{(b+3)c}{b+2} + \dfrac{40}{c+1}\) 的最小值为 \(\dfrac{35}{2}\)</li>
+            </ol>
+
+            <div class="exam-section">三、填空题（每小题 5 分，共 20 分）</div>
+            <ol class="exam-list cont10">
+              <li>已知 \(a > 0, b > 0\)，且 \(ab = 1\)，则 \(\dfrac{1}{2a} + \dfrac{1}{2b} + \dfrac{8}{a+b}\) 的最小值为 \(\underline{\qquad}\)。</li>
+
+              <li>已知集合 \(A = [t, t+1] \cup [t+3, t+6]\)，其中 \(t > 0\)。若存在正数 \(\lambda\)，使得对任意 \(a \in A\)，都有 \(\dfrac{\lambda}{a} \in A\)，则 \(t\) 的值是 \(\underline{\qquad}\)。</li>
+
+              <li>已知集合 \(A = \{x \mid x^2 + px + q = 0\}\)，\(B = \{x \mid qx^2 + px + 1 = 0\}\)，同时满足 \(A \cap B \ne \varnothing\)，\(A \cap (\complement_R B) = \{-2\}\)，且 \(B\) 中元素之和大于 \(0\)，则 \(A \cup B = \underline{\qquad}\)。</li>
+
+              <li>已知集合 \(A = \{x \mid x < 0\}\)，\(B = \left\{y \mid y = \dfrac{m^2x - 1}{mx + 1}, x > 2\right\}\)，若 \(B \subseteq A\)，则实数 \(m\) 的取值范围是 \(\underline{\qquad}\)。</li>
+            </ol>
+
+            <div class="exam-section">四、解答题（共 26 分）</div>
+            <ol class="exam-list cont14">
+              <li>（本小题 14 分）<br>
+                已知集合 \(A = \{x \mid x^2 + 2(a - 1)x + a^2 - 1 = 0\}\)，\(B = \{x \mid x^2 - 4x = 0\}\)。<br>
+                (1) 若 \(0 \in A\)，求实数 \(a\) 的值；<br>
+                (2) 若 \(C = \{x \mid mx + 2 = 0\}\)，且 \(C \subseteq B\)，求 \(m\) 的值；<br>
+                (3) 求实数 \(a\) 的值使得 \((A \cup B) \subseteq B\)。</li>
+
+              <li>（本小题 12 分）<br>
+                已知函数 \(y = ax^2 + (a - 1)x + 1 - \dfrac{7}{4}a\)（\(a\) 为非零常数）。<br>
+                (1) 若存在 \(x > 1\)，使得 \(y < -\dfrac{11}{4}a\) 成立，求实数 \(a\) 的取值范围；<br>
+                (2) 解关于 \(x\) 的不等式：\(y > \dfrac{2}{a} - \dfrac{7}{4}a + 3\)。</li>
+            </ol>
+
+          </div>
+        </div>
+
+        <!-- 答案与解析 -->
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false">
+            <span class="dot"></span>
+            <span class="label">答案与解析</span>
+            <span class="cnt">共 16 题</span>
+            <span class="chev">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+
+              <!-- 1 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 1 题</span>
+                  <span class="sol-ans">答案：<b>D</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>特称命题的否定是全称命题，且结论要否定。</p>
+                  <p>原命题：\(\exists n \in N^*,\ n>2n^2+1\)。</p>
+                  <p>否定：\(\forall n \in N^*,\ n\le 2n^2+1\)。故选 D。</p>
+                </div>
+              </div>
+
+              <!-- 2 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 2 题</span>
+                  <span class="sol-ans">答案：<b>A</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(|x-2|<1 \iff 1<x<3\)；</p>
+                  <p>\(x^2+2x-3>0 \iff (x+3)(x-1)>0 \iff x<-3 \text{ 或 } x>1\)。</p>
+                  <p>\(1<x<3\) 能推出 \(x>1\)，但反过来不一定成立，所以是充分不必要条件，选 A。</p>
+                </div>
+              </div>
+
+              <!-- 3 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 3 题</span>
+                  <span class="sol-ans">答案：<b>D</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(A \cap B = B\) 等价于 \(B \subseteq A\)。</p>
+                  <p>\(B=[a-1,a+1]\)，要完全落在 \((-\infty,-1)\) 或 \((2,+\infty)\) 中。</p>
+                  <p>因此 \(a+1<-1 \Rightarrow a<-2\)，或 \(a-1>2 \Rightarrow a>3\)。</p>
+                  <p>所以 \(a<-2\) 或 \(a>3\)，选 D。</p>
+                </div>
+              </div>
+
+              <!-- 4 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 4 题</span>
+                  <span class="sol-ans">答案：<b>D</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由 \(x^2 - xy + 1 = 0\) 得 \(xy = x^2 + 1\)。因为 \(x \neq 0\)，所以 \(y = x + \dfrac{1}{x}\)。</p>
+                  <p>于是 \(x+y = 2x + \dfrac{1}{x}\)。</p>
+                  <p>当 \(x>0\) 时，\(2x+\dfrac{1}{x} \ge 2\sqrt{2}\)；当 \(x<0\) 时，\(2x+\dfrac{1}{x} \le -2\sqrt{2}\)。</p>
+                  <p>所以 \(|x+y| \ge 2\sqrt{2}\)，选 D。</p>
+                </div>
+              </div>
+
+              <!-- 5 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 5 题</span>
+                  <span class="sol-ans">答案：<b>C</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由绝对值三角不等式：</p>
+                  <p>\(|x+a|+|x+3| \ge |(x+a)-(x+3)| = |a-3|\)。</p>
+                  <p>要使不等式恒成立，只需 \(|a-3| > a\)。</p>
+                  <p>当 \(a<3\) 时，\(3-a>a \Rightarrow a<\dfrac{3}{2}\)；当 \(a\ge3\) 时，\(a-3>a\) 不可能。</p>
+                  <p>所以 \(a<\dfrac{3}{2}\)，选 C。</p>
+                </div>
+              </div>
+
+              <!-- 6 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 6 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>原不等式整理为 \(2ax^2-(a+4)x+2<0\)，因式分解：</p>
+                  <p>\((ax-2)(2x-1)<0\)。</p>
+                  <p>当 \(a>0\) 时，两根为 \(\dfrac{2}{a}\) 和 \(\dfrac{1}{2}\)。要有且只有一个整数解，解集只能是 \(\left(\dfrac{1}{2}, \dfrac{2}{a}\right)\)，且整数解为 1。</p>
+                  <p>因此 \(1<\dfrac{2}{a}\le 2 \Rightarrow 1 \le a < 2\)。故选 B。</p>
+                </div>
+              </div>
+
+              <!-- 7 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 7 题</span>
+                  <span class="sol-ans">答案：<b>BD</b></span>
+                </div>
+                <div class="sol-body">
+                  <p><strong>A 错</strong>：实数集规范写法为 \(\{x \mid x \in R\}\)。</p>
+                  <p><strong>B 对</strong>：\(A \subseteq B \iff A \cap (\complement_U B) = \varnothing\)。</p>
+                  <p><strong>C 错</strong>：\(\{x \mid y=x^2-1\}=R\)，\(\{y \mid y=x^2-1\}=[-1,+\infty)\)，不同。</p>
+                  <p><strong>D 对</strong>：\(\neg p:\exists x \in R, |x+1|\le 1\)，取 \(x=-1\) 成立；\(q:\exists x>0, x^3=x\)，取 \(x=1\) 成立。</p>
+                  <p>故选 BD。</p>
+                </div>
+              </div>
+
+              <!-- 8 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 8 题</span>
+                  <span class="sol-ans">答案：<b>AC</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>集合 \(A\) 恰有两个子集，说明 \(A\) 是单元素集。</p>
+                  <p>由 \(\dfrac{x-2}{x^2-a}=1\) 得 \(x-2=x^2-a \Rightarrow x^2-x+2-a=0\)，且 \(x^2-a\ne0\)。</p>
+                  <p>判别式 \(\Delta=1-4(2-a)=4a-7\)。</p>
+                  <div class="case">
+                    <p>· 若 \(\Delta=0\)，即 \(a=\dfrac{7}{4}\)，根为 \(x=\dfrac{1}{2}\)，分母不为 0，可行。</p>
+                    <p>· 若二次方程有两个根，但其中一个使分母为 0，则 \(x^2=a\)。代入二次方程得 \(x=2\)，此时 \(a=4\)。方程为 \(x^2-x-2=0\)，根为 \(2,-1\)，舍去 2，得 \(A=\{-1\}\)，可行。</p>
+                    <p>· \(a=-\dfrac{7}{4}\) 时 \(\Delta<0\)，\(A=\varnothing\)，只有一个子集，不可行。</p>
+                    <p>· \(a=-4\) 时 \(\Delta<0\)，不可行。</p>
+                  </div>
+                  <p>故选 AC。</p>
+                </div>
+              </div>
+
+              <!-- 9 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 9 题</span>
+                  <span class="sol-ans">答案：<b>AD</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(A*B\) 即对称差 \((A\cup B)\setminus(A\cap B)\)。</p>
+                  <p><strong>A 对</strong>：对称差可交换。</p>
+                  <p><strong>B 错</strong>：若 \(A \subseteq A*B\)，则 \(A\cap B=\varnothing\)，不是 \(\ne\varnothing\)。</p>
+                  <p><strong>C 错</strong>：若 \(A*B=A\)，则 \(B\setminus A=\varnothing\) 且 \(A\cap B=\varnothing\)，所以 \(B=\varnothing\)，该命题为真，不是假命题。</p>
+                  <p><strong>D 对</strong>：\(A*B \subseteq A \iff B\setminus A=\varnothing \iff B\subseteq A\)，故 \(p\) 是 \(q\) 的充要条件。</p>
+                  <p>故选 AD。</p>
+                </div>
+              </div>
+
+              <!-- 10 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 10 题</span>
+                  <span class="sol-ans">答案：<b>ABD</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由 \(ab=14-2a-b\) 得 \(ab+2a+b=14 \Rightarrow (a+1)(b+2)=16\)。</p>
+                  <p>设 \(x=a+1>1,\ y=b+2>2\)，则 \(xy=16\)。</p>
+                  <div class="case">
+                    <p><strong>A</strong>：\(ab=(x-1)(y-2)=xy-2x-y+2=18-(2x+y)\)。\(2x+y \ge 2\sqrt{2xy}=8\sqrt{2}\)，所以 \(ab \le 18-8\sqrt{2}\)，A 对。</p>
+                    <p><strong>B</strong>：\(2a+b=2(x-1)+(y-2)=2x+y-4 \ge 8\sqrt{2}-4\)，B 对。</p>
+                    <p><strong>C</strong>：\(a+b=x+y-3 \ge 2\sqrt{xy}-3=8-3=5\)，最小值为 5，不是 4，C 错。</p>
+                    <p><strong>D</strong>：原式 \(= c\left(2+\dfrac{1}{x}+\dfrac{1}{y}\right)+\dfrac{40}{c+1}\)。\(\dfrac{1}{x}+\dfrac{1}{y} \ge \dfrac{2}{\sqrt{xy}}=\dfrac{1}{2}\)，所以原式 \(\ge \dfrac{5}{2}c+\dfrac{40}{c+1}\)。当 \(c=3\) 时取最小值 \(\dfrac{15}{2}+10=\dfrac{35}{2}\)，D 对。</p>
+                  </div>
+                  <p>故选 ABD。</p>
+                </div>
+              </div>
+
+              <!-- 11 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 11 题</span>
+                  <span class="sol-ans">答案：<b>4</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(\dfrac{1}{2a}+\dfrac{1}{2b} = \dfrac{a+b}{2ab} = \dfrac{a+b}{2}\)。</p>
+                  <p>设 \(s=a+b \ge 2\)，原式 \(= \dfrac{s}{2}+\dfrac{8}{s}\)。</p>
+                  <p>由均值不等式：\(\dfrac{s}{2}+\dfrac{8}{s} \ge 2\sqrt{\dfrac{s}{2}\cdot\dfrac{8}{s}} = 4\)。</p>
+                  <p>当 \(s=4\) 时取等号，故最小值为 4。</p>
+                </div>
+              </div>
+
+              <!-- 12 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 12 题</span>
+                  <span class="sol-ans">答案：<b>\(\dfrac{3}{2}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>映射 \(x \mapsto \dfrac{\lambda}{x}\) 将两个区间互换。区间长度分别为 1 和 3，故：</p>
+                  <p>\(\dfrac{\lambda}{t+1}=t+3,\quad \dfrac{\lambda}{t}=t+6\)。</p>
+                  <p>即 \(\lambda=(t+1)(t+3)=t(t+6)\)。</p>
+                  <p>解得 \(t^2+4t+3=t^2+6t \Rightarrow 2t=3 \Rightarrow t=\dfrac{3}{2}\)。</p>
+                </div>
+              </div>
+
+              <!-- 13 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 13 题</span>
+                  <span class="sol-ans">答案：<b>\(\left\{-2, -\dfrac{1}{2}, 1\right\}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由 \(A \cap (\complement_R B) = \{-2\}\) 知 \(-2 \in A\) 且 \(-2 \notin B\)。</p>
+                  <p>设 \(A=\{-2, r\}\)，则 \(x^2+px+q = (x+2)(x-r)\)，得 \(p=2-r,\ q=-2r\)。</p>
+                  <p>又 \(r \in B\)，代入 \(qx^2+px+1=0\)：</p>
+                  <p>\(-2r^3+(2-r)r+1=0 \Rightarrow 2r^3+r^2-2r-1=0\)。</p>
+                  <p>分解得 \((r-1)(2r+1)(r+1)=0\)，所以 \(r=1, -\dfrac{1}{2}, -1\)。</p>
+                  <div class="case">
+                    <p>检验 \(-2 \notin B\)：当 \(r=-\dfrac{1}{2}\) 时，\(-2 \in B\)，舍去。</p>
+                    <p>当 \(r=1\) 时，\(A=\{-2,1\}\)，\(B=\left\{1,-\dfrac{1}{2}\right\}\)，\(B\) 元素之和 \(\dfrac{1}{2}>0\)，符合。</p>
+                    <p>当 \(r=-1\) 时，\(B\) 元素之和小于 0，舍去。</p>
+                  </div>
+                  <p>故 \(A \cup B = \left\{-2, -\dfrac{1}{2}, 1\right\}\)。</p>
+                </div>
+              </div>
+
+              <!-- 14 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 14 题</span>
+                  <span class="sol-ans">答案：<b>\(m=0\) 或 \(m \le -\dfrac{\sqrt{2}}{2}\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>要求对任意 \(x>2\) 且 \(mx+1\ne0\)，都有 \(\dfrac{m^2x-1}{mx+1} < 0\)。</p>
+                  <div class="case">
+                    <p><strong>当 \(m=0\) 时</strong>：\(y=-1<0\)，满足。</p>
+                    <p><strong>当 \(m>0\) 时</strong>：\(mx+1>0\)，而 \(m^2x-1\) 随 \(x\) 增大而增大，当 \(x\) 足够大时为正，分式为正，不满足。</p>
+                    <p><strong>当 \(m<0\) 时</strong>：分母零点 \(x=-\dfrac{1}{m}\)。</p>
+                    <p>· 若 \(-\dfrac{1}{m} \le 2\)，即 \(m \le -\dfrac{1}{2}\)，则当 \(x>2\) 时分母恒为负。要使分式恒负，需分子 \(m^2x-1>0\) 恒成立。分子零点 \(x=\dfrac{1}{m^2}\)，需 \(\dfrac{1}{m^2} \le 2 \Rightarrow m^2 \ge \dfrac{1}{2}\)。结合 \(m<0\)，得 \(m \le -\dfrac{\sqrt{2}}{2}\)。</p>
+                    <p>· 若 \(-\dfrac{1}{2} < m < 0\)，分母在 \(x>2\) 上会变号，无法保证分式恒负，无解。</p>
+                    <p>· \(m=-\dfrac{1}{2}\) 时，在 \(2<x<4\) 上分式为正，不满足。</p>
+                  </div>
+                  <p>综上：\(m=0\) 或 \(m \le -\dfrac{\sqrt{2}}{2}\)。</p>
+                </div>
+              </div>
+
+              <!-- 15 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 15 题</span>
+                  <span class="sol-ans">答案：<b>(1) \(a=\pm 1\)　(2) \(m=0\) 或 \(m=-\dfrac{1}{2}\)　(3) \(a=-1\) 或 \(a \ge 1\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(B = \{x \mid x^2-4x=0\} = \{0,4\}\)。</p>
+                  <p><strong>(1)</strong> 若 \(0 \in A\)，代入方程：\(0^2 + 2(a-1)\cdot 0 + a^2 - 1 = 0 \Rightarrow a^2 = 1\)，所以 \(a = \pm 1\)。</p>
+                  <p><strong>(2)</strong> \(C = \{x \mid mx+2=0\}\)，且 \(C \subseteq B = \{0,4\}\)。</p>
+                  <div class="case">
+                    <p>· 若 \(m=0\)，则 \(2=0\) 无解，\(C=\varnothing \subseteq B\)，成立。</p>
+                    <p>· 若 \(m\ne0\)，则 \(x=-\dfrac{2}{m}\)。要 \(-\dfrac{2}{m} \in \{0,4\}\)，不可能为 0，所以 \(-\dfrac{2}{m}=4 \Rightarrow m=-\dfrac{1}{2}\)。</p>
+                  </div>
+                  <p>综上：\(m=0\) 或 \(m=-\dfrac{1}{2}\)。</p>
+                  <p><strong>(3)</strong> \((A \cup B) \subseteq B\) 即 \(A \subseteq B\)。因为 \(B=\{0,4\}\)，所以 \(A\) 只能是 \(\varnothing, \{0\}, \{4\}, \{0,4\}\)。</p>
+                  <p>方程 \(x^2+2(a-1)x+a^2-1=0\) 的判别式：\(\Delta = [2(a-1)]^2 - 4(a^2-1) = 8(1-a)\)。</p>
+                  <div class="case">
+                    <p>· 当 \(a>1\) 时，\(\Delta<0\)，\(A=\varnothing \subseteq B\)，成立。</p>
+                    <p>· 当 \(a=1\) 时，\(\Delta=0\)，方程为 \(x^2=0\)，根为 0，\(A=\{0\} \subseteq B\)，成立。</p>
+                    <p>· 当 \(a<1\) 时，\(\Delta>0\)，有两个实根。要使 \(A \subseteq \{0,4\}\)，则根只能是 0,4。由韦达定理：\(0+4 = -2(a-1) \Rightarrow a=-1\)。且 \(0\cdot 4 = a^2-1 \Rightarrow a^2=1 \Rightarrow a=\pm1\)，取 \(a=-1\)。此时 \(A=\{0,4\} \subseteq B\)，成立。</p>
+                  </div>
+                  <p>综上：\(a=-1\) 或 \(a \ge 1\)。</p>
+                </div>
+              </div>
+
+              <!-- 16 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 16 题</span>
+                  <span class="sol-ans">答案：<b>(1) \(a \in (-\infty,0)\cup\left(0,\dfrac{2\sqrt{3}-3}{3}\right)\)　(2) 见解析</b></span>
+                </div>
+                <div class="sol-body">
+                  <p><strong>(1)</strong> 不等式 \(y < -\dfrac{11}{4}a\) 即：</p>
+                  <p>\(ax^2+(a-1)x+1-\dfrac{7}{4}a < -\dfrac{11}{4}a \Rightarrow ax^2+(a-1)x+a+1 < 0\)。</p>
+                  <p>设 \(f(x)=ax^2+(a-1)x+a+1\)。</p>
+                  <div class="case">
+                    <p>· 若 \(a<0\)，开口向下，当 \(x\to+\infty\) 时 \(f(x)\to-\infty\)，故存在 \(x>1\) 使 \(f(x)<0\)，成立。</p>
+                    <p>· 若 \(a>0\)，开口向上。要使存在 \(x>1\) 使 \(f(x)<0\)，需顶点在 \(x>1\) 且顶点值小于 0。</p>
+                    <p>顶点横坐标 \(x_0=\dfrac{1-a}{2a}\)，要求 \(x_0>1 \Rightarrow \dfrac{1-a}{2a}>1 \Rightarrow a<\dfrac{1}{3}\)。</p>
+                    <p>顶点值 \(f(x_0)=\dfrac{3a^2+6a-1}{4a}<0 \Rightarrow 3a^2+6a-1<0\)。</p>
+                    <p>解得 \(0<a<\dfrac{2\sqrt{3}-3}{3}\)。</p>
+                  </div>
+                  <p>综上：\(a \in (-\infty,0)\cup\left(0,\dfrac{2\sqrt{3}-3}{3}\right)\)。</p>
+
+                  <p><strong>(2)</strong> 不等式 \(y > \dfrac{2}{a}-\dfrac{7}{4}a+3\) 即：</p>
+                  <p>\(ax^2+(a-1)x+1-\dfrac{7}{4}a > \dfrac{2}{a}-\dfrac{7}{4}a+3 \Rightarrow ax^2+(a-1)x -2 - \dfrac{2}{a} > 0\)。</p>
+                  <p>因式分解：\(a\left(x-\dfrac{2}{a}\right)\left(x+\dfrac{a+1}{a}\right) > 0\)。</p>
+                  <p>两根为 \(x_1=\dfrac{2}{a}\)，\(x_2=-\dfrac{a+1}{a}\)。</p>
+                  <div class="case">
+                    <p><strong>当 \(a>0\) 时</strong>：开口向上，\(x_1 > x_2\)，解为 \(x < -\dfrac{a+1}{a}\) 或 \(x > \dfrac{2}{a}\)。</p>
+                    <p><strong>当 \(a<0\) 时</strong>：开口向下，比较两根大小：\(x_1-x_2=\dfrac{a+3}{a}\)。</p>
+                    <p>· 若 \(a<-3\)，则 \(x_1>x_2\)，解为 \(-\dfrac{a+1}{a} < x < \dfrac{2}{a}\)；</p>
+                    <p>· 若 \(-3<a<0\)，则 \(x_1<x_2\)，解为 \(\dfrac{2}{a} < x < -\dfrac{a+1}{a}\)；</p>
+                    <p>· 若 \(a=-3\)，原不等式化为 \(-3\left(x+\dfrac{2}{3}\right)^2>0\)，无解。</p>
+                  </div>
+                  <p>综上：</p>
+                  <p>\[
+                    \begin{cases}
+                    x<-\dfrac{a+1}{a}\ \text{或}\ x>\dfrac{2}{a}, & a>0,\\[6pt]
+                    -\dfrac{a+1}{a}<x<\dfrac{2}{a}, & a<-3,\\[6pt]
+                    \dfrac{2}{a}<x<-\dfrac{a+1}{a}, & -3<a<0,\\[6pt]
+                    \text{无解}, & a=-3.
+                    \end{cases}
+                  \]</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /protectedContent -->
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   邀请码校验 · 三哈希
+     · 轮1：base = 2147483647           mod = 2305843009213693951
+     · 轮2：base = 2305843009213693951  mod = 9223372036854775783
+     · 轮3：base = 9223372036854775783  mod = 18446744073709551557
+   passwordhash.txt 位于网站根目录（本页通过 ../../passwordhash.txt 访问）
+   ============================================================ */
+(function(){
+  const lockScreen = document.getElementById('lockScreen');
+  const content    = document.getElementById('protectedContent');
+  const form       = document.getElementById('lockForm');
+  const input      = document.getElementById('lockInput');
+  const errorEl    = document.getElementById('lockError');
+
+  let expectedHashes = [];
+  let loadingError   = false;
+
+  const HASH_ROUNDS = [
+    { base: 2147483647n,          mod: 2305843009213693951n  },
+    { base: 2305843009213693951n, mod: 9223372036854775783n  },
+    { base: 9223372036854775783n, mod: 18446744073709551557n }
+  ];
+
+  function hashPassword(s){
+    let data = s;
+    for (let r = 0; r < HASH_ROUNDS.length; r++){
+      const base = HASH_ROUNDS[r].base;
+      const mod  = HASH_ROUNDS[r].mod;
+      let h = 0n;
+      for (let i = 0; i < data.length; i++){
+        h = (h * base + BigInt(data.charCodeAt(i))) % mod;
+      }
+      data = h.toString();
+    }
+    return data;
+  }
+
+  fetch('../../passwordhash.txt', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(text){
+      expectedHashes = text
+        .split(/\r?\n/)
+        .map(function(line){ return line.trim(); })
+        .filter(function(line){ return /^\d+$/.test(line); });
+
+      if (expectedHashes.length === 0){
+        throw new Error('passwordhash.txt 中没有有效的哈希行');
+      }
+    })
+    .catch(function(err){
+      loadingError = true;
+      errorEl.textContent = '验证文件加载失败：' + err.message;
+    });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorEl.textContent = '';
+
+    if (loadingError){
+      errorEl.textContent = '验证文件加载失败，请刷新页面';
+      return;
+    }
+    if (!expectedHashes.length){
+      errorEl.textContent = '验证文件尚未就绪，请稍后重试';
+      return;
+    }
+
+    const val = input.value;
+    if (!val){
+      errorEl.textContent = '请输入邀请码';
+      return;
+    }
+
+    const h = hashPassword(val);
+    if (expectedHashes.indexOf(h) !== -1){
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise){
+        MathJax.startup.promise.then(function(){});
+      }
+    } else {
+      errorEl.textContent = '邀请码错误，请重试';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  input.focus();
+})();
+
+/* ===== 折叠面板 ===== */
+document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const acc  = btn.parentElement;
+    const body = acc.querySelector('.acc-body');
+    const open = acc.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  });
+});
+
+/* ===== MathJax 渲染完成后重算高度 ===== */
+function refreshOpen(){
+  document.querySelectorAll('.acc.open .acc-body').forEach(body => {
+    body.style.maxHeight = body.scrollHeight + 'px';
+  });
+}
+window.addEventListener('load', refreshOpen);
+window.addEventListener('resize', refreshOpen);
+if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+  MathJax.startup.promise.then(refreshOpen);
+}
+[300, 800, 1500].forEach(t => setTimeout(refreshOpen, t));
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>
