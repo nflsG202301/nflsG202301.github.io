@@ -167,16 +167,13 @@ ul,ol{list-style:none}
   vertical-align:baseline;
   line-height:1.2;
 }
-/* 整词填空：纯下划线空白 */
-.blank{
-  display:inline-block;
-  min-width:6em;
-  min-height:1em;
+
+/* 划线的原句部分（第 9–14 题） */
+.exam-list > li u{
+  text-decoration:none;
   border-bottom:1.5px solid var(--gold);
-  margin:0 3px;
-  vertical-align:baseline;
+  padding-bottom:1px;
 }
-.blank.wide{min-width:11em}
 
 /* 七选五：带下划线的序号 */
 .blank-num{
@@ -204,6 +201,11 @@ ul,ol{list-style:none}
 }
 .reading p{margin-bottom:12px}
 .reading p:last-child{margin-bottom:0}
+.reading u{
+  text-decoration:underline;
+  text-decoration-color:rgba(201,162,39,.7);
+  text-underline-offset:3px;
+}
 
 /* A / B 分节标记居中 */
 .reading-label{
@@ -304,8 +306,6 @@ ul,ol{list-style:none}
   .exam-section{font-size:14.5px}
   .reading{padding:16px 16px;font-size:14.5px}
   .blank-first{min-width:5em}
-  .blank{min-width:5em}
-  .blank.wide{min-width:8em}
   .sol{padding:14px 15px}
   .sol-body{font-size:14px}
 }
@@ -389,17 +389,17 @@ ul,ol{list-style:none}
 
               <li>Students' primary <span class="blank-first">t</span> is to improve their overall academic performance.</li>
 
-              <li>The new evening-study rule <span class="blank wide"></span> a total success once the whole grade actually tried to follow it.</li>
+              <li>The new evening-study rule <u>proved to be</u> a total success once the whole grade actually tried to follow it.</li>
 
-              <li>Skipping breakfast for three weeks and living on instant noodles <span class="blank wide"></span> a sharp drop in his energy levels.</li>
+              <li>Skipping breakfast for three weeks and living on instant noodles <u>led to</u> a sharp drop in his energy levels.</li>
 
-              <li>Told to rewrite the letter of advice by Friday, he sat back and <span class="blank wide"></span> the whole structure carefully before touching a single word.</li>
+              <li>Told to rewrite the letter of advice by Friday, he sat back and <u>thought</u> the whole structure carefully before touching a single word.</li>
 
-              <li>My younger brother <span class="blank wide"></span> taller fast over the past year.</li>
+              <li>My younger brother <u>has grown taller fast</u> over the past year.</li>
 
-              <li>She stood her ground at first, but finally <span class="blank wide"></span> when she saw the evidence.</li>
+              <li>She stood her ground at first, but finally <u>retreated</u> when she saw the evidence.</li>
 
-              <li>Though the two scientists rarely <span class="blank wide"></span> the same views with each other about the research methods, they eventually reached a workable plan.</li>
+              <li>Though the two scientists rarely <u>shared the same views with each other about</u> the research methods, they eventually reached a workable plan.</li>
             </ol>
 
             <!-- II. Extended Reading -->
@@ -538,17 +538,17 @@ ul,ol{list-style:none}
 
                     <p><strong>8.</strong> <em>target</em>　　target 作名词，意为“目标”，primary target 即“首要目标”。</p>
 
-                    <p><strong>9.</strong> <em>turned out to be</em>　　turn out to be 意为“结果是、最终成为”，用来替换原句的 proved to be，语气更自然、更口语化。</p>
+                    <p><strong>9.</strong> <em>turned out to be</em>（替换划线部分 proved to be）　　turn out to be 意为“结果是、最终成为”，比 proved to be 语气更自然、更口语化。</p>
 
-                    <p><strong>10.</strong> <em>resulted in</em>　　result in 意为“导致”，是固定搭配，介词只能用 in。注意不能写成 result as of 之类的错误组合。</p>
+                    <p><strong>10.</strong> <em>resulted in</em>（替换划线部分 led to）　　result in 意为“导致”，是固定搭配，介词只能用 in。注意不能写成 result as of 之类的错误组合。</p>
 
-                    <p><strong>11.</strong> <em>thought through</em>　　think through 意为“仔细考虑、全面思考”。相比单独用 thought，think through 更强调“把事情从头到尾想清楚”。</p>
+                    <p><strong>11.</strong> <em>thought through</em>（替换划线部分 thought）　　think through 意为“仔细考虑、全面思考”，比单独用 thought 更强调“把事情从头到尾想清楚”。</p>
 
-                    <p><strong>12.</strong> <em>has shot up</em>　　shoot up 意为“猛长、迅速上升”，常用来形容身高、价格等的快速增长，此处替换原句的 has grown taller fast。</p>
+                    <p><strong>12.</strong> <em>has shot up</em>（替换划线部分 has grown taller fast）　　shoot up 意为“猛长、迅速上升”，常用来形容身高、价格等的快速增长。</p>
 
-                    <p><strong>13.</strong> <em>backed down</em>　　back down 意为“让步、退缩”，与 retreated 意思相近。</p>
+                    <p><strong>13.</strong> <em>backed down</em>（替换划线部分 retreated）　　back down 意为“让步、退缩”，与 retreated 意思相近。</p>
 
-                    <p><strong>14.</strong> <em>saw eye to eye with each other on</em>　　see eye to eye with sb. on sth. 意为“与某人在某事上看法一致”。with each other 表示“彼此”，on 引出具体讨论的话题，两个介词都不能省略。</p>
+                    <p><strong>14.</strong> <em>saw eye to eye with each other on</em>（替换划线部分 shared the same views with each other about）　　see eye to eye with sb. on sth. 意为“与某人在某事上看法一致”。with each other 表示“彼此”，on 引出具体讨论的话题，两个介词都不能省略。</p>
                   </div>
                 </div>
               </div>
