@@ -143,32 +143,41 @@ ul,ol{list-style:none}
 .exam-section::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18)}
 .exam-section:first-child{margin-top:0}
 
-.exam-subsection{
-  font-size:14.5px;font-weight:700;letter-spacing:.4px;color:var(--navy);
-  margin:20px 0 12px;display:flex;align-items:center;gap:8px;
-}
-.exam-subsection::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold)}
-
+/* ===== 只作用于顶层 li，不影响 .opts 内的 li ===== */
 .exam-list{list-style:none;counter-reset: q}
-.exam-list li{
+.exam-list > li{
   position:relative;padding-left:30px;margin-bottom:16px;
   line-height:1.95;font-size:15px;color:#3f4a5a;
 }
-.exam-list li:last-child{margin-bottom:0}
-.exam-list li::before{
+.exam-list > li:last-child{margin-bottom:0}
+.exam-list > li::before{
   counter-increment: q;content: counter(q) ".";
   position:absolute;left:0;top:0;
   font-weight:800;color:var(--gold);font-size:14.5px;
 }
 
-/* 词汇题的空格 */
+/* 词汇题：空白下划线 */
 .blank{
   display:inline-block;
-  min-width:70px;
+  min-width:6em;
+  min-height:1em;
+  border-bottom:1.5px solid var(--gold);
+  margin:0 3px;
+  vertical-align:baseline;
+}
+.blank.wide{min-width:11em}
+
+/* 七选五：带下划线的序号 */
+.blank-num{
+  display:inline-block;
+  min-width:2.2em;
   padding:0 6px;
   border-bottom:1.5px solid var(--gold);
-  font-weight:700;color:#a8791a;
+  color:#a8791a;
+  font-weight:800;
   text-align:center;
+  margin:0 4px;
+  vertical-align:baseline;
 }
 
 /* 阅读文章 */
@@ -184,27 +193,25 @@ ul,ol{list-style:none}
 }
 .reading p{margin-bottom:12px}
 .reading p:last-child{margin-bottom:0}
-.reading .title{
-  font-size:16px;font-weight:800;letter-spacing:.5px;
-  color:var(--navy);margin-bottom:14px;
-  text-align:center;
-}
-.reading .qnum{
-  display:inline-block;
-  min-width:22px;height:22px;line-height:22px;
-  text-align:center;
-  background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  color:var(--navy);font-weight:800;
-  border-radius:50%;
-  margin:0 4px;
-  font-size:12px;
-  vertical-align:1px;
-}
 
-/* 选项列表 */
-.opts{list-style:none;margin:10px 0 0;display:flex;flex-direction:column;gap:6px}
-.opts li{padding-left:0;font-size:15px;color:#3f4a5a;line-height:1.85}
-.opts li b{color:var(--navy);font-weight:700;margin-right:6px}
+/* A / B 分节标记居中 */
+.reading-label{
+  font-size:19px;font-weight:800;
+  color:var(--navy);
+  text-align:center;
+  letter-spacing:3px;
+  margin:26px 0 8px;
+}
+.reading-label:first-child{margin-top:0}
+
+/* A 下的标题居中 */
+.reading-title-center{
+  font-size:17px;font-weight:700;
+  color:var(--navy);
+  text-align:center;
+  letter-spacing:1px;
+  margin-bottom:18px;
+}
 
 /* 词库 */
 .wordbox{
@@ -219,10 +226,15 @@ ul,ol{list-style:none}
   color:#a8791a;margin-bottom:10px;
 }
 .wordbox .wl{
-  display:flex;gap:10px 20px;flex-wrap:wrap;
+  display:flex;flex-direction:column;gap:6px;
   font-size:15px;color:#3f4a5a;
 }
 .wordbox .wl span{font-weight:600}
+
+/* 选项 */
+.opts{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.opts li{padding-left:0;font-size:15px;color:#3f4a5a;line-height:1.85}
+.opts li b{color:var(--navy);font-weight:700;margin-right:6px}
 
 /* 答案解析 */
 .sol{
@@ -276,7 +288,7 @@ ul,ol{list-style:none}
   .exam-card-body{padding:16px 14px 20px}
   .acc-head{padding:15px 18px;font-size:14.5px}
   .acc-inner{padding:16px 14px 20px}
-  .exam-list li{font-size:14.5px;padding-left:26px}
+  .exam-list > li{font-size:14.5px;padding-left:26px}
   .exam-section{font-size:14.5px}
   .reading{padding:16px 16px;font-size:14.5px}
   .sol{padding:14px 15px}
@@ -346,54 +358,55 @@ ul,ol{list-style:none}
             <div class="exam-section">I. Vocabulary Review</div>
 
             <ol class="exam-list">
-              <li>A morning roll-call was introduced recently to <span class="blank">address</span> the rising number of late arrivals.</li>
+              <li>A morning roll-call was introduced recently to <span class="blank"></span> the rising number of late arrivals.</li>
 
-              <li><span class="blank">Concerns</span> about heavy homework loads are often discussed among parents and teachers.</li>
+              <li><span class="blank"></span> about heavy homework loads are often discussed among parents and teachers.</li>
 
-              <li>The number of reported crimes is increasing at an alarming <span class="blank">rate</span>.</li>
+              <li>The number of reported crimes is increasing at an alarming <span class="blank"></span>.</li>
 
-              <li>The students lined up at the gate, <span class="blank">anxious</span> for the selection results.</li>
+              <li>The students lined up at the gate, <span class="blank"></span> for the selection results.</li>
 
-              <li>The <span class="blank">guarded</span> reply from her left most of us unsure whether the plan would actually go ahead.</li>
+              <li>The <span class="blank"></span> reply from her left most of us unsure whether the plan would actually go ahead.</li>
 
-              <li><span class="blank">Tension</span> was still hanging in the air long after the debate contest between classes.</li>
+              <li><span class="blank"></span> was still hanging in the air long after the debate contest between classes.</li>
 
-              <li>Driven by a <span class="blank">desire</span> to stand out in the presentation, he rehearsed his speech in front of the mirror for days.</li>
+              <li>Driven by a <span class="blank"></span> to stand out in the presentation, he rehearsed his speech in front of the mirror for days.</li>
 
-              <li>Students' primary <span class="blank">target</span> is to improve their overall academic performance.</li>
+              <li>Students' primary <span class="blank"></span> is to improve their overall academic performance.</li>
 
-              <li>The new evening-study rule <span class="blank">turned out to be</span> a total success once the whole grade actually tried to follow it.</li>
+              <li>The new evening-study rule <span class="blank wide"></span> a total success once the whole grade actually tried to follow it.</li>
 
-              <li>Skipping breakfast for three weeks and living on instant noodles <span class="blank">resulted in</span> a sharp drop in his energy levels.</li>
+              <li>Skipping breakfast for three weeks and living on instant noodles <span class="blank wide"></span> a sharp drop in his energy levels.</li>
 
-              <li>Told to rewrite the letter of advice by Friday, he sat back and <span class="blank">thought through</span> the whole structure carefully before touching a single word.</li>
+              <li>Told to rewrite the letter of advice by Friday, he sat back and <span class="blank wide"></span> the whole structure carefully before touching a single word.</li>
 
-              <li>My younger brother <span class="blank">has shot up</span> taller fast over the past year.</li>
+              <li>My younger brother <span class="blank wide"></span> taller fast over the past year.</li>
 
-              <li>She stood her ground at first, but finally <span class="blank">backed down</span> when she saw the evidence.</li>
+              <li>She stood her ground at first, but finally <span class="blank wide"></span> when she saw the evidence.</li>
 
-              <li>Though the two scientists rarely <span class="blank">saw eye to eye on</span> the same views with each other about the research methods, they eventually reached a workable plan.</li>
+              <li>Though the two scientists rarely <span class="blank wide"></span> the same views with each other about the research methods, they eventually reached a workable plan.</li>
             </ol>
 
             <!-- II. Extended Reading -->
             <div class="exam-section">II. Extended Reading</div>
 
-            <div class="exam-subsection">A. Peer Pressure</div>
+            <div class="reading-label">A</div>
+            <div class="reading-title-center">Peer Pressure</div>
 
             <div class="reading">
-              <p>Peer pressure is a part of life. <span class="qnum">1</span> This peer group may be of similar age but can also be defined by other commonalities (共同点), including motherhood, professional affiliations, and your local neighborhood.</p>
+              <p>Peer pressure is a part of life. <span class="blank-num">1</span> This peer group may be of similar age but can also be defined by other commonalities (共同点), including motherhood, professional affiliations, and your local neighborhood.</p>
 
-              <p>Peer pressure is not always negative. Trying to fit into a healthy social group, for example, of peers getting good grades, joining sports teams, and making plans for their futures, is positive. <span class="qnum">2</span> Peer influence can show you there is support, encouragement, and community available to you. By seeing someone else do something positive, you may reflect on your own life choices, goals, and where you spend your time.</p>
+              <p>Peer pressure is not always negative. Trying to fit into a healthy social group, for example, of peers getting good grades, joining sports teams, and making plans for their futures, is positive. <span class="blank-num">2</span> Peer influence can show you there is support, encouragement, and community available to you. By seeing someone else do something positive, you may reflect on your own life choices, goals, and where you spend your time.</p>
 
-              <p><span class="qnum">3</span> Being pressured by peer, whether it happens in person or online, may shake your sense of identity and self-confidence. For example, you may feel pressure to do unsafe things that have risks you may not fully know.</p>
+              <p><span class="blank-num">3</span> Being pressured by peer, whether it happens in person or online, may shake your sense of identity and self-confidence. For example, you may feel pressure to do unsafe things that have risks you may not fully know.</p>
 
-              <p><span class="qnum">4</span> You can also work on surrounding yourself with more positive influences. Some ways of coping with peer pressure include:</p>
+              <p><span class="blank-num">4</span> You can also work on surrounding yourself with more positive influences. Some ways of coping with peer pressure include:</p>
 
               <ul style="padding-left:22px;margin:8px 0;color:#3f4a5a;">
                 <li style="margin-bottom:6px;">Not spending time with people who pressure you to do things that feel wrong or dangerous.</li>
                 <li style="margin-bottom:6px;">Learning to say "no" and practicing leaving situations that feel unsafe or uncomfortable.</li>
                 <li style="margin-bottom:6px;">Talking to a trusted peer or professional (teacher, counselor) if you have problems saying "no" or are feeling pressured to change something about yourself.</li>
-                <li>● <span class="qnum">5</span></li>
+                <li><span class="blank-num">5</span></li>
               </ul>
 
               <p>In the journey of life, peers influence our steps. If you embrace positive guidance and stand firm against negativity, you can become the architects of your own story.</p>
@@ -412,7 +425,7 @@ ul,ol{list-style:none}
               </div>
             </div>
 
-            <div class="exam-subsection">B. Speech</div>
+            <div class="reading-label">B</div>
 
             <div class="reading">
               <p>Thank you. Thank you all. I'm here to plant a seed today. A seed that will inspire you to move forward in life with enthusiastic hearts and a clear sense of wholeness.</p>
@@ -500,8 +513,8 @@ ul,ol{list-style:none}
                     <p><strong>13.</strong> backed down　　<strong>14.</strong> saw eye to eye on</p>
                   </div>
                   <p><strong>易错点：</strong></p>
-                  <p>· <strong>第 6 题</strong>：应为名词 <em>Tension</em>（紧张气氛），学生写成了形容词 tense。</p>
-                  <p>· <strong>第 10 题</strong>：应为 <em>resulted in</em>（导致），学生写成 resulted as of，搭配错误。</p>
+                  <p>· <strong>第 6 题</strong>：应为名词 <em>Tension</em>（紧张气氛），不要写成形容词 tense。</p>
+                  <p>· <strong>第 10 题</strong>：应为 <em>resulted in</em>（导致），搭配是 result in，不是 result as of。</p>
                   <p>· <strong>第 14 题</strong>：应为 <em>saw eye to eye on</em>（在某事上看法一致），其中 with each other 多余，介词用 on 而非 about。</p>
                 </div>
               </div>
@@ -538,10 +551,10 @@ ul,ol{list-style:none}
               <div class="sol">
                 <div class="sol-head">
                   <span class="sol-no">II. B 第 2 题</span>
-                  <span class="sol-ans">答案：<b>B</b></span>
+                  <span class="sol-ans">答案：<b>C</b></span>
                 </div>
                 <div class="sol-body">
-                  <p>wild cat 的比喻先写 "rub up against your leg and purr"（亲近），紧接着 "out of nowhere, she'll swat you in the face"（突然打击），强调外部世界的不可预测和潜在危险。后文也说 "Sure it's rough sometimes"，故 <strong>B. To show that the outside world is filled with dangers and difficulties</strong> 最贴合。</p>
+                  <p>wild cat 的比喻先写 "rub up against your leg and purr"（亲近），紧接着 "out of nowhere, she'll swat you in the face"（突然打击），强调外部世界的变化无常与不可预测，故 <strong>C. To show that the outside world is ever-changing and unpredictable</strong> 最贴合。</p>
                 </div>
               </div>
 
