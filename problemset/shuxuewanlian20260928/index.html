@@ -225,6 +225,38 @@ ul,ol{list-style:none}
 .sol-body .case p{margin-bottom:5px}
 .sol-body .case p:last-child{margin-bottom:0}
 
+/* ===== 分类讨论表格（替代 cases） ===== */
+.case-table{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px 26px;
+  align-items:center;
+  margin:12px 0;
+  padding:16px 22px;
+  background:#f7f9fc;
+  border-radius:10px;
+  border-left:3px solid rgba(201,162,39,.5);
+  font-size:14.5px;
+  line-height:1.9;
+}
+.case-table .expr{color:#3f4a5a}
+.case-table .cond{color:#a8791a;font-weight:600;white-space:nowrap}
+.case-table .brace{
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:12px;
+}
+@media (max-width:640px){
+  .case-table{
+    grid-template-columns:1fr;
+    gap:2px 0;
+    padding:14px 16px;
+  }
+  .case-table .expr{margin-top:6px}
+  .case-table .expr:first-child{margin-top:0}
+  .case-table .cond{font-size:13.5px;color:#a8791a}
+}
+
 .site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
 .site-footer a{color:#cfd9e8;transition:color .2s}
@@ -251,7 +283,10 @@ ul,ol{list-style:none}
 
 <script>
   window.MathJax = {
-    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['$$', '$$']]
+    },
     svg: { fontCache: 'global' }
   };
 </script>
@@ -679,15 +714,23 @@ ul,ol{list-style:none}
                     <p>· 若 \(-3<a<0\)，则 \(x_1<x_2\)，解为 \(\dfrac{2}{a} < x < -\dfrac{a+1}{a}\)；</p>
                     <p>· 若 \(a=-3\)，原不等式化为 \(-3\left(x+\dfrac{2}{3}\right)^2>0\)，无解。</p>
                   </div>
-                  <p>综上：</p>
-                  <p>\[
-                    \begin{cases}
-                    x<-\dfrac{a+1}{a}\ \text{或}\ x>\dfrac{2}{a}, & a>0,\\
-                    -\dfrac{a+1}{a}<x<\dfrac{2}{a}, & a<-3,\\
-                    \dfrac{2}{a}<x<-\dfrac{a+1}{a}, & -3<a<0,\\
-                    \text{无解}, & a=-3.
-                    \end{cases}
-                  \]</p>
+                  <p>综上，解集为：</p>
+
+                  <!-- 用 HTML 表格代替 cases，避免 display math 渲染问题 -->
+                  <div class="case-table">
+                    <span class="expr">\(x<-\dfrac{a+1}{a}\) 或 \(x>\dfrac{2}{a}\)</span>
+                    <span class="cond">当 \(a>0\)</span>
+
+                    <span class="expr">\(-\dfrac{a+1}{a}<x<\dfrac{2}{a}\)</span>
+                    <span class="cond">当 \(a<-3\)</span>
+
+                    <span class="expr">\(\dfrac{2}{a}<x<-\dfrac{a+1}{a}\)</span>
+                    <span class="cond">当 \(-3<a<0\)</span>
+
+                    <span class="expr">无解</span>
+                    <span class="cond">当 \(a=-3\)</span>
+                  </div>
+
                 </div>
               </div>
 
