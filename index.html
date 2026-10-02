@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>南京外国语学校 G202301 · 官网</title>
+<title>南京外国语学校 G202301</title>
 <meta name="description" content="南京外国语学校 G202301 班官方网站：通知、作业、新闻、文章、名言、人物志、题集、资源与投稿。">
 <style>
 :root{
@@ -133,10 +133,15 @@ ul{list-style:none}
 /* 通用区块 */
 .section{padding:64px 0}
 
-/* 三栏：相遇正计时 + 高考倒计时 + 软件入口 */
+/* 三栏：相遇正计时 + 高考倒计时 + 右侧两卡片竖排 */
 .feature-row{
   display:grid;
   grid-template-columns:1fr 1.05fr .95fr;
+  gap:20px;
+}
+.feature-right{
+  display:flex;
+  flex-direction:column;
   gap:20px;
 }
 
@@ -208,35 +213,36 @@ ul{list-style:none}
 
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-/* 作业软件预览卡片 */
+/* 软件预览卡片 */
 .soft-card{
   display:flex;align-items:center;gap:16px;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:26px 24px;
+  padding:22px 24px;
   box-shadow:var(--shadow);
   transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
   animation:rise .45s ease both;
-  animation-delay:.06s;
+  flex:1;
 }
 .soft-card:hover{
   transform:translateY(-7px);
   box-shadow:var(--shadow-hover);
   border-color:rgba(201,162,39,.65);
 }
+.soft-card + .soft-card{animation-delay:.06s}
 .soft-icon{
-  flex:0 0 56px;height:56px;border-radius:16px;
-  display:grid;place-items:center;font-size:26px;
+  flex:0 0 52px;height:52px;border-radius:15px;
+  display:grid;place-items:center;font-size:24px;
   background:linear-gradient(135deg,var(--gold-light),var(--gold));
   box-shadow:0 8px 20px rgba(201,162,39,.32);
 }
 .soft-body{flex:1;min-width:0}
 .soft-title{
-  font-size:17px;font-weight:700;color:var(--navy);
-  letter-spacing:.3px;margin-bottom:6px;
+  font-size:16.5px;font-weight:700;color:var(--navy);
+  letter-spacing:.3px;margin-bottom:5px;
 }
-.soft-desc{font-size:13.5px;color:var(--muted)}
+.soft-desc{font-size:13px;color:var(--muted);line-height:1.55}
 .soft-arrow{
   flex:0 0 auto;font-size:20px;color:#c3cbd8;
   transition:all .26s ease;
@@ -298,7 +304,8 @@ ul{list-style:none}
 
 @media (max-width:980px){
   .feature-row{grid-template-columns:1fr 1fr}
-  .soft-card{grid-column:1 / -1}
+  .feature-right{grid-column:1 / -1;flex-direction:row}
+  .feature-right .soft-card{flex:1}
 }
 @media (max-width:880px){
   .hero{padding:64px 0 68px}
@@ -313,13 +320,17 @@ ul{list-style:none}
   .nav a{padding:7px 11px;font-size:13.5px}
   .section{padding:44px 0}
   .feature-row{grid-template-columns:1fr;gap:14px}
+  .feature-right{flex-direction:column}
   .grid{grid-template-columns:repeat(2, 1fr);gap:12px}
   .card{padding:20px 16px}
   .nav-card .icon{width:44px;height:44px;font-size:21px}
   .nav-card h3{font-size:15.5px}
   .nav-card p{font-size:12.5px}
   .countdown{padding:24px 20px 22px}
-  .soft-card{padding:20px 18px}
+  .soft-card{padding:18px 16px}
+  .soft-icon{flex:0 0 46px;height:46px;font-size:22px;border-radius:13px}
+  .soft-title{font-size:15.5px}
+  .soft-desc{font-size:12.5px}
   .hero-actions{gap:10px}
   .btn{padding:11px 20px;font-size:14px}
   .hero-inner{flex-direction:column;align-items:flex-start}
@@ -361,7 +372,7 @@ ul{list-style:none}
     <div class="wrap hero-inner">
       <div class="hero-text">
         <p class="eyebrow">Nanjing Foreign Language School</p>
-        <h1>G202301 · 官网</h1>
+        <h1>G202301</h1>
         <p class="lead">通知公告 · 作业发布 · 班级新闻 · 优秀文章 · 每日名言 · 人物志 · 精选题集 · 学习资源 · 在线投稿</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="homework" id="todayHomeworkBtn"><span class="bi">📚</span>查看今日作业</a>
@@ -375,7 +386,7 @@ ul{list-style:none}
     </div>
   </section>
 
-  <!-- 三栏：相遇正计时 + 高考倒计时 + 软件入口 -->
+  <!-- 三栏：相遇正计时 + 高考倒计时 + 右侧两卡片竖排 -->
   <section class="section" style="padding-bottom:0">
     <div class="wrap">
       <div class="feature-row">
@@ -402,15 +413,30 @@ ul{list-style:none}
           <span class="cd-date">目标 · 2029 年 6 月 7 日 9:00</span>
         </div>
 
-        <!-- 作业软件预览 -->
-        <a class="soft-card" href="/Class%20Panel%202.3.html" target="_blank" rel="noopener">
-          <span class="soft-icon">🖥️</span>
-          <div class="soft-body">
-            <div class="soft-title">Class Panel 2.3</div>
-            <div class="soft-desc">最新版作业软件 · 点击预览</div>
-          </div>
-          <span class="soft-arrow">→</span>
-        </a>
+        <!-- 右侧：两个软件入口竖排 -->
+        <div class="feature-right">
+
+          <!-- Class Panel -->
+          <a class="soft-card" href="/Class%20Panel%202.3.html" target="_blank" rel="noopener">
+            <span class="soft-icon">🖥️</span>
+            <div class="soft-body">
+              <div class="soft-title">Class Panel 2.3</div>
+              <div class="soft-desc">最新版作业软件 · 点击预览</div>
+            </div>
+            <span class="soft-arrow">→</span>
+          </a>
+
+          <!-- 英语月考词汇短语练习 -->
+          <a class="soft-card" href="/yingyuyuekaocihuiduanyulianxi/" target="_blank" rel="noopener">
+            <span class="soft-icon">📝</span>
+            <div class="soft-body">
+              <div class="soft-title">英语月考词汇短语练习</div>
+              <div class="soft-desc">一键生成试题 · 自动批改 · 整理错题</div>
+            </div>
+            <span class="soft-arrow">→</span>
+          </a>
+
+        </div>
 
       </div>
     </div>
