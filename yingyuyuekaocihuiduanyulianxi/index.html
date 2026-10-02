@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英语词汇短语练习</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+     background:#f4f6fb;color:#1f2937;line-height:1.8;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:24px 16px 100px}
+h1{font-size:24px;text-align:center;margin:8px 0 22px;letter-spacing:.5px}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 2px 16px rgba(17,24,39,.07);margin-bottom:20px}
+.hidden{display:none!important}
+.sec-title{font-weight:700;font-size:14px;margin:18px 0 10px;color:#374151;display:flex;align-items:center;gap:8px}
+.sec-title:first-child{margin-top:0}
+.sec-title::before{content:"";width:4px;height:15px;border-radius:2px;background:#3b82f6;display:inline-block}
+.chks{display:flex;flex-wrap:wrap;gap:8px}
+.chk{display:inline-flex;align-items:center;gap:6px;padding:6px 13px;border:1px solid #e5e7eb;border-radius:999px;
+     cursor:pointer;font-size:13.5px;background:#fafbfc;transition:.15s;user-select:none}
+.chk:hover{border-color:#93c5fd;background:#eff6ff}
+.chk input{accent-color:#2563eb;cursor:pointer;margin:0}
+.chk .cnt{color:#9ca3af;font-size:11.5px}
+.chk.all{border-style:dashed;color:#2563eb}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px}
+input[type=number]{width:90px;padding:9px 12px;border:1px solid #d1d5db;border-radius:10px;font-size:15px;outline:none}
+input[type=number]:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+.btn{padding:10px 22px;border-radius:10px;border:1px solid #d1d5db;background:#fff;cursor:pointer;font-size:14.5px;
+     font-weight:600;color:#374151;transition:.15s;font-family:inherit}
+.btn:hover{background:#f3f4f6}
+.btn.primary{background:#2563eb;border-color:#2563eb;color:#fff}
+.btn.primary:hover{background:#1d4ed8}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.paper-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;
+            padding-bottom:14px;border-bottom:1px dashed #e5e7eb}
+.paper-head .ptitle{font-weight:700;font-size:16px}
+.bank{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:14px 16px;margin-bottom:18px}
+.bank-title{font-size:13px;font-weight:700;color:#475569;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;max-height:180px;overflow-y:auto}
+.chip{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:3px 10px;font-size:13px;color:#334155;
+      font-family:ui-monospace,Menlo,Consolas,monospace}
+.group-title{font-weight:700;font-size:15px;color:#1e40af;margin:24px 0 12px;padding-left:10px;
+             border-left:4px solid #3b82f6;line-height:1.3}
+.group-title:first-child{margin-top:4px}
+.q{padding:16px 18px;border:1px solid #eef1f5;border-radius:12px;margin-bottom:14px;transition:.2s;background:#fff}
+.q.ok{border-color:#86efac;background:#f0fdf4}
+.q.bad{border-color:#fca5a5;background:#fef2f2}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.qno{font-weight:700;color:#64748b;font-size:13px}
+.badge{font-size:11.5px;padding:2px 9px;border-radius:999px;font-weight:600;letter-spacing:.3px}
+.b1{background:#dbeafe;color:#1d4ed8}
+.b2{background:#dcfce7;color:#15803d}
+.b3{background:#fef3c7;color:#b45309}
+.qtext{font-size:16px;margin:6px 0 12px;color:#111827}
+.qtext.en{font-family:Georgia,"Times New Roman",serif;font-size:16.5px;line-height:2.1}
+.qtext .cn{color:#b91c1c;font-size:17px;letter-spacing:.5px}
+.hint{font-size:13px;color:#6b7280;margin:-6px 0 10px}
+/* 首字母填空：首字母在下划线左侧 */
+.blank{display:inline-block;white-space:nowrap;margin:0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;
+       font-weight:700;color:#2563eb;vertical-align:baseline}
+.blank .first{color:#2563eb}
+.blank .line{display:inline-block;min-width:92px;border-bottom:2px solid #3b82f6;height:.85em;
+             vertical-align:baseline;margin-left:1px}
+/* 短语替换题的划线部分 */
+.uline{text-decoration:underline;text-decoration-color:#f59e0b;text-decoration-thickness:2px;
+       text-underline-offset:4px;color:#b45309;font-weight:600;font-style:italic}
+.ans{color:#15803d;font-weight:700;background:#dcfce7;border-radius:4px;padding:0 5px;
+     font-family:ui-monospace,Menlo,Consolas,monospace}
+.ansinput{width:100%;max-width:460px;padding:10px 14px;border:1.5px solid #d1d5db;border-radius:10px;
+          font-size:15px;outline:none;font-family:ui-monospace,Menlo,Consolas,monospace;transition:.15s}
+.ansinput:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+.ansinput:disabled{background:#f9fafb;color:#374151}
+.fb{margin-top:10px;font-size:14px}
+.fb.ok{color:#15803d;font-weight:600}
+.fb.bad{color:#b91c1c}
+.fb b{font-family:ui-monospace,Menlo,Consolas,monospace}
+.score{font-size:34px;font-weight:800;text-align:center;color:#2563eb;margin:6px 0 4px}
+.sub{text-align:center;color:#6b7280;font-size:14px;margin-bottom:6px}
+.bar{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin:14px 0 22px}
+.bar > i{display:block;height:100%;background:linear-gradient(90deg,#34d399,#2563eb);border-radius:999px;transition:width .6s}
+.wtitle{font-weight:700;font-size:15px;margin:0 0 12px;color:#b91c1c}
+.witem{border:1px solid #fee2e2;background:#fff7f7;border-radius:10px;padding:12px 15px;margin-bottom:10px;font-size:14.5px}
+.witem .wq{color:#374151;margin-bottom:6px;font-family:Georgia,"Times New Roman",serif;line-height:1.9}
+.witem .wa{color:#b91c1c;font-size:13.5px}
+.witem .wa b{font-family:ui-monospace,Menlo,Consolas,monospace}
+.perfect{text-align:center;color:#15803d;font-weight:700;font-size:16px;padding:10px 0}
+@media(max-width:600px){
+  .wrap{padding:14px 10px 80px}
+  .card{padding:16px}
+  .qtext{font-size:15px}
+  .qtext.en{font-size:15px}
+  .ansinput{max-width:100%}
+  .blank .line{min-width:60px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📘 英语词汇短语练习</h1>
+
+  <!-- ========== 配置区 ========== -->
+  <div class="card" id="cfgCard">
+    <div class="sec-title">考察内容 · 单词</div>
+    <div class="chks" id="wordChks"></div>
+
+    <div class="sec-title">考察内容 · 短语</div>
+    <div class="chks" id="phraseChks"></div>
+
+    <div class="sec-title">题型</div>
+    <div class="chks" id="typeChks">
+      <label class="chk"><input type="checkbox" data-kind="type" value="cn" checked> 根据汉语释义默写单词</label>
+      <label class="chk"><input type="checkbox" data-kind="type" value="first" checked> 首字母填空</label>
+      <label class="chk"><input type="checkbox" data-kind="type" value="phrase" checked> 同义短语替换</label>
+    </div>
+
+    <div class="sec-title">题目数量</div>
+    <div class="row">
+      <input type="number" id="numQ" value="10" min="1" max="60">
+      <button class="btn primary" id="genBtn">生成试题</button>
+    </div>
+  </div>
+
+  <!-- ========== 试卷区 ========== -->
+  <div class="card hidden" id="paperCard">
+    <div class="paper-head">
+      <div class="ptitle" id="paperTitle">试题</div>
+      <button class="btn primary" id="submitBtn">交卷</button>
+    </div>
+    <div class="bank hidden" id="phraseBank"></div>
+    <div id="questions"></div>
+  </div>
+
+  <!-- ========== 结果区 ========== -->
+  <div class="card hidden" id="resultCard"></div>
+</div>
+
+<script>
+/* =========================================================
+   数据区：单词
+   每个单词 5 条例句，[[ ]] 中为考查答案（首字母填空用）
+   ========================================================= */
+const WORDS = [
+/* ---------- A ---------- */
+{w:"accumulate",cn:"积累，积聚；堆积",tag:"NCE3-L1",ex:[
+`Over the years, he patiently [[accumulated]] a large and valuable collection of rare stamps from all over the world.`,
+`Dust and dirt will soon [[accumulate]] on the furniture if you don't clean the room regularly and thoroughly.`,
+`Wealth that has been [[accumulated]] through years of hard work is far more meaningful than money won in a lottery.`,
+`Snow was beginning to [[accumulate]] on the narrow mountain path, making it dangerous for the climbers to continue.`,
+`By the end of the term, she had [[accumulated]] a great deal of useful experience that would help her in her future career.`
+]},
+{w:"acquire",cn:"获得，取得；学到",tag:"U1",ex:[
+`She [[acquired]] a good working knowledge of English by reading widely and listening to the radio every day.`,
+`The large company [[acquired]] three small firms last year in order to expand its business overseas.`,
+`It takes time and patience to [[acquire]] the technical skills that are needed for this kind of job.`,
+`He [[acquired]] a deep taste for classical music when he was still a young boy living in the countryside.`,
+`Through constant practice, you will gradually [[acquire]] the confidence you need in speaking English before a large audience.`
+]},
+{w:"address",cn:"处理，应对；演说；称呼",tag:"U2",ex:[
+`The government must take immediate action to [[address]] the serious problem of air pollution in big cities.`,
+`He [[addressed]] the large audience in a calm and confident voice that impressed everyone present.`,
+`We need to [[address]] the root cause of the conflict instead of dealing only with its surface effects.`,
+`The important letter was [[addressed]] to the wrong person and therefore never reached its intended reader.`,
+`The meeting tomorrow morning will [[address]] the most urgent issues now facing the company.`
+]},
+{w:"advance",cn:"前进；进展；预先的",tag:"U1",ex:[
+`Modern technology continues to [[advance]] at such an amazing speed that it is hard to keep up with it.`,
+`The army [[advanced]] silently towards the enemy's camp under cover of darkness and total surprise.`,
+`She was [[advanced]] to the position of manager after only two years of hard and faithful service.`,
+`Please book your tickets well in [[advance]] if you want to avoid disappointment during the busy holiday season.`,
+`Medical science has [[advanced]] so greatly over the past century that many diseases are no longer feared.`
+]},
+{w:"alone",cn:"独自，单独；仅仅",tag:"U1",ex:[
+`He lives quite [[alone]] in a small, quiet flat near the river, with only a cat for company.`,
+`You certainly can't finish such a difficult task [[alone]]; you will need help from your classmates.`,
+`Money [[alone]] cannot make you happy if you have no friends and no real purpose in life.`,
+`She felt extremely lonely when she was left [[alone]] at home for the whole weekend.`,
+`Leave me [[alone]] for a while, please — I really need some quiet time to think things over.`
+]},
+{w:"anxious",cn:"焦虑的，担心的；渴望的",tag:"U2",ex:[
+`She was deeply [[anxious]] about her son's safety while he was travelling abroad on his own.`,
+`Parents are often [[anxious]] for their children to succeed in a world that is full of fierce competition.`,
+`He grew more and more [[anxious]] when the important letter still hadn't arrived after three long weeks.`,
+`I'm really [[anxious]] to know the result of the exam, because it will decide my future.`,
+`There was a deeply [[anxious]] look on her face as she waited outside the operating room.`
+]},
+{w:"archaeologist",cn:"考古学家",tag:"NCE3-L3",ex:[
+`The famous [[archaeologist]] spent nearly ten years digging patiently in the hot desert sands.`,
+`An [[archaeologist]] studies the remains of ancient civilizations in order to understand how people once lived.`,
+`The team of [[archaeologists]] discovered the remains of a sacred temple that had been buried for centuries.`,
+`As a professional [[archaeologist]], she has travelled all over the world in search of ancient ruins.`,
+`The [[archaeologist]] carefully cleaned the fragile fragments of pottery before sending them to the laboratory.`
+]},
+{w:"argument",cn:"争论，争吵；论点，论据",tag:"U2",ex:[
+`They had a heated [[argument]] about money that lasted late into the night and upset the whole family.`,
+`His [[argument]] was supported by such strong evidence that no one in the room could doubt it.`,
+`We should try to settle this silly [[argument]] peacefully rather than let it destroy our friendship.`,
+`There is a strong [[argument]] for raising the age limit, especially given the recent rise in accidents.`,
+`The couple's loud [[argument]] woke up the whole neighbourhood and made them the talk of the street.`
+]},
+{w:"arm",cn:"武装，配备；手臂",tag:"NCE3-L2",ex:[
+`The soldiers were fully [[armed]] with modern rifles, helmets and protective clothing before the battle.`,
+`She broke her left [[arm]] while skiing down a steep and icy slope in the Alps.`,
+`He [[armed]] himself with a powerful torch and a long rope before entering the dark, narrow cave.`,
+`The police were [[armed]] with the latest information about the criminal's hiding place.`,
+`They [[armed]] the villagers with simple weapons and taught them how to defend their homes.`
+]},
+{w:"attitude",cn:"态度，看法",tag:"U1",ex:[
+`His [[attitude]] towards work has changed a great deal since he became a father last year.`,
+`A positive [[attitude]] towards life is often the real key to success in whatever you do.`,
+`I really don't like the careless [[attitude]] she shows towards her elderly parents.`,
+`The whole team has a surprisingly relaxed [[attitude]] to tomorrow's important match.`,
+`We must change our careless [[attitude]] to the environment before it is too late to save the planet.`
+]},
+/* ---------- B ---------- */
+{w:"balance",cn:"平衡；余额；使平衡",tag:"U1",ex:[
+`It's really hard to keep a proper [[balance]] between your work and your family life.`,
+`She lost her [[balance]] on the wet road and fell heavily off her new bike.`,
+`You should check your bank [[balance]] regularly to make sure that nobody has stolen your money.`,
+`The graceful dancer [[balanced]] a heavy book on her head while walking across the stage.`,
+`A healthy diet and regular exercise help to [[balance]] your energy levels throughout the day.`
+]},
+{w:"breakdown",cn:"崩溃；故障；破裂；分类",tag:"U2",ex:[
+`The sudden [[breakdown]] of our car left us stranded in the middle of nowhere with no phone signal.`,
+`A serious [[breakdown]] in communications between the two teams caused the terrible accident.`,
+`He suffered a complete nervous [[breakdown]] after months of working under terrible stress.`,
+`The unexpected [[breakdown]] of their twenty-year marriage shocked all their friends and relatives.`,
+`Please give me a detailed [[breakdown]] of the costs so that I can check the figures.`
+]},
+/* ---------- C ---------- */
+{w:"cause",cn:"原因；引起，导致",tag:"NCE3-L2",ex:[
+`The police are still looking for the exact [[cause]] of the fire that destroyed the old warehouse.`,
+`Smoking heavily over many years can [[cause]] serious health problems, including heart disease and cancer.`,
+`Three days of heavy rain [[caused]] the river to flood and wash away the wooden bridge.`,
+`There is really no [[cause]] for alarm, since the doctors say the illness is not serious.`,
+`Careless driving [[causes]] thousands of accidents on the roads every single year.`
+]},
+{w:"character",cn:"性格，品质；人物；字符",tag:"U1",ex:[
+`She has a strong and independent [[character]] that has helped her through many difficult times.`,
+`The main [[character]] in the novel is a young doctor who works in a poor mountain village.`,
+`Hard work and difficult experiences can build [[character]] in a way that easy success never can.`,
+`The small town has kept its old [[character]] despite the rapid growth of tourism in the area.`,
+`Chinese [[characters]] are difficult for foreigners to learn, but they are also fascinating to write.`
+]},
+{w:"civilization",cn:"文明",tag:"NCE3-L3",ex:[
+`Ancient Egyptian [[civilization]] lasted for thousands of years and produced some of the world's greatest monuments.`,
+`The great river was the cradle of an early [[civilization]] that learned to farm and build cities.`,
+`A long and terrible war can destroy a whole [[civilization]] and everything that its people have built.`,
+`They studied the rise and fall of great [[civilizations]] in order to understand the lessons of history.`,
+`Writing is one of the clearest marks of [[civilization]], because it allows knowledge to be passed on.`
+]},
+{w:"claim",cn:"声称；索取；认领；主张",tag:"NCE3-L1",ex:[
+`He firmly [[claimed]] that he had never seen the man before, although several witnesses said otherwise.`,
+`You can [[claim]] your luggage at the counter near the main exit of the airport.`,
+`The terrible flood [[claimed]] many lives and left thousands of people without homes.`,
+`She [[claims]] to be a distant relative of the queen, though nobody has ever believed her story.`,
+`Nobody came to [[claim]] the lost wallet, so it was finally given to charity.`
+]},
+{w:"classical",cn:"古典的；经典的",tag:"NCE3-L3",ex:[
+`She loves listening to [[classical]] music while she is reading or working in her quiet study.`,
+`The museum has a fine collection of [[classical]] sculpture dating from the fifth century BC.`,
+`He studied [[classical]] languages, such as Latin and Greek, at a famous university in England.`,
+`This beautiful old building is a fine example of [[classical]] architecture at its very best.`,
+`Many students find [[classical]] literature hard to read because the language is so old-fashioned.`
+]},
+{w:"cling",cn:"紧握；依附；坚持",tag:"NCE3-L1",ex:[
+`The frightened child [[clung]] tightly to his mother's hand as they crossed the busy street.`,
+`Wet clothes [[cling]] to the body and make you feel cold and uncomfortable.`,
+`She [[clung]] to the hope that he would one day return, even after many years had passed.`,
+`Some people [[cling]] to old habits even when those habits clearly do them harm.`,
+`The exhausted climber [[clung]] to the rock with all his remaining strength, waiting for help.`
+]},
+{w:"concern",cn:"担忧；关心；涉及",tag:"U2",ex:[
+`Her poor health is a great [[concern]] to the whole family, who worry about her day and night.`,
+`The new report [[concerns]] the safety of the workers in the city's oldest factories.`,
+`As far as I'm [[concerned]], the whole matter is settled and there is nothing more to discuss.`,
+`There is growing public [[concern]] about climate change and its effect on the world's poorest countries.`,
+`This interesting article [[concerns]] the serious problem of youth unemployment in southern Europe.`
+]},
+{w:"confirm",cn:"确认，证实",tag:"NCE3-L1",ex:[
+`Please [[confirm]] your booking by email at least two days before you plan to arrive.`,
+`The results of the experiment [[confirmed]] exactly what we had suspected from the very beginning.`,
+`He [[confirmed]] that the important meeting would be held on Friday morning as planned.`,
+`The new evidence clearly [[confirms]] his innocence and proves that he was nowhere near the scene.`,
+`We are still waiting for the doctor to [[confirm]] the diagnosis before any treatment can begin.`
+]},
+{w:"convince",cn:"使确信，说服",tag:"NCE3-L1",ex:[
+`He finally [[convinced]] me that he was telling the truth about the whole unfortunate business.`,
+`I tried hard to [[convince]] her to stay for another week, but she politely refused.`,
+`The evidence presented in court [[convinced]] the judge of his guilt beyond any doubt.`,
+`She is absolutely [[convinced]] that she will win the first prize in the competition.`,
+`Nothing you say will ever [[convince]] him to change his mind about such an important matter.`
+]},
+{w:"corner",cn:"角落；把……逼入困境",tag:"NCE3-L1",ex:[
+`There is a small family shop at the [[corner]] of the street, open from early morning until late at night.`,
+`The escaped thief was finally [[cornered]] by the police in a dark alley near the river.`,
+`He sat quietly in a [[corner]] of the room, watching the others and saying nothing.`,
+`The clever question [[cornered]] him completely, and he had to admit the truth at last.`,
+`She quietly wiped the tears from the [[corner]] of her eye and pretended to smile.`
+]},
+/* ---------- D ---------- */
+{w:"desire",cn:"渴望，欲望",tag:"U2",ex:[
+`She had a strong [[desire]] to travel the world and see as many different cultures as possible.`,
+`He [[desired]] nothing more than a quiet life in the country with his family.`,
+`The hotel is so comfortable that it leaves nothing to be [[desired]].`,
+`His burning [[desire]] for success drove him to work day and night for many years.`,
+`I have no [[desire]] to argue with you about such a small and unimportant matter.`
+]},
+{w:"disturbing",cn:"令人不安的",tag:"NCE3-L1",ex:[
+`The news of the accident was deeply [[disturbing]] to everyone in the small village.`,
+`There was a strange and [[disturbing]] silence in the room after the phone call ended.`,
+`He received a very [[disturbing]] phone call late at night and could not sleep afterwards.`,
+`The film contains several [[disturbing]] scenes that are not suitable for young children.`,
+`It is deeply [[disturbing]] to see how quickly the great forest is disappearing year by year.`
+]},
+{w:"drainage",cn:"排水（系统）",tag:"NCE3-L3",ex:[
+`The [[drainage]] system in the old part of town is very poor and floods after every heavy rain.`,
+`Good [[drainage]] is absolutely essential for successful farming in such wet and low-lying areas.`,
+`They dug a long channel to improve the [[drainage]] of the waterlogged field behind the farm.`,
+`The builders installed new [[drainage]] pipes under the road to prevent it from flooding.`,
+`Poor [[drainage]] caused the streets to flood, and the water rose above the car wheels.`
+]},
+/* ---------- E ---------- */
+{w:"effort",cn:"努力，力气",tag:"U1",ex:[
+`He made a great [[effort]] to finish the race despite the terrible pain in his leg.`,
+`All her careful [[efforts]] ended in failure, but she refused to give up.`,
+`It takes a lot of time and [[effort]] to learn a foreign language really well.`,
+`With just a little more [[effort]], you could easily do much better in your exams.`,
+`The whole project was a joint [[effort]] of every member of the research team.`
+]},
+{w:"equal",cn:"平等的；相等的；等于；比得上",tag:"U1",ex:[
+`All men are born [[equal]], and no one should be treated as less important than others.`,
+`Women should receive [[equal]] pay for equal work, and this principle must be protected by law.`,
+`Two plus three [[equals]] five, as every child learns at primary school.`,
+`No one in the whole office can [[equal]] her in patience and quiet good humour.`,
+`We must treat everyone as an [[equal]], whatever their background or education.`
+]},
+{w:"evidence",cn:"证据",tag:"NCE3-L1",ex:[
+`There is no real [[evidence]] to support his story, and the police do not believe him.`,
+`The police found clear [[evidence]] of a break-in at the back of the empty house.`,
+`His fingerprints were used as the main [[evidence]] against him in court.`,
+`The scientists carefully collected [[evidence]] from the site before the rain washed it away.`,
+`On the [[evidence]] of the old letters, he was set free after ten long years.`
+]},
+{w:"explore",cn:"探索，勘探；探讨",tag:"NCE3-L3",ex:[
+`The children love to [[explore]] the woods near their home, looking for birds and small animals.`,
+`Scientists are still [[exploring]] the deepest parts of the ocean, where no light ever reaches.`,
+`We should [[explore]] every possible solution before we make such an important decision.`,
+`He [[explored]] the old castle from top to bottom, finding secret doors and hidden rooms.`,
+`The company is now [[exploring]] new markets in Asia in order to increase its sales.`
+]},
+{w:"extraordinarily",cn:"极其，非凡地",tag:"NCE3-L1",ex:[
+`The weather this summer has been [[extraordinarily]] hot, breaking records in many parts of the country.`,
+`She is an [[extraordinarily]] talented musician who has already performed in the world's greatest halls.`,
+`He was [[extraordinarily]] kind to strangers, always ready to help anyone in trouble.`,
+`The team performed [[extraordinarily]] well under pressure and won the championship at last.`,
+`It is [[extraordinarily]] difficult to change old habits, even when we know they are bad for us.`
+]},
+/* ---------- F ---------- */
+{w:"facilities",cn:"设施，设备",tag:"U1",ex:[
+`The school has excellent sports [[facilities]], including a large swimming pool and several tennis courts.`,
+`The hotel offers special [[facilities]] for disabled guests, such as lifts and wide bathroom doors.`,
+`There are no cooking [[facilities]] at all in this small flat, so we always eat out.`,
+`The new library has modern [[facilities]] for study, including quiet rooms and free computers.`,
+`Medical [[facilities]] in the countryside still need improving, as many villages have no doctor.`
+]},
+{w:"figure",cn:"数字；人物；认为；算出",tag:"NCE3-L2",ex:[
+`The [[figures]] in the report simply don't add up, so the whole account must be checked again.`,
+`He is a leading [[figure]] in the world of science and has won many international prizes.`,
+`I [[figured]] that she would arrive late, because she always does when it rains.`,
+`She still has a remarkably good [[figure]] for a woman of her age.`,
+`We must [[figure]] out how to solve this difficult problem before the deadline.`
+]},
+{w:"fragment",cn:"碎片，片段",tag:"NCE3-L3",ex:[
+`The expensive vase broke into tiny [[fragments]] when it fell onto the stone floor.`,
+`Only a small [[fragment]] of the ancient letter survived the fire that destroyed the library.`,
+`The archaeologists found [[fragments]] of ancient pottery scattered across the whole excavation site.`,
+`I heard only a [[fragment]] of their conversation as I walked past the open door.`,
+`The bomb reduced the whole building to [[fragments]] in a matter of seconds.`
+]},
+/* ---------- G ---------- */
+{w:"graceful",cn:"优雅的，优美的",tag:"NCE3-L3",ex:[
+`The dancer made a slow and [[graceful]] movement that silenced the whole audience.`,
+`She gave a [[graceful]] bow at the end of the performance and smiled at the cheering crowd.`,
+`The white swan glided across the still lake in a wonderfully [[graceful]] way.`,
+`He accepted the defeat in a [[graceful]] manner and congratulated the winner warmly.`,
+`The old stone bridge has a [[graceful]] arch that has been admired by painters for centuries.`
+]},
+{w:"guarded",cn:"谨慎的，有戒备的",tag:"U2",ex:[
+`He gave a very [[guarded]] answer to the reporter's difficult question about the accident.`,
+`She was always [[guarded]] about her private life and never spoke about her family.`,
+`The soldiers stood on a [[guarded]] watch all night, ready for any sudden attack.`,
+`His tone was [[guarded]] but polite, as though he were hiding something important.`,
+`The hospital is heavily [[guarded]] at night by police and security cameras.`
+]},
+/* ---------- I ---------- */
+{w:"identity",cn:"身份",tag:"NCE3-L3",ex:[
+`The police are still trying to discover the [[identity]] of the man found near the river.`,
+`She has kept her real [[identity]] a secret for years, even from her closest friends.`,
+`His [[identity]] card was stolen on the train, so he had to apply for a new one.`,
+`Music is an important part of their cultural [[identity]] and is passed down from parents to children.`,
+`The thief used a false [[identity]] to open a bank account in another person's name.`
+]},
+{w:"individual",cn:"个人的；个体",tag:"U1",ex:[
+`Each [[individual]] has his own way of learning, so teachers should not treat all students alike.`,
+`The rights of the [[individual]] must be protected by law, even when the majority disagree.`,
+`She has a very [[individual]] style of dress that makes her easy to recognize in a crowd.`,
+`The teacher gives [[individual]] attention to every student, especially those who are struggling.`,
+`Society is made up of many different [[individuals]], each with his own hopes and fears.`
+]},
+{w:"investigate",cn:"调查，研究",tag:"NCE3-L1",ex:[
+`The police are still [[investigating]] the cause of the terrible accident on the motorway.`,
+`Scientists are [[investigating]] the long-term effects of the new drug on elderly patients.`,
+`A special committee was set up to [[investigate]] the matter and report back within a month.`,
+`He was sent to [[investigate]] the strange noises that had frightened the whole village.`,
+`The company promised to [[investigate]] the customer's complaint as soon as possible.`
+]},
+/* ---------- O ---------- */
+{w:"oblige",cn:"迫使；使感激",tag:"NCE3-L1",ex:[
+`The heavy rain [[obliged]] us to stay indoors for the whole afternoon, playing cards.`,
+`I am much [[obliged]] to you for all the help you have given me this week.`,
+`The law [[obliges]] parents to send their children to school until they are sixteen.`,
+`We were [[obliged]] to leave the party early because of the sudden storm.`,
+`Could you [[oblige]] me by closing the window, please? It's rather cold in here.`
+]},
+{w:"observe",cn:"观察；注意到；遵守",tag:"NCE3-L1",ex:[
+`The scientists [[observed]] the distant stars through a powerful telescope on the mountain top.`,
+`She [[observed]] that he looked tired and worried, though he tried hard to hide it.`,
+`Drivers must carefully [[observe]] the speed limit, especially near schools and hospitals.`,
+`I [[observed]] him walking quietly into the building at noon, carrying a large black bag.`,
+`We should [[observe]] the traditions of our ancestors, even in these modern times.`
+]},
+{w:"opportunity",cn:"机会，时机",tag:"U1",ex:[
+`This is a good [[opportunity]] to practise your English with native speakers from different countries.`,
+`He never missed an [[opportunity]] to make money, however small the profit might be.`,
+`The new job gives me an [[opportunity]] to travel to many countries I have only read about.`,
+`Don't let such a wonderful [[opportunity]] slip away, or you may regret it forever.`,
+`She took the [[opportunity]] to thank everyone who had helped her through the difficult year.`
+]},
+/* ---------- P ---------- */
+{w:"possession",cn:"拥有；财产",tag:"NCE3-L1",ex:[
+`The old family house is now in the [[possession]] of his youngest daughter, who lives there alone.`,
+`He lost all his [[possessions]] in the fire, including the photographs of his parents.`,
+`The old car came into my [[possession]] last month, after my grandfather passed away.`,
+`Please take good care of your personal [[possessions]] while you are travelling abroad.`,
+`The small island has been in their [[possession]] for centuries, though nobody lives there now.`
+]},
+{w:"potential",cn:"潜力；潜在的",tag:"U1",ex:[
+`She has great [[potential]] as a writer, and her first novel has already attracted attention.`,
+`We must carefully consider the [[potential]] risks of the plan before we invest any money.`,
+`The young player's [[potential]] is enormous, and many clubs are watching him closely.`,
+`This is a [[potential]] problem that needs attention before it becomes a real one.`,
+`He hasn't yet reached his full [[potential]] as a musician, though he practises every day.`
+]},
+{w:"promising",cn:"有前途的，有希望的",tag:"U1",ex:[
+`She is a very [[promising]] young scientist who has already published two important papers.`,
+`The results of the experiment are very [[promising]], and further tests will be carried out.`,
+`He began his career as a [[promising]] young footballer, but injuries soon ended his dreams.`,
+`The weather looks quite [[promising]] for tomorrow's picnic, with warm sunshine expected.`,
+`This is a very [[promising]] start to the project, and the team is full of confidence.`
+]},
+{w:"prove",cn:"证明，证实",tag:"NCE3-L1",ex:[
+`He was able to [[prove]] that he was innocent by producing a letter from his doctor.`,
+`The results of the experiment [[prove]] that the theory is basically correct.`,
+`It [[proved]] to be a far more difficult task than anyone had expected.`,
+`Can you [[prove]] where you were last night, or can anyone confirm your story?`,
+`The old letter [[proved]] that she had been telling the truth all along.`
+]},
+{w:"promontory",cn:"海角，岬",tag:"NCE3-L3",ex:[
+`The white lighthouse stands on a rocky [[promontory]] that juts out into the stormy sea.`,
+`We walked out to the [[promontory]] to watch the sun set slowly over the wide bay.`,
+`A small fishing village was built on the [[promontory]] hundreds of years ago.`,
+`The ship sailed slowly around the [[promontory]] at dawn and disappeared into the mist.`,
+`From the top of the [[promontory]] you can see the whole bay and the islands beyond.`
+]},
+{w:"prosperous",cn:"繁荣的，兴旺的",tag:"NCE3-L3",ex:[
+`The small town grew [[prosperous]] after the railway arrived and brought trade and visitors.`,
+`He comes from a [[prosperous]] merchant family that has lived in the city for generations.`,
+`The country enjoyed a long and [[prosperous]] period of peace after the war ended.`,
+`They live in a [[prosperous]] suburb of the city, full of large houses and green gardens.`,
+`Trade with the East made the port [[prosperous]] in the eighteenth century.`
+]},
+/* ---------- R ---------- */
+{w:"raise",cn:"举起；提高；抚养；筹集",tag:"NCE3-L2",ex:[
+`Please [[raise]] your hand if you know the answer to the teacher's question.`,
+`The school is trying to [[raise]] money for charity by organizing a sponsored run.`,
+`She was [[raised]] by her grandparents in a quiet village in the north of the country.`,
+`The government has [[raised]] the price of fuel again, which has made many drivers angry.`,
+`He didn't [[raise]] his voice even once, though the argument was very heated.`
+]},
+{w:"rate",cn:"比率；速度；评价",tag:"U2",ex:[
+`The unemployment [[rate]] has fallen this year, though it is still higher than before the crisis.`,
+`The train was travelling at a [[rate]] of two hundred kilometres an hour when the accident happened.`,
+`His work is [[rated]] very highly by his colleagues and by his customers as well.`,
+`The birth [[rate]] in the country is declining steadily, worrying the government.`,
+`At any [[rate]], we should arrive at the hotel before it gets dark.`
+]},
+{w:"recognize",cn:"认出；承认；认可",tag:"NCE3-L2",ex:[
+`I didn't [[recognize]] you at first with your new haircut and your new glasses.`,
+`The country was finally [[recognized]] as an independent state by the rest of the world.`,
+`She [[recognized]] the song from the very first few notes played on the old piano.`,
+`He was [[recognized]] for his outstanding contribution to modern medicine.`,
+`Do you [[recognize]] the man standing on the left in this old photograph?`
+]},
+{w:"reconstruct",cn:"重建；重现",tag:"NCE3-L3",ex:[
+`The city was completely [[reconstructed]] after the war, though some old buildings were lost forever.`,
+`Police are trying to [[reconstruct]] the events of that terrible night from the witnesses' stories.`,
+`The old bridge had to be [[reconstructed]] after the flood washed away its central arch.`,
+`Scientists [[reconstructed]] the face of the ancient man from the bones found in the cave.`,
+`The old theatre was [[reconstructed]] exactly as it had been before the fire.`
+]},
+{w:"regular",cn:"规律的；定期的；经常的",tag:"U2",ex:[
+`He takes [[regular]] exercise every morning before breakfast, whatever the weather may be.`,
+`The little shop on the corner is a [[regular]] customer of ours and always pays on time.`,
+`You should have [[regular]] meals and enough sleep if you want to stay healthy.`,
+`The buses run at [[regular]] intervals of twenty minutes throughout the whole day.`,
+`She is a [[regular]] visitor to the museum and knows the collection better than most guides.`
+]},
+{w:"remains",cn:"遗迹，剩余物；遗骸",tag:"NCE3-L3",ex:[
+`The [[remains]] of an ancient temple were found here by farmers digging in the field.`,
+`The [[remains]] of the meal were given to the dog, who ate them in seconds.`,
+`The team carefully examined the [[remains]] of the building before the site was covered again.`,
+`His [[remains]] were buried in his home town, beside the graves of his parents.`,
+`The [[remains]] of the old castle still stand on the hill above the quiet village.`
+]},
+{w:"rest",cn:"剩余部分；休息",tag:"NCE3-L3",ex:[
+`The [[rest]] of the students had already gone home by the time I reached the classroom.`,
+`You look really tired; you need a good [[rest]] and a proper holiday somewhere quiet.`,
+`He spent the [[rest]] of his life quietly in the countryside, writing and painting.`,
+`Let's take a short [[rest]] here before we continue climbing to the top of the mountain.`,
+`The [[rest]] of the story is even more exciting than the part you have just read.`
+]},
+{w:"rough",cn:"粗糙的；大致的；粗暴的",tag:"U2",ex:[
+`The mountain road was [[rough]] and full of loose stones, making the journey very slow.`,
+`Can you give me a [[rough]] idea of the cost before I decide whether to go ahead?`,
+`He has a rather [[rough]] manner, but everyone knows he has a kind heart.`,
+`The sea was extremely [[rough]] that night and the small boat rocked dangerously.`,
+`I made a [[rough]] drawing of the plan on the back of an old envelope.`
+]},
+/* ---------- S ---------- */
+{w:"sacred",cn:"神圣的",tag:"NCE3-L3",ex:[
+`The ancient temple is a [[sacred]] place for the villagers, who visit it every spring.`,
+`Cows are considered [[sacred]] in some cultures and are never killed for food.`,
+`They made a solemn promise on [[sacred]] ground and never broke it.`,
+`This high mountain has been [[sacred]] since ancient times, and few dare to climb it.`,
+`Nothing is [[sacred]] to him; he would sell anything for money.`
+]},
+{w:"shoot",cn:"射击；拍摄；猛增；嫩芽",tag:"U2",ex:[
+`He [[shot]] at the distant target but missed it because of the strong wind.`,
+`The whole film was [[shot]] in the beautiful mountains of Yunnan over three months.`,
+`Prices of vegetables have [[shot]] up since last month because of the heavy rain.`,
+`The police [[shot]] the robber in the leg as he tried to escape over the wall.`,
+`New green [[shoots]] are appearing on the apple tree, a sure sign that spring has come.`
+]},
+{w:"somehow",cn:"不知怎么地，以某种方式",tag:"NCE3-L1",ex:[
+`[[Somehow]] we managed to get there on time, though the traffic was terrible.`,
+`She [[somehow]] knew that he was lying, even though he had a perfect explanation.`,
+`The secret letter [[somehow]] ended up in the wrong hands, causing a great scandal.`,
+`I must finish the report [[somehow]] tonight, even if I have to stay up till dawn.`,
+`[[Somehow]] or other, the fire was put out before it could spread to the other houses.`
+]},
+{w:"spot",cn:"发现，看见；地点，斑点",tag:"U2",ex:[
+`She quickly [[spotted]] a serious mistake in the report and pointed it out to her manager.`,
+`This is a lovely [[spot]] for a picnic, with a fine view of the lake below.`,
+`He has a small [[spot]] of ink on his clean white shirt and cannot remove it.`,
+`I [[spotted]] him in the crowd at once, even though he was wearing a hat.`,
+`The police were soon on the [[spot]] and took control of the whole situation.`
+]},
+{w:"start",cn:"开始；惊起，吓一跳",tag:"NCE3-L2",ex:[
+`The important meeting will [[start]] at nine o'clock sharp, so please don't be late.`,
+`She gave a [[start]] when she heard the door bang loudly in the wind.`,
+`He [[started]] to laugh loudly when he saw the surprised look on my face.`,
+`The sudden noise in the dark gave me quite a [[start]].`,
+`We [[started]] off early in the morning to avoid the heavy traffic into the city.`
+]},
+{w:"storey",cn:"楼层",tag:"NCE3-L3",ex:[
+`They live in a modern five-[[storey]] building near the centre of the city.`,
+`The office is on the third [[storey]], and there is no lift in the old building.`,
+`The old house has two [[storeys]] and a large basement used for storing wine.`,
+`A new ten-[[storey]] hotel is being built here and will open next spring.`,
+`She climbed all the way to the top [[storey]] of the tower to enjoy the view.`
+]},
+{w:"stress",cn:"压力；强调",tag:"U2",ex:[
+`He is under a lot of [[stress]] at work because of the new project and the tight deadline.`,
+`The teacher [[stressed]] the importance of daily practice when learning a foreign language.`,
+`Too much [[stress]] over a long period can make you seriously ill.`,
+`She [[stressed]] that the work must be finished today, whatever the difficulties might be.`,
+`Regular exercise is a good way to relieve [[stress]] after a long day at work.`
+]},
+{w:"strike",cn:"打击；罢工；突然想到；敲响",tag:"NCE3-L2",ex:[
+`The workers went on [[strike]] for better pay and shorter working hours.`,
+`A good idea suddenly [[struck]] me while I was walking home in the rain.`,
+`The old clock in the hall [[struck]] twelve as we were saying goodbye.`,
+`The terrible storm [[struck]] the village at midnight and destroyed many roofs.`,
+`It [[struck]] me that she had been crying, though she tried hard to smile.`
+]},
+{w:"still",cn:"静止的；仍然",tag:"NCE3-L2",ex:[
+`The lake was completely [[still]] and clear, reflecting the mountains like a mirror.`,
+`He is [[still]] waiting for an answer to the letter he sent three months ago.`,
+`Please keep [[still]] for a moment while I take your photograph.`,
+`She [[still]] lives in the small house where she was born over eighty years ago.`,
+`The air was [[still]] and hot, and not a single leaf was moving.`
+]},
+{w:"struggle",cn:"挣扎，努力；斗争",tag:"U2",ex:[
+`He [[struggled]] to open the heavy wooden door, which had not been used for years.`,
+`Many families in the area [[struggle]] to make ends meet on very low wages.`,
+`She [[struggled]] with her maths homework for hours before asking her brother for help.`,
+`The silver fish [[struggled]] desperately in the net before the fisherman pulled it out.`,
+`The two countries [[struggled]] for control of the sea for many long years.`
+]},
+/* ---------- T ---------- */
+{w:"target",cn:"目标；靶子；瞄准",tag:"U2",ex:[
+`Our [[target]] is to double the sales this year, though the market is far from easy.`,
+`He hit the [[target]] with his very first shot, to everyone's surprise.`,
+`The factory has failed to meet its production [[target]] for the third month running.`,
+`The clever advertisement [[targets]] young people who spend a lot of time online.`,
+`The little village was a [[target]] for enemy bombers during the whole winter.`
+]},
+{w:"tension",cn:"紧张（局势）；张力",tag:"U2",ex:[
+`There was a lot of [[tension]] in the room as we waited for the results to come in.`,
+`The [[tension]] between the two countries is growing, and war seems ever more likely.`,
+`You could actually feel the [[tension]] in the stadium before the final match began.`,
+`The old rope snapped under the [[tension]] and the heavy box fell to the ground.`,
+`Laughter is one of the best ways to ease [[tension]] between people.`
+]},
+{w:"trail",cn:"小径；痕迹；跟踪；拖在后面",tag:"NCE3-L1",ex:[
+`We followed a narrow [[trail]] through the thick forest, guided only by the marks on the trees.`,
+`The tired dog [[trailed]] behind its master, too exhausted to run any further.`,
+`The police found a [[trail]] of blood on the floor leading to the back door.`,
+`Her long silk skirt [[trailed]] on the ground as she walked slowly down the stairs.`,
+`The hikers left a long [[trail]] of footprints in the fresh snow across the field.`
+]},
+/* ---------- W ---------- */
+{w:"wake",cn:"醒来；唤醒；尾波",tag:"NCE3-L2",ex:[
+`I usually [[wake]] up at six in the morning, even at the weekend.`,
+`Please [[wake]] me before you leave for work, because I have an early meeting.`,
+`The terrible noise from the street [[woke]] the whole family in the middle of the night.`,
+`The ship left a long white [[wake]] behind it as it moved slowly out of the harbour.`,
+`She [[woke]] to the sound of birds singing in the garden outside her window.`
+]},
+{w:"well-rounded",cn:"全面的，多才多艺的",tag:"U1",ex:[
+`The school aims to produce [[well-rounded]] students who are good at both academic subjects and sports.`,
+`She had a [[well-rounded]] education in both arts and science, which prepared her well for life.`,
+`A [[well-rounded]] person is good at many different things and can deal with almost any situation.`,
+`Reading widely in many different subjects helps you become a truly [[well-rounded]] person.`,
+`They want their children to have a [[well-rounded]] development, both in mind and in body.`
+]},
+{w:"whatever",cn:"无论什么；不管怎样",tag:"NCE3-L2",ex:[
+`You can eat [[whatever]] you like from the menu; it's all included in the price.`,
+`[[Whatever]] happens in the coming months, I will stand by you and support you.`,
+`Take [[whatever]] you need from the fridge, and don't worry about the cost.`,
+`He refused to change his mind, [[whatever]] we said to persuade him.`,
+`[[Whatever]] you do, don't be late for the interview tomorrow morning.`
+]},
+{w:"worship",cn:"崇拜，敬奉",tag:"NCE3-L3",ex:[
+`People come from far away to [[worship]] at this ancient temple on the mountain.`,
+`The children [[worshipped]] their elder brother and copied everything he did.`,
+`The islanders [[worship]] the sea god and offer gifts before every fishing trip.`,
+`Money is the thing he [[worships]] most, though he would never admit it.`,
+`The old stone church is a place of [[worship]] for the whole village.`
+]},
+/* ---------- Y ---------- */
+{w:"yet",cn:"然而；还（未）",tag:"U1",ex:[
+`He is well over seventy, [[yet]] he still works in his garden like a young man.`,
+`Have you finished your homework [[yet]], or are you still working on the last question?`,
+`The best is [[yet]] to come, as the team has several young players of great promise.`,
+`She hasn't arrived [[yet]], though the train was due half an hour ago.`,
+`The method is simple, [[yet]] it is very effective and saves a lot of time.`
+]}
+];
+
+/* =========================================================
+   数据区：短语
+   每条 {s: 含[[划线部分]]的原句, a: 用本短语替换后的正确形式}
+   ========================================================= */
+const PHRASES = [
+/* ---------- U1 ---------- */
+{p:"lie in sth",cn:"在于……",tag:"U1",ex:[
+{s:`The real cause of the problem [[is to be found in]] the lack of money and proper planning.`,a:`lies in`},
+{s:`His greatest strength [[consists in]] his honesty and his patience with other people.`,a:`lies in`},
+{s:`The answer to your question [[is to be found in]] careful and patient study.`,a:`lies in`},
+{s:`The charm of the old village [[consists in]] its simplicity and its quiet way of life.`,a:`lies in`},
+{s:`The difficulty [[consists in]] finding enough time to finish the whole project.`,a:`lies in`}
+]},
+{p:"rise to sth",cn:"应对，有能力处理（挑战）",tag:"U1",ex:[
+{s:`She quickly [[proved able to deal with]] the challenge of her new job.`,a:`rose to`},
+{s:`He [[managed to cope with]] the occasion and gave a wonderful speech.`,a:`rose to`},
+{s:`Few people can [[deal successfully with]] such a difficult task.`,a:`rise to`},
+{s:`The team [[met the demands of]] the final match with great courage.`,a:`rose to`},
+{s:`It takes courage to [[face up to]] a challenge like that.`,a:`rise to`}
+]},
+{p:"put sth + adv./prep.",cn:"放置（put 后接宾语再接副词/介词）",tag:"U1",ex:[
+{s:`Please [[place]] the books carefully on the shelf by the window.`,a:`put`},
+{s:`She [[placed]] her hand gently on my shoulder and smiled.`,a:`put`},
+{s:`He [[placed]] all the money in his pocket and hurried away.`,a:`put`},
+{s:`They [[placed]] the heavy boxes in the corner of the room.`,a:`put`},
+{s:`Don't [[place]] your feet on the table; it isn't polite.`,a:`put`}
+]},
+{p:"make the most of",cn:"充分利用",tag:"U1",ex:[
+{s:`You should [[take full advantage of]] your time at university.`,a:`make the most of`},
+{s:`We [[took full advantage of]] the sunny weather and went hiking in the hills.`,a:`made the most of`},
+{s:`She [[takes full advantage of]] every opportunity to practise her English.`,a:`makes the most of`},
+{s:`Let's [[take full advantage of]] the remaining days of the holiday.`,a:`make the most of`},
+{s:`He [[took full advantage of]] his talents and became a famous pianist.`,a:`made the most of`}
+]},
+/* ---------- U2 ---------- */
+{p:"see eye to eye with sb. on sth",cn:"与某人在某事上看法一致",tag:"U2",ex:[
+{s:`I don't [[agree with]] my father on this matter.`,a:`see eye to eye with`},
+{s:`They rarely [[agree with]] each other on political questions.`,a:`see eye to eye with`},
+{s:`We [[agree with]] each other on most important things.`,a:`see eye to eye with`},
+{s:`My boss and I don't always [[agree with]] each other.`,a:`see eye to eye with`},
+{s:`Do you [[agree with]] your parents on the choice of career?`,a:`see eye to eye with`}
+]},
+{p:"result of / from",cn:"由……造成；起因于",tag:"U2",ex:[
+{s:`The accident [[was caused by]] careless driving.`,a:`was the result of`},
+{s:`Her illness [[came from]] working too hard for too many years.`,a:`resulted from`},
+{s:`The flood [[was caused by]] three days of heavy rain.`,a:`was the result of`},
+{s:`His success [[came from]] years of patient hard work.`,a:`resulted from`},
+{s:`The delay [[was caused by]] a technical problem.`,a:`was the result of`}
+]},
+{p:"be anxious about sth / for sb",cn:"为某事担心 / 为某人担忧",tag:"U2",ex:[
+{s:`She [[is worried about]] her exam results.`,a:`is anxious about`},
+{s:`Parents are always [[worried about]] their children's safety.`,a:`anxious about`},
+{s:`I'm [[worried about]] the coming interview.`,a:`anxious about`},
+{s:`He [[was eager for]] his son to do well in the competition.`,a:`was anxious for`},
+{s:`We [[were worried about]] the weather during the whole trip.`,a:`were anxious about`}
+]},
+{p:"shoot up",cn:"猛增，迅速上升",tag:"U2",ex:[
+{s:`Prices have [[risen very quickly]] since the beginning of the year.`,a:`shot up`},
+{s:`The boy [[grew very fast]] in the last two years.`,a:`shot up`},
+{s:`House prices are [[rising very quickly]] in this area.`,a:`shooting up`},
+{s:`The temperature [[rose suddenly]] to forty degrees.`,a:`shot up`},
+{s:`Sales [[rose quickly]] after the advertisement appeared on television.`,a:`shot up`}
+]},
+{p:"think ... through",cn:"仔细考虑，通盘考虑",tag:"U2",ex:[
+{s:`You should [[consider it carefully]] before you start the project.`,a:`think it through`},
+{s:`He hadn't [[considered the matter carefully]] before making the decision.`,a:`thought the matter through`},
+{s:`We need to [[consider everything carefully]] before we act.`,a:`think it through`},
+{s:`Have you [[considered everything carefully]]?`,a:`thought everything through`},
+{s:`She always [[considers things carefully]] before making a decision.`,a:`thinks things through`}
+]},
+{p:"back down",cn:"让步，放弃（要求）",tag:"U2",ex:[
+{s:`Neither side was willing to [[give way]].`,a:`back down`},
+{s:`The government refused to [[give way]] over the new tax.`,a:`back down`},
+{s:`He finally [[gave way]] and apologized to everyone.`,a:`backed down`},
+{s:`Don't [[give way]] just because someone disagrees with you.`,a:`back down`},
+{s:`She [[gave way]] from her original demand.`,a:`backed down`}
+]},
+{p:"turn out (that)",cn:"结果是，证明是",tag:"U2",ex:[
+{s:`It [[proved to be the case]] that he had been right all along.`,a:`turned out`},
+{s:`The party [[proved to be]] a great success.`,a:`turned out to be`},
+{s:`Things didn't [[happen as]] we had expected.`,a:`turn out`},
+{s:`It [[proved to be]] a lovely day after all.`,a:`turned out to be`},
+{s:`As it [[proved]], nobody was hurt in the accident.`,a:`turned out`}
+]},
+/* ---------- L1 ---------- */
+{p:"be at large",cn:"逍遥法外，在逃",tag:"NCE3-L1",ex:[
+{s:`Police warned that a dangerous criminal [[hadn't been caught]] and was still somewhere in the city.`,a:`was at large`},
+{s:`The murderer is still [[free and not caught]].`,a:`at large`},
+{s:`The escaped prisoner was [[free]] for three days before being caught.`,a:`at large`},
+{s:`Police warned that a dangerous criminal was [[still free]].`,a:`at large`},
+{s:`The gang remained [[free and not captured]] for months.`,a:`at large`}
+]},
+{p:"take sth. seriously/lightly",cn:"认真对待 / 轻视",tag:"NCE3-L1",ex:[
+{s:`You should [[pay serious attention to this warning]].`,a:`take this warning seriously`},
+{s:`He never [[pays serious attention to his studies]].`,a:`takes his studies seriously`},
+{s:`We must [[pay serious attention to the problem]].`,a:`take the problem seriously`},
+{s:`Don't [[pay little attention to the matter]].`,a:`take the matter lightly`},
+{s:`She [[paid little attention to his threats]].`,a:`took his threats lightly`}
+]},
+{p:"leave ... behind ...",cn:"留下；遗忘；把……抛在后面",tag:"NCE3-L1",ex:[
+{s:`The robber [[abandoned]] a pair of gloves at the scene of the crime.`,a:`left behind`},
+{s:`Don't [[forget to take]] any of your personal belongings with you.`,a:`leave behind`},
+{s:`The storm [[caused]] a trail of destruction in the village.`,a:`left behind`},
+{s:`She [[abandoned]] her hometown and moved to the city.`,a:`left behind`},
+{s:`Hurry up, or the others will [[go on without you]].`,a:`leave you behind`}
+]},
+{p:"must have been done",cn:"一定已经……（对过去的肯定推测，被动）",tag:"NCE3-L1",ex:[
+{s:`The window is broken. It [[was certainly broken]] by the boys.`,a:`must have been done`},
+{s:`The work [[was certainly finished]] in a great hurry.`,a:`must have been done`},
+{s:`The damage [[was certainly caused]] during the storm.`,a:`must have been done`},
+{s:`This drawing [[was certainly made]] by a very skilled hand.`,a:`must have been done`},
+{s:`The letter [[was certainly written]] on an old typewriter.`,a:`must have been done`}
+]},
+{p:"be in sb's possession / be in the possession of sb",cn:"被某人拥有",tag:"NCE3-L1",ex:[
+{s:`The painting [[belongs to]] a private collector.`,a:`is in the possession of`},
+{s:`The house [[belonged to]] him for over forty years.`,a:`was in his possession`},
+{s:`The stolen jewels [[are now owned by]] the police.`,a:`are now in the possession of`},
+{s:`All the documents [[are owned by]] the company.`,a:`are in the possession of`},
+{s:`The land [[has belonged to]] the family for generations.`,a:`has been in the possession of`}
+]},
+/* ---------- L2 ---------- */
+{p:"be always doing sth",cn:"总是做某事（表赞美或不满）",tag:"NCE3-L2",ex:[
+{s:`She [[helps others all the time]].`,a:`is always helping`},
+{s:`He [[loses his keys all the time]].`,a:`is always losing`},
+{s:`You [[complain about the weather all the time]].`,a:`are always complaining`},
+{s:`My neighbour [[plays loud music at night all the time]].`,a:`is always playing`},
+{s:`He [[forgets to bring his homework all the time]].`,a:`is always forgetting`}
+]},
+{p:"arm sb with sth",cn:"用……武装某人；使某人具备……",tag:"NCE3-L2",ex:[
+{s:`The soldiers [[were equipped with]] modern weapons before the battle.`,a:`were armed with`},
+{s:`The police [[were equipped with]] sticks and shields.`,a:`were armed with`},
+{s:`She entered the room [[carrying]] a torch and a map.`,a:`armed with`},
+{s:`Students should [[be given]] knowledge before entering society.`,a:`be armed with`},
+{s:`The villagers [[were given]] simple tools to defend themselves.`,a:`were armed with`}
+]},
+{p:"catch sight of ...",cn:"看见，瞥见",tag:"NCE3-L2",ex:[
+{s:`I [[saw]] him in the crowd.`,a:`caught sight of`},
+{s:`She [[saw]] a beautiful bird in the tree.`,a:`caught sight of`},
+{s:`We [[saw]] the sea from the top of the hill.`,a:`caught sight of`},
+{s:`He [[saw]] his old friend at the station.`,a:`caught sight of`},
+{s:`If you [[see]] the sign, turn left.`,a:`catch sight of`}
+]}
+];
+
+/* =========================================================
+   常量与工具
+   ========================================================= */
+const TYPE_ORDER = ['cn','first','phrase'];
+const TYPE_NAME = {
+  cn:'根据汉语释义默写单词',
+  first:'首字母填空',
+  phrase:'同义短语替换'
+};
+const BADGE = {cn:'<span class="badge b1">中译英</span>',
+               first:'<span class="badge b2">首字母填空</span>',
+               phrase:'<span class="badge b3">短语替换</span>'};
+const TAG_ORDER = ["U1","U2","NCE3-L1","NCE3-L2","NCE3-L3"];
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function norm(s){
+  return String(s==null?'':s)
+    .toLowerCase()
+    .replace(/[’‘]/g,"'")
+    .replace(/[.,!?;:"“”()\[\]{}]/g,'')
+    .replace(/[\s\-_]+/g,'')
+    .trim();
+}
+function firstAnswer(sent){
+  const m = sent.match(/\[\[(.+?)\]\]/);
+  return m ? m[1] : '';
+}
+/* 把带 [[ ]] 的句子转成 HTML
+   mode: 'blank'（首字母填空）| 'uline'（划线替换）| 'ans'（显示答案） */
+function sentToHtml(sent, mode){
+  let out = '', last = 0, m;
+  const re = /\[\[(.+?)\]\]/g;
+  while((m = re.exec(sent))){
+    out += escapeHtml(sent.slice(last, m.index));
+    const a = m[1];
+    if(mode === 'blank'){
+      out += '<span class="blank"><span class="first">'+escapeHtml(a[0])+'</span><span class="line"></span></span>';
+    }else if(mode === 'uline'){
+      out += '<u class="uline">'+escapeHtml(a)+'</u>';
+    }else{
+      out += '<span class="ans">'+escapeHtml(a)+'</span>';
+    }
+    last = m.index + m[0].length;
+  }
+  out += escapeHtml(sent.slice(last));
+  return out;
+}
+
+/* =========================================================
+   勾选面板初始化
+   ========================================================= */
+function initChecks(){
+  const build = (data, kind, el) => {
+    const tags = [...new Set(data.map(d=>d.tag))]
+      .sort((a,b)=>TAG_ORDER.indexOf(a)-TAG_ORDER.indexOf(b));
+    el.innerHTML = tags.map(t=>{
+      const n = data.filter(d=>d.tag===t).length;
+      return '<label class="chk"><input type="checkbox" data-kind="'+kind+'" value="'+t+'" checked>'
+           + t + '<span class="cnt">'+n+'</span></label>';
+    }).join('')
+    + '<label class="chk all"><input type="checkbox" data-kind="'+kind+'" value="__all__" checked>全选</label>';
+  };
+  build(WORDS,'word',document.getElementById('wordChks'));
+  build(PHRASES,'phrase',document.getElementById('phraseChks'));
+
+  document.querySelectorAll('input[value="__all__"]').forEach(allBox=>{
+    const kind = allBox.dataset.kind;
+    const getBoxes = ()=>[...document.querySelectorAll('input[data-kind="'+kind+'"]')]
+                          .filter(b=>b.value!=='__all__');
+    allBox.addEventListener('change',()=>{
+      getBoxes().forEach(b=>b.checked = allBox.checked);
+      allBox.indeterminate = false;
+    });
+    document.addEventListener('change',e=>{
+      if(e.target.dataset && e.target.dataset.kind===kind && e.target.value!=='__all__'){
+        const bs = getBoxes();
+        const checked = bs.filter(b=>b.checked).length;
+        allBox.checked = checked === bs.length;
+        allBox.indeterminate = checked>0 && checked<bs.length;
+      }
+    });
+  });
+}
+
+/* =========================================================
+   状态
+   ========================================================= */
+let currentQs = [];
+let currentPhraseBank = [];
+
+/* =========================================================
+   生成试题
+   ========================================================= */
+function generate(){
+  const wordTags = [...document.querySelectorAll('input[data-kind="word"]')]
+      .filter(i=>i.value!=='__all__' && i.checked).map(i=>i.value);
+  const phraseTags = [...document.querySelectorAll('input[data-kind="phrase"]')]
+      .filter(i=>i.value!=='__all__' && i.checked).map(i=>i.value);
+  const types = [...document.querySelectorAll('input[data-kind="type"]:checked')]
+      .map(i=>i.value)
+      .sort((a,b)=>TYPE_ORDER.indexOf(a)-TYPE_ORDER.indexOf(b));
+
+  let n = parseInt(document.getElementById('numQ').value,10);
+  if(isNaN(n)||n<1) n = 10;
+  n = Math.min(n,60);
+
+  if(types.length===0){ alert('请至少选择一种题型！'); return; }
+  if(wordTags.length===0 && phraseTags.length===0){ alert('请至少选择一个考察内容！'); return; }
+
+  const selWords   = WORDS.filter(w=>wordTags.includes(w.tag));
+  const selPhrases = PHRASES.filter(p=>phraseTags.includes(p.tag));
+
+  /* 按题型建池子，顺序与题型列表一致 */
+  const groups = [];
+  types.forEach(t=>{
+    if(t==='cn'){
+      const pool = shuffle(selWords.map(w=>({type:'cn',word:w})));
+      if(pool.length) groups.push({type:'cn',pool});
+    }
+    if(t==='first'){
+      const arr = [];
+      selWords.forEach(w=>w.ex.forEach(s=>arr.push({type:'first',word:w,sent:s})));
+      if(arr.length) groups.push({type:'first',pool:shuffle(arr)});
+    }
+    if(t==='phrase'){
+      const arr = [];
+      selPhrases.forEach(p=>p.ex.forEach(e=>arr.push({type:'phrase',phrase:p,sent:e.s,answer:e.a})));
+      if(arr.length) groups.push({type:'phrase',pool:shuffle(arr)});
+    }
+  });
+
+  if(groups.length===0){ alert('当前选择下没有可用题目，请检查勾选内容。'); return; }
+
+  /* 轮流分配题数，尽量均匀 */
+  const counts = groups.map(()=>0);
+  let remaining = n;
+  while(remaining > 0){
+    let assigned = false;
+    for(let i=0;i<groups.length && remaining>0;i++){
+      if(counts[i] < groups[i].pool.length){
+        counts[i]++; remaining--; assigned = true;
+      }
+    }
+    if(!assigned) break;
+  }
+
+  /* 抽取并预处理，按题型分组顺序排列 */
+  const chosen = [];
+  groups.forEach((g,i)=>{
+    for(let k=0;k<counts[i];k++){
+      chosen.push(prep(g.pool[k]));
+    }
+  });
+
+  currentPhraseBank = selPhrases;
+  renderPaper(chosen);
+}
+
+/* 预处理：提取答案、生成题干 */
+function prep(q){
+  if(q.type==='cn'){
+    q.answer = q.word.w;
+    q.prompt = '写出下列汉语释义对应的英语单词：<b class="cn">'+escapeHtml(q.word.cn)+'</b>';
+  }else if(q.type==='first'){
+    const ans = firstAnswer(q.sent);
+    q.answer = ans;
+    q.prompt = sentToHtml(q.sent,'blank');
+  }else{
+    q.prompt = sentToHtml(q.sent,'uline');
+    q.solved = sentToHtml(q.sent,'ans');
+  }
+  return q;
+}
+
+/* =========================================================
+   渲染试卷
+   ========================================================= */
+function renderPaper(qs){
+  currentQs = qs;
+
+  /* 短语词单 */
+  const bank = document.getElementById('phraseBank');
+  const hasPhraseQ = qs.some(q=>q.type==='phrase');
+  if(hasPhraseQ && currentPhraseBank.length){
+    bank.classList.remove('hidden');
+    bank.innerHTML = '<div class="bank-title">📎 短语词单（第 3 类题请从下列短语中选用，注意时态、语态和词形变化）</div>'
+      + '<div class="chips">' + currentPhraseBank.map(p=>'<span class="chip">'+escapeHtml(p.p)+'</span>').join('') + '</div>';
+  }else{
+    bank.classList.add('hidden');
+  }
+
+  /* 按题型分组 */
+  const groups = [];
+  qs.forEach(q=>{
+    let g = groups.find(x=>x.type===q.type);
+    if(!g){ g = {type:q.type, items:[]}; groups.push(g); }
+    g.items.push(q);
+  });
+  groups.sort((a,b)=>TYPE_ORDER.indexOf(a.type)-TYPE_ORDER.indexOf(b.type));
+
+  const NUM_CN = ['一','二','三','四'];
+  let html = '';
+  let globalIdx = 0;
+
+  groups.forEach((g, gi)=>{
+    html += '<div class="group-title">'+NUM_CN[gi]+'、'+TYPE_NAME[g.type]
+          + '（共 '+g.items.length+' 题）</div>';
+    g.items.forEach(q=>{
+      const i = globalIdx++;
+      let hint = '';
+      if(q.type==='phrase'){
+        hint = ''; // 按用户要求：不提供中文提示
+      }
+      const cls = q.type==='cn' ? 'qtext' : 'qtext en';
+      const ph  = q.type==='cn' ? '输入英语单词'
+                : q.type==='first' ? '补全单词（注意词形变化）'
+                : '填入合适的短语（注意时态、语态、人称变化）';
+
+      html += '<div class="q" data-i="'+i+'">'
+        + '<div class="qhead"><span class="qno">第 '+(i+1)+' 题</span>'+BADGE[q.type]+'</div>'
+        + '<div class="'+cls+'">'+q.prompt+'</div>'
+        + hint
+        + '<input type="text" class="ansinput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="'+ph+'">'
+        + '<div class="fb hidden"></div>'
+        + '</div>';
+    });
+  });
+
+  document.getElementById('questions').innerHTML = html;
+  document.getElementById('paperTitle').textContent = '试题（共 ' + qs.length + ' 题）';
+  document.getElementById('paperCard').classList.remove('hidden');
+  const rc = document.getElementById('resultCard');
+  rc.classList.add('hidden');
+  rc.innerHTML = '';
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = false;
+  btn.textContent = '交卷';
+  btn.onclick = submitPaper;
+
+  document.getElementById('paperCard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* =========================================================
+   交卷判分
+   ========================================================= */
+function submitPaper(){
+  const inputs = document.querySelectorAll('#questions .ansinput');
+  let correct = 0;
+  const wrongs = [];
+
+  currentQs.forEach((q,i)=>{
+    const el = inputs[i];
+    if(!el) return;
+    const user = el.value.trim();
+    const ok = norm(user) === norm(q.answer);
+
+    el.disabled = true;
+    const qDiv = el.closest('.q');
+    const fb = qDiv.querySelector('.fb');
+    fb.classList.remove('hidden');
+
+    if(ok){
+      correct++;
+      qDiv.classList.add('ok');
+      fb.classList.add('ok');
+      fb.innerHTML = '✅ 正确';
+    }else{
+      qDiv.classList.add('bad');
+      fb.classList.add('bad');
+      fb.innerHTML = '❌ 你的答案：<b>' + (escapeHtml(user) || '（空）') + '</b>　|　正确答案：<b class="ans">'
+                   + escapeHtml(q.answer) + '</b>';
+      wrongs.push({q, user});
+    }
+  });
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '已交卷';
+
+  renderResult(correct, currentQs.length, wrongs);
+}
+
+/* =========================================================
+   渲染结果
+   ========================================================= */
+function renderResult(correct, total, wrongs){
+  const score = Math.round(correct / total * 100);
+  const card = document.getElementById('resultCard');
+
+  let html = '';
+  html += '<div class="score">' + score + ' 分</div>';
+  html += '<div class="sub">共 ' + total + ' 题，答对 ' + correct + ' 题，答错 ' + (total-correct) + ' 题</div>';
+  html += '<div class="bar"><i style="width:' + score + '%"></i></div>';
+
+  if(wrongs.length === 0){
+    html += '<div class="perfect">🎉 全部正确，太棒了！</div>';
+  }else{
+    html += '<div class="wtitle">📕 错题集（' + wrongs.length + ' 题）</div>';
+    html += wrongs.map((it, idx)=>{
+      const q = it.q;
+      let stem;
+      if(q.type === 'cn'){
+        stem = '<span class="badge b1">中译英</span> ' + escapeHtml(q.word.cn);
+      }else if(q.type === 'first'){
+        stem = '<span class="badge b2">首字母填空</span> ' + q.solved;
+      }else{
+        stem = '<span class="badge b3">短语替换</span> ' + q.solved;
+      }
+      return '<div class="witem">'
+        + '<div class="wq">' + (idx+1) + '. ' + stem + '</div>'
+        + '<div class="wa">你的答案：<b>' + (escapeHtml(it.user) || '（空）')
+        + '</b>　→　正确答案：<b>' + escapeHtml(q.answer) + '</b></div>'
+        + '</div>';
+    }).join('');
+  }
+
+  html += '<div style="text-align:center;margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">'
+        + '<button class="btn primary" onclick="window.scrollTo({top:0,behavior:\'smooth\'})">重新配置</button>'
+        + '<button class="btn" id="againBtn">再来一套</button>'
+        + '</div>';
+
+  card.innerHTML = html;
+  card.classList.remove('hidden');
+  card.scrollIntoView({behavior:'smooth',block:'start'});
+
+  document.getElementById('againBtn').onclick = ()=>{ generate(); };
+}
+
+/* =========================================================
+   启动
+   ========================================================= */
+initChecks();
+document.getElementById('genBtn').addEventListener('click', generate);
+</script>
+</body>
+</html>
