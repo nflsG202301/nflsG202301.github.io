@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>软件下载 · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班软件下载：官网同步软件、Class Panel 2.3。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* 页面头部 */
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:1px;margin-bottom:12px}
+.page-hero .sub{color:#c3d2e6;font-size:15px;max-width:640px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+/* 内容区 */
+.section{padding:40px 0 72px}
+.list-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;margin-bottom:22px;
+}
+.list-head h2{
+  font-size:17px;letter-spacing:.5px;color:var(--navy);
+  display:flex;align-items:center;gap:9px;
+}
+.list-head h2::before{
+  content:"";width:9px;height:9px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18);
+}
+.list-head .count{font-size:13.5px;color:var(--muted)}
+.list-head .count b{color:var(--navy)}
+
+/* ============ 软件横条 ============ */
+.sw-list{display:flex;flex-direction:column;gap:16px}
+
+.sw-row{
+  position:relative;
+  display:flex;align-items:center;gap:28px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:24px 28px;
+  overflow:hidden;
+  transition:transform .26s ease, box-shadow .26s ease, border-color .26s ease;
+  animation:rise .45s ease both;
+}
+.sw-row:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+  border-color:rgba(201,162,39,.55);
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* 左侧金色竖条 */
+.sw-row::before{
+  content:"";
+  position:absolute;left:0;top:24px;bottom:24px;
+  width:4px;border-radius:0 4px 4px 0;
+  background:linear-gradient(180deg,var(--gold-light),var(--gold));
+  transition:top .26s ease, bottom .26s ease;
+}
+.sw-row:hover::before{top:18px;bottom:18px}
+
+/* 软件信息 */
+.sw-info{flex:1;min-width:200px}
+.sw-name{
+  font-size:18px;font-weight:800;letter-spacing:.5px;
+  color:var(--navy);line-height:1.5;margin-bottom:6px;
+}
+.sw-desc{
+  font-size:13.5px;color:var(--muted);line-height:1.7;
+}
+
+/* 右侧按钮组：PC 一行 + 手机一行 */
+.sw-downloads{
+  flex:0 0 auto;
+  display:flex;flex-direction:column;gap:10px;
+  align-items:flex-end;
+}
+.dl-row{
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.dl-row-label{
+  font-size:11.5px;font-weight:800;letter-spacing:1.5px;
+  color:#9aa6b8;
+  padding-right:6px;
+  margin-right:4px;
+  border-right:1px solid var(--line);
+  white-space:nowrap;
+}
+
+/* 下载按钮：两行 —— 上系统名，下状态 */
+.sw-btn{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1px;
+  min-width:94px;
+  padding:7px 14px 8px;
+  border-radius:12px;
+  font-size:13px;letter-spacing:.3px;
+  color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  box-shadow:0 6px 16px rgba(201,162,39,.28);
+  transition:all .22s ease;
+  white-space:nowrap;
+  border:none;cursor:pointer;font-family:inherit;
+  text-align:center;
+}
+.sw-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(201,162,39,.42);
+}
+.sw-btn .name{
+  display:block;
+  font-size:13.5px;font-weight:800;
+  letter-spacing:.3px;
+  line-height:1.2;
+}
+.sw-btn .sub{
+  display:block;
+  font-size:10.5px;font-weight:600;
+  color:rgba(15,37,71,.66);
+  letter-spacing:.5px;
+  line-height:1.3;
+}
+
+/* 禁用（敬请期待）按钮 */
+.sw-btn.off{
+  background:#eef1f5;
+  color:#9aa6b8;
+  box-shadow:none;
+  cursor:not-allowed;
+  pointer-events:none;
+}
+.sw-btn.off .name{color:#8b95a5}
+.sw-btn.off .sub{color:#b8c0cc}
+
+/* 提示条 */
+.tip-bar{
+  margin-top:26px;
+  display:flex;align-items:flex-start;gap:11px;
+  background:#eef3fb;
+  border-left:4px solid #2f6bc0;
+  border-radius:10px;
+  padding:14px 18px;
+  font-size:14px;color:#3b4a61;
+  line-height:1.75;
+}
+.tip-bar .ti{flex:0 0 auto;font-size:16px;line-height:1.6}
+
+/* 页脚 */
+.site-footer{
+  background:var(--navy);color:#9fb3d1;
+  padding:34px 0;font-size:13.5px;
+}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:1180px){
+  .sw-row{flex-wrap:wrap;gap:18px}
+  .sw-info{flex:1 1 100%;min-width:0}
+  .sw-downloads{
+    flex:1 1 100%;
+    align-items:flex-start;
+  }
+  .dl-row{justify-content:flex-start}
+}
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .sw-row{padding:20px 18px}
+  .sw-name{font-size:16.5px}
+  .sw-desc{font-size:13px}
+  .sw-btn{min-width:80px;padding:6px 11px 7px}
+  .sw-btn .name{font-size:12.5px}
+  .sw-btn .sub{font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="../">首页</a><span>/</span>软件下载</p>
+      <h1>软件下载</h1>
+      <p class="sub">班级软件安装包下载，选择对应平台版本下载安装即可。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="list-head">
+        <h2>软件列表</h2>
+        <div class="count">共 <b>2</b> 款软件 · <b>3</b> 个安装包</div>
+      </div>
+
+      <div class="sw-list">
+
+        <!-- ===== G202301 官网同步软件 ===== -->
+        <div class="sw-row">
+          <div class="sw-info">
+            <div class="sw-name">G202301 官网同步软件</div>
+            <div class="sw-desc">将班级官网的作业与通知同步到本地，随时查看最新动态</div>
+          </div>
+          <div class="sw-downloads">
+
+            <div class="dl-row">
+              <span class="dl-row-label">PC 端</span>
+
+              <a class="sw-btn"
+                 href="./G202301_Windows_Setup.exe"
+                 download="G202301_Windows_Setup.exe"
+                 title="G202301_Windows_Setup.exe">
+                <span class="name">Windows</span>
+                <span class="sub">下载</span>
+              </a>
+
+              <span class="sw-btn off" title="macOS 版 · 敬请期待">
+                <span class="name">macOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="Linux 版 · 敬请期待">
+                <span class="name">Linux</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="Chrome OS 版 · 敬请期待">
+                <span class="name">Chrome OS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="统信 UOS 版 · 敬请期待">
+                <span class="name">统信 UOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="麒麟 OS 版 · 敬请期待">
+                <span class="name">麒麟 OS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+            </div>
+
+            <div class="dl-row">
+              <span class="dl-row-label">手机端</span>
+
+              <a class="sw-btn"
+                 href="./G202301_Android_Setup.apk"
+                 download="G202301_Android_Setup.apk"
+                 title="G202301_Android_Setup.apk">
+                <span class="name">Android</span>
+                <span class="sub">下载</span>
+              </a>
+
+              <span class="sw-btn off" title="iOS 版 · 敬请期待">
+                <span class="name">iOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="HarmonyOS 版 · 敬请期待">
+                <span class="name">HarmonyOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="EMUI 版 · 敬请期待">
+                <span class="name">EMUI</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="MIUI 版 · 敬请期待">
+                <span class="name">MIUI</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="ColorOS 版 · 敬请期待">
+                <span class="name">ColorOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="OriginOS 版 · 敬请期待">
+                <span class="name">OriginOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="Flyme 版 · 敬请期待">
+                <span class="name">Flyme</span>
+                <span class="sub">敬请期待</span>
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ===== Class Panel 2.3 ===== -->
+        <div class="sw-row">
+          <div class="sw-info">
+            <div class="sw-name">Class Panel 2.3</div>
+            <div class="sw-desc">班级电教作业管理软件，用于作业发布、展示与课堂投屏</div>
+          </div>
+          <div class="sw-downloads">
+
+            <div class="dl-row">
+              <span class="dl-row-label">PC 端</span>
+
+              <a class="sw-btn"
+                 href="./Class%20Panel%202.3%20Setup.exe"
+                 download="Class Panel 2.3 Setup.exe"
+                 title="Class Panel 2.3 Setup.exe">
+                <span class="name">Windows</span>
+                <span class="sub">下载</span>
+              </a>
+
+              <span class="sw-btn off" title="macOS 版 · 敬请期待">
+                <span class="name">macOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="Linux 版 · 敬请期待">
+                <span class="name">Linux</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="Chrome OS 版 · 敬请期待">
+                <span class="name">Chrome OS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="统信 UOS 版 · 敬请期待">
+                <span class="name">统信 UOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="麒麟 OS 版 · 敬请期待">
+                <span class="name">麒麟 OS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+            </div>
+
+            <div class="dl-row">
+              <span class="dl-row-label">手机端</span>
+
+              <span class="sw-btn off" title="Android 版 · 敬请期待">
+                <span class="name">Android</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="iOS 版 · 敬请期待">
+                <span class="name">iOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="HarmonyOS 版 · 敬请期待">
+                <span class="name">HarmonyOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="EMUI 版 · 敬请期待">
+                <span class="name">EMUI</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="MIUI 版 · 敬请期待">
+                <span class="name">MIUI</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="ColorOS 版 · 敬请期待">
+                <span class="name">ColorOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="OriginOS 版 · 敬请期待">
+                <span class="name">OriginOS</span>
+                <span class="sub">敬请期待</span>
+              </span>
+
+              <span class="sw-btn off" title="Flyme 版 · 敬请期待">
+                <span class="name">Flyme</span>
+                <span class="sub">敬请期待</span>
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip-bar">
+        <span class="ti">💡</span>
+        <span>灰色按钮为暂未提供的版本，敬请期待。</span>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../submit">投稿</a> ·
+      <a href="../announcement">通知</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ===== 地址栏不显示 index.html ===== */
+  if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+  }
+</script>
+
+</body>
+</html>
