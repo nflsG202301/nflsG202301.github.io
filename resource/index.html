@@ -59,11 +59,13 @@ ul,ol{list-style:none}
   color:#fff;
 }
 .res-icon.docx{background:linear-gradient(135deg,#3b7ddd,#2b579a);box-shadow:0 6px 16px rgba(43,87,154,.32)}   /* 蓝 */
+.res-icon.doc {background:linear-gradient(135deg,#5b90e8,#3a68b5);box-shadow:0 6px 16px rgba(58,104,181,.32)}   /* 浅蓝（旧版 Word） */
 .res-icon.pdf {background:linear-gradient(135deg,#e85a4f,#c0392b);box-shadow:0 6px 16px rgba(192,57,43,.32)}    /* 红 */
 .res-icon.pptx{background:linear-gradient(135deg,#e8763a,#c9541a);box-shadow:0 6px 16px rgba(201,84,26,.32)}    /* 橙 */
 .res-icon.mp3 {background:linear-gradient(135deg,#3fb87a,#1e8e5a);box-shadow:0 6px 16px rgba(30,142,90,.32)}    /* 绿 */
 .res-icon.mp4 {background:linear-gradient(135deg,#2bb3bf,#0e8f9e);box-shadow:0 6px 16px rgba(14,143,158,.32)}   /* 青 */
 .res-icon.jpg {background:linear-gradient(135deg,#9a6fe0,#7c4dbe);box-shadow:0 6px 16px rgba(124,77,190,.32)}   /* 紫 */
+.res-icon.zip {background:linear-gradient(135deg,#6b7fd7,#4250a8);box-shadow:0 6px 16px rgba(66,80,168,.32)}    /* 靛蓝 */
 
 /* 文件信息 */
 .res-info{flex:1;min-width:0}
@@ -244,10 +246,234 @@ ul,ol{list-style:none}
 
       <div class="list-head">
         <h2>资源列表</h2>
-        <div class="count">共 <b>9</b> 项</div>
+        <div class="count">共 <b>21</b> 项</div>
       </div>
 
       <div class="res-list">
+
+        <!-- ===== 国庆资料（新增） ===== -->
+
+        <div class="res-item">
+          <span class="res-icon zip">ZIP</span>
+          <div class="res-info">
+            <div class="res-title">国庆假期资料包.zip</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview is-disabled" disabled
+                    title="压缩包不支持在线预览，请下载后解压查看">
+              🚫 不支持预览
+            </button>
+            <button class="res-dl"
+                    data-href="./国庆假期资料包.zip"
+                    data-name="国庆假期资料包.zip">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon pdf">PDF</span>
+          <div class="res-info">
+            <div class="res-title">假期作业参考答案(1).pdf</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./假期作业参考答案(1).pdf">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./假期作业参考答案(1).pdf"
+                    data-name="假期作业参考答案(1).pdf">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon pdf">PDF</span>
+          <div class="res-info">
+            <div class="res-title">高一物理2026国庆练习2解析.pdf</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./高一物理2026国庆练习2解析.pdf">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./高一物理2026国庆练习2解析.pdf"
+                    data-name="高一物理2026国庆练习2解析.pdf">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon pdf">PDF</span>
+          <div class="res-info">
+            <div class="res-title">练习1答案.pdf</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./练习1答案.pdf">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./练习1答案.pdf"
+                    data-name="练习1答案.pdf">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon docx">DOCX</span>
+          <div class="res-info">
+            <div class="res-title">国庆作业（1）解析.docx</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview is-disabled" disabled
+                    title="该格式不支持在线预览，请下载后查看">
+              🚫 不支持预览
+            </button>
+            <button class="res-dl"
+                    data-href="./国庆作业（1）解析.docx"
+                    data-name="国庆作业（1）解析.docx">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon docx">DOCX</span>
+          <div class="res-info">
+            <div class="res-title">国庆作业（2）解析.docx</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview is-disabled" disabled
+                    title="该格式不支持在线预览，请下载后查看">
+              🚫 不支持预览
+            </button>
+            <button class="res-dl"
+                    data-href="./国庆作业（2）解析.docx"
+                    data-name="国庆作业（2）解析.docx">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== 通知文件（新增） ===== -->
+
+        <div class="res-item">
+          <span class="res-icon pdf">PDF</span>
+          <div class="res-info">
+            <div class="res-title">南京外国语学校2026AMC通知.pdf</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./南京外国语学校2026AMC通知.pdf">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./南京外国语学校2026AMC通知.pdf"
+                    data-name="南京外国语学校2026AMC通知.pdf">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon doc">DOC</span>
+          <div class="res-info">
+            <div class="res-title">20260929评审活页.doc</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview is-disabled" disabled
+                    title="该格式不支持在线预览，请下载后查看">
+              🚫 不支持预览
+            </button>
+            <button class="res-dl"
+                    data-href="./20260929评审活页.doc"
+                    data-name="20260929评审活页.doc">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon docx">DOCX</span>
+          <div class="res-info">
+            <div class="res-title">2026年度市级专项课题申报通知（拔尖创新学生专项）.docx</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview is-disabled" disabled
+                    title="该格式不支持在线预览，请下载后查看">
+              🚫 不支持预览
+            </button>
+            <button class="res-dl"
+                    data-href="./2026年度市级专项课题申报通知（拔尖创新学生专项）.docx"
+                    data-name="2026年度市级专项课题申报通知（拔尖创新学生专项）.docx">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon pdf">PDF</span>
+          <div class="res-info">
+            <div class="res-title">2026年国庆节主题教育实践活动通知(1)(1).pdf</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./2026年国庆节主题教育实践活动通知(1)(1).pdf">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./2026年国庆节主题教育实践活动通知(1)(1).pdf"
+                    data-name="2026年国庆节主题教育实践活动通知(1)(1).pdf">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== 听力音频（新增） ===== -->
+
+        <div class="res-item">
+          <span class="res-icon mp3">MP3</span>
+          <div class="res-info">
+            <div class="res-title">A篇+听2遍.mp3</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./A篇+听2遍.mp3">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./A篇+听2遍.mp3"
+                    data-name="A篇+听2遍.mp3">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <div class="res-item">
+          <span class="res-icon mp3">MP3</span>
+          <div class="res-info">
+            <div class="res-title">B篇+听2遍.mp3</div>
+          </div>
+          <div class="res-actions">
+            <button class="res-preview"
+                    data-href="./B篇+听2遍.mp3">
+              👁 预览
+            </button>
+            <button class="res-dl"
+                    data-href="./B篇+听2遍.mp3"
+                    data-name="B篇+听2遍.mp3">
+              ⬇ 下载
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== 原有资源 ===== -->
 
         <div class="res-item">
           <span class="res-icon pdf">PDF</span>
@@ -458,16 +684,7 @@ ul,ol{list-style:none}
 
 <script>
 /* ============================================================
-   资源预览 / 下载 · 邀请码校验
-   ------------------------------------------------------------
-   三哈希：同一个邀请码连续哈希 3 轮，每轮底数与模数都不同
-     · 轮1：base = 2147483647           mod = 2305843009213693951
-     · 轮2：base = 2305843009213693951  mod = 9223372036854775783
-     · 轮3：base = 9223372036854775783  mod = 18446744073709551557
-   passwordhash.txt 中存放第 3 轮的最终结果（一行）
-   ------------------------------------------------------------
-   预览支持：PDF / 图片 / 音频 / 视频（浏览器可直接渲染）
-   不支持：DOCX / PPTX（按钮已禁用）
+   资源预览 / 下载 · 邀请码校验（三哈希）
    ============================================================ */
 (function(){
   const modal       = document.getElementById('modalMask');
@@ -476,22 +693,20 @@ ul,ol{list-style:none}
   const modalInput  = document.getElementById('modalInput');
   const modalError  = document.getElementById('modalError');
 
-  let expectedHashes = [];   // 从 passwordhash.txt 读到的哈希（可多行）
+  let expectedHashes = [];
   let loadingError   = false;
   let pendingUrl     = null;
   let pendingName    = null;
-  let pendingAction  = null;   // 'preview' 或 'download'
+  let pendingAction  = null;
 
   const SESSION_KEY = 'g202301_resource_verified';
 
-  /* ====== 3 轮哈希参数（每轮底数与模数都不同，且都是大质数） ====== */
   const HASH_ROUNDS = [
-    { base: 2147483647n,          mod: 2305843009213693951n  },  // 2^31-1, 2^61-1
-    { base: 2305843009213693951n, mod: 9223372036854775783n  },  // 2^61-1, <2^63 最大质数
-    { base: 9223372036854775783n, mod: 18446744073709551557n }   // <2^63 最大质数, <2^64 最大质数
+    { base: 2147483647n,          mod: 2305843009213693951n  },
+    { base: 2305843009213693951n, mod: 9223372036854775783n  },
+    { base: 9223372036854775783n, mod: 18446744073709551557n }
   ];
 
-  /* ====== 三哈希函数：返回第 3 轮的最终结果 ====== */
   function hashPassword(s){
     let data = s;
     for (let r = 0; r < HASH_ROUNDS.length; r++){
@@ -506,7 +721,6 @@ ul,ol{list-style:none}
     return data;
   }
 
-  /* ====== 读取 passwordhash.txt（按行解析，空行与注释自动忽略） ====== */
   fetch('../passwordhash.txt', { cache: 'no-store' })
     .then(function(r){
       if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -554,13 +768,11 @@ ul,ol{list-style:none}
   }
 
   function triggerPreview(url){
-    // 新标签页打开，浏览器能直接显示 PDF / 图片 / 音视频等
     window.open(url, '_blank', 'noopener');
   }
 
-  /* ====== 预览按钮（跳过已禁用的） ====== */
   document.querySelectorAll('.res-preview').forEach(function(btn){
-    if (btn.disabled) return;          // 禁用按钮不绑定事件
+    if (btn.disabled) return;
 
     btn.addEventListener('click', function(){
       const url = btn.dataset.href;
@@ -573,7 +785,6 @@ ul,ol{list-style:none}
     });
   });
 
-  /* ====== 下载按钮 ====== */
   document.querySelectorAll('.res-dl').forEach(function(btn){
     btn.addEventListener('click', function(){
       const url  = btn.dataset.href;
