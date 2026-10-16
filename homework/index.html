@@ -43,6 +43,7 @@ ul,ol{list-style:none}
 .cal-legend i{display:inline-block;width:12px;height:12px;border-radius:4px}
 .cal-legend i.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold))}
 .cal-legend i.gray{background:#fff;border:1px solid var(--line)}
+.cal-legend i.red{background:linear-gradient(135deg,#e0524d,#c0392b)}
 
 .cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
 .cal-weekdays span{text-align:center;font-size:13px;font-weight:700;letter-spacing:.5px;color:#9aa6b8;padding:6px 0}
@@ -68,13 +69,42 @@ ul,ol{list-style:none}
 .cal-day.has-hw .lunar:not(.festival):not(.observance):not(.term){ color:#6b4a08 }
 .cal-day.has-hw:hover{ transform:translateY(-4px); box-shadow:0 12px 24px rgba(201,162,39,.5) }
 
+/* ===== 月考标识 ===== */
+.cal-day.has-exam{
+  border:1.5px solid rgba(224,82,77,.55);
+  background:linear-gradient(135deg,#fff6f6,#ffecec);
+}
+.cal-day.has-exam .d{ color:#c0392b; font-weight:800 }
+.cal-day.has-exam:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 24px rgba(224,82,77,.32);
+}
+.cal-day .exam-tag{
+  display:inline-block;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.8px;
+  color:#fff;
+  background:linear-gradient(135deg,#e0524d,#c0392b);
+  padding:1px 7px;
+  border-radius:5px;
+  line-height:1.5;
+}
+/* 有作业 + 有考试时，标签用深红色以适配金色底 */
+.cal-day.has-hw .exam-tag{
+  background:linear-gradient(135deg,#b0332d,#8a2a24);
+  color:#fff;
+}
+
 .cal-day.today{ box-shadow:0 0 0 3px rgba(201,162,39,.35), 0 6px 16px rgba(201,162,39,.3) }
 .cal-day.has-hw.today{ box-shadow:0 0 0 3px rgba(15,37,71,.28), 0 8px 20px rgba(201,162,39,.45) }
+.cal-day.has-exam.today{ box-shadow:0 0 0 3px rgba(224,82,77,.35), 0 6px 16px rgba(224,82,77,.3) }
 
 .cal-day.empty{ background:transparent;border:none;pointer-events:none }
 
 .cal-day .d.weekend{ color:#c2453c }
 .cal-day.has-hw .d.weekend{ color:var(--navy) }
+.cal-day.has-exam .d.weekend{ color:#c0392b }
 
 .back-top{position:fixed;right:28px;bottom:28px;width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;font-family:inherit;display:grid;place-items:center;color:var(--navy);background:linear-gradient(135deg,var(--gold-light),var(--gold));box-shadow:0 14px 32px rgba(201,162,39,.45);opacity:0;visibility:hidden;transform:translateY(14px) scale(.9);transition:all .3s cubic-bezier(.4,0,.2,1);z-index:99}
 .back-top.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
@@ -100,6 +130,7 @@ ul,ol{list-style:none}
   .cal-day{border-radius:8px;padding:2px;gap:1px}
   .cal-day .d{font-size:16px}
   .cal-day .lunar{font-size:10px;line-height:1.2;padding:0}
+  .cal-day .exam-tag{font-size:9.5px;padding:0 5px;letter-spacing:.5px}
   .cal-info{font-size:12px}
   .cal-legend{font-size:11px;gap:10px}
   .cal-legend i{width:10px;height:10px}
@@ -138,6 +169,7 @@ ul,ol{list-style:none}
           <div class="cal-count">本月 <b id="count">0</b> 天有作业</div>
           <div class="cal-legend">
             <span><i class="gold"></i>有作业</span>
+            <span><i class="red"></i>月考</span>
             <span><i class="gray"></i>无作业</span>
           </div>
         </div>
@@ -182,9 +214,9 @@ ul,ol{list-style:none}
    作业日历
    ------------------------------------------------------------
    1. HOMEWORK：有作业的日期列表（YYYY-MM-DD）
-   2. LUNAR：用户指定的节日 / 节气名称
-   3. 没有指定名称的日期自动用算法计算农历
-   4. 颜色：红（重要节日）/ 蓝灰（一般）/ 金（节气）/ 中灰（农历）
+   2. EXAM：有考试的日期（红色标识，无作业详情页）
+   3. LUNAR：用户指定的节日 / 节气名称
+   4. 没有指定名称的日期自动用算法计算农历
    ============================================================ */
 
 /* ====== 科目排序常量（供以后新增作业页参考） ====== */
@@ -197,8 +229,14 @@ const HOMEWORK = [
   '2026-09-14','2026-09-15','2026-09-16','2026-09-17','2026-09-18',
   '2026-09-20','2026-09-21','2026-09-22','2026-09-23','2026-09-24',
   '2026-09-30',
-  '2026-10-08','2026-10-09','2026-10-10','2026-10-12'
+  '2026-10-08','2026-10-09','2026-10-10','2026-10-12','2026-10-16'
 ];
+
+/* ====== 有考试的日期（红色标识，无作业详情页） ====== */
+const EXAM = {
+  '2026-10-13': '月考',
+  '2026-10-14': '月考'
+};
 
 /* ====== 节日 / 节气（用户指定） ====== */
 const LUNAR = {
@@ -649,6 +687,7 @@ function render(){
   for (let d = 1; d <= daysInMonth; d++){
     const dateStr = ymd(cursorY, cursorM, d);
     const hasHw   = hwSet.has(dateStr);
+    const examText = EXAM[dateStr];   /* 月考标识 */
     const isToday = dateStr === todayStr;
 
     const wIdx = (firstWeekday + d - 1) % 7;
@@ -664,8 +703,9 @@ function render(){
     }
 
     let cls = 'cal-day';
-    if (hasHw)   cls += ' has-hw';
-    if (isToday) cls += ' today';
+    if (hasHw)                          cls += ' has-hw';
+    if (examText && !hasHw)             cls += ' has-exam';
+    if (isToday)                        cls += ' today';
 
     let cell;
     if (hasHw){
@@ -677,10 +717,18 @@ function render(){
     }
     cell.className = cls;
 
-    const dCls = isWeekend && !hasHw ? 'd weekend' : 'd';
+    const dCls = isWeekend && !hasHw && !examText ? 'd weekend' : 'd';
+
+    /* 子文字：考试 > 农历 */
+    let subHtml = '';
+    if (examText){
+      subHtml = `<span class="exam-tag">${examText}</span>`;
+    } else if (lunarText){
+      subHtml = `<span class="${lunarCls}">${lunarText}</span>`;
+    }
+
     cell.innerHTML =
-      `<span class="${dCls}">${d}</span>` +
-      (lunarText ? `<span class="${lunarCls}">${lunarText}</span>` : '');
+      `<span class="${dCls}">${d}</span>` + subHtml;
 
     grid.appendChild(cell);
   }
