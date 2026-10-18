@@ -205,9 +205,10 @@ body.test-mode .btn-start-test:hover {
   position:absolute;left:0;top:0;
   font-weight:800;color:var(--gold);font-size:14.5px;
 }
-.exam-list.cont9{counter-reset: q 9;}
-.exam-list.cont12{counter-reset: q 12;}
-.exam-list.cont15{counter-reset: q 15;}
+/* counter-reset 的值 = 上一段最后一题的编号 */
+.exam-list.cont9{counter-reset: q 8;}
+.exam-list.cont12{counter-reset: q 11;}
+.exam-list.cont15{counter-reset: q 14;}
 
 /* 选项交互 */
 .opts{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
