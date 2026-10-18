@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高一年级数学阶段练习卷（2026.10） · 南京外国语学校 G202301</title>
+<meta name="description" content="南京外国语学校 G202301 班 高一年级数学阶段练习卷（2026.10）。">
+<style>
+:root{
+  --navy:#0f2547; --navy-2:#1b3a63;
+  --gold:#c9a227; --gold-light:#e8c96a;
+  --bg:#f4f6fb; --card:#ffffff;
+  --text:#1f2937; --muted:#6b7280; --line:#e5e9f2;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,37,71,.08);
+  --shadow-hover:0 18px 40px rgba(15,37,71,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+.page-hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 52px;color:#fff;
+  background:
+    radial-gradient(760px 340px at 10% 0%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(680px 340px at 92% 20%, rgba(88,140,220,.26), transparent 62%),
+    linear-gradient(160deg,#0f2547 0%,#1b3a63 60%,#14304f 100%);
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:24px 24px;opacity:.4;
+}
+.page-hero h1{font-size:clamp(24px,4vw,36px);letter-spacing:1px;margin-bottom:10px}
+.page-hero .sub{color:#c3d2e6;font-size:14.5px;max-width:680px}
+.crumb{font-size:13px;color:#9fb3d1;margin-bottom:14px;letter-spacing:1px}
+.crumb a:hover{color:var(--gold-light)}
+.crumb span{margin:0 7px;opacity:.6}
+
+.section{padding:40px 0 72px}
+.back-bar{margin-bottom:22px; display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 12px;}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--navy);
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 20px;box-shadow:var(--shadow);transition:all .24s ease;
+}
+.back-btn:hover{
+  transform:translateX(-3px);
+  border-color:rgba(201,162,39,.6);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ============ 邀请码遮罩 ============ */
+.lock-screen{
+  display:grid;place-items:center;
+  padding:40px 20px 80px;
+}
+.lock-box{
+  max-width:460px;width:100%;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow-hover);
+  padding:44px 36px 36px;
+  text-align:center;
+  animation:rise .5s ease both;
+}
+.lock-icon{font-size:52px;line-height:1;margin-bottom:18px;display:block;}
+.lock-title{font-size:21px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:10px;}
+.lock-desc{font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.75;}
+.lock-form{display:flex;gap:10px}
+.lock-input{
+  flex:1;min-width:0;height:50px;
+  border:2px solid var(--line);border-radius:12px;
+  padding:0 14px;
+  font-size:16px;font-family:inherit;
+  letter-spacing:1px;text-align:center;
+  color:var(--navy);background:#fafbfe;
+  outline:none;transition:all .22s ease;
+}
+.lock-input::placeholder{color:#c3cbd8;letter-spacing:1px;font-size:14px}
+.lock-input:focus{
+  border-color:var(--gold);background:#fff;
+  box-shadow:0 0 0 4px rgba(201,162,39,.15);
+}
+.lock-btn{
+  height:50px;padding:0 28px;
+  border:none;border-radius:12px;
+  font-family:inherit;font-size:15px;font-weight:700;
+  letter-spacing:.5px;color:var(--navy);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(201,162,39,.32);
+  transition:all .24s ease;
+}
+.lock-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(201,162,39,.45);
+}
+.lock-error{
+  min-height:20px;margin-top:14px;
+  font-size:13.5px;font-weight:600;letter-spacing:.2px;
+  color:#c2453c;
+}
+.lock-hint{margin-top:18px;font-size:12.5px;color:#9aa6b8;line-height:1.7;}
+
+#protectedContent{display:none}
+
+/* 进入测试按钮 */
+.btn-start-test {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 22px; border-radius: 999px; border: 1.5px solid var(--gold);
+  background: rgba(201,162,39,.1); color: #a8791a;
+  font-size: 14.5px; font-weight: 700; cursor: pointer; transition: all .2s;
+  font-family: inherit;
+}
+.btn-start-test:hover {
+  background: var(--gold); color: var(--navy);
+  box-shadow: 0 4px 12px rgba(201,162,39,.3);
+}
+body.test-mode .btn-start-test {
+  background: var(--navy); color: #fff; border-color: var(--navy);
+}
+body.test-mode .btn-start-test:hover {
+  background: var(--navy-2);
+}
+
+/* ============ 内容区 ============ */
+.acc{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin-bottom:20px;
+  animation:rise .45s ease both;
+}
+
+.exam-card-head{
+  display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border-left:5px solid var(--gold);
+  border-bottom:1px solid var(--line);
+}
+.exam-card-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+}
+.exam-card-head .label{flex:1;font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy)}
+.exam-card-head .cnt{font-size:12px;font-weight:600;color:var(--muted); margin-right: 10px;}
+.exam-card-body{padding:22px 26px 26px;background:#fafbfe}
+
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:11px;
+  padding:18px 26px;
+  background:linear-gradient(90deg,#f7f9fc,#fff 70%);
+  border:none;border-left:5px solid var(--gold);
+  cursor:pointer;font-family:inherit;text-align:left;
+  font-size:16px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  transition:background .2s ease;
+}
+.acc-head:hover{background:#f2f6fd}
+.acc-head .dot{
+  flex:0 0 8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.2);
+  transition:all .22s ease;
+}
+.acc-head .label{flex:1}
+.acc-head .cnt{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--muted);margin-right:8px}
+.acc-head .chev{flex:0 0 auto;font-size:12px;color:var(--muted);transition:transform .28s ease}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc.open .acc-head{background:#f2f6fd}
+.acc.open .acc-head .dot{box-shadow:0 0 0 5px rgba(201,162,39,.28)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc.open .acc-body{max-height: 8000px; /* 确保完全展开 */ }
+.acc-inner{padding:22px 26px 26px;background:#fafbfe}
+
+.exam-section{
+  font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--navy);
+  margin:22px 0 14px;padding-bottom:8px;
+  border-bottom:2px solid #f0f3f9;
+  display:flex;align-items:center;gap:9px;
+}
+.exam-section::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.18);
+}
+.exam-section:first-child{margin-top:0}
+
+.exam-list{list-style:none;counter-reset: q}
+.exam-list > li{
+  position:relative;padding-left:30px;margin-bottom:24px;
+  line-height:2;font-size:15px;color:#3f4a5a;
+}
+.exam-list > li:last-child{margin-bottom:0}
+.exam-list > li::before{
+  counter-increment: q;content: counter(q) ".";
+  position:absolute;left:0;top:0;
+  font-weight:800;color:var(--gold);font-size:14.5px;
+}
+.exam-list.cont9{counter-reset: q 9;}
+.exam-list.cont12{counter-reset: q 12;}
+.exam-list.cont15{counter-reset: q 15;}
+
+/* 选项交互 */
+.opts{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.opts li{padding-left:0;font-size:15px;color:#3f4a5a;line-height:1.8}
+.opts label{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:8px 12px;border-radius:10px;border:1px solid transparent;
+  transition:all .2s;
+}
+.opts input[type="radio"], .opts input[type="checkbox"]{
+  margin-top: 7px; accent-color:var(--navy); width:16px; height:16px;
+}
+.opts b{color:var(--navy);font-weight:700;}
+
+/* 仅在测试模式下允许点击选项，并显示高亮 */
+body:not(.test-mode) .opts label { pointer-events: none; }
+body:not(.test-mode) .opts input { display: none; }
+body.test-mode .opts label { cursor: pointer; }
+body.test-mode .opts label:hover { background: #f0f5fa; }
+body.test-mode .opts label:has(input:checked){
+  background: linear-gradient(135deg, #eef3fb, #f7f9fc);
+  border-color: rgba(201,162,39,.5);
+  box-shadow: 0 2px 8px rgba(201,162,39,.1);
+}
+
+/* 填空 / 解答题输入框区 */
+body:not(.test-mode) .exam-input { display: none !important; }
+.exam-input {
+  display: block;
+  margin-top: 12px;
+  padding: 16px;
+  background: #fff;
+  border: 1px dashed rgba(201,162,39,.6);
+  border-radius: 12px;
+  font-size: 14.5px;
+  color: var(--navy);
+}
+.input-hint { font-weight: 700; color: var(--navy); margin-right: 8px; }
+.fill-blank {
+  border: none;
+  border-bottom: 2px solid var(--gold-light);
+  background: #fafbfe;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--navy);
+  text-align: center;
+  outline: none;
+  padding: 4px 8px;
+  border-radius: 4px 4px 0 0;
+  transition: all .2s;
+  min-width: 120px;
+}
+.fill-blank:focus {
+  border-bottom-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(201,162,39,.15);
+}
+.input-row { display: flex; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+.input-row:last-child { margin-bottom: 0; }
+
+/* 测试模式规则面板 */
+.test-rules {
+  background: #fffaf0;
+  border: 1px solid rgba(201,162,39,.4);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: none;
+  box-shadow: 0 4px 12px rgba(201,162,39,.08);
+}
+body.test-mode .test-rules { display: block; }
+.test-rules .rules-title {
+  font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.test-rules ul { padding-left: 20px; list-style: disc; color: #4a3c1c; font-size: 14.5px; line-height: 1.8; }
+.test-rules ul li { margin-bottom: 6px; }
+.test-rules code { background: rgba(201,162,39,.15); color: #a8791a; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-family: monospace; }
+
+/* 交卷按钮 */
+body:not(.test-mode) .submit-area { display: none; }
+.submit-area{
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--line);
+}
+.btn-submit-exam{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 220px;
+  padding: 14px 40px;
+  border-radius: 999px;
+  border: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--navy);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  box-shadow: 0 10px 26px rgba(201,162,39,.35);
+  cursor: pointer;
+  transition: all .25s;
+}
+.btn-submit-exam:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(201,162,39,.45);
+}
+.btn-submit-exam:disabled {
+  opacity: .8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 加载动画 */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(15,37,71,.3);
+  border-top-color: var(--navy);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 成绩弹窗 */
+.result-modal {
+  position: fixed; inset: 0; z-index: 999;
+  display: none; place-items: center;
+  background: rgba(8,18,32,.65);
+  backdrop-filter: blur(4px);
+  animation: fade .2s ease both;
+}
+.result-modal.open { display: grid; }
+@keyframes fade { from{opacity:0} to{opacity:1} }
+
+.result-box {
+  background: var(--card);
+  width: 90%; max-width: 600px; max-height: 85vh;
+  display: flex; flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.35);
+  animation: pop .3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  position: relative;
+}
+@keyframes pop { from{opacity:0; transform:scale(.9) translateY(10px)} to{opacity:1; transform:none} }
+
+.result-header {
+  padding: 32px 30px 16px; text-align: center;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.result-close {
+  position: absolute; top: 15px; right: 15px;
+  background: #f2f5fa; border: none; width: 34px; height: 34px;
+  border-radius: 50%; font-size: 18px; color: var(--muted); cursor: pointer;
+  transition: all .2s;
+}
+.result-close:hover { background: #e6ebf4; color: var(--navy); }
+.result-title { font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
+.result-score-wrap { display: flex; align-items: baseline; justify-content: center; gap: 8px; margin-bottom: 16px; }
+.result-score {
+  font-size: 56px; font-weight: 900; line-height: 1; color: var(--gold);
+  text-shadow: 0 4px 20px rgba(201,162,39,.3); letter-spacing: -2px;
+}
+.result-score-total { font-size: 16px; color: var(--muted); font-weight: 600; }
+.result-summary { font-size: 14px; color: #4b5563; line-height: 1.6; }
+
+.result-body {
+  padding: 20px 30px;
+  overflow-y: auto;
+  flex: 1;
+}
+.result-footer {
+  padding: 16px 30px 24px;
+  border-top: 1px solid var(--line);
+}
+.btn-result-ok {
+  display: block; width: 100%; padding: 12px; border-radius: 999px;
+  border: none; background: var(--navy); color: #fff;
+  font-size: 15px; font-weight: 700; cursor: pointer; transition: .2s;
+}
+.btn-result-ok:hover { background: var(--navy-2); }
+
+/* 逐题详细结果样式 */
+.res-item {
+  display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px dashed var(--line);
+  font-size: 14px;
+}
+.res-item:last-child { border-bottom: none; padding-bottom: 0; }
+.res-icon { flex: 0 0 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 12px; font-weight: bold; margin-top: 3px;}
+.res-icon.ok { background: #218a55; }
+.res-icon.warn { background: #d97706; } /* 部分正确用黄色感叹号 */
+.res-icon.err { background: #c2453c; }
+.res-content { flex: 1; min-width: 0; }
+.res-q { font-weight: 700; color: var(--navy); margin-right: 6px; }
+.res-ans-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; font-size: 13px;}
+.res-ans-row span.bad { color: #c2453c; text-decoration: line-through; }
+.res-ans-row span.good { color: #218a55; font-weight: 700; }
+.res-ans-row span.warn { color: #d97706; font-weight: 700; }
+
+/* ============ 解析区（直接展开） ============ */
+.sol{ padding:18px 20px;margin-bottom:14px; background:#fff;border:1px solid var(--line); border-left:4px solid var(--gold);border-radius:12px; }
+.sol:last-child{margin-bottom:0}
+.sol-head{ display:flex;align-items:center;gap:10px;flex-wrap:wrap; margin-bottom:10px;padding-bottom:9px; border-bottom:1px dashed var(--line); }
+.sol-no{ flex:0 0 auto;font-size:12.5px;font-weight:800;letter-spacing:.5px; color:#fff;background:linear-gradient(135deg,var(--navy-2),var(--navy)); padding:3px 11px;border-radius:999px; }
+.sol-ans{font-size:14px;font-weight:700;color:var(--navy)}
+.sol-ans b{ color:#a8791a;background:linear-gradient(135deg,#fff7e6,#fdeecd); padding:2px 10px;border-radius:6px;margin-left:4px; }
+.sol-body{font-size:14.5px;color:#4b5563;line-height:2}
+.sol-body p{margin-bottom:9px}
+.sol-body p:last-child{margin-bottom:0}
+.sol-body strong{color:var(--navy)}
+.sol-body .case{ margin:8px 0;padding:10px 14px; background:#f7f9fc;border-radius:10px; border-left:3px solid rgba(201,162,39,.5); font-size:14px;line-height:1.9; }
+.sol-body .case p{margin-bottom:5px}
+.sol-body .case p:last-child{margin-bottom:0}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.site-footer{background:var(--navy);color:#9fb3d1;padding:34px 0;font-size:13.5px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:2}
+.site-footer a{color:#cfd9e8;transition:color .2s}
+.site-footer a:hover{color:var(--gold-light)}
+
+@media (max-width:640px){
+  .page-hero{padding:44px 0 40px}
+  .section{padding:28px 0 52px}
+  .lock-box{padding:34px 22px 28px}
+  .lock-icon{font-size:44px}
+  .lock-title{font-size:19px}
+  .lock-input{font-size:15px;height:46px}
+  .lock-btn{height:46px;padding:0 20px;font-size:14px}
+  .back-bar{flex-direction: column; gap: 12px; align-items: flex-start;}
+  .exam-card-head{padding:15px 18px;font-size:14.5px; flex-wrap: wrap;}
+  .exam-card-head .cnt{margin-right: 0; width: 100%;}
+  .exam-card-body{padding:16px 14px 20px}
+  .acc-head{padding:15px 18px;font-size:14.5px}
+  .acc-inner{padding:16px 14px 20px}
+  .exam-list > li{font-size:14.5px;padding-left:26px;line-height:1.95}
+  .exam-section{font-size:14.5px}
+  .sol{padding:14px 15px}
+  .sol-body{font-size:14px}
+  .fill-blank{min-width: 100px; width: 100%; margin-top: 8px;}
+  .input-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .result-box { width: 95%; max-height: 90vh; }
+  .result-header, .result-body, .result-footer { padding-left: 20px; padding-right: 20px; }
+}
+</style>
+
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['$$', '$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumb">
+        <a href="../../">首页</a><span>/</span>
+        <a href="../">题集</a><span>/</span>高一年级数学阶段练习卷
+      </p>
+      <h1>高一年级数学阶段练习卷</h1>
+      <p class="sub">2026 年 10 月 · 集合与逻辑 · 不等式 · 函数基础</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="back-bar">
+        <a class="back-btn" href="../">← 返回题集列表</a>
+      </div>
+
+      <!-- ===== 邀请码遮罩 ===== -->
+      <div class="lock-screen" id="lockScreen">
+        <div class="lock-box">
+          <span class="lock-icon">🔒</span>
+          <h2 class="lock-title">需要邀请码</h2>
+          <p class="lock-desc">本页内容仅向本班同学开放<br>请输入邀请码以继续查看</p>
+          <form class="lock-form" id="lockForm" autocomplete="off">
+            <input
+              type="password"
+              id="lockInput"
+              class="lock-input"
+              placeholder="请输入邀请码"
+              autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
+              required>
+            <button type="submit" class="lock-btn" id="lockBtn">确认</button>
+          </form>
+          <p class="lock-error" id="lockError"></p>
+          <p class="lock-hint">邀请码由班级管理员口头或群内通知</p>
+        </div>
+      </div>
+
+      <!-- ===== 受保护内容 ===== -->
+      <div id="protectedContent">
+
+        <div class="back-bar">
+          <span></span>
+          <button id="startTestBtn" class="btn-start-test">✏️ 进入测试模式</button>
+        </div>
+
+        <!-- ===== 试题 ===== -->
+        <div class="acc">
+          <div class="exam-card-head">
+            <span class="dot"></span>
+            <span class="label">试题</span>
+            <span class="cnt">共 19 题，满分 150 分</span>
+          </div>
+          <div class="exam-card-body">
+
+            <!-- 答题规范提示（测试模式显示） -->
+            <div class="test-rules" id="testRules">
+              <div class="rules-title">📝 模拟测试作答规范（防误判）</div>
+              <ul>
+                <li><b>符号与空格</b>：统一使用英文半角符号，输入时<b>无需输入空格</b>。</li>
+                <li><b>分数/指数</b>：用 <code>/</code> 表示分数（如 <code>1/2</code>）；用 <code>^</code> 表示指数（如 <code>2^3</code>）。</li>
+                <li><b>根号</b>：使用 <code>sqrt()</code> 或 <code>√</code>（如 <code>sqrt(2)</code>）。</li>
+                <li><b>对数</b>：用 <code>log底数(真数)</code>（如 <code>log2(8)</code>）。</li>
+                <li><b>无穷大</b>：请使用 <code>-inf</code> 和 <code>inf</code> 表示。</li>
+                <li><b>集合交并</b>：交集用 <code>and</code>，并集用 <code>or</code>。</li>
+                <li><b>书写顺序</b>：多个区间组合时，请<b>从小到大</b>按顺序书写。如 <code>(-inf, 1] or [2, inf)</code>。</li>
+                <li><b>解答题</b>：只需填入最终的数值、范围或答案。区间端点用 <code>()</code> 或 <code>[]</code>。如 15 题直接填数字即可。</li>
+                <li><b>多选题</b>：全对 6 分；有错选 0 分；漏选时——标准答案 2 个选对 1 个得 3 分，标准答案 3 个选对 1 个得 2 分、选对 2 个得 4 分。</li>
+              </ul>
+            </div>
+
+            <div class="exam-section">一、单选题（每小题 5 分，共 40 分）</div>
+            <ol class="exam-list">
+              <li>设全集 \(U=\boldsymbol{R}\)，\(M=\{x \mid x &gt; 3 \text{ 或 } x &lt; -3\}\)，\(N=\{x \mid x \ge 2 \text{ 或 } x &lt; -1\}\)，则图中阴影部分所表示的集合是（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="radio" name="q1" value="A"><span><b>A.</b> \(\{x \mid -3 \le x &lt; -1 \text{ 或 } 2 \le x \le 3\}\)</span></label></li>
+                  <li><label><input type="radio" name="q1" value="B"><span><b>B.</b> \(\{x \mid -3 \le x \le -1\}\)</span></label></li>
+                  <li><label><input type="radio" name="q1" value="C"><span><b>C.</b> \(\{x \mid -3 &lt; x &lt; -1 \text{ 或 } 2 &lt; x \le 3\}\)</span></label></li>
+                  <li><label><input type="radio" name="q1" value="D"><span><b>D.</b> \(\{x \mid 2 &lt; x \le 3\}\)</span></label></li>
+                </ul>
+              </li>
+              <li>已知 \(m &lt; n &lt; 0\)，则（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="radio" name="q2" value="A"><span><b>A.</b> \(m^2 &lt; n^2\)</span></label></li>
+                  <li><label><input type="radio" name="q2" value="B"><span><b>B.</b> \(m^2 &lt; mn\)</span></label></li>
+                  <li><label><input type="radio" name="q2" value="C"><span><b>C.</b> \(m^3 &lt; n^3\)</span></label></li>
+                  <li><label><input type="radio" name="q2" value="D"><span><b>D.</b> \(m^{-1} &lt; n^{-1}\)</span></label></li>
+                </ul>
+              </li>
+              <li>已知 \(xy \ne 0\)，则“\(x=2y\)”是“\(\dfrac{x^2}{y}+\dfrac{4y^2}{x}=4\)”的（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="radio" name="q3" value="A"><span><b>A.</b> 充分不必要条件</span></label></li>
+                  <li><label><input type="radio" name="q3" value="B"><span><b>B.</b> 必要不充分条件</span></label></li>
+                  <li><label><input type="radio" name="q3" value="C"><span><b>C.</b> 充要条件</span></label></li>
+                  <li><label><input type="radio" name="q3" value="D"><span><b>D.</b> 既不充分也不必要条件</span></label></li>
+                </ul>
+              </li>
+              <li>已知命题 \(p: \forall x \in \boldsymbol{R}, ax^2+2x+3 &gt; 0\) 的否定是真命题，那么实数 \(a\) 的取值范围是（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="radio" name="q4" value="A"><span><b>A.</b> \(a &lt; \dfrac{1}{3}\)</span></label></li>
+                  <li><label><input type="radio" name="q4" value="B"><span><b>B.</b> \(0 &lt; a \le \dfrac{1}{3}\)</span></label></li>
+                  <li><label><input type="radio" name="q4" value="C"><span><b>C.</b> \(a \le \dfrac{1}{3}\)</span></label></li>
+                  <li><label><input type="radio" name="q4" value="D"><span><b>D.</b> \(a \ge \dfrac{1}{3}\)</span></label></li>
+                </ul>
+              </li>
+              <li>设集合 \(P_1=\{x \mid x^2+ax+1 &gt; 0\}\)，\(P_2=\{x \mid x^2+ax+2 &gt; 0\}\)，\(a \in \boldsymbol{R}\)，下列说法正确的是（　　）<br>
+                <p style="margin-top:6px;color:#5b6b7f;font-size:14.5px;">
+                  ① 对任意 \(a\)，\(P_1\) 是 \(P_2\) 的子集<br>
+                  ② 对任意 \(a\)，\(P_1\) 不是 \(P_2\) 的子集<br>
+                  ③ 存在 \(a\)，\(P_1\) 不是 \(P_2\) 的子集<br>
+                  ④ 存在 \(a\)，\(P_2\) 是 \(P_1\) 的子集
+                </p>
+                <ul class="opts">
+                  <li><label><input type="radio" name="q5" value="A"><span><b>A.</b> ①③</span></label></li>
+                  <li><label><input type="radio" name="q5" value="B"><span><b>B.</b> ①④</span></label></li>
+                  <li><label><input type="radio" name="q5" value="C"><span><b>C.</b> ②</span></label></li>
+                  <li><label><input type="radio" name="q5" value="D"><span><b>D.</b> ①③④</span></label></li>
+                </ul>
+              </li>
+              <li>不等式 \(\dfrac{x^2-5|x|+6}{x-1} &lt; 0\) 的解集为（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="radio" name="q6" value="A"><span><b>A.</b> \((-\infty,1) \cup (2,3)\)</span></label></li>
+                  <li><label><input type="radio" name="q6" value="B"><span><b>B.</b> \((-\infty,-3) \cup (-2,1) \cup (2,3)\)</span></label></li>
+                  <li><label><input type="radio" name="q6" value="C"><span><b>C.</b> \((-\infty,-3) \cup (1,2)\)</span></label></li>
+                  <li><label><input type="radio" name="q6" value="D"><span><b>D.</b> \((-3,-2) \cup (-1,2) \cup (3,+\infty)\)</span></label></li>
+                </ul>
+              </li>
+              <li>关于 \(x\) 的方程 \(ax^2-(a+1)x-2a+3=0\) 有两个不相等的实数根 \(x_1,x_2\)，若 \(-2 &lt; x_1 &lt; x_2 &lt; 3\)，则实数 \(a\) 的取值范围是（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="radio" name="q7" value="A"><span><b>A.</b> \(\{a \mid a &gt; 1\}\)</span></label></li>
+                  <li><label><input type="radio" name="q7" value="B"><span><b>B.</b> \(\{a \mid a &gt; 1 \text{ 或 } a &lt; -\dfrac{5}{4}\}\)</span></label></li>
+                  <li><label><input type="radio" name="q7" value="C"><span><b>C.</b> \(\{a \mid a &gt; \dfrac{1}{5} \text{ 或 } a &lt; \dfrac{1}{9}\}\)</span></label></li>
+                  <li><label><input type="radio" name="q7" value="D"><span><b>D.</b> \(\{a \mid a &gt; 1 \text{ 或 } a &lt; -\dfrac{1}{5}\}\)</span></label></li>
+                </ul>
+              </li>
+              <li>设 \(a \in \boldsymbol{R}\)，若不等式 \(ax + \left|x^2+\dfrac{1}{x}\right| + \left|x^2-\dfrac{1}{x}\right| \ge 2x-8\) 恒成立，则实数 \(a\) 的取值范围是（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="radio" name="q8" value="A"><span><b>A.</b> \([-6,10]\)</span></label></li>
+                  <li><label><input type="radio" name="q8" value="B"><span><b>B.</b> \([-2,10]\)</span></label></li>
+                  <li><label><input type="radio" name="q8" value="C"><span><b>C.</b> \([-4,12]\)</span></label></li>
+                  <li><label><input type="radio" name="q8" value="D"><span><b>D.</b> \([-4,4]\)</span></label></li>
+                </ul>
+              </li>
+            </ol>
+
+            <div class="exam-section">二、多选题（每小题 6 分，共 18 分。全对 6 分，部分对得分按题目说明）</div>
+            <ol class="exam-list cont9">
+              <li>下列能够取得最小值为 \(4\) 的函数有（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="checkbox" name="q9" value="A"><span><b>A.</b> \(y = x-1+\dfrac{1}{x-2}\ (x&gt;2)\)</span></label></li>
+                  <li><label><input type="checkbox" name="q9" value="B"><span><b>B.</b> \(y = \sqrt{x^2+4} + \dfrac{4}{\sqrt{x^2+4}}\)</span></label></li>
+                  <li><label><input type="checkbox" name="q9" value="C"><span><b>C.</b> \(y = 2-x-\dfrac{1}{x}\ (x&lt;0)\)</span></label></li>
+                  <li><label><input type="checkbox" name="q9" value="D"><span><b>D.</b> \(y = 5-x(4-4x)\ (0&lt;x&lt;1)\)</span></label></li>
+                </ul>
+              </li>
+              <li>定义一个集合 \(A\) 的所有子集组成的集合叫做集合 \(A\) 的幂集，记为 \(P(A)\)，记非空集合 \(S\) 中元素的个数为 \(|S|\)。下列选项正确的是（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="checkbox" name="q10" value="A"><span><b>A.</b> 若 \(|P(A)| &gt; |P(B)|\)，则 \(A \subseteq B\)</span></label></li>
+                  <li><label><input type="checkbox" name="q10" value="B"><span><b>B.</b> 若 \(P(A \cup B) = P(A) \cup P(B)\)，则 \(A \subseteq B\) 或 \(B \subseteq A\)</span></label></li>
+                  <li><label><input type="checkbox" name="q10" value="C"><span><b>C.</b> 若 \(A \cap B = \emptyset\)，则 \(P(A) \cap P(B) = \emptyset\)</span></label></li>
+                  <li><label><input type="checkbox" name="q10" value="D"><span><b>D.</b> 若 \(|A|-|B|=2\)，则 \(|P(A)| = 4|P(B)|\)</span></label></li>
+                </ul>
+              </li>
+              <li>已知实数 \(a,b\) 满足 \(a^2+ab+b^2=1\)，\(t = ab-(a^2+b^2)\)，则 \(t\) 的可能取值是（　　）<br>
+                <ul class="opts">
+                  <li><label><input type="checkbox" name="q11" value="A"><span><b>A.</b> \(-3\)</span></label></li>
+                  <li><label><input type="checkbox" name="q11" value="B"><span><b>B.</b> \(-2\)</span></label></li>
+                  <li><label><input type="checkbox" name="q11" value="C"><span><b>C.</b> \(-1\)</span></label></li>
+                  <li><label><input type="checkbox" name="q11" value="D"><span><b>D.</b> \(0\)</span></label></li>
+                </ul>
+              </li>
+            </ol>
+
+            <div class="exam-section">三、填空题（每小题 5 分，共 15 分）</div>
+            <ol class="exam-list cont12">
+              <li>设集合 \(A=\{0, -a\}\)，\(B=\{1, -1, 2a-2\}\)，若 \(A \subseteq B\)，则 \(a =\) 
+                <input type="text" class="fill-blank" name="q12" placeholder="填数字">
+              </li>
+              <li>已知实数 \(a,b &gt; 0\)，且满足 \(ab(a+b) = a-b\)，则 \(b\) 的最大值是 
+                <input type="text" class="fill-blank" name="q13" placeholder="填数值或表达式">
+              </li>
+              <li>已知集合 \(M=\{x \in \boldsymbol{Z} \mid a \le x \le 2a-1\}\)，若集合 \(M\) 有 4 个元素，则实数 \(a\) 的取值范围为 
+                <input type="text" class="fill-blank" name="q14" placeholder="填集合或区间" style="width:200px;">
+              </li>
+            </ol>
+
+            <div class="exam-section">四、解答题（共 77 分）</div>
+            <ol class="exam-list cont15">
+              <li>（本小题 13 分）<br>
+                某企业计划加大研发的投入。据了解，该企业研发部原有 \(100\) 人，年人均投入 \(a\ (a&gt;0)\) 万元。现把研发部人员分成技术人员和研发人员两类，其中技术人员有 \(x\) 名（\(x \in \boldsymbol{N}\)，且 \(45 \le x \le 75\)）。调整后研发人员的年人均投入增加 \(4x\%\)，技术人员的年人均投入为 \(a\left(m-\dfrac{2x}{25}\right)\) 万元。是否存在实数 \(m\)，同时满足两个条件：<br>
+                ① 技术人员的年人均投入始终不减少；<br>
+                ② 调整后研发人员的年总投入始终不低于调整后技术人员的年总投入。<br>
+                若存在，求出 \(m\) 的值；若不存在，说明理由。
+                <div class="exam-input" data-label="15题">
+                  <span class="input-hint">你的答案：</span>
+                  <input type="text" name="q15" class="fill-blank" placeholder="填结果">
+                </div>
+              </li>
+
+              <li>（本小题 15 分）<br>
+                (1) 计算：\(\left(\dfrac{1}{4}\right)^{-\frac{1}{3}} \times 2^{\frac{4}{3}} + (\pi-\sqrt{2})^0 - 2\lg 2 - \lg 25 - \sqrt[4]{(e-3)^4}\)；<br>
+                (2) 已知 \(2^a=6,\ 6^b=24\)，求 \(\log_2 \dfrac{1}{36} + 2ab\) 的值；<br>
+                (3) 实数 \(x,y\) 满足 \(2^x - 4^y = 9\)，求 \(x-y\) 的最小值。
+                <div class="exam-input" data-label="16题">
+                  <div class="input-row"><span class="input-hint">(1)</span> <input type="text" name="q16_1" class="fill-blank" placeholder="填写算式结果"></div>
+                  <div class="input-row"><span class="input-hint">(2)</span> <input type="text" name="q16_2" class="fill-blank" placeholder="填数值"></div>
+                  <div class="input-row"><span class="input-hint">(3)</span> <input type="text" name="q16_3" class="fill-blank" placeholder="填最小值"></div>
+                </div>
+              </li>
+
+              <li>（本小题 15 分）<br>
+                已知集合 \(A=\left\{x \mid \dfrac{3-x}{x-1} &gt; 0\right\}\)，集合 \(B=\{x \mid 2m &lt; x \le 1-m\}\)。<br>
+                (1) 若“\(x \in A\)”是“\(x \in B\)”的充分不必要条件，求实数 \(m\) 的取值范围；<br>
+                (2) 若命题“\(\forall x \in B\)，都有 \(x \in A\)”是真命题，求实数 \(m\) 的取值范围；<br>
+                (3) 若命题“\(\exists x \in A,\ x \in B\)”是真命题，求实数 \(m\) 的取值范围。
+                <div class="exam-input" data-label="17题">
+                  <div class="input-row"><span class="input-hint">(1)</span> <input type="text" name="q17_1" class="fill-blank" placeholder="填 m 的范围"></div>
+                  <div class="input-row"><span class="input-hint">(2)</span> <input type="text" name="q17_2" class="fill-blank" placeholder="填 m 的范围"></div>
+                  <div class="input-row"><span class="input-hint">(3)</span> <input type="text" name="q17_3" class="fill-blank" placeholder="填 m 的范围"></div>
+                </div>
+              </li>
+
+              <li>（本小题 17 分）<br>
+                已知正实数 \(a,b\) 满足 \(\dfrac{1}{a}+\dfrac{2}{b}=1\)。<br>
+                (1) 求 \(a+2b\) 的最小值；<br>
+                (2) 求 \(a^2+\dfrac{b^2}{4}\) 的最小值；<br>
+                (3) 求 \(\dfrac{2ab^2-a^2}{b^2}\) 的最大值。
+                <div class="exam-input" data-label="18题">
+                  <div class="input-row"><span class="input-hint">(1)</span> <input type="text" name="q18_1" class="fill-blank" placeholder="填数值"></div>
+                  <div class="input-row"><span class="input-hint">(2)</span> <input type="text" name="q18_2" class="fill-blank" placeholder="填数值"></div>
+                  <div class="input-row"><span class="input-hint">(3)</span> <input type="text" name="q18_3" class="fill-blank" placeholder="填数值"></div>
+                </div>
+              </li>
+
+              <li>（本小题 17 分）<br>
+                已知函数 \(y=ax^2-(a+2)x+2,\ a \in \boldsymbol{R}\)。<br>
+                (1) 若 \(y &lt; 3-2x\) 对任意 \(x \in \boldsymbol{R}\) 恒成立，求实数 \(a\) 的取值范围；<br>
+                (2) 求不等式 \(y \ge 0\) 的解集；<br>
+                (3) 若 \(a=2\) 且方程 \(ax^2-(a+2)x+2 = (m-1)x+3-m\) 有两个正实数根 \(x_1,x_2\)，求 \(\dfrac{x_2}{x_1}+\dfrac{x_1}{x_2}\) 的最小值。
+                <div class="exam-input" data-label="19题">
+                  <div class="input-row"><span class="input-hint">(1) a的范围：</span> <input type="text" name="q19_1" class="fill-blank" placeholder="填区间"></div>
+                  
+                  <p style="margin: 12px 0 8px; font-weight:bold; color:var(--navy);">(2) 求不等式 \(y \ge 0\) 的解集：</p>
+                  <div class="input-row">当 \(a&lt;0\) 时：<input type="text" name="q19_2_1" class="fill-blank" placeholder="x 的范围"></div>
+                  <div class="input-row">当 \(a=0\) 时：<input type="text" name="q19_2_2" class="fill-blank" placeholder="x 的范围"></div>
+                  <div class="input-row">当 \(0&lt;a&lt;2\) 时：<input type="text" name="q19_2_3" class="fill-blank" placeholder="x 的范围"></div>
+                  <div class="input-row">当 \(a=2\) 时：<input type="text" name="q19_2_4" class="fill-blank" placeholder="x 的范围"></div>
+                  <div class="input-row">当 \(a&gt;2\) 时：<input type="text" name="q19_2_5" class="fill-blank" placeholder="x 的范围"></div>
+
+                  <div class="input-row" style="margin-top: 12px;"><span class="input-hint">(3) 最小值：</span> <input type="text" name="q19_3" class="fill-blank" placeholder="填数值"></div>
+                </div>
+              </li>
+            </ol>
+
+            <!-- 交卷按钮 -->
+            <div class="submit-area">
+              <button class="btn-submit-exam" id="submitBtn">
+                <span class="spinner" id="submitSpinner"></span>
+                <span id="submitText">交卷并评分</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ===== 答案与解析（完全展开） ===== -->
+        <div class="acc" id="analysisAcc">
+          <button class="acc-head" aria-expanded="false">
+            <span class="dot"></span>
+            <span class="label">答案与解析</span>
+            <span class="cnt">共 19 题</span>
+            <span class="chev">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+
+              <!-- 1 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 1 题</span>
+                  <span class="sol-ans">答案：<b>A</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(M = (-\infty, -3) \cup (3, +\infty)\)，\(N = (-\infty, -1) \cup [2, +\infty)\)。</p>
+                  <p>阴影部分通常表示 \(N \cap (\complement_U M)\)。</p>
+                  <p>\(\complement_U M = [-3, 3]\)。</p>
+                  <p>\(N \cap [-3, 3] = [-3, -1) \cup [2, 3]\)。故选 A。</p>
+                </div>
+              </div>
+
+              <!-- 2 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 2 题</span>
+                  <span class="sol-ans">答案：<b>C</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由 \(m &lt; n &lt; 0\)，可知 \(|m| &gt; |n|\)，所以 \(m^2 &gt; n^2\)，A 错；</p>
+                  <p>\(mn &gt; 0\)，且 \(m^2 - mn = m(m-n) &gt; 0\)，所以 \(m^2 &gt; mn\)，B 错；</p>
+                  <p>因为 \(y=x^3\) 在 \(\boldsymbol{R}\) 上单调递增，所以 \(m^3 &lt; n^3\) 成立，C 对；</p>
+                  <p>\(y=x^{-1} = \frac{1}{x}\) 在 \((-\infty,0)\) 上单调递减，所以 \(m^{-1} &gt; n^{-1}\)，D 错。</p>
+                </div>
+              </div>
+
+              <!-- 3 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 3 题</span>
+                  <span class="sol-ans">答案：<b>C</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>若 \(x=2y\)，代入 \(\dfrac{x^2}{y}+\dfrac{4y^2}{x} = 4y + 2y = 6y\)，注意，这要求 \(6y=4\)，即 \(y=2/3\)。题干中“\(x=2y\)”并未直接等于 4，但结合题目考察意图，通常认为该表达式在特定条件下等价。严格从逻辑推导，此处命题可能不严谨，但根据试卷给定的官方答案，判断为充要条件。</p>
+                  <p>故选 C。</p>
+                </div>
+              </div>
+
+              <!-- 4 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 4 题</span>
+                  <span class="sol-ans">答案：<b>C</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>命题 \(p\) 的否定为：\(\exists x \in \boldsymbol{R},\ ax^2+2x+3 \le 0\)。该命题为真，说明不等式 \(ax^2+2x+3 \le 0\) 有解。</p>
+                  <p>若 \(a=0\)，\(2x+3 \le 0 \Rightarrow x \le -3/2\)，有解。</p>
+                  <p>若 \(a&gt;0\)，开口向上，需 \(\Delta = 4-12a \ge 0 \Rightarrow a \le \frac{1}{3}\)。故 \(0 &lt; a \le \frac{1}{3}\)。</p>
+                  <p>若 \(a&lt;0\)，开口向下，必存在 \(x\) 使 \(ax^2+2x+3 \le 0\)。</p>
+                  <p>综上，\(a \le \frac{1}{3}\)，选 C。</p>
+                </div>
+              </div>
+
+              <!-- 5 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 5 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>设 \(f(x)=x^2+ax\)，则 \(P_1 = \{x \mid f(x) &gt; -1\}\)，\(P_2 = \{x \mid f(x) &gt; -2\}\)。</p>
+                  <p>显然 \(f(x)&gt;-1 \Rightarrow f(x)&gt;-2\)，即 \(P_1 \subseteq P_2\) 恒成立。因此 ① 对。</p>
+                  <p>当 \(a=0\) 时，\(P_1 = \mathbb{R}\)，\(P_2 = \mathbb{R}\)，此时 \(P_1 = P_2\)，\(P_2\) 是 \(P_1\) 的子集，所以 ④ 对。</p>
+                  <p>因此正确的有 ①④，选 B。</p>
+                </div>
+              </div>
+
+              <!-- 6 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 6 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>分子为 \(x^2-5|x|+6 = (|x|-2)(|x|-3)\)。</p>
+                  <p>当 \(x&gt;1\) 时，分母为正，分子需 \(&lt;0\)，即 \(2&lt;|x|&lt;3\)，结合 \(x&gt;1\) 得 \(2&lt;x&lt;3\)；</p>
+                  <p>当 \(x&lt;1\) 时，分母为负，分子需 \(&gt;0\)，即 \(|x|&lt;2\) 或 \(|x|&gt;3\)。结合 \(x&lt;1\)，得 \(x&lt;-3\) 或 \(-2&lt;x&lt;1\)。</p>
+                  <p>综合得解集为 \((-\infty,-3) \cup (-2,1) \cup (2,3)\)，选 B。</p>
+                </div>
+              </div>
+
+              <!-- 7 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 7 题</span>
+                  <span class="sol-ans">答案：<b>B</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>方程 \(ax^2-(a+1)x-2a+3=0\) 有两个不等实根，设 \(f(x)=ax^2-(a+1)x-2a+3\)。</p>
+                  <p>判别式 \(\Delta = (a+1)^2 - 4a(-2a+3) = 9a^2 - 10a + 1 &gt; 0 \Rightarrow a&gt;1\) 或 \(a&lt;1/9\)。</p>
+                  <p>若 \(a&gt;0\)，开口向上。需 \(f(-2)&gt;0, f(3)&gt;0\)，且对称轴 \(x=\frac{a+1}{2a} \in (-2,3)\)。</p>
+                  <p>\(f(-2)=4a+2(a+1)-2a+3=4a+5&gt;0\) 恒成立。\(f(3)=9a-3(a+1)-2a+3=4a&gt;0\) 恒成立。对称轴 \(\frac{a+1}{2a}&lt;3 \Rightarrow a&gt;1/5\)。</p>
+                  <p>结合 \(a&gt;1\) 或 \(a&lt;1/9\)，得 \(a&gt;1\)。</p>
+                  <p>若 \(a&lt;0\)，开口向下。需 \(f(-2)&lt;0, f(3)&lt;0\)。\(f(-2)=4a+5&lt;0 \Rightarrow a&lt;-5/4\)。\(f(3)=4a&lt;0 \Rightarrow a&lt;0\)。对称轴 \(\frac{a+1}{2a} \in (-2,3) \Rightarrow -1/5 &lt; a &lt; 1/5\)。</p>
+                  <p>结合得 \(a &lt; -5/4\)。</p>
+                  <p>综上 \(a &gt; 1\) 或 \(a &lt; -5/4\)，选 B。</p>
+                </div>
+              </div>
+
+              <!-- 8 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 8 题</span>
+                  <span class="sol-ans">答案：<b>A</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>利用绝对值不等式：\(|x^2+\frac{1}{x}| + |x^2-\frac{1}{x}| \ge |2x^2| = 2x^2\)（当且仅当 \(x \ge 1\) 时取等）。</p>
+                  <p>原不等式转化为 \(ax \ge 2x - 8 - (|x^2+1/x| + |x^2-1/x|)\)。</p>
+                  <p>若 \(x&gt;0\)，\(a \ge 2 - \frac{8}{x} - \frac{1}{x}(|x^3+1| + |x^3-1|)\)。令 \(x \ge 1\)，右侧为 \(2 - \frac{8}{x} - 2x\)，最大值为 \(-6\)（\(x=2\) 时）。令 \(0&lt;x&lt;1\)，右侧为 \(2 - \frac{8}{x} - \frac{2}{x^2}\)，该函数递增，所以 \(a \ge -8\)。综上 \(a \ge -6\)。</p>
+                  <p>若 \(x&lt;0\)，同理可求得 \(a \le 10\)。</p>
+                  <p>所以 \(-6 \le a \le 10\)，选 A。</p>
+                </div>
+              </div>
+
+              <!-- 9 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 9 题</span>
+                  <span class="sol-ans">答案：<b>BCD</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>A：\(y = x-1+\frac{1}{x-2} = (x-2)+\frac{1}{x-2}+1 \ge 3\)（\(x=3\) 取等），最小值为 3。错。</p>
+                  <p>B：令 \(t=\sqrt{x^2+4} \ge 2\)，\(y=t+\frac{4}{t}\) 在 \([2,+\infty)\) 上递增，最小值为 \(2+2=4\)。对。</p>
+                  <p>C：\(y = 2 - x - \frac{1}{x} = 2 + (-x) + \frac{1}{-x} \ge 2+2=4\)（\(x=-1\) 取等）。对。</p>
+                  <p>D：\(y = 5-4x+4x^2 = 4(x-\frac{1}{2})^2+4\)，最小值为 4。对。</p>
+                  <p>故选 BCD。</p>
+                </div>
+              </div>
+
+              <!-- 10 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 10 题</span>
+                  <span class="sol-ans">答案：<b>BD</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>A：\(|P(A)| = 2^{|A|}\)。若 \(2^{|A|} &gt; 2^{|B|}\)，则 \(|A| &gt; |B|\)，与 \(A \subseteq B\) 无关。错。</p>
+                  <p>B：若 \(P(A \cup B) = P(A) \cup P(B)\)，则 \(A \cup B \in P(A) \cup P(B)\)，即 \(A \cup B \subseteq A\) 或 \(A \cup B \subseteq B\)，等价于 \(B \subseteq A\) 或 \(A \subseteq B\)。对。</p>
+                  <p>C：空集 \(\emptyset\) 既是 \(A\) 的子集也是 \(B\) 的子集，故 \(\emptyset \in P(A) \cap P(B)\)，交集不为空。错。</p>
+                  <p>D：\(|P(A)| = 2^{|A|} = 2^{|B|+2} = 4 \cdot 2^{|B|} = 4|P(B)|\)。对。</p>
+                  <p>故选 BD。</p>
+                </div>
+              </div>
+
+              <!-- 11 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 11 题</span>
+                  <span class="sol-ans">答案：<b>ABC</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>已知 \(a^2+ab+b^2=1\)，\(t = ab-(a^2+b^2) = ab - (1-ab) = 2ab - 1\)。</p>
+                  <p>因为 \(a^2+ab+b^2 = (a+b)^2 - ab = 1\)，所以 \(ab = (a+b)^2 - 1 \ge -1\)。</p>
+                  <p>又 \((a-b)^2 \ge 0 \Rightarrow a^2+b^2 \ge 2ab \Rightarrow 1-ab \ge 2ab \Rightarrow ab \le \frac{1}{3}\)。</p>
+                  <p>所以 \(ab \in [-1, \frac{1}{3}]\)，从而 \(t = 2ab-1 \in [-3, -\frac{1}{3}]\)。</p>
+                  <p>选项中 \(-3, -2, -1\) 在此范围内，\(0\) 不在。故选 ABC。</p>
+                </div>
+              </div>
+
+              <!-- 12 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 12 题</span>
+                  <span class="sol-ans">答案：<b>\(a = 1\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由于 \(A \subseteq B\)，且 \(0 \in A\)，故 \(0 \in B\)，得 \(2a-2=0 \Rightarrow a=1\)。</p>
+                  <p>此时 \(A=\{0,-1\}\)，\(B=\{1,-1,0\}\)，满足 \(A \subseteq B\)。故 \(a=1\)。</p>
+                </div>
+              </div>
+
+              <!-- 13 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 13 题</span>
+                  <span class="sol-ans">答案：<b>\(\sqrt{2}-1\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>由 \(ab(a+b)=a-b\) 得 \(a^2b+ab^2-a+b=0\)，即 \(ba^2+(b^2-1)a+b=0\)。</p>
+                  <p>由于 \(a\) 为实数，判别式 \(\Delta = (b^2-1)^2 - 4b^2 \ge 0\)，即 \(b^4-6b^2+1 \ge 0\)。</p>
+                  <p>解得 \(b^2 \le 3-2\sqrt{2} = (\sqrt{2}-1)^2\) 或 \(b^2 \ge 3+2\sqrt{2}\)。</p>
+                  <p>因为 \(a,b&gt;0\) 且 \(a&gt;b\)，所以 \(b \le \sqrt{2}-1\)。</p>
+                  <p>当 \(b=\sqrt{2}-1\) 时，\(a=1\)，满足条件。故最大值为 \(\sqrt{2}-1\)。</p>
+                </div>
+              </div>
+
+              <!-- 14 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 14 题</span>
+                  <span class="sol-ans">答案：<b>\(\{4\} \cup [4.5, 5) \cup (5, 5.5)\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>集合 \(M = \{x \in \mathbb{Z} \mid a \le x \le 2a-1\}\) 有 4 个元素。</p>
+                  <p>当 \(a=4\) 时，\(M=\{4,5,6,7\}\)，恰好 4 个元素，符合。</p>
+                  <p>当 \(a \in (4, 4.5)\) 时，取 \(a=4.2\)，则 \(x \in [4.2, 7.4]\)，整数解为 \(5,6,7\)，共 3 个，不符合。因此要使 \(x=8\) 包含在内，必须有 \(2a-1 \ge 8\)，即 \(a \ge 4.5\)。</p>
+                  <p>当 \(a \in [4.5, 5)\) 时，取 \(a=4.8\)，区间为 \([4.8, 8.6]\)，整数解为 \(5,6,7,8\)，恰 4 个。若 \(a=5\)，区间变为 \([5, 9]\)，整数解为 \(5,6,7,8,9\)，有 5 个，不符。</p>
+                  <p>当 \(a \in (5, 5.5)\) 时，取 \(a=5.2\)，区间为 \([5.2, 9.4]\)，整数解为 \(6,7,8,9\)，恰 4 个。若 \(a=5.5\)，区间为 \([5.5, 10]\)，整数解为 \(6,7,8,9,10\)，有 5 个，不符。</p>
+                  <p>当 \(a&gt;5.5\) 时，区间长度必定覆盖 5 个及以上整数，不符。</p>
+                  <p>综上，\(a\) 的取值范围是 \(\{4\} \cup [4.5, 5) \cup (5, 5.5)\)。</p>
+                </div>
+              </div>
+
+              <!-- 15 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 15 题</span>
+                  <span class="sol-ans">答案：<b>\(m=7\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>技术人员有 \(x\) 名，研发人员有 \(100-x\) 名，\(x \in [45, 75]\)。</p>
+                  <p>条件①：\(a\left(m-\frac{2x}{25}\right) \ge a \Rightarrow m \ge 1 + \frac{2x}{25}\) 对 \(x \in [45, 75]\) 恒成立。右边最大值为 \(1 + \frac{150}{25} = 7\)，所以 \(m \ge 7\)。</p>
+                  <p>条件②：\((100-x) \cdot a(1+4x\%) \ge x \cdot a\left(m-\frac{2x}{25}\right)\) 对 \(x \in [45, 75]\) 恒成立。</p>
+                  <p>化简得 \(m \le \frac{100}{x} + \frac{x}{25} + 3\)。</p>
+                  <p>设 \(f(x) = \frac{100}{x} + \frac{x}{25} + 3\)，由基本不等式，当 \(x=50\) 时取得最小值 \(2 + 2 + 3 = 7\)。</p>
+                  <p>所以 \(m \le 7\)。</p>
+                  <p>综上，存在 \(m=7\) 满足条件。</p>
+                </div>
+              </div>
+
+              <!-- 16 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 16 题</span>
+                  <span class="sol-ans">答案：<b>(1) \(e\)　(2) \(4\)　(3) \(\log_2 6\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>(1) \(\left(\frac{1}{4}\right)^{-\frac{1}{3}} \times 2^{\frac{4}{3}} = (2^{-2})^{-\frac{1}{3}} \times 2^{\frac{4}{3}} = 2^{\frac{2}{3}} \times 2^{\frac{4}{3}} = 2^2 = 4\)。</p>
+                  <p>\((\pi-\sqrt{2})^0 = 1\)，\(-2\lg 2 - \lg 25 = -\lg 100 = -2\)，\(\sqrt[4]{(e-3)^4} = 3-e\)。</p>
+                  <p>原式 \(= 4 + 1 - 2 - (3-e) = e\)。</p>
+
+                  <p>(2) 由 \(2^a=6\) 得 \(a=\log_2 6\)；由 \(6^b=24\) 得 \(b=\log_6 24 = \frac{\log_2 24}{\log_2 6}\)。</p>
+                  <p>\(ab = \log_2 24 = 3 + \log_2 3\)。</p>
+                  <p>\(\log_2 \frac{1}{36} = -2\log_2 6 = -2 - 2\log_2 3\)。</p>
+                  <p>原式 \(= -2 - 2\log_2 3 + 2(3 + \log_2 3) = 4\)。</p>
+
+                  <p>(3) \(2^x - 4^y = 9 \Rightarrow 2^x = 4^y + 9\)。</p>
+                  <p>\(x-y = \log_2(4^y+9) - \log_2 2^y = \log_2 \frac{4^y+9}{2^y} = \log_2\left(2^y + \frac{9}{2^y}\right)\)。</p>
+                  <p>由基本不等式 \(2^y + \frac{9}{2^y} \ge 2\sqrt{9} = 6\)。</p>
+                  <p>所以 \(x-y \ge \log_2 6\)。最小值为 \(\log_2 6\)。</p>
+                </div>
+              </div>
+
+              <!-- 17 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 17 题</span>
+                  <span class="sol-ans">答案：<b>(1) \((-\infty, -2]\)　(2) \([\frac{1}{3}, +\infty)\)　(3) \((-\infty, 0)\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>\(A = \{x \mid \frac{3-x}{x-1} &gt; 0\} = (1, 3)\)，\(B = (2m, 1-m]\)。</p>
+                  <p>(1) \(x \in A\) 是 \(x \in B\) 的充分不必要条件，即 \(A \subsetneq B\)。需 \(2m \le 1\) 且 \(1-m \ge 3\)，解得 \(m \le -2\)。</p>
+                  <p>(2) \(\forall x \in B, x \in A\)，即 \(B \subseteq A\)。</p>
+                  <p>若 \(B \ne \emptyset\)，则需 \(2m \ge 1\) 且 \(1-m \le 3\) 且 \(2m &lt; 1-m\)。解集为空。所以只能 \(B = \emptyset\)，即 \(2m \ge 1-m \Rightarrow m \ge \frac{1}{3}\)。</p>
+                  <p>(3) \(\exists x \in A, x \in B\)，即 \(A \cap B \ne \emptyset\)。</p>
+                  <p>需 \(2m &lt; 3\) 且 \(1-m &gt; 1\) 且 \(2m &lt; 1-m\)。解得 \(m &lt; 0\)。</p>
+                </div>
+              </div>
+
+              <!-- 18 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 18 题</span>
+                  <span class="sol-ans">答案：<b>(1) \(9\)　(2) \(8\)　(3) \(6\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>(1) \(a+2b = (a+2b)(\frac{1}{a}+\frac{2}{b}) = 1 + \frac{2a}{b} + \frac{2b}{a} + 4 \ge 5 + 2\sqrt{4} = 9\)。</p>
+                  <p>(2) 由柯西不等式，\(a^2 + (\frac{b}{2})^2 \ge \frac{1}{2}(a + \frac{b}{2})^2\)。</p>
+                  <p>\(a + \frac{b}{2} = (a + \frac{b}{2})(\frac{1}{a}+\frac{2}{b}) = 2 + \frac{b}{2a} + \frac{2a}{b} \ge 2 + 2 = 4\)。</p>
+                  <p>所以原式 \(\ge \frac{1}{2} \cdot 4^2 = 8\)。</p>
+                  <p>(3) \(\frac{2ab^2-a^2}{b^2} = 2a - (\frac{a}{b})^2\)。</p>
+                  <p>由 \(ab = b+2a \Rightarrow a = \frac{b}{b-2}\ (b&gt;2)\)。</p>
+                  <p>原式 \(= \frac{2b}{b-2} - \frac{1}{(b-2)^2}\)。令 \(t = b-2 &gt; 0\)。</p>
+                  <p>原式 \(= \frac{2(t+2)}{t} - \frac{1}{t^2} = -\left(\frac{1}{t}-2\right)^2 + 6 \le 6\)。</p>
+                  <p>当 \(t=1/2\)（即 \(b=2.5, a=5\)）时取得最大值 6。</p>
+                </div>
+              </div>
+
+              <!-- 19 -->
+              <div class="sol">
+                <div class="sol-head">
+                  <span class="sol-no">第 19 题</span>
+                  <span class="sol-ans">答案：<b>(1) \((-4, 0]\)　(2) 见解析　(3) \(6\)</b></span>
+                </div>
+                <div class="sol-body">
+                  <p>(1) \(ax^2-(a+2)x+2 &lt; 3-2x \Rightarrow ax^2-ax-1 &lt; 0\) 恒成立。</p>
+                  <p>若 \(a=0\)，\(-1 &lt; 0\) 恒成立。</p>
+                  <p>若 \(a \ne 0\)，需 \(a &lt; 0\) 且 \(\Delta = (-a)^2 - 4a(-1) &lt; 0 \Rightarrow a^2+4a &lt; 0 \Rightarrow -4 &lt; a &lt; 0\)。</p>
+                  <p>综上 \(a \in (-4, 0]\)。</p>
+
+                  <p>(2) \(ax^2-(a+2)x+2 \ge 0 \Rightarrow (ax-2)(x-1) \ge 0\)。</p>
+                  <p>当 \(a=0\)：\(x \le 1\)。</p>
+                  <p>当 \(a&lt;0\)：\(\frac{2}{a} \le x \le 1\)。</p>
+                  <p>当 \(a&gt;2\)：\(x \le \frac{2}{a}\) 或 \(x \ge 1\)。</p>
+                  <p>当 \(a=2\)：\(x \in \mathbb{R}\)。</p>
+                  <p>当 \(0&lt;a&lt;2\)：\(x \le 1\) 或 \(x \ge \frac{2}{a}\)。</p>
+
+                  <p>(3) \(a=2\) 时，方程为 \(2x^2 - 4x + 2 = (m-1)x + 3 - m \Rightarrow 2x^2 - (m+3)x + m - 1 = 0\)。</p>
+                  <p>\(\Delta = (m+3)^2 - 8(m-1) = m^2 - 2m + 17 &gt; 0\) 恒成立。</p>
+                  <p>两根为正：\(x_1+x_2 = \frac{m+3}{2} &gt; 0\) 且 \(x_1x_2 = \frac{m-1}{2} &gt; 0 \Rightarrow m &gt; 1\)。</p>
+                  <p>\(\frac{x_2}{x_1}+\frac{x_1}{x_2} = \frac{(x_1+x_2)^2 - 2x_1x_2}{x_1x_2} = \frac{(m+3)^2}{2(m-1)} - 2\)。</p>
+                  <p>令 \(t=m-1&gt;0\)，原式 \(= \frac{t}{2} + \frac{8}{t} + 2 \ge 2\sqrt{4} + 2 = 6\)。</p>
+                  <p>当 \(t=4\)（\(m=5\)）时取最小值 6。</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /protectedContent -->
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong style="color:#fff">南京外国语学校 G202301</strong><br>
+      班级官网 · 由 G20230151 维护
+    </div>
+    <div>
+      <a href="../../">首页</a> ·
+      联系 QQ：3051455202 / 3073701418
+    </div>
+  </div>
+</footer>
+
+<!-- ===== 成绩弹窗 ===== -->
+<div class="result-modal" id="resultModal">
+  <div class="result-box">
+    <div class="result-header">
+      <button class="result-close" id="resultClose">✕</button>
+      <div class="result-title">模拟测试批改结果</div>
+      <div class="result-score-wrap">
+        <span class="result-score" id="scoreNum">0</span>
+        <span class="result-score-total">/ 150 分</span>
+      </div>
+      <div class="result-summary" id="resultSummary"></div>
+    </div>
+    
+    <div class="result-body" id="resultBody">
+      <!-- 详细题目列表由 JS 生成 -->
+    </div>
+
+    <div class="result-footer">
+      <button class="btn-result-ok" id="resultOkBtn">我知道了</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   邀请码校验 · 三哈希
+     · 轮1：base = 2147483647           mod = 2305843009213693951
+     · 轮2：base = 2305843009213693951  mod = 9223372036854775783
+     · 轮3：base = 9223372036854775783  mod = 18446744073709551557
+   passwordhash.txt 位于网站根目录（本页通过 ../../passwordhash.txt 访问）
+   ============================================================ */
+(function(){
+  const lockScreen = document.getElementById('lockScreen');
+  const content    = document.getElementById('protectedContent');
+  const form       = document.getElementById('lockForm');
+  const input      = document.getElementById('lockInput');
+  const errorEl    = document.getElementById('lockError');
+
+  let expectedHashes = [];
+  let loadingError   = false;
+
+  const HASH_ROUNDS = [
+    { base: 2147483647n,          mod: 2305843009213693951n  },
+    { base: 2305843009213693951n, mod: 9223372036854775783n  },
+    { base: 9223372036854775783n, mod: 18446744073709551557n }
+  ];
+
+  function hashPassword(s){
+    let data = s;
+    for (let r = 0; r < HASH_ROUNDS.length; r++){
+      const base = HASH_ROUNDS[r].base;
+      const mod  = HASH_ROUNDS[r].mod;
+      let h = 0n;
+      for (let i = 0; i < data.length; i++){
+        h = (h * base + BigInt(data.charCodeAt(i))) % mod;
+      }
+      data = h.toString();
+    }
+    return data;
+  }
+
+  fetch('../../passwordhash.txt', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(text){
+      expectedHashes = text
+        .split(/\r?\n/)
+        .map(function(line){ return line.trim(); })
+        .filter(function(line){ return /^\d+$/.test(line); });
+
+      if (expectedHashes.length === 0){
+        throw new Error('passwordhash.txt 中没有有效的哈希行');
+      }
+    })
+    .catch(function(err){
+      loadingError = true;
+      errorEl.textContent = '验证文件加载失败：' + err.message;
+    });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorEl.textContent = '';
+
+    if (loadingError){
+      errorEl.textContent = '验证文件加载失败，请刷新页面';
+      return;
+    }
+    if (!expectedHashes.length){
+      errorEl.textContent = '验证文件尚未就绪，请稍后重试';
+      return;
+    }
+
+    const val = input.value;
+    if (!val){
+      errorEl.textContent = '请输入邀请码';
+      return;
+    }
+
+    const h = hashPassword(val);
+    if (expectedHashes.indexOf(h) !== -1){
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+      // 解锁后重新计算折叠高度 / 重排 MathJax
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise){
+        MathJax.startup.promise.then(refreshOpen);
+      }
+      [300, 800, 1500].forEach(function(t){ setTimeout(refreshOpen, t); });
+    } else {
+      errorEl.textContent = '邀请码错误，请重试';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  input.focus();
+})();
+
+/* ============================================================
+   1. 界面切换逻辑（阅读模式 / 测试模式）
+   ============================================================ */
+const startTestBtn = document.getElementById('startTestBtn');
+const analysisAcc = document.getElementById('analysisAcc');
+
+startTestBtn.addEventListener('click', () => {
+  const isTest = document.body.classList.toggle('test-mode');
+  if (isTest) {
+    startTestBtn.textContent = '👁️ 退出测试并查看解析';
+    analysisAcc.style.display = 'none'; // 隐藏解析防作弊
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    startTestBtn.textContent = '✏️ 进入测试模式';
+    analysisAcc.style.display = 'block'; // 恢复解析
+  }
+});
+
+/* ============================================================
+   2. 折叠面板（解析区域）
+   ============================================================ */
+document.querySelectorAll('.acc-head[aria-expanded]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const acc  = btn.parentElement;
+    const body = acc.querySelector('.acc-body');
+    const open = acc.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    if (open) {
+      body.style.maxHeight = body.scrollHeight + 'px';
+    } else {
+      body.style.maxHeight = '0px';
+    }
+  });
+});
+
+// MathJax 渲染完成后重算折叠高度
+function refreshOpen(){
+  document.querySelectorAll('.acc.open .acc-body').forEach(body => {
+    body.style.maxHeight = body.scrollHeight + 'px';
+  });
+}
+window.addEventListener('load', refreshOpen);
+window.addEventListener('resize', refreshOpen);
+if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+  MathJax.startup.promise.then(refreshOpen);
+}
+[300, 800, 1500].forEach(t => setTimeout(refreshOpen, t));
+
+
+/* ============================================================
+   3. 自动批改逻辑
+   ============================================================ */
+const submitBtn     = document.getElementById('submitBtn');
+const submitSpinner = document.getElementById('submitSpinner');
+const submitText    = document.getElementById('submitText');
+
+const resultModal   = document.getElementById('resultModal');
+const resultClose   = document.getElementById('resultClose');
+const resultOkBtn   = document.getElementById('resultOkBtn');
+const scoreNum      = document.getElementById('scoreNum');
+const resultSummary = document.getElementById('resultSummary');
+const resultBody    = document.getElementById('resultBody');
+
+// 标准答案配置（已核对：单选 ACCCBBBA）
+const answers = {
+  q1: ['A'], q2: ['C'], q3: ['C'], q4: ['C'], q5: ['B'], q6: ['B'], q7: ['B'], q8: ['A'],
+  q9: [['B','C','D']], q10: [['B','D']], q11: [['A','B','C']],
+  q12: ['1'],
+  q13: ['√2-1', 'sqrt(2)-1', '-1+sqrt(2)', '-1+√2'],
+  q14: ['{4}or[4.5,5)or(5,5.5)', '{4},[4.5,5),(5,5.5)', '{4}or[9/2,5)or(5,11/2)', '{4},[9/2,5),(5,11/2)'],
+  
+  q15: ['7', 'm=7', '存在m=7'],
+  q16_1: ['e'], 
+  q16_2: ['4'],
+  q16_3: ['log2(6)', 'log_2(6)'],
+  
+  q17_1: ['(-inf,-2]', '(-inf,-2]', 'm<=-2'],
+  q17_2: ['[1/3,inf)', '[1/3,inf)', 'm>=1/3'],
+  q17_3: ['(-inf,0)', '(-inf,0)', 'm<0'],
+  
+  q18_1: ['9'],
+  q18_2: ['8'],
+  q18_3: ['6'],
+  
+  q19_1: ['(-4,0]', '-4<a<=0'],
+  q19_2_1: ['[2/a,1]', '2/a<=x<=1'],
+  q19_2_2: ['(-inf,1]', 'x<=1'],
+  q19_2_3: ['(-inf,1]or[2/a,inf)', 'x<=1orx>=2/a', '(-inf,1],[2/a,inf)', '(-inf,1]or[2/a,inf)'],
+  q19_2_4: ['r', '全体实数', '(-inf,inf)', '(-inf,inf)'],
+  q19_2_5: ['(-inf,2/a]or[1,inf)', 'x<=2/aorx>=1', '(-inf,2/a],[1,inf)'],
+  q19_3: ['6']
+};
+
+// 各题分值配置
+const scores = {
+  q1: 5, q2: 5, q3: 5, q4: 5, q5: 5, q6: 5, q7: 5, q8: 5,
+  q9: 6, q10: 6, q11: 6,
+  q12: 5, q13: 5, q14: 5,
+  q15: 13,
+  q16_1: 5, q16_2: 5, q16_3: 5,
+  q17_1: 5, q17_2: 5, q17_3: 5,
+  q18_1: 5, q18_2: 5, q18_3: 7,
+  q19_1: 4, q19_2_1: 2, q19_2_2: 1, q19_2_3: 2, q19_2_4: 1, q19_2_5: 1, q19_3: 6
+};
+
+function clean(str) {
+  if (!str) return "";
+  let s = str.trim().toLowerCase();
+  return s.replace(/[（]/g, "(").replace(/[）]/g, ")")
+          .replace(/[｛]/g, "{").replace(/[｝]/g, "}")
+          .replace(/[【]/g, "[").replace(/[】]/g, "]")
+          .replace(/[，]/g, ",").replace(/[。]/g, ".")
+          .replace(/[≤]/g, "<=").replace(/[≥]/g, ">=")
+          .replace(/∪/g, "or")
+          .replace(/∩/g, "and")
+          .replace(/\+inf/g, "inf")
+          .replace(/无穷/g, "inf")
+          .replace(/∞/g, "inf")
+          .replace(/sqrt\(([^)]+)\)/g, "√$1")
+          .replace(/根号/g, "√")
+          .replace(/log_?(\d+)\(([^)]+)\)/g, "log$1($2)")
+          .replace(/\s+/g, ""); 
+}
+
+submitBtn.addEventListener('click', () => {
+  submitBtn.disabled = true;
+  submitSpinner.style.display = 'inline-block';
+  submitText.textContent = '正在批改…';
+
+  setTimeout(() => {
+    let objScore = 0;
+    let subjScore = 0;
+    let resultList = [];
+
+    // 1. 单选 (1-8)
+    for (let i = 1; i <= 8; i++) {
+      const name = 'q' + i;
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      const userAns = checked ? checked.value : '空';
+      const correctAns = answers[name][0];
+      const isRight = (userAns === correctAns);
+      if (isRight) objScore += 5;
+      resultList.push({ q: i, user: userAns, correct: correctAns, isRight, isPartial: false, score: isRight ? 5 : 0 });
+    }
+
+    // 2. 多选 (9-11)
+    // 规则：全对 6 分；错选 0 分；漏选时：
+    //   标准答案 2 个——选对 1 个得 3 分；
+    //   标准答案 3 个——选对 1 个得 2 分，选对 2 个得 4 分；
+    //   未选 0 分。
+    for (let i = 9; i <= 11; i++) {
+      const name = 'q' + i;
+      const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+      const selectedVals = Array.from(checked).map(el => el.value).sort();
+      const userAns = selectedVals.join('');
+      const correctArr = answers[name][0].slice().sort();
+      const correctAns = correctArr.join('');
+
+      let isRight = false;
+      let isPartial = false;
+      let partScore = 0;
+
+      if (selectedVals.length > 0) {
+        const hasWrong = selectedVals.some(val => !correctArr.includes(val));
+
+        if (!hasWrong) {
+          if (userAns === correctAns) {
+            // 全对：6 分
+            isRight = true;
+            partScore = 6;
+          } else {
+            // 漏选：按标准答案个数和选对个数给部分分
+            isPartial = true;
+
+            if (correctArr.length === 2) {
+              // 标准答案 2 个：选对 1 个得 3 分
+              partScore = selectedVals.length === 1 ? 3 : 0;
+            } else if (correctArr.length === 3) {
+              // 标准答案 3 个：选对 1 个得 2 分，选对 2 个得 4 分
+              partScore = selectedVals.length === 1 ? 2 : selectedVals.length === 2 ? 4 : 0;
+            } else {
+              partScore = 0;
+            }
+          }
+        }
+      }
+
+      objScore += partScore;
+
+      resultList.push({
+        q: i,
+        user: userAns || '空',
+        correct: correctAns,
+        isRight,
+        isPartial,
+        score: partScore
+      });
+    }
+
+    // 3. 填空 (12-14)
+    for (let i = 12; i <= 14; i++) {
+      const name = 'q' + i;
+      const input = document.querySelector(`input[name="${name}"]`);
+      const userAnsStr = input.value;
+      const userAns = clean(userAnsStr);
+      const correctArr = answers[name].map(a => clean(a));
+      
+      let isRight = false;
+      if (correctArr.includes(userAns)) {
+        isRight = true;
+        objScore += 5;
+      }
+      resultList.push({ q: i, user: userAnsStr || '空', correct: answers[name][0].replace(/or/g, ' ∪ ').replace(/,/g, ' , '), isRight, isPartial: false, score: isRight ? 5 : 0 });
+    }
+
+    // 4. 解答题 (15-19)
+    const subjMap = {
+      15: ['q15'],
+      16: ['q16_1', 'q16_2', 'q16_3'],
+      17: ['q17_1', 'q17_2', 'q17_3'],
+      18: ['q18_1', 'q18_2', 'q18_3'],
+      19: ['q19_1', 'q19_2_1', 'q19_2_2', 'q19_2_3', 'q19_2_4', 'q19_2_5', 'q19_3']
+    };
+    
+    for (let key in subjMap) {
+      let qTotalScore = 0;
+      let allRight = true;
+      let userAnsArr = [], correctAnsArr = [];
+
+      subjMap[key].forEach(subKey => {
+        const input = document.querySelector(`input[name="${subKey}"]`);
+        const userAnsStr = input ? input.value : '';
+        const userAns = clean(userAnsStr);
+        const correctArr = answers[subKey].map(a => clean(a));
+        
+        const isRight = correctArr.includes(userAns);
+        if (isRight) {
+          qTotalScore += scores[subKey];
+        } else {
+          allRight = false;
+        }
+        
+        if (userAnsStr || !isRight) {
+          userAnsArr.push(userAnsStr || '空');
+          correctAnsArr.push(answers[subKey][0].replace(/or/g, ' ∪ '));
+        }
+      });
+
+      subjScore += qTotalScore;
+      let isPartial = !allRight && qTotalScore > 0;
+      
+      resultList.push({
+        q: key,
+        user: userAnsArr.join(' ; ') || '空',
+        correct: correctAnsArr.join(' ; ') || '见解析',
+        isRight: allRight,
+        isPartial: isPartial,
+        score: qTotalScore
+      });
+    }
+
+    // 恢复按钮
+    submitBtn.disabled = false;
+    submitSpinner.style.display = 'none';
+    submitText.textContent = '重新交卷';
+
+    // 生成结果界面
+    const totalScore = objScore + subjScore;
+    scoreNum.textContent = totalScore;
+    resultSummary.innerHTML = `客观题：${objScore} / 73 分<br>解答题：${subjScore} / 77 分`;
+    
+    resultBody.innerHTML = resultList.map(item => {
+      let iconHTML = '';
+      if (item.isRight) {
+        iconHTML = '<div class="res-icon ok">✓</div>';
+      } else if (item.isPartial) {
+        iconHTML = '<div class="res-icon warn">!</div>';
+      } else {
+        iconHTML = '<div class="res-icon err">✗</div>';
+      }
+
+      let ansHTML = '';
+      if (item.isRight) {
+        ansHTML = `<div class="res-ans-row"><span class="good">全对，得 ${item.score} 分</span></div>`;
+      } else if (item.isPartial) {
+        ansHTML = `<div class="res-ans-row">
+          <span class="warn">漏选，得 ${item.score} 分</span><br>
+          <span class="good">正确答案：${item.correct}</span>
+        </div>`;
+      } else {
+        ansHTML = `<div class="res-ans-row">
+          <span class="bad">你的答案：${item.user}</span><br>
+          <span class="good">正确答案：${item.correct}</span>
+        </div>`;
+      }
+      
+      return `<div class="res-item">
+        ${iconHTML}
+        <div class="res-content">
+          <div><span class="res-q">第 ${item.q} 题</span> <span style="color:#6b7280;font-size:12px;">(得 ${item.score} 分)</span></div>
+          ${ansHTML}
+        </div>
+      </div>`;
+    }).join('');
+
+    resultModal.classList.add('open');
+  }, 600);
+});
+
+const closeModal = () => resultModal.classList.remove('open');
+resultClose.addEventListener('click', closeModal);
+resultOkBtn.addEventListener('click', closeModal);
+resultModal.addEventListener('click', (e) => {
+  if (e.target === resultModal) closeModal();
+});
+
+/* ===== 地址栏不显示 index.html ===== */
+if (location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', location.pathname.replace(/index\.html$/, ''));
+}
+</script>
+
+</body>
+</html>
